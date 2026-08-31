@@ -34,19 +34,20 @@ costs. Both expanding and rolling walk-forward modes are emitted.
 
 ## Production-quality provider gate
 
-The selected next provider is Databento Historical because its normalized
-records distinguish event time from capture-server receive time (`ts_recv`),
-and its historical filtering uses the schema's index timestamp. Its official
-documentation also supports one-minute OHLCV and continuous futures symbology.
-An API key and licensed dataset selection are required, so acquisition is not
-silently substituted with weaker data.
+Databento was evaluated as the technically strongest provenance option because
+it distinguishes event and receive timestamps, but it was rejected on cost for
+the current pre-signal-discovery phase. The low-cost plan is now Alpaca
+historical SIP bars for SPY/QQQ, Massive Futures Basic for two years of ES/NQ,
+and the existing IBKR account for live capture and recent-history validation.
 
-- Timestamp semantics: https://databento.com/docs/standards-and-conventions/common-fields-enums-types
-- OHLCV schema: https://databento.com/docs/schemas-and-data-formats
-- Historical API key requirement: https://databento.com/docs/quickstart
-- Continuous futures: https://databento.com/docs/standards-and-conventions/symbology
+The cheaper historical providers do not supply Databento-style revision
+lineage. Every raw response must therefore be frozen and content-hashed,
+backfilled bars must be marked `event-time-only`, futures must use explicit
+contract/roll mappings, and overlapping IBKR history must be used for quality
+comparison. Locally captured IBKR live events will receive a genuine local
+first-seen timestamp and become the strongest point-in-time dataset over time.
 
-Before a target can be frozen, a credentialed run must archive raw DBN/metadata,
-preserve `ts_recv`/`ts_event`, resolve equity venue coverage, record continuous
-contract mappings and roll boundaries, apply corporate actions point in time,
-and meet the configured observation gate across all candidates.
+The detailed source analysis, operational constraints, links, and exact
+implementation sequence are maintained in `docs/PROJECT_PLAN_AND_STATUS.md`.
+No target can be frozen until sample, provenance, stability, calibration, and
+cost gates pass together.

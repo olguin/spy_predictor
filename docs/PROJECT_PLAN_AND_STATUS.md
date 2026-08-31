@@ -2,10 +2,10 @@
 
 ## Project plan, implementation status, and next-session handoff
 
-**Status date:** 2026-08-30
+**Status date:** 2026-08-31
 **Repository:** `spy_predictor`
 **Current milestone:** `FOUNDATION-001` complete
-**Next research milestone:** `TARGET-TOURNAMENT-001` credentialed-data gate
+**Next research milestone:** `TARGET-TOURNAMENT-001` low-cost data acquisition
 
 ### 2026-08-30 continuation update
 
@@ -23,10 +23,30 @@ available data authority permits:
    qualification feed lacks first-seen/revision provenance and the run has fewer
    than 100 out-of-sample observations per candidate. No V1 target was frozen.
 
-Databento Historical is the selected production-quality acquisition path
-because it exposes receive and event timestamps, minute schemas, and continuous
-futures symbology. A credentialed/licensed download remains required before
-`TARGET-TOURNAMENT-001` can pass its point-in-time data gate.
+### 2026-08-31 market-data decision update
+
+Databento is no longer the planned provider. It has excellent receive/event
+timestamp provenance, minute schemas, and continuous-futures support, but its
+cost is disproportionate to this pre-signal-discovery phase. Paying premium
+data costs before establishing that any candidate target has predictive value
+would invert the intended research order.
+
+The selected low-cost architecture is now:
+
+```text
+historical SPY/QQQ: Alpaca free historical SIP bars
+historical ES/NQ:   Massive Futures Basic (two years free)
+live/recent data:   existing personal IBKR account through TWS/IB Gateway
+durable truth:      immutable local raw archive with content hashes and
+                    locally recorded first-seen timestamps for live events
+```
+
+IBKR-only backfill remains a fallback and cross-provider validation source, but
+not the preferred bulk source because Interactive Brokers throttles large
+historical downloads and generally does not retain expired futures beyond two
+years from expiration. If two years of free futures history produces evidence
+worth pursuing, a single paid deeper-history acquisition can be considered at
+that point rather than becoming a recurring cost now.
 
 ---
 
@@ -497,6 +517,128 @@ they are deliberately not accepted as point-in-time research truth.
 All agent, evolution, news/macro, options, paper-trading, and live-execution work
 remains intentionally pending.
 
+### Market-data source analysis and decision
+
+#### Recommended hybrid: Alpaca + Massive + IBKR
+
+**Alpaca for SPY and QQQ historical research.** Alpaca documents minute equity
+history since 2016. Its free live feed is IEX-only, but consolidated SIP history
+older than the most recent 15 minutes is available for offline queries. This is
+adequate for bulk target-tournament history, while IBKR will supply the live
+decision-time feed.
+
+- Plans and coverage: https://docs.alpaca.markets/us/docs/about-market-data-api
+- SIP versus IEX behavior: https://docs.alpaca.markets/us/docs/market-data-faq
+
+**Massive Futures Basic for ES and NQ historical research.** As checked on
+2026-08-31, the free individual futures tier advertises all CME-group futures
+tickers, reference data, minute aggregates, two years of history, and five API
+calls per minute. That should provide roughly 500 sessions, comfortably above
+the current 100 out-of-sample observation gate. The optional Futures Developer
+tier advertises five years of history for USD 79/month, but it must not be
+purchased until the free two-year experiment justifies deeper research.
+
+- Futures plans: https://massive.com/pricing?product=futures
+
+**IBKR for recent-history validation, live capture, and eventual execution.**
+The existing personal account avoids adding another real-time provider. The TWS
+API supports historical bars, streaming market data, five-second real-time bars,
+and `keepUpToDate` historical bars through TWS or IB Gateway. Relevant market
+subscriptions and trading permissions are still required. The published US
+Securities Snapshot and Futures Value Bundle is a possible low-cost starting
+package, but the exact Network B/Network C streaming requirements for SPY and
+QQQ must be confirmed in the account portal before implementation.
+
+- Historical bars: https://ibkrcampus.com/docs/tws-api/doc/market-data-historical/historical-bars/requesting-historical-bars
+- API/session operation: https://ibkrcampus.com/docs/third-party-integrations/general-third-party-frequently-asked-questions
+- Current subscription pricing: https://www.interactivebrokers.com/en/pricing/market-data-pricing.php
+- Historical limitations: https://interactivebrokers.github.io/tws-api/historical_limitations.html
+
+IBKR operational constraints to design around:
+
+- TWS or IB Gateway must be running and authenticated; GUI-less operation is
+  not officially supported.
+- Automatic restart can maintain the session Monday through Saturday, while a
+  weekend reauthentication is normally required.
+- A username has one brokerage session at a time. Additional usernames can
+  incur duplicate market-data subscription fees.
+- Bulk history must use a slow, resumable downloader with bounded concurrency,
+  retries, pacing, and immutable per-request checkpoints.
+- One-minute-and-larger requests no longer have the old hard pacing limit, but
+  soft throttling and disconnection remain possible.
+- Expired futures older than two years from expiration are generally
+  unavailable. Continuous futures also have request restrictions, so explicit
+  contracts and stored roll decisions are preferred.
+- IBKR historical trades are filtered differently from an unfiltered live feed;
+  volume and VWAP may therefore differ. Cross-source comparisons must account
+  for this rather than treating discrepancies as corruption.
+
+#### Other acceptable fallbacks
+
+**FirstRate Data** offers one year of free one-minute SPY and QQQ bars. Its paid
+ES/NQ files contain individual contracts plus unadjusted, absolute-adjusted, and
+ratio-adjusted continuous series going back to 2008. It is useful for a one-time
+deep-history purchase, but it has no live API or revision/first-seen lineage.
+If used, the platform should ingest individual contracts and construct its own
+explicit roll series.
+
+- Free intraday files: https://firstratedata.com/free-intraday-data
+- Example NQ history: https://firstratedata.com/i/futures/NQ
+
+**Sierra Chart Denali** provides real-time and historical CME data at relatively
+low non-professional exchange fees and normalizes data into its DTC protocol.
+It is a viable futures-only backup if IBKR live data proves unreliable, but it
+adds another desktop/service dependency, does not solve equities by itself, and
+is more complex to integrate than the current hybrid.
+
+- Denali feed and exchange fees: https://www.sierrachart.com/index.php?page=doc%2FDenaliExchangeDataFeed.php
+
+#### Rejected or limited sources
+
+**Databento:** technically the strongest evaluated source for point-in-time
+provenance, but rejected on cost for the current stage. Reconsider only after a
+cheap-data tournament shows stable predictive value that warrants buying better
+history. It should not be a prerequisite for determining whether the research
+hypothesis has any signal.
+
+**Yahoo Chart:** retained only as the completed pipeline-qualification fixture.
+Its short intraday retention and missing original first-seen/revision metadata
+make it unsuitable for target selection.
+
+**Alpaca live free feed:** IEX-only, so it is not accepted as the production
+SPY/QQQ live feed. IBKR will provide live data instead.
+
+**Massive free futures:** accepted for the first historical tournament, but not
+as the live source. The free tier is historical and rate-limited.
+
+#### Scientific handling of inexpensive data
+
+These lower-cost aggregate-bar services do not provide Databento-style capture
+timestamps and full revision lineage. The project will use the following
+explicit compromise without weakening the cutoff rules:
+
+1. Store every raw response immutably before normalization and content-hash it.
+2. Record provider, query, retrieval time, timezone, contract identifier,
+   corporate-action version, and provider quality classification.
+3. Mark backfilled aggregate bars as `event-time-only` rather than pretending
+   their original first-seen time is known.
+4. Never expose an incomplete current bar to a historical snapshot.
+5. Build futures histories from explicit contracts and persist every roll rule
+   and mapping; do not silently mix adjusted continuous prices with tradable
+   prices.
+6. Compare overlapping IBKR and bulk-provider periods and report systematic
+   price, volume, session, and missing-bar differences.
+7. From the first live day onward, persist IBKR events immediately with the
+   platform's own receive/first-seen timestamp. This local archive becomes the
+   strongest point-in-time dataset over time.
+8. Fail closed to `NO_TRADE` when live data is stale, disconnected, incomplete,
+   or outside the expected exchange session.
+
+This means the inexpensive historical tournament can rank candidate targets,
+but provenance quality remains an explicit promotion dimension. Strong results
+must survive cross-provider validation and later forward capture before they can
+support paper or controlled-live trading.
+
 ---
 
 ## 7. The prior three recommended steps and outcome
@@ -584,13 +726,27 @@ the report recommends a target or explicitly concludes that none is adequate
 
 ### Next recommendations
 
-1. Configure a licensed Databento Historical account and archive raw one-minute
-   data plus symbology/definition records with `ts_recv` and `ts_event` intact.
-2. Run the tournament over a multi-year window, investigate roll/corporate-action
-   quality failures, and rerun until every candidate meets the minimum sample gate.
-3. Review the resulting stability, calibration, and cost-sensitive ranking and
-   freeze V1 only if every promotion gate passes; otherwise retain the explicit
-   `NO_TARGET_ADEQUATE` result.
+The recommended implementation order is therefore:
+
+1. Add an IBKR TWS/Gateway adapter for live capture and recent-history validation.
+2. Replace Yahoo with Alpaca for SPY/QQQ and Massive Basic for ES/NQ.
+3. Run the tournament on approximately two years first.
+4. Only purchase deeper futures history if the initial results justify it.
+
+Implementation details for the next session:
+
+- Keep provider interfaces separate: `AlpacaHistoricalMarketDataProvider`,
+  `MassiveHistoricalMarketDataProvider`, and `IbkrMarketDataProvider` must all
+  normalize into the same internal `MarketBar` representation.
+- Implement raw response storage and dataset manifests before writing feature or
+  tournament logic.
+- IBKR live capture should initially be market-data-only. Continue using the
+  internal execution simulator; do not enable order submission.
+- Start with explicit ES/NQ contracts and a deterministic roll policy. Do not
+  use an opaque adjusted continuous series as the trading-price target.
+- Rerun the existing no-LLM tournament and preserve the `NO_TARGET_ADEQUATE`
+  result unless all sample, provenance, stability, calibration, and cost gates
+  genuinely pass.
 
 ---
 
@@ -618,8 +774,10 @@ Read these files first:
 ```text
 docs/PROJECT_PLAN_AND_STATUS.md
 docs/FOUNDATION-001.md
+docs/TARGET-TOURNAMENT-001.md
 README.md
 config/foundation.json
+config/target-tournament.json
 apps/cli/src/foundation.ts
 packages/domain/src/*
 packages/data-providers/src/provider.ts
@@ -630,8 +788,11 @@ migrations/001_foundation.sql
 Immediate next task:
 
 ```text
-Configure the credentialed point-in-time market-data acquisition path and rerun
-TARGET-TOURNAMENT-001. Do not begin Pi, Ollama, agents, or evolution yet.
+Implement the IBKR market-data-only TWS/Gateway adapter with immutable raw live
+capture and recent-history validation. Then add Alpaca historical SPY/QQQ and
+Massive Basic historical ES/NQ adapters before rerunning TARGET-TOURNAMENT-001.
+Do not enable IBKR order submission and do not begin Pi, Ollama, agents, or
+evolution yet.
 ```
 
 ---
