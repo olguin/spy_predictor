@@ -456,10 +456,12 @@ binding: 127.0.0.1:54329 → container 5432
 volume: persistent named Docker volume
 ```
 
-### Current generated experiment
+### Clean-tree reproducibility verification
 
 ```text
-experiment ID: foundation-9a69a38355b5
+verified commit: 267550d64db3729ea72f1107c0b124d21016c1de
+experiment ID at that commit: foundation-21d1daff218c0a0c
+manifest dirty flag: false
 dataset: synthetic-spy-v1
 observations: 35
 partition sizes: train 20, validation 5, test 6, excluded 4
