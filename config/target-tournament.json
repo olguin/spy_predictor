@@ -1,0 +1,28 @@
+{
+  "provider": {
+    "type": "yahoo-chart-qualification",
+    "interval": "5m",
+    "range": "60d",
+    "includePrePost": true,
+    "symbols": {
+      "SPY": "SPY",
+      "QQQ": "QQQ",
+      "ES": "ES=F",
+      "NQ": "NQ=F"
+    },
+    "pointInTimeSafe": false,
+    "limitation": "Yahoo Chart does not expose original first-seen timestamps or revision vintages; this run may qualify the pipeline but cannot freeze V1."
+  },
+  "horizons": ["open-15m", "open-30m", "open-60m", "previous-close-next-open", "open-close", "close-next-close"],
+  "neutralThreshold": 0.0005,
+  "minimumTrainingObservations": 15,
+  "rollingWindow": 30,
+  "minimumPromotionObservations": 100,
+  "randomSeed": 42,
+  "transactionCostBps": {
+    "SPY": 1.0,
+    "QQQ": 1.0,
+    "ES": 0.5,
+    "NQ": 0.5
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/experiment-manifest-v2.json",
+  "title": "ExperimentManifest",
+  "type": "object",
+  "required": ["manifestVersion", "researchDefinitionId", "experimentId", "codeCommit", "codeIdentity", "datasetVersion", "snapshotSchemaVersion", "targetDefinition", "featureVersion", "agentVersions", "models", "randomSeed", "configHash", "configuration", "createdAt"],
+  "properties": {
+    "manifestVersion": { "const": "experiment-manifest-v2" },
+    "researchDefinitionId": { "type": "string" },
+    "experimentId": { "type": "string" },
+    "codeCommit": { "type": "string" },
+    "codeIdentity": {
+      "type": "object",
+      "required": ["commit", "sourceTreeHash", "dirty", "identityHash"],
+      "properties": {
+        "commit": { "type": ["string", "null"] },
+        "sourceTreeHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "dirty": { "type": "boolean" },
+        "identityHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "datasetVersion": { "type": "string" },
+    "snapshotSchemaVersion": { "type": "string" },
+    "targetDefinition": {
+      "type": "object",
+      "required": ["id", "instrument", "predictionTime", "targetStart", "targetEnd", "timezone", "neutralThreshold"],
+      "properties": {
+        "id": { "type": "string" },
+        "instrument": { "type": "string" },
+        "predictionTime": { "type": "string" },
+        "targetStart": { "type": "string" },
+        "targetEnd": { "type": "string" },
+        "timezone": { "const": "America/New_York" },
+        "neutralThreshold": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "featureVersion": { "type": "string" },
+    "agentVersions": { "type": "array", "items": { "type": "string" } },
+    "models": { "type": "array", "items": { "type": "string" } },
+    "randomSeed": { "type": "integer" },
+    "configHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "configuration": {},
+    "createdAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

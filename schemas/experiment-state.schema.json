@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/experiment-state-v1.json",
+  "title": "ExperimentState",
+  "type": "object",
+  "required": ["experimentId", "status", "completedDates", "totalDates", "checkpointVersion", "updatedAt"],
+  "properties": {
+    "experimentId": { "type": "string" },
+    "status": { "enum": ["running", "paused", "completed", "failed"] },
+    "completedDates": { "type": "array", "uniqueItems": true, "items": { "type": "string", "format": "date" } },
+    "totalDates": { "type": "integer", "minimum": 0 },
+    "checkpointVersion": { "type": "integer", "minimum": 0 },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

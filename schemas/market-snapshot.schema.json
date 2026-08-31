@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/market-snapshot-v1.json",
+  "title": "MarketSnapshot",
+  "type": "object",
+  "required": [
+    "id",
+    "schemaVersion",
+    "predictionTime",
+    "dataCutoff",
+    "instruments",
+    "technicalFeatures",
+    "sourceManifest",
+    "dataQuality",
+    "hash"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "schemaVersion": { "const": "market-snapshot-v1" },
+    "predictionTime": { "type": "string", "format": "date-time" },
+    "dataCutoff": { "type": "string", "format": "date-time" },
+    "instruments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["symbol", "asOf", "latestPrice", "previousClose", "overnightReturn"],
+        "properties": {
+          "symbol": { "type": "string" },
+          "asOf": { "type": "string", "format": "date-time" },
+          "latestPrice": { "type": "number" },
+          "previousClose": { "type": "number" },
+          "overnightReturn": { "type": "number" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "technicalFeatures": {
+      "type": "object",
+      "additionalProperties": { "type": ["number", "null"] }
+    },
+    "sourceManifest": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source", "datasetVersion", "recordCount", "earliestFirstSeenAt", "latestFirstSeenAt", "contentHash"],
+        "properties": {
+          "source": { "type": "string" },
+          "datasetVersion": { "type": "string" },
+          "recordCount": { "type": "integer", "minimum": 0 },
+          "earliestFirstSeenAt": { "type": "string", "format": "date-time" },
+          "latestFirstSeenAt": { "type": "string", "format": "date-time" },
+          "contentHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dataQuality": {
+      "type": "object",
+      "required": ["marketDataComplete", "newsAvailable", "macroAvailable", "optionsAvailable", "staleSources", "qualityScore"],
+      "properties": {
+        "marketDataComplete": { "type": "boolean" },
+        "newsAvailable": { "type": "boolean" },
+        "macroAvailable": { "type": "boolean" },
+        "optionsAvailable": { "type": "boolean" },
+        "staleSources": { "type": "array", "items": { "type": "string" } },
+        "qualityScore": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  },
+  "additionalProperties": false
+}

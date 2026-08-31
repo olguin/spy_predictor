@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/target-tournament-report-v1.json",
+  "title": "TargetTournamentReport",
+  "type": "object",
+  "required": ["reportVersion", "datasetVersion", "configHash", "rawHashes", "noLlmCalls", "pointInTimeSafe", "providerLimitation", "dataQuality", "normalization", "decision", "decisionReason", "results"],
+  "properties": {
+    "reportVersion": { "const": "target-tournament-report-v1" },
+    "datasetVersion": { "type": "string" },
+    "configHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "rawHashes": {
+      "type": "object",
+      "required": ["SPY", "QQQ", "ES", "NQ"],
+      "additionalProperties": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+    },
+    "noLlmCalls": { "const": true },
+    "pointInTimeSafe": { "type": "boolean" },
+    "providerLimitation": { "type": "string" },
+    "dataQuality": { "type": "object" },
+    "normalization": { "type": "object" },
+    "decision": { "enum": ["FREEZE_TARGET", "NO_TARGET_ADEQUATE"] },
+    "decisionReason": { "type": "string" },
+    "results": { "type": "object", "minProperties": 1 }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/market-target-v1.json",
+  "title": "MarketTarget",
+  "type": "object",
+  "required": ["snapshotId", "targetDefinitionId", "startTime", "endTime", "startPrice", "endPrice", "return", "directionLabel", "realizedVolatility", "absoluteReturn", "highLowRange"],
+  "properties": {
+    "snapshotId": { "type": "string" },
+    "targetDefinitionId": { "type": "string" },
+    "startTime": { "type": "string", "format": "date-time" },
+    "endTime": { "type": "string", "format": "date-time" },
+    "startPrice": { "type": "number", "exclusiveMinimum": 0 },
+    "endPrice": { "type": "number", "exclusiveMinimum": 0 },
+    "return": { "type": "number" },
+    "directionLabel": { "enum": ["DOWN", "NEUTRAL", "UP"] },
+    "realizedVolatility": { "type": "number", "minimum": 0 },
+    "absoluteReturn": { "type": "number", "minimum": 0 },
+    "highLowRange": { "type": "number", "minimum": 0 }
+  },
+  "additionalProperties": false
+}

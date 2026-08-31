@@ -1,0 +1,25 @@
+name: spy-predictor
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${SPY_POSTGRES_DB:-spy_predictor}
+      POSTGRES_USER: ${SPY_POSTGRES_USER:-spy_predictor}
+      POSTGRES_PASSWORD: ${SPY_POSTGRES_PASSWORD:-spy_predictor_dev}
+    ports:
+      - "127.0.0.1:${SPY_POSTGRES_PORT:-54329}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./migrations:/migrations:ro
+      - ./migrations/001_foundation.sql:/docker-entrypoint-initdb.d/001_foundation.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+    restart: unless-stopped
+
+volumes:
+  postgres-data:

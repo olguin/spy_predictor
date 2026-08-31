@@ -1,0 +1,26 @@
+[project]
+name = "spy-predictor-quant"
+version = "0.1.0"
+description = "Quantitative storage and evaluation helpers for spy-predictor"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+  "duckdb>=1.4,<2",
+  "jsonschema>=4.25,<5",
+  "numpy>=2,<3",
+  "scikit-learn>=1.7,<2",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8,<10",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/spy_predictor_quant"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
