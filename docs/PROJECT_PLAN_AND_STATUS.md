@@ -4,22 +4,24 @@
 
 **Status date:** 2026-09-05
 **Repository:** `spy_predictor`
-**Current milestone:** `TARGET-TOURNAMENT-001` in progress
-**Latest completed enabling work:** IBKR market-data adapter increments 1–3
-**Immediate next task:** build the bulk Alpaca/Massive research dataset and rerun
-the target tournament
+**Current milestone:** `TARGET-TOURNAMENT-001` complete with
+`NO_TARGET_ADEQUATE`
+**Latest completed work:** immutable two-year Alpaca/Massive dataset, explicit
+futures rolls, four-provider comparisons, and sealed-confirmation tournament
+**Immediate next task:** review the no-target result and decide whether to widen
+the preregistered target search before beginning `REALITY-STORE-001`
 
 ### Executive status audit
 
 This table compares the original phase acceptance criteria with code, tests,
 generated artifacts, and integration runs present as of the status date.
-Overall: one of thirteen phases is complete, four have partial/scaffold work,
+Overall: two of thirteen phases are complete, three have partial/scaffold work,
 and eight have not started.
 
 | Phase | Status | What exists now | What is still required |
 |---|---|---|---|
 | 0 — `FOUNDATION-001` | **Complete** | Reproducible experiment identity, point-in-time guards, snapshots/targets, purged partitions, resumable filesystem/PostgreSQL persistence, schemas, Parquet/DuckDB materialization, CI, and a provider-neutral runtime interface | No Phase 0 acceptance item remains; keep the foundation green while extending it |
-| 1 — `TARGET-TOURNAMENT-001` | **In progress** | The no-LLM six-horizon tournament, ten directional baselines, two volatility baselines, rolling/expanding evaluation, data-quality gates, and an explicit `NO_TARGET_ADEQUATE` qualification result | Implement bulk Alpaca SPY/QQQ and Massive ES/NQ ingestion, explicit futures rolls, run about two years, pass provenance/sample/stability/cost gates, and freeze V1 only if justified |
+| 1 — `TARGET-TOURNAMENT-001` | **Complete — no target frozen** | Immutable Alpaca SPY/QQQ plus Massive ES/NQ minute data, 18 verified futures contracts, explicit rolls, 779,985 normalized bars, four passing IBKR comparisons, 24 candidate evaluations, and 100 sealed confirmation observations each | No acceptance item remains. The result is `NO_TARGET_ADEQUATE`; any wider target search must be a new preregistered hypothesis set |
 | 2 — `REALITY-STORE-001` | **Foundation subset only** | Generic market provider/cutoff guard, source manifests, immutable snapshots, and immutable/hash-addressed IBKR raw/history/live artifacts | A provider-neutral persistent store spanning market, macro, SEC, news, revisions/vintages, quality flags, and deterministic arbitrary-date replay |
 | 3 — `BASELINE-001` | **Prototype subset only** | Tournament implementations of logistic/tree/rule baselines, historical/EWMA volatility, walk-forward metrics, calibration, regime/year breakdowns, and simple costs | First freeze the target; then build the production feature set and benchmark artifacts, add the selected boosted-tree equivalent and remaining volatility/reliability work, and pass the Phase 3 acceptance run |
 | 4 — `AGENT-RUNTIME-001` | **Scaffold only** | `AgentRuntime` contract and `MockAgentRuntime` | Pi/Ollama adapters, validated signal schema, restricted tools, prompt/genome persistence, deterministic cache, accounting, failure handling, and a persisted cache-hit acceptance test |
@@ -32,16 +34,67 @@ and eight have not started.
 | 11 — `CHAMPION-CHALLENGER-001` | **Not started** | None | Official champion, offline challengers, monitoring, and predefined promotion rules |
 | 12 — `CONTROLLED-LIVE-001` | **Not started** | No order-submission code; IBKR integration deliberately fails closed to paper/read-only market data | Only after paper evidence: isolated execution plus hard risk, loss, instrument, kill-switch, and manual-disable controls |
 
-The critical path has therefore not reached agents or trading. It is currently:
+The critical path has therefore not reached agents or trading. Phase 1 closed
+without a target, so the current decision point is:
 
 ```text
-bulk/versioned Alpaca + Massive data
-→ two-year TARGET-TOURNAMENT-001 run
-→ freeze a defensible target (or explicitly reject all candidates)
-→ build the broader point-in-time Reality Store
+review NO_TARGET_ADEQUATE evidence
+→ either preregister a bounded target-search extension and rerun
+→ or stop target discovery
+→ only after a target is frozen: build the broader point-in-time Reality Store
 → complete the production quantitative baseline
 → test fixed agents before evolution
 ```
+
+### 2026-09-05 TARGET-TOURNAMENT-001 completion
+
+Phase 1 is complete. The free Massive Futures Basic key was verified without
+adding a paid subscription. One command now builds or resumes the immutable
+dataset, performs four cross-provider comparisons, and runs the tournament:
+
+```bash
+npm run phase1
+npm run phase1 -- --offline
+```
+
+The pinned dataset covers 2024-09-03 through 2026-09-03:
+
+```text
+dataset:          phase1-market-e70bdc3ff5238003
+dataset hash:     e70bdc3ff5238003978778e6f3f7636eb120f16258a5a9066003e85da029c1e9
+normalized bars: 779,985
+SPY / QQQ:        503 research sessions
+ES / NQ:          500 research sessions
+futures:          18 exact contracts, 9 explicit mappings per instrument
+provenance:       event-time-only; target-selection admissible, not replay-safe first-seen
+```
+
+The comparison gate passed for every instrument. Intersections and maximum
+close differences were SPY 853 / 0.260 bps, QQQ 879 / 0.417 bps, ES 1,379 /
+0.324 bps, and NQ 1,380 / 0.590 bps.
+
+All 24 instrument/horizon candidates had 100 observations in the final
+chronological confirmation segment. Coverage was 98.77% or better. No candidate
+passed all promotion gates. In particular, the best apparent result was only a
+tiny probability-smoothing improvement over historical frequencies and made
+the same directional decisions, so it failed the material Brier-improvement,
+incremental-economic-value, stress-cost, and stability gates.
+
+Final report:
+
+```text
+decision:     NO_TARGET_ADEQUATE
+report hash:  cd393a5b710cd17692648d10e0418be07e7391a7eeb030f6d52371d4c6523072
+report path:  reports/phase1-cd393a5b710cd176/report.json
+LLM calls:    0
+orders:       0
+```
+
+An initial validation run exposed that a zero improvement threshold could let
+numerically trivial logistic smoothing pass despite identical economic actions.
+The acceptance gate was corrected to require an absolute 0.005 Brier improvement
+and incremental net return before Phase 1 was closed. The conservative final
+result rejects every candidate rather than promoting that artifact.
 
 ### 2026-09-04 IBKR adapter update
 
@@ -106,11 +159,9 @@ compare:   datasets/comparisons/comparison-20260905T014416137105Z-c1160dcc/repor
 live:      datasets/ibkr/live/live-20260905T013756002651Z-f34e6a4a/manifest.json
 ```
 
-The live adapter emits no fabricated data under that entitlement failure. Once
-real-time subscriptions are enabled, the same command will persist genuinely
-locally-first-seen observations without code changes. The remaining data-roadmap
-work is bulk Alpaca/Massive acquisition and futures cross-provider comparison,
-not completion of the three IBKR adapter increments.
+The live adapter emits no fabricated data under that entitlement failure. No
+paid real-time entitlement is planned. The bulk Alpaca/Massive acquisition and
+all four historical cross-provider comparisons are now complete.
 
 ### 2026-08-30 continuation update
 
@@ -602,6 +653,15 @@ npm run ibkr:capture
   adapter reached IBKR and requested all four exact contracts
   status: partial; 0 bars because the account lacks real-time API entitlements
   IBKR rejected subscriptions with code 354/420; no data was fabricated
+
+npm run phase1 -- --offline
+  dataset: phase1-market-e70bdc3ff5238003
+  normalized one-minute bars: 779,985
+  explicit futures contracts / mappings: 18 / 18
+  cross-provider gates: SPY, QQQ, ES, and NQ passed
+  candidates / confirmation observations each: 24 / 100
+  decision: NO_TARGET_ADEQUATE
+  LLM calls / orders: 0 / 0
 ```
 
 Current Docker state on 2026-09-05:
@@ -613,10 +673,9 @@ binding: 127.0.0.1:54329 → container 5432
 implementation status: migrations and integration path previously verified
 ```
 
-The latest IBKR/Alpaca adapter work is still in the working tree and has not
-been committed. `npm run check` passes on that dirty tree, but a clean-tree
-reproducibility run for the latest adapter revision remains pending until those
-changes are reviewed and committed.
+The IBKR/Alpaca adapter increment was committed as `ee1bf42`; the Phase 1
+implementation was committed as `196f5be`. A clean-source offline rerun from
+the pinned bytes reproduced the final identities.
 
 ### Clean-tree reproducibility verification
 
@@ -668,9 +727,9 @@ data entitlements.
 **Alpaca for SPY and QQQ historical research.** Alpaca documents minute equity
 history since 2016. Its free live feed is IEX-only, but consolidated SIP history
 older than the most recent 15 minutes is available for offline queries. This is
-adequate for bulk target-tournament history. Paper credentials, the connectivity
-probe, and the one-day SIP comparison path are working; the reusable bulk
-historical provider and two-year materialization are not yet implemented.
+adequate for bulk target-tournament history. The bulk downloader now archives
+every page immutably, resumes from verified pages, and materializes two years of
+SPY/QQQ research-session bars.
 
 - Plans and coverage: https://docs.alpaca.markets/us/docs/about-market-data-api
 - SIP versus IEX behavior: https://docs.alpaca.markets/us/docs/market-data-faq
@@ -680,10 +739,9 @@ historical provider and two-year materialization are not yet implemented.
 tickers, reference data, minute aggregates, two years of history, and five API
 calls per minute. That should provide roughly 500 sessions, comfortably above
 the current 100 out-of-sample observation gate. The optional Futures Developer
-tier advertises five years of history for USD 79/month, but it must not be
-purchased until the free two-year experiment justifies deeper research.
-The Massive adapter, credentials, raw archive, and explicit roll mappings remain
-pending.
+tier advertises deeper history, but this project has an explicit zero-new-cost
+constraint and will not upgrade. The free adapter, raw archive, reference and
+schedule captures, exact contract verification, and roll mappings are complete.
 
 - Futures plans: https://massive.com/pricing?product=futures
 
@@ -845,9 +903,10 @@ CI runs deterministic unit and integration checks
 
 ### Step 3 — Execute TARGET-TOURNAMENT-001
 
-**Outcome: the pipeline and a real-market qualification run are complete, but
-the phase is not complete. Promotion is correctly blocked by the
-point-in-time-provenance and sample-size gates.**
+**Outcome: complete with `NO_TARGET_ADEQUATE`.** The bulk two-year run passed
+sample, coverage, provenance-for-target-selection, liquidity, and all four
+cross-provider gates. No candidate passed the material forecast, stability,
+incremental economic-value, and stressed-cost gates together.
 
 Goal: obtain the first real empirical result without LLMs.
 
@@ -875,41 +934,19 @@ the report recommends a target or explicitly concludes that none is adequate
 
 ### Next recommendations
 
-The IBKR adapter that was previously item 1 is complete. The recommended order
-from here is:
+Do not proceed directly to agents or trading. The recommended decision is:
 
-1. Implement a reusable `AlpacaHistoricalMarketDataProvider` for bulk SPY/QQQ
-   history, preserving every raw response before normalization.
-2. Configure Massive Futures Basic and implement
-   `MassiveHistoricalMarketDataProvider` for explicit ES/NQ contracts.
-3. Define and persist deterministic futures contract/roll mappings. Never infer
-   or silently substitute the front month at research time.
-4. Materialize an immutable, versioned dataset covering about two years and run
-   data-quality/cross-provider checks, including the currently missing ES/NQ
-   Massive-versus-IBKR comparison.
-5. Rerun `TARGET-TOURNAMENT-001`; freeze V1 only if sample, provenance,
-   calibration, stability, liquidity, cost, and economic-value gates pass.
-6. If a target is frozen, complete `REALITY-STORE-001` and then
-   `BASELINE-001` before adding Pi, Ollama, fixed agents, evolution, paper
-   orders, or live orders.
-7. Only purchase deeper futures history if the two-year results justify it.
-
-Implementation details for the next session:
-
-- Keep provider interfaces separate: `AlpacaHistoricalMarketDataProvider`,
-  `MassiveHistoricalMarketDataProvider`, and the implemented IBKR adapter must
-  normalize into a common, provider-neutral market-bar representation.
-- Implement raw response storage and dataset manifests before writing feature or
-  tournament logic.
-- Keep IBKR live capture market-data-only. Do not add account or order APIs.
-- IBKR real-time entitlements are needed to produce a non-empty locally
-  timestamped live archive, but are not required to proceed with the bulk
-  historical tournament.
-- Start with explicit ES/NQ contracts and a deterministic roll policy. Do not
-  use an opaque adjusted continuous series as the trading-price target.
-- Rerun the existing no-LLM tournament and preserve the `NO_TARGET_ADEQUATE`
-  result unless all sample, provenance, stability, calibration, and cost gates
-  genuinely pass.
+1. Treat all 24 current candidates as rejected and keep the final report sealed.
+2. Decide whether there is a small, economically motivated target-search
+   extension worth preregistering, such as changing neutral thresholds or adding
+   one or two horizons. Record it as a new hypothesis family rather than editing
+   the completed Phase 1 result.
+3. If no bounded extension is justified, stop this research branch; do not add
+   complexity to manufacture signal.
+4. If a later extension freezes a target, proceed to `REALITY-STORE-001` and
+   then `BASELINE-001` before Pi, Ollama, fixed agents, or evolution.
+5. Keep the zero-new-cost constraint. Do not purchase deeper futures history or
+   IBKR real-time subscriptions.
 
 ---
 
@@ -922,6 +959,7 @@ git status --short
 npm run check
 npm run db:status
 npm run foundation
+npm run phase1 -- --offline
 ```
 
 If Docker is stopped:
@@ -945,6 +983,7 @@ docs/IBKR_SETUP.md
 README.md
 config/foundation.json
 config/target-tournament.json
+config/phase1.json
 config/ibkr-contracts.json
 config/ibkr-history.json
 config/ibkr-live.json
@@ -957,18 +996,13 @@ packages/snapshot-engine/src/*
 python/src/spy_predictor_quant/ibkr_*.py
 python/src/spy_predictor_quant/market_archive.py
 python/src/spy_predictor_quant/market_comparison.py
+python/src/spy_predictor_quant/phase1_*.py
 migrations/001_foundation.sql
 ```
 
-Immediate next task:
-
-```text
-Implement bulk Alpaca historical SPY/QQQ ingestion and immutable raw/dataset
-manifests. Then implement Massive Basic ES/NQ ingestion with explicit contract
-and roll mappings, perform the missing futures cross-provider comparison, and
-rerun TARGET-TOURNAMENT-001 on about two years. Do not enable IBKR order
-submission and do not begin Pi, Ollama, agents, or evolution yet.
-```
+Immediate next task: review the completed `NO_TARGET_ADEQUATE` report and decide
+whether to preregister a bounded target-search extension. Do not enable IBKR
+order submission and do not begin Pi, Ollama, agents, or evolution.
 
 ---
 
