@@ -105,6 +105,32 @@ not provide original first-seen/revision timestamps, so its report is required
 to return `NO_TARGET_ADEQUATE`; it validates the pipeline but cannot freeze V1.
 See [`docs/TARGET-TOURNAMENT-001.md`](docs/TARGET-TOURNAMENT-001.md).
 
+## Complete the Phase 1 target tournament
+
+The production Phase 1 path uses the existing Alpaca account for raw SIP
+SPY/QQQ bars and Massive Futures Basic ($0/month) for explicit ES/NQ contracts.
+It never requests account data or submits orders. Put `MASSIVE_API_KEY` beside
+the existing Alpaca credentials in the ignored `.env`, then run:
+
+```bash
+npm run massive:check
+npm run phase1
+```
+
+`npm run phase1` builds or resumes the immutable two-year raw archive,
+normalizes the fixed 09:30–16:00 New York research session, verifies every
+configured futures contract and roll, compares all four instruments with the
+pinned IBKR history, and runs the 24-candidate sealed-confirmation tournament.
+Massive's free five-request-per-minute limit makes the first acquisition slow;
+completed pages are always reused.
+
+After the first acquisition, prove that no network access or recomputation is
+required and that identities are stable with:
+
+```bash
+npm run phase1 -- --offline
+```
+
 ## Repository boundaries
 
 - `apps/cli`: experiment entry point

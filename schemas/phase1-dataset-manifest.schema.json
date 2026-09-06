@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/phase1-dataset-manifest-v1.json",
+  "title": "Phase1DatasetManifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "datasetVersion",
+    "planHash",
+    "dateRange",
+    "barSemantics",
+    "provenance",
+    "captureReceiptRange",
+    "rawPages",
+    "normalizedBars",
+    "contracts",
+    "futuresRollPolicy",
+    "futuresRollPolicyHash",
+    "scheduleQuality",
+    "quality",
+    "datasetIdentityHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "phase1-dataset-manifest-v1"},
+    "datasetVersion": {"type": "string", "pattern": "^phase1-market-[a-f0-9]{16}$"},
+    "planHash": {"$ref": "#/$defs/hash"},
+    "dateRange": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": {"type": "string", "format": "date"},
+        "end": {"type": "string", "format": "date"}
+      },
+      "additionalProperties": false
+    },
+    "barSemantics": {"type": "object"},
+    "provenance": {
+      "type": "object",
+      "required": ["class", "targetSelectionAdmissible", "replaySafeFirstSeen", "limitation"],
+      "properties": {
+        "class": {"const": "event-time-only"},
+        "targetSelectionAdmissible": {"const": true},
+        "replaySafeFirstSeen": {"const": false},
+        "limitation": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "captureReceiptRange": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"type": "string", "format": "date-time"}
+    },
+    "rawPages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["provider", "page", "path", "sha256", "receivedAt", "requestUrl", "records"],
+        "properties": {
+          "provider": {"type": "string"},
+          "page": {"type": "integer", "minimum": 0},
+          "path": {"type": "string"},
+          "sha256": {"$ref": "#/$defs/hash"},
+          "receivedAt": {"type": "string", "format": "date-time"},
+          "requestUrl": {"type": "string", "pattern": "^https://"},
+          "records": {"type": "integer", "minimum": 0}
+        },
+        "additionalProperties": false
+      }
+    },
+    "normalizedBars": {
+      "type": "object",
+      "required": ["path", "records", "sha256"],
+      "properties": {
+        "path": {"type": "string"},
+        "records": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/hash"}
+      },
+      "additionalProperties": false
+    },
+    "contracts": {"type": "object", "minProperties": 18},
+    "futuresRollPolicy": {"type": "object"},
+    "futuresRollPolicyHash": {"$ref": "#/$defs/hash"},
+    "scheduleQuality": {"type": "object", "required": ["ES", "NQ"]},
+    "quality": {"type": "object", "required": ["SPY", "QQQ", "ES", "NQ"]},
+    "datasetIdentityHash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": false
+}

@@ -33,6 +33,8 @@ class Bar:
     low: float
     close: float
     volume: float
+    contract_ticker: str | None = None
+    session_date: str | None = None
 
 
 @dataclass(frozen=True)

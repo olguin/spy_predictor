@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/target-tournament-report-v2.json",
+  "title": "TargetTournamentReportV2",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "datasetVersion",
+    "datasetIdentityHash",
+    "datasetManifestSha256",
+    "comparisonHash",
+    "configHash",
+    "researchSourceHash",
+    "noLlmCalls",
+    "noOrderSubmission",
+    "provenance",
+    "targetSemantics",
+    "hypothesesEvaluated",
+    "decision",
+    "decisionReason",
+    "selectedCandidate",
+    "targetDefinition",
+    "results",
+    "reportHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "target-tournament-report-v2"},
+    "datasetVersion": {"type": "string"},
+    "datasetIdentityHash": {"$ref": "#/$defs/hash"},
+    "datasetManifestSha256": {"$ref": "#/$defs/hash"},
+    "comparisonHash": {"$ref": "#/$defs/hash"},
+    "configHash": {"$ref": "#/$defs/hash"},
+    "researchSourceHash": {"$ref": "#/$defs/hash"},
+    "noLlmCalls": {"const": true},
+    "noOrderSubmission": {"const": true},
+    "provenance": {"type": "object"},
+    "targetSemantics": {"type": "object"},
+    "hypothesesEvaluated": {"const": 24},
+    "decision": {"enum": ["FREEZE_TARGET", "NO_TARGET_ADEQUATE"]},
+    "decisionReason": {"type": "string", "minLength": 1},
+    "selectedCandidate": {"type": ["string", "null"]},
+    "targetDefinition": {"type": ["object", "null"]},
+    "results": {
+      "type": "object",
+      "minProperties": 24,
+      "maxProperties": 24,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["totalObservations", "dateRange", "labelCounts", "coverage", "evaluation", "promotion"],
+        "properties": {
+          "totalObservations": {"type": "integer", "minimum": 1},
+          "dateRange": {"type": "array", "minItems": 2, "maxItems": 2},
+          "labelCounts": {"type": "object", "required": ["DOWN", "NEUTRAL", "UP"]},
+          "coverage": {"type": "object"},
+          "evaluation": {"type": "object", "required": ["expanding", "rolling"]},
+          "promotion": {
+            "type": "object",
+            "required": ["championModelSelectedOnSelectionOnly", "gates", "passed", "selectionBrierImprovement"],
+            "properties": {
+              "championModelSelectedOnSelectionOnly": {"type": "string"},
+              "gates": {
+                "type": "object",
+                "required": ["provenance", "sample", "coverage", "crossProvider", "liquidity", "forecastImprovement", "selectionForecastImprovement", "calibration", "stability", "economicValue", "costSensitivity"]
+              },
+              "passed": {"type": "boolean"},
+              "selectionBrierImprovement": {"type": "number"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "reportHash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": false
+}

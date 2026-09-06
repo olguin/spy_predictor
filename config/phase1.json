@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "phase1-plan-v1",
+  "dataset": {
+    "rawArchiveId": "phase1-plan-457c58e4ff407478",
+    "startDate": "2024-09-03",
+    "endDate": "2026-09-03",
+    "barSize": "1Min",
+    "researchSession": {
+      "timezone": "America/New_York",
+      "start": "09:30",
+      "endExclusive": "16:00"
+    },
+    "alpaca": {
+      "provider": "alpaca",
+      "feed": "sip",
+      "adjustment": "raw",
+      "asOf": "2026-09-03",
+      "symbols": ["SPY", "QQQ"],
+      "pageLimit": 10000,
+      "maximumRequestsPerMinute": 180
+    },
+    "massive": {
+      "provider": "massive",
+      "resolution": "1min",
+      "pageLimit": 50000,
+      "maximumRequestsPerMinute": 5,
+      "products": ["ES", "NQ"]
+    },
+    "futuresRollPolicy": {
+      "schemaVersion": "explicit-futures-roll-v1",
+      "description": "Quarterly ES/NQ rolls fixed before acquisition at the 09:30 America/New_York research-session boundary on the Thursday eight calendar days before expiration. No same-day or future volume selects a contract.",
+      "mappings": {
+        "ES": [
+          {"startDate": "2024-09-03", "endDate": "2024-09-11", "ticker": "ESU4", "lastTradeDate": "2024-09-20"},
+          {"startDate": "2024-09-12", "endDate": "2024-12-11", "ticker": "ESZ4", "lastTradeDate": "2024-12-20"},
+          {"startDate": "2024-12-12", "endDate": "2025-03-12", "ticker": "ESH5", "lastTradeDate": "2025-03-21"},
+          {"startDate": "2025-03-13", "endDate": "2025-06-11", "ticker": "ESM5", "lastTradeDate": "2025-06-20"},
+          {"startDate": "2025-06-12", "endDate": "2025-09-10", "ticker": "ESU5", "lastTradeDate": "2025-09-19"},
+          {"startDate": "2025-09-11", "endDate": "2025-12-10", "ticker": "ESZ5", "lastTradeDate": "2025-12-19"},
+          {"startDate": "2025-12-11", "endDate": "2026-03-11", "ticker": "ESH6", "lastTradeDate": "2026-03-20"},
+          {"startDate": "2026-03-12", "endDate": "2026-06-10", "ticker": "ESM6", "lastTradeDate": "2026-06-18"},
+          {"startDate": "2026-06-11", "endDate": "2026-09-03", "ticker": "ESU6", "lastTradeDate": "2026-09-18"}
+        ],
+        "NQ": [
+          {"startDate": "2024-09-03", "endDate": "2024-09-11", "ticker": "NQU4", "lastTradeDate": "2024-09-20"},
+          {"startDate": "2024-09-12", "endDate": "2024-12-11", "ticker": "NQZ4", "lastTradeDate": "2024-12-20"},
+          {"startDate": "2024-12-12", "endDate": "2025-03-12", "ticker": "NQH5", "lastTradeDate": "2025-03-21"},
+          {"startDate": "2025-03-13", "endDate": "2025-06-11", "ticker": "NQM5", "lastTradeDate": "2025-06-20"},
+          {"startDate": "2025-06-12", "endDate": "2025-09-10", "ticker": "NQU5", "lastTradeDate": "2025-09-19"},
+          {"startDate": "2025-09-11", "endDate": "2025-12-10", "ticker": "NQZ5", "lastTradeDate": "2025-12-19"},
+          {"startDate": "2025-12-11", "endDate": "2026-03-11", "ticker": "NQH6", "lastTradeDate": "2026-03-20"},
+          {"startDate": "2026-03-12", "endDate": "2026-06-10", "ticker": "NQM6", "lastTradeDate": "2026-06-18"},
+          {"startDate": "2026-06-11", "endDate": "2026-09-03", "ticker": "NQU6", "lastTradeDate": "2026-09-18"}
+        ]
+      }
+    }
+  },
+  "tournament": {
+    "horizons": ["open-15m", "open-30m", "open-60m", "previous-close-next-open", "open-close", "close-next-close"],
+    "targetSemanticsVersion": "target-semantics-v2",
+    "neutralThreshold": 0.0005,
+    "minimumTrainingObservations": 126,
+    "rollingWindow": 252,
+    "confirmationObservations": 100,
+    "minimumConfirmationObservations": 100,
+    "minimumCoveragePercent": 95.0,
+    "randomSeed": 42,
+    "transactionCostBps": {"SPY": 1.0, "QQQ": 1.0, "ES": 0.5, "NQ": 0.5},
+    "stressCostMultiplier": 2.0,
+    "promotion": {
+      "minimumBrierImprovement": 0.005,
+      "minimumIncrementalNetReturn": 0.001,
+      "maximumExpectedCalibrationError": 0.2,
+      "maximumCalibrationDegradation": 0.02,
+      "requirePositiveNetReturn": true,
+      "requirePositiveStressNetReturn": true,
+      "requireBothWalkForwardModes": true,
+      "requireBothConfirmationHalves": true,
+      "eligibleModels": ["overnight-continuation", "overnight-reversal", "momentum", "mean-reversion", "logistic-l2", "tree-depth-3"]
+    },
+    "crossProvider": {
+      "minimumIntersectionBars": 100,
+      "maximumCloseDifferenceBps": 5.0
+    }
+  }
+}
