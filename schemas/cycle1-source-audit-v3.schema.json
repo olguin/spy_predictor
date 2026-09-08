@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/cycle1-source-audit-v3.json",
+  "title": "Cycle1SourceAuditV3",
+  "type": "object",
+  "required": [
+    "schemaVersion", "auditId", "auditDate", "status",
+    "preregistrationSchemaVersion", "preregistrationHash",
+    "containsModelOutput", "paidSubscriptionRequired", "redistributeRawData",
+    "baseAudit", "providers", "runtimeSourcePlan", "runtimeCoverageGates",
+    "protectedFieldPolicy", "auditHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "cycle1-source-audit-v3"},
+    "auditId": {"type": "string", "minLength": 1},
+    "auditDate": {"type": "string", "format": "date"},
+    "status": {"const": "QUALIFIED_WITH_MANUAL_SOURCE_GATE"},
+    "preregistrationSchemaVersion": {"const": "cycle1-preregistration-v4"},
+    "preregistrationHash": {"$ref": "#/$defs/hash"},
+    "containsModelOutput": {"const": false},
+    "paidSubscriptionRequired": {"const": false},
+    "redistributeRawData": {"const": false},
+    "baseAudit": {
+      "type": "object",
+      "required": ["path", "auditHash", "unchangedSeries"],
+      "properties": {
+        "path": {"const": "config/cycle1-source-audit-v2.json"},
+        "auditHash": {"$ref": "#/$defs/hash"},
+        "unchangedSeries": {"type": "array", "minItems": 13, "maxItems": 13, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      },
+      "additionalProperties": false
+    },
+    "providers": {
+      "type": "array", "minItems": 1, "maxItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["providerId", "providerName", "documentationUrl", "termsUrl", "licensePolicy", "redistributionAllowed", "series"],
+        "properties": {
+          "providerId": {"const": "fred-alfred-credit-amendment"},
+          "providerName": {"type": "string", "minLength": 1},
+          "documentationUrl": {"type": "string", "format": "uri"},
+          "termsUrl": {"type": "string", "format": "uri"},
+          "licensePolicy": {"type": "string", "minLength": 20},
+          "redistributionAllowed": {"const": false},
+          "series": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/series"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "runtimeSourcePlan": {"type": "object", "minProperties": 9},
+    "runtimeCoverageGates": {"type": "object", "minProperties": 10},
+    "protectedFieldPolicy": {"type": "string", "minLength": 20},
+    "auditHash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "series": {
+      "type": "object",
+      "required": [
+        "seriesId", "requestUrl", "endpointSemantics", "fieldSemantics",
+        "coverageStart", "coverageEndRule", "frequency", "publicationBehavior",
+        "revisionBehavior", "pointInTimeTier", "licenseRestriction",
+        "missingnessPolicy", "releaseLagRule", "decision", "decisionReason"
+      ],
+      "properties": {
+        "seriesId": {"type": "string", "minLength": 1},
+        "requestUrl": {"type": "string", "format": "uri"},
+        "endpointSemantics": {"type": "string", "minLength": 1},
+        "fieldSemantics": {"type": "string", "minLength": 1},
+        "coverageStart": {"type": "string", "minLength": 1},
+        "coverageEndRule": {"type": "string", "minLength": 1},
+        "frequency": {"type": "string", "minLength": 1},
+        "publicationBehavior": {"type": "string", "minLength": 1},
+        "revisionBehavior": {"type": "string", "minLength": 1},
+        "pointInTimeTier": {"enum": ["POINT_IN_TIME_ADMISSIBLE", "RECONSTRUCTED_RESEARCH_ONLY"]},
+        "licenseRestriction": {"type": "string", "minLength": 1},
+        "missingnessPolicy": {"type": "string", "minLength": 1},
+        "releaseLagRule": {"type": "string", "minLength": 1},
+        "decision": {"enum": ["ACCEPTED", "ACCEPTED_DIAGNOSTIC_ONLY", "EXCLUDED"]},
+        "decisionReason": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

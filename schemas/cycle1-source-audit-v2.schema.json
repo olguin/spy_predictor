@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/cycle1-source-audit-v2.json",
+  "title": "Cycle1SourceAuditV2",
+  "type": "object",
+  "required": [
+    "schemaVersion", "auditId", "auditDate", "status",
+    "preregistrationSchemaVersion", "preregistrationHash",
+    "containsModelOutput", "paidSubscriptionRequired", "redistributeRawData",
+    "baseAudit", "providers", "runtimeSourcePlan", "runtimeCoverageGates",
+    "protectedFieldPolicy", "auditHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "cycle1-source-audit-v2"},
+    "auditId": {"type": "string", "minLength": 1},
+    "auditDate": {"type": "string", "format": "date"},
+    "status": {"const": "QUALIFIED_WITH_MANUAL_SOURCE_GATE"},
+    "preregistrationSchemaVersion": {"const": "cycle1-preregistration-v3"},
+    "preregistrationHash": {"$ref": "#/$defs/hash"},
+    "containsModelOutput": {"const": false},
+    "paidSubscriptionRequired": {"const": false},
+    "redistributeRawData": {"const": false},
+    "baseAudit": {
+      "type": "object",
+      "required": ["path", "auditHash", "unchangedSeries"],
+      "properties": {
+        "path": {"const": "config/cycle1-source-audit.json"},
+        "auditHash": {"$ref": "#/$defs/hash"},
+        "unchangedSeries": {
+          "type": "array", "minItems": 9, "maxItems": 9,
+          "items": {"type": "string", "minLength": 1}, "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "providers": {
+      "type": "array", "minItems": 4, "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["providerId", "providerName", "documentationUrl", "termsUrl", "licensePolicy", "redistributionAllowed", "series"],
+        "properties": {
+          "providerId": {"type": "string", "minLength": 1},
+          "providerName": {"type": "string", "minLength": 1},
+          "documentationUrl": {"type": "string", "format": "uri"},
+          "termsUrl": {"type": "string", "format": "uri"},
+          "licensePolicy": {"type": "string", "minLength": 1},
+          "redistributionAllowed": {"const": false},
+          "series": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/series"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "runtimeSourcePlan": {
+      "type": "object",
+      "required": [
+        "ibkrCatalogPath", "ibkrCatalogHash", "ibkrDuration",
+        "dailyPriceSeries", "distributionSeries", "diagnosticSeries",
+        "manualQqqSnapshotPath", "distributionCoverage"
+      ],
+      "properties": {
+        "ibkrCatalogPath": {"type": "string", "minLength": 1},
+        "ibkrCatalogHash": {"$ref": "#/$defs/hash"},
+        "ibkrDuration": {"const": "40 Y"},
+        "dailyPriceSeries": {"const": "IBKR_SPY_QQQ_DAILY_TRADES"},
+        "distributionSeries": {
+          "type": "object",
+          "required": ["SPY", "QQQ"],
+          "properties": {
+            "SPY": {"const": "SSGA_SPY_HISTORICAL_DISTRIBUTIONS"},
+            "QQQ": {"const": "INVESCO_QQQ_HISTORICAL_DISTRIBUTIONS"}
+          },
+          "additionalProperties": false
+        },
+        "diagnosticSeries": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}, "uniqueItems": true
+        },
+        "manualQqqSnapshotPath": {"type": "string", "minLength": 1},
+        "distributionCoverage": {
+          "type": "object",
+          "required": ["SPY", "QQQ"],
+          "additionalProperties": {"$ref": "#/$defs/coverage"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "runtimeCoverageGates": {"type": "object", "minProperties": 6},
+    "protectedFieldPolicy": {"type": "string", "minLength": 1},
+    "auditHash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "coverage": {
+      "type": "object",
+      "required": ["firstExDate", "lastExDate", "records"],
+      "properties": {
+        "firstExDate": {"type": "string", "format": "date"},
+        "lastExDate": {"type": "string", "format": "date"},
+        "records": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "series": {
+      "type": "object",
+      "required": [
+        "seriesId", "requestUrl", "endpointSemantics", "fieldSemantics",
+        "coverageStart", "coverageEndRule", "frequency", "publicationBehavior",
+        "revisionBehavior", "pointInTimeTier", "licenseRestriction",
+        "missingnessPolicy", "releaseLagRule", "decision", "decisionReason"
+      ],
+      "properties": {
+        "seriesId": {"type": "string", "minLength": 1},
+        "requestUrl": {"type": "string", "format": "uri"},
+        "endpointSemantics": {"type": "string", "minLength": 1},
+        "fieldSemantics": {"type": "string", "minLength": 1},
+        "coverageStart": {"type": "string", "minLength": 1},
+        "coverageEndRule": {"type": "string", "minLength": 1},
+        "frequency": {"type": "string", "minLength": 1},
+        "publicationBehavior": {"type": "string", "minLength": 1},
+        "revisionBehavior": {"type": "string", "minLength": 1},
+        "pointInTimeTier": {"enum": ["POINT_IN_TIME_ADMISSIBLE", "RECONSTRUCTED_RESEARCH_ONLY"]},
+        "licenseRestriction": {"type": "string", "minLength": 1},
+        "missingnessPolicy": {"type": "string", "minLength": 1},
+        "releaseLagRule": {"type": "string", "minLength": 1},
+        "decision": {"enum": ["ACCEPTED", "ACCEPTED_LOCAL_RESEARCH_ONLY", "ACCEPTED_WITH_COVERAGE_GATE", "ACCEPTED_DIAGNOSTIC_ONLY", "EXCLUDED"]},
+        "decisionReason": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

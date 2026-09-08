@@ -48,6 +48,50 @@ def test_archived_pages_are_reused_without_network(tmp_path: Path) -> None:
     assert records == payload["bars"]
 
 
+def test_archived_page_parser_migration_uses_hash_linked_sidecar(
+    tmp_path: Path,
+) -> None:
+    request_url = "https://example.test/actions"
+    payload = {"group": [{"x": 1}]}
+    encoded = json.dumps(payload, separators=(",", ":")).encode()
+    raw_path = tmp_path / "page-0000.json"
+    raw_path.write_bytes(encoded)
+    metadata_path = tmp_path / "page-0000.meta.json"
+    metadata = {
+        "schemaVersion": "archived-http-page-v1",
+        "provider": "fixture",
+        "page": 0,
+        "requestUrl": request_url,
+        "httpStatus": 200,
+        "receivedAt": "2026-09-05T00:00:00+00:00",
+        "records": 0,
+        "sha256": hashlib.sha256(encoded).hexdigest(),
+    }
+    metadata_path.write_text(json.dumps(metadata))
+
+    pages, records = capture_pages(
+        provider="fixture",
+        initial_url=request_url,
+        raw_directory=tmp_path,
+        headers={},
+        limiter=RequestLimiter(5),
+        next_url=lambda _document, _url: None,
+        extract_records=lambda document: document["group"],
+        allow_network=False,
+        record_extraction_version="grouped-v2",
+    )
+
+    assert records == [{"x": 1}]
+    assert pages[0].records == 1
+    assert json.loads(metadata_path.read_text())["records"] == 0
+    sidecar = tmp_path / "page-0000.extraction-grouped-v2.meta.json"
+    migrated = json.loads(sidecar.read_text())
+    assert migrated["records"] == 1
+    assert migrated["baseMetadataSha256"] == hashlib.sha256(
+        metadata_path.read_bytes()
+    ).hexdigest()
+
+
 def test_phase1_plan_has_contiguous_explicit_rolls() -> None:
     plan = load_phase1_plan(REPO_ROOT / "config" / "phase1.json")
     assert plan.start_date.isoformat() == "2024-09-03"

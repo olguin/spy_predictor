@@ -2,6 +2,14 @@
 
 Research infrastructure for point-in-time, reproducible market forecasting.
 
+Current work is the Cycle 1 pre-evaluation repair. See
+[project status](docs/PROJECT_PLAN_AND_STATUS.md) and
+[repair findings](docs/CYCLE1_REPAIR.md).
+`npm run cycle1:preflight` audits the pinned dataset without model metrics;
+exit code 2 reports the known scientific blockers. The old v4 dataset is
+suspended for evaluation, and its repaired offline rebuild fails closed on
+missing historical cash-rate publication coverage.
+
 The repository contains the hardened **FOUNDATION-001** research spine and a
 no-LLM **TARGET-TOURNAMENT-001** qualification pipeline. The foundation uses a
 deterministic synthetic dataset; the tournament pins raw real-market responses

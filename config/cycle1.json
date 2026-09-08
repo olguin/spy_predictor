@@ -1,0 +1,331 @@
+{
+  "schemaVersion": "cycle1-preregistration-v4",
+  "experimentId": "CYCLE-ASYMMETRY-001",
+  "status": "frozen-before-source-acquisition",
+  "amendment": {
+    "supersedesSchemaVersion": "cycle1-preregistration-v3",
+    "reason": "ALFRED NFCI vintages begin on 2011-05-25, yielding only 147 complete feature/target rows versus the frozen 228-row minimum.",
+    "changedFields": [
+      "features.dimensions.stress.features[0]",
+      "features.dimensions.direction.features[3]"
+    ],
+    "unchangedFields": "targets,states,models,partitions,promotion-gates,seeds,decision-vocabulary,no-HMM-rule,ten-evaluation-budget",
+    "candidateOutputExistedBeforeAmendment": false
+  },
+  "attribution": {
+    "modelDescription": "Independent quantitative cycle-asymmetry formalization inspired by public cycle-investing concepts.",
+    "proprietaryModelClaimed": false
+  },
+  "instruments": ["SPY", "QQQ"],
+  "decisionFrequency": {
+    "frequency": "monthly",
+    "calendar": "XNYS",
+    "timezone": "America/New_York",
+    "snapshotSessionRule": "final-scheduled-equity-session-of-calendar-month",
+    "snapshotCutoff": "scheduled-session-close",
+    "recordAvailabilityRule": "publicationTimestamp<=snapshotCutoff",
+    "earliestPolicyExecution": "next-scheduled-session-open"
+  },
+  "targets": {
+    "primary": {
+      "id": "forward-real-excess-total-return-12m",
+      "horizonMonths": 12,
+      "promotionEligible": true,
+      "startEndpoint": "snapshot-session-total-return-close",
+      "endEndpoint": "final-scheduled-session-total-return-close-of-calendar-month-plus-12",
+      "equityReturn": {
+        "method": "log-total-return-index-ratio",
+        "splitTreatment": "split-adjusted",
+        "dividendTreatment": "cash-distribution-reinvested-on-ex-date-at-split-adjusted-close"
+      },
+      "cashReturn": {
+        "seriesId": "DGS3MO",
+        "method": "monthly-rolled-simple-accrual-log-return",
+        "rateSelection": "latest-observation-published-by-each-monthly-holding-period-start",
+        "dayCount": "actual-365",
+        "formula": "sum(log(1+(annualPercent/100)*actualDays/365))"
+      },
+      "inflation": {
+        "seriesId": "CPIAUCSL",
+        "labelVintage": "latest-vintage-pinned-at-ingestion",
+        "method": "log-index-ratio",
+        "commonDeflatorRule": "subtract-the-same-log-cpi-change-from-equity-and-cash",
+        "excessIdentity": "real-equity-minus-real-cash-equals-nominal-equity-minus-nominal-cash"
+      }
+    },
+    "secondary": {
+      "id": "forward-maximum-drawdown-12m",
+      "horizonMonths": 12,
+      "promotionEligible": false,
+      "pathFrequency": "daily-session-close",
+      "pathStart": "snapshot-session-total-return-close",
+      "pathEnd": "primary-target-endpoint-inclusive",
+      "runningPeakIncludesStart": true,
+      "formula": "min(level/maximum(levels-from-start-through-current)-1)",
+      "eventOperator": "<=",
+      "eventThreshold": -0.2
+    },
+    "diagnostic": {
+      "id": "forward-real-excess-total-return-24m",
+      "horizonMonths": 24,
+      "promotionEligible": false,
+      "formula": "primary-target-formula-with-24-month-endpoint",
+      "mayRescuePrimaryFailure": false
+    },
+    "endpointFallback": "use-final-scheduled-session-of-target-calendar-month",
+    "labelAvailabilityRule": "target-path-and-endpoint-must-be-complete-before-training-forecast-cutoff"
+  },
+  "features": {
+    "minimumRawHistoryMonths": 60,
+    "missingValuePolicy": "candidate-row-unavailable-no-imputation",
+    "availability": {
+      "pointInTimeRule": "use-latest-vintage-whose-publicationTimestamp-is-at-or-before-cutoff",
+      "reconstructedRule": "diagnostic-only-never-silently-promotable"
+    },
+    "normalization": {
+      "percentileMethod": "expanding-midrank",
+      "percentileMinimumHistoryMonths": 24,
+      "percentileFormula": "2*((countLess+0.5*countEqual)/count)-1",
+      "fitScope": "available-history-through-cutoff-within-fold",
+      "clipMinimum": -1.0,
+      "clipMaximum": 1.0
+    },
+    "dimensions": {
+      "valuation": {
+        "weight": 1.0,
+        "features": [
+          {
+            "id": "real-price-trend-deviation",
+            "source": "instrument-total-return-index-deflated-by-cpi",
+            "windowMonths": 60,
+            "method": "exact-theil-sen-log-linear-trend-with-mad-residual-scale",
+            "madConsistencyFactor": 1.4826,
+            "madFloor": 1e-09,
+            "economicSign": -1,
+            "promotionEligible": true
+          }
+        ],
+        "diagnostics": [
+          {
+            "id": "shiller-cape-expanding-percentile",
+            "source": "SHILLER_IE_DATA_CAPE",
+            "economicSign": -1,
+            "promotionEligible": false,
+            "reason": "publication history is reconstructed unless the source audit proves otherwise"
+          }
+        ]
+      },
+      "stress": {
+        "weight": 1.0,
+        "features": [
+          {
+            "id": "bank-prime-minus-treasury-credit-spread",
+            "sources": ["MPRIME", "GS3M"],
+            "alignment": "latest-common-observation-month-whose-both-vintages-were-published-by-cutoff",
+            "formula": "MPRIME_t-GS3M_t",
+            "transform": "percentage-point-spread-level",
+            "economicSign": 1,
+            "promotionEligible": true
+          },
+          {
+            "id": "realized-volatility-3m",
+            "source": "instrument-daily-total-return",
+            "windowMonths": 3,
+            "annualizationSessions": 252,
+            "economicSign": 1,
+            "promotionEligible": true
+          },
+          {
+            "id": "drawdown-from-trailing-high-12m",
+            "source": "instrument-daily-total-return-index",
+            "windowMonths": 12,
+            "transform": "positive-drawdown-magnitude",
+            "economicSign": 1,
+            "promotionEligible": true
+          }
+        ],
+        "diagnostics": [
+          {
+            "id": "national-financial-conditions-index",
+            "source": "NFCI",
+            "economicSign": 1,
+            "promotionEligible": false,
+            "reason": "first ALFRED vintage is 2011-05-25 and cannot satisfy the frozen 228-row validation gate"
+          }
+        ]
+      },
+      "direction": {
+        "weight": 1.0,
+        "features": [
+          {
+            "id": "momentum-6m",
+            "source": "instrument-month-end-total-return-index",
+            "windowMonths": 6,
+            "transform": "log-return",
+            "economicSign": 1,
+            "promotionEligible": true
+          },
+          {
+            "id": "momentum-12m",
+            "source": "instrument-month-end-total-return-index",
+            "windowMonths": 12,
+            "transform": "log-return",
+            "economicSign": 1,
+            "promotionEligible": true
+          },
+          {
+            "id": "price-versus-moving-average-10m",
+            "source": "instrument-real-month-end-total-return-index",
+            "windowMonths": 10,
+            "transform": "log-level-minus-log-arithmetic-moving-average",
+            "economicSign": 1,
+            "promotionEligible": true
+          },
+          {
+            "id": "bank-prime-minus-treasury-credit-spread-change-3m",
+            "source": "bank-prime-minus-treasury-credit-spread",
+            "windowMonths": 3,
+            "formula": "spread_t-spread_t_minus_3_months",
+            "transform": "current-minus-lagged",
+            "economicSign": -1,
+            "promotionEligible": true
+          },
+          {
+            "id": "industrial-production-growth-6m",
+            "source": "INDPRO",
+            "windowMonths": 6,
+            "transform": "log-change",
+            "economicSign": 1,
+            "promotionEligible": true
+          }
+        ]
+      }
+    },
+    "dimensionAggregation": "equal-weight-arithmetic-mean-of-available-preregistered-features-require-all",
+    "cycleScoreAggregation": "equal-weight-arithmetic-mean-of-three-dimension-scores"
+  },
+  "states": {
+    "scoreRange": [-1.0, 1.0],
+    "thresholds": {
+      "cheapValuationMinimum": 0.5,
+      "expensiveValuationMaximum": -0.5,
+      "highStressMinimum": 0.5,
+      "easyStressMaximum": -0.5,
+      "positiveDirectionMinimum": 0.25,
+      "weakDirectionMaximum": -0.25,
+      "stressChangeMagnitude": 0.25,
+      "formerlyExpensiveLookbackMonths": 12
+    },
+    "precedence": ["EUPHORIA", "EARLY_RECOVERY", "CRISIS", "CORRECTION", "GREED", "NORMAL"],
+    "rules": {
+      "EUPHORIA": "expensive-and-easy-stress-and-positive-direction",
+      "EARLY_RECOVERY": "cheap-and-high-stress-and-stress-declining-and-positive-direction",
+      "CRISIS": "cheap-and-high-stress-and-weak-direction",
+      "CORRECTION": "currently-or-formerly-expensive-and-direction-weak-or-stress-rising",
+      "GREED": "expensive-and-positive-direction",
+      "NORMAL": "fallback"
+    }
+  },
+  "models": {
+    "perInstrument": [
+      {"id": "unconditional-history", "kind": "empirical-distribution", "promotionRole": "baseline"},
+      {"id": "valuation-only", "kind": "ridge-and-logistic-l2", "ridgeAlpha": 10.0, "logisticC": 0.1, "promotionRole": "baseline"},
+      {"id": "direction-only", "kind": "ridge-and-logistic-l2", "ridgeAlpha": 10.0, "logisticC": 0.1, "promotionRole": "baseline"},
+      {"id": "fixed-cycle-score", "kind": "training-only-score-tertile-empirical-distribution", "binCount": 3, "minimumBinObservations": 20, "promotionRole": "challenger"},
+      {"id": "regularized-cycle", "kind": "ridge-and-logistic-l2", "ridgeAlpha": 10.0, "logisticC": 0.1, "promotionRole": "challenger"}
+    ],
+    "preprocessing": "fit-within-each-training-fold-only",
+    "hyperparameterSearch": "none",
+    "hmmIncluded": false,
+    "randomSeeds": [42]
+  },
+  "partitions": {
+    "modes": ["expanding", "rolling"],
+    "minimumTrainingMonths": 120,
+    "rollingWindowMonths": 180,
+    "primaryLabelOverlapMonths": 12,
+    "purgeMonths": 12,
+    "selectionConfirmationEmbargoMonths": 12,
+    "confirmationBoundaryRule": "final-96-complete-primary-label-months-per-instrument",
+    "minimumConfirmationLabeledMonths": 96,
+    "minimumConfirmationCalendarYears": 8,
+    "minimumEffectiveAnnualBlocks": 8,
+    "confirmationHalves": 2,
+    "minimumLabeledMonthsPerHalf": 48,
+    "bootstrap": {
+      "method": "moving-block",
+      "blockLengthMonths": 12,
+      "resamples": 10000,
+      "confidenceLevel": 0.9,
+      "seed": 42
+    }
+  },
+  "promotionGates": {
+    "minimumCoreFeatureCoveragePercent": 95.0,
+    "returnDistribution": {
+      "primaryMetric": "crps",
+      "minimumRelativeImprovement": 0.02,
+      "minimumAbsoluteImprovement": 0.001,
+      "maximumRmseDegradation": 0.005,
+      "requireBothWalkForwardModes": true,
+      "requireBothConfirmationHalves": true,
+      "bootstrapLowerBoundMustExceed": 0.0001
+    },
+    "drawdown": {
+      "primaryMetric": "brier",
+      "minimumAbsoluteBrierImprovement": 0.01,
+      "maximumLogLossDegradation": 0.01,
+      "maximumExpectedCalibrationError": 0.1,
+      "minimumCalibrationSlope": 0.5,
+      "maximumCalibrationSlope": 1.5
+    },
+    "monotonicity": {
+      "groups": 3,
+      "minimumObservationsPerGroup": 12,
+      "returnOrdering": "strictly-increasing-with-cycle-score",
+      "drawdownProbabilityOrdering": "non-increasing-with-cycle-score"
+    },
+    "stability": {
+      "minimumEvaluableEras": 3,
+      "minimumPositiveEraFraction": 0.67,
+      "maximumRelativeLossDegradationAnyEra": 0.02,
+      "maximumSingleBlockBenefitFraction": 0.5
+    },
+    "multipleTesting": {
+      "method": "holm-bonferroni",
+      "familyWiseAlpha": 0.1,
+      "family": "ten-preregistered-instrument-model-primary-evaluations"
+    },
+    "economicPolicy": {
+      "evaluateOnlyAfterPredictivePass": true,
+      "equityWeightsByForecastTertile": [0.5, 0.75, 1.0],
+      "oneWayTransactionCostBps": 5.0,
+      "stressCostMultiplier": 2.0,
+      "maximumAnnualTurnover": 3.0,
+      "minimumRiskAdjustedTradeoffImprovement": 0.1,
+      "maximumAnnualizedReturnShortfall": 0.005,
+      "minimumMaximumDrawdownImprovement": 0.05,
+      "benchmark": "selection-period-volatility-matched-static-equity-cash-allocation"
+    }
+  },
+  "hypothesisBudget": {
+    "instruments": 2,
+    "modelsPerInstrument": 5,
+    "primaryEvaluations": 10,
+    "optionalHmmEvaluations": 0
+  },
+  "decisionVocabulary": {
+    "experiment": ["FREEZE_CYCLE_TARGET", "NO_CYCLE_TARGET_ADEQUATE"],
+    "instrument": ["QUALIFIED", "REJECTED"],
+    "evidenceTier": ["POINT_IN_TIME_ADMISSIBLE", "RECONSTRUCTED_RESEARCH_ONLY"]
+  },
+  "prohibitions": {
+    "paidData": true,
+    "llmCalls": true,
+    "agentCalls": true,
+    "accountQueries": true,
+    "orders": true,
+    "leverageRecommendations": true,
+    "postConfirmationChanges": true
+  }
+}

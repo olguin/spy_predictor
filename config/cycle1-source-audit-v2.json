@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "cycle1-source-audit-v2",
+  "auditId": "CYCLE-ASYMMETRY-001-SOURCE-AUDIT-V2-2026-09-07",
+  "auditDate": "2026-09-07",
+  "status": "QUALIFIED_WITH_MANUAL_SOURCE_GATE",
+  "preregistrationSchemaVersion": "cycle1-preregistration-v3",
+  "preregistrationHash": "ac56d103ba602e859ab02679f11513579795eb44823702ad6b700e711778e4ca",
+  "containsModelOutput": false,
+  "paidSubscriptionRequired": false,
+  "redistributeRawData": false,
+  "baseAudit": {
+    "path": "config/cycle1-source-audit.json",
+    "auditHash": "2e150dff239848abdd79869c2d6e415651de600cb80604d6a3e6baba6feee5ff",
+    "unchangedSeries": [
+      "SHILLER_IE_DATA_CAPE",
+      "DGS3MO",
+      "CPIAUCSL",
+      "NFCI",
+      "INDPRO",
+      "BAA",
+      "ALPACA_SPY_QQQ_DAILY_SIP_RAW",
+      "ALPACA_SPY_QQQ_CORPORATE_ACTIONS",
+      "QQQ_SPECIFIC_HISTORICAL_VALUATION"
+    ]
+  },
+  "providers": [
+    {
+      "providerId": "interactive-brokers-historical",
+      "providerName": "Interactive Brokers Historical Market Data",
+      "documentationUrl": "https://ibkrcampus.com/campus/ibkr-quant-news/retrieving-historical-data-from-ibkr/",
+      "termsUrl": "https://www.interactivebrokers.com/en/general/about/legalDocs.php",
+      "licensePolicy": "Use the existing paper/read-only account for internal research, archive only entitled responses locally, and do not redistribute provider data.",
+      "redistributionAllowed": false,
+      "series": [
+        {
+          "seriesId": "IBKR_SPY_QQQ_DAILY_TRADES",
+          "requestUrl": "https://interactivebrokers.github.io/tws-api/historical_bars.html",
+          "endpointSemantics": "Exact catalog-pinned SPY and QQQ stock contracts requested through reqHistoricalData with duration=40 Y, barSize=1 day, whatToShow=TRADES, useRTH=1 and formatDate=1.",
+          "fieldSemantics": "Daily regular-session OHLC and volume; IBKR documents TRADES history as split-adjusted but not dividend-adjusted.",
+          "coverageStart": "SPY=1993-01-29;QQQ=1999-03-10",
+          "coverageEndRule": "last-complete-session-at-or-before-2026-09-05",
+          "frequency": "daily-session",
+          "publicationBehavior": "Current historical reconstruction acquired after the fact; it is not a first-seen event stream.",
+          "revisionBehavior": "Every callback payload, exact contract, request identity and response boundary is pinned by hash and never overwritten.",
+          "pointInTimeTier": "RECONSTRUCTED_RESEARCH_ONLY",
+          "licenseRestriction": "Internal account-entitled research only; no raw redistribution.",
+          "missingnessPolicy": "Require unique ordered XNYS sessions and every completed month final session; never synthesize a missing close.",
+          "releaseLagRule": "completed-session-only",
+          "decision": "ACCEPTED_WITH_COVERAGE_GATE",
+          "decisionReason": "Read-only qualification returned 8,456 SPY sessions from inception and 6,917 QQQ sessions from inception through 2026-09-04. Sponsor cash distributions remain separate exact inputs."
+        },
+        {
+          "seriesId": "IBKR_SPY_QQQ_DAILY_ADJUSTED_LAST",
+          "requestUrl": "https://interactivebrokers.github.io/tws-api/historical_bars.html",
+          "endpointSemantics": "The same exact contracts requested with whatToShow=ADJUSTED_LAST; IBKR requires an empty endDateTime for this series.",
+          "fieldSemantics": "Daily close adjusted for splits and dividends according to IBKR; paired return ratios can diagnose cash events but rounded values are not the target's cash source.",
+          "coverageStart": "SPY=1993-01-29;QQQ=1999-03-10",
+          "coverageEndRule": "normalize-only-through-2026-09-05-from-first-pinned-response",
+          "frequency": "daily-session",
+          "publicationBehavior": "Current historical reconstruction acquired after the fact.",
+          "revisionBehavior": "The first response is pinned; later upstream adjustments cannot overwrite it.",
+          "pointInTimeTier": "RECONSTRUCTED_RESEARCH_ONLY",
+          "licenseRestriction": "Internal account-entitled research only; no raw redistribution.",
+          "missingnessPolicy": "Diagnostic comparison only; absence or mismatch cannot be imputed into sponsor distributions.",
+          "releaseLagRule": "not-promotion-evidence",
+          "decision": "ACCEPTED_DIAGNOSTIC_ONLY",
+          "decisionReason": "Useful for independent distribution-date reconciliation, but rounded adjusted closes and omitted early events make inferred cash unsuitable for the exact target."
+        }
+      ]
+    },
+    {
+      "providerId": "state-street-spdr",
+      "providerName": "State Street SPDR Historical Distributions",
+      "documentationUrl": "https://www.ssga.com/us/en/intermediary/resources/documents/etf-dividend-distributions",
+      "termsUrl": "https://www.ssga.com/us/en/intermediary/resources/documents/etf-dividend-distributions",
+      "licensePolicy": "Retain one offered workbook only in the local ignored research archive, cite State Street, and do not redistribute any raw workbook or table.",
+      "redistributionAllowed": false,
+      "series": [
+        {
+          "seriesId": "SSGA_SPY_HISTORICAL_DISTRIBUTIONS",
+          "requestUrl": "https://www.ssga.com/library-content/products/fund-data/etfs/us/spdr-etf-historical-distributions.xlsx",
+          "endpointSemantics": "Official downloadable SPDR Historical Distributions OOXML workbook, filtered to ticker SPY and CUSIP 78462F103.",
+          "fieldSemantics": "Ex-date, record date, payable date, dividend, short-term capital gain and long-term capital gain per share; total target cash is the sum of the three cash fields on ex-date.",
+          "coverageStart": "1993-03-19",
+          "coverageEndRule": "latest-SPY-ex-date-at-or-before-2026-09-05",
+          "frequency": "event",
+          "publicationBehavior": "The workbook is updated in place and explicitly labels ex-date as the date shares cease carrying the declared distribution.",
+          "revisionBehavior": "Pin workbook bytes and receipt metadata; later workbooks cannot modify this audit's snapshot.",
+          "pointInTimeTier": "RECONSTRUCTED_RESEARCH_ONLY",
+          "licenseRestriction": "Local internal research cache only; State Street material must not be copied, transmitted or disclosed to third parties.",
+          "missingnessPolicy": "Require exactly 135 unique SPY ex-dates from 1993-03-19 through 2026-06-18; blank component fields mean zero, never an absent event.",
+          "releaseLagRule": "effective-ex-date-for-reconstructed-targets",
+          "decision": "ACCEPTED_LOCAL_RESEARCH_ONLY",
+          "decisionReason": "The official workbook supplies exact inception-length SPY cash events and independently matches the transient Tiingo event count."
+        }
+      ]
+    },
+    {
+      "providerId": "invesco-qqq",
+      "providerName": "Invesco QQQ Sponsor Distribution Table",
+      "documentationUrl": "https://www.invesco.com/us/en/financial-products/etfs/invesco-qqq-trust-series-1.html",
+      "termsUrl": "https://www.invesco.com/us/en/resources/terms-of-use.html",
+      "licensePolicy": "Use one browser-saved page/table snapshot for personal noncommercial or internal research and page caching only; no automated repeated access, mining, republication or raw redistribution.",
+      "redistributionAllowed": false,
+      "series": [
+        {
+          "seriesId": "INVESCO_QQQ_HISTORICAL_DISTRIBUTIONS",
+          "requestUrl": "https://www.invesco.com/us/en/financial-products/etfs/invesco-qqq-trust-series-1.html",
+          "endpointSemantics": "Official QQQ sponsor product table saved once through a normal browser, then imported into a hash-verified local archive without automated network access.",
+          "fieldSemantics": "Ex-date, record date, pay date, total distribution per share, ordinary income, gains, return of capital and liquidation distribution; total distribution per share is reinvested on ex-date.",
+          "coverageStart": "2003-12-24",
+          "coverageEndRule": "latest-QQQ-ex-date-at-or-before-2026-09-05",
+          "frequency": "event",
+          "publicationBehavior": "The product table is updated in place; the imported browser snapshot fixes the observed table for this audit.",
+          "revisionBehavior": "The saved bytes, parsed record count and receipt metadata are immutable and verified offline.",
+          "pointInTimeTier": "RECONSTRUCTED_RESEARCH_ONLY",
+          "licenseRestriction": "Personal noncommercial/internal use and page caching only; no automated repeated extraction or raw redistribution.",
+          "missingnessPolicy": "Require exactly 88 unique QQQ ex-dates from 2003-12-24 through 2026-06-22, including 2004-12-17 and 2005-06-17 events absent from IBKR adjusted history.",
+          "releaseLagRule": "effective-ex-date-for-reconstructed-targets",
+          "decision": "ACCEPTED_WITH_COVERAGE_GATE",
+          "decisionReason": "The sponsor table is the exact QQQ cash source, but automated access currently returns HTTP 406; a one-time browser snapshot is mandatory before dataset acquisition."
+        }
+      ]
+    },
+    {
+      "providerId": "tiingo",
+      "providerName": "Tiingo End-of-Day API",
+      "documentationUrl": "https://www.tiingo.com/documentation/end-of-day",
+      "termsUrl": "https://app.tiingo.com/tos/",
+      "licensePolicy": "Do not persist, archive or use Starter/Trial response rows in Cycle 1.",
+      "redistributionAllowed": false,
+      "series": [
+        {
+          "seriesId": "TIINGO_SPY_QQQ_EOD_STARTER",
+          "requestUrl": "https://api.tiingo.com/tiingo/daily",
+          "endpointSemantics": "Starter-account EOD endpoint transiently checked for coverage only; no provider rows were retained.",
+          "fieldSemantics": "Raw and adjusted OHLCV, cash dividend and split factor fields.",
+          "coverageStart": "SPY=1993-01-29;QQQ=1999-03-10",
+          "coverageEndRule": "not-acquired-for-dataset",
+          "frequency": "daily-session",
+          "publicationBehavior": "Current historical reconstruction.",
+          "revisionBehavior": "Not applicable because persistent capture is prohibited on the configured plan.",
+          "pointInTimeTier": "RECONSTRUCTED_RESEARCH_ONLY",
+          "licenseRestriction": "Tiingo's August 5, 2026 terms prohibit Starter and Trial users from writing, saving, archiving, backing up or otherwise retaining Tiingo data persistently.",
+          "missingnessPolicy": "not-applicable",
+          "releaseLagRule": "not-applicable",
+          "decision": "EXCLUDED",
+          "decisionReason": "The free account passed coverage, but its storage prohibition is incompatible with the required immutable raw archive."
+        }
+      ]
+    }
+  ],
+  "runtimeSourcePlan": {
+    "ibkrCatalogPath": "datasets/ibkr/contracts/catalog-20260904T233249778093Z-525ae22c5fd89a35.json",
+    "ibkrCatalogHash": "525ae22c5fd89a35077298f53d109268063d98f77ac3e706d7823a03158354d0",
+    "ibkrDuration": "40 Y",
+    "dailyPriceSeries": "IBKR_SPY_QQQ_DAILY_TRADES",
+    "distributionSeries": {
+      "SPY": "SSGA_SPY_HISTORICAL_DISTRIBUTIONS",
+      "QQQ": "INVESCO_QQQ_HISTORICAL_DISTRIBUTIONS"
+    },
+    "diagnosticSeries": [
+      "IBKR_SPY_QQQ_DAILY_ADJUSTED_LAST",
+      "ALPACA_SPY_QQQ_DAILY_SIP_RAW",
+      "ALPACA_SPY_QQQ_CORPORATE_ACTIONS"
+    ],
+    "manualQqqSnapshotPath": "datasets/cycle1/manual-sources/invesco-qqq-distributions.csv",
+    "distributionCoverage": {
+      "SPY": {"firstExDate": "1993-03-19", "lastExDate": "2026-06-18", "records": 135},
+      "QQQ": {"firstExDate": "2003-12-24", "lastExDate": "2026-06-22", "records": 88}
+    }
+  },
+  "runtimeCoverageGates": {
+    "asOfDate": "2026-09-05",
+    "requestedInstrumentStartDates": {"SPY": "1993-01-29", "QQQ": "1999-03-10"},
+    "requiredInstruments": ["SPY", "QQQ"],
+    "minimumTrainingMonths": 120,
+    "purgeAndEmbargoMonths": 12,
+    "minimumConfirmationLabeledMonths": 96,
+    "minimumEffectiveAnnualBlocks": 8,
+    "minimumCoreFeatureCoveragePercent": 95.0,
+    "confirmationResolutionRule": "For each instrument, reserve the final 96 months with complete 12-month labels after all core-source coverage gates pass; record exact dates in the dataset manifest without changing scientific fields."
+  },
+  "protectedFieldPolicy": "This audit changes sources and coverage evidence only. The preregistration hash, target formulas, feature definitions, models, gates, thresholds, seeds, decision vocabulary, no-HMM rule and ten-evaluation budget remain unchanged.",
+  "auditHash": "a100830882199a477dfe3d2ee41c58cf19eb1849e7657aa9ddab14b337916a6f"
+}

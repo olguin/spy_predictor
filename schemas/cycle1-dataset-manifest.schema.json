@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/cycle1-dataset-manifest-v1.json",
+  "title": "Cycle1DatasetManifest",
+  "type": "object",
+  "required": ["schemaVersion", "datasetVersion", "preregistrationHash", "sourceAuditHash", "asOfDate", "tracks", "datasetIdentityHash"],
+  "properties": {
+    "schemaVersion": {"const": "cycle1-dataset-manifest-v1"},
+    "datasetVersion": {"type": "string", "pattern": "^cycle1-monthly-[a-f0-9]{16}$"},
+    "preregistrationHash": {"$ref": "#/$defs/hash"},
+    "sourceAuditHash": {"$ref": "#/$defs/hash"},
+    "asOfDate": {"type": "string", "format": "date"},
+    "tracks": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["trackId", "role", "instrument", "manifestPath", "manifestSha256", "datasetIdentityHash"],
+        "properties": {
+          "trackId": {"enum": ["discovery-sp500", "validation-spy", "validation-qqq"]},
+          "role": {"enum": ["RECONSTRUCTED_DISCOVERY", "ACTUAL_ETF_VALIDATION"]},
+          "instrument": {"enum": ["SP500_COMPOSITE", "SPY", "QQQ"]},
+          "manifestPath": {"type": "string", "minLength": 1},
+          "manifestSha256": {"$ref": "#/$defs/hash"},
+          "datasetIdentityHash": {"$ref": "#/$defs/hash"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "datasetIdentityHash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}},
+  "additionalProperties": false
+}

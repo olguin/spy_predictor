@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "cycle1-source-audit-v3",
+  "auditId": "CYCLE-ASYMMETRY-001-SOURCE-AUDIT-V3-2026-09-07",
+  "auditDate": "2026-09-07",
+  "status": "QUALIFIED_WITH_MANUAL_SOURCE_GATE",
+  "preregistrationSchemaVersion": "cycle1-preregistration-v4",
+  "preregistrationHash": "887ab9410f79e7fd2884af731c029d81ba2f0d57d4d3c3e22b9bb68671bfdbc8",
+  "containsModelOutput": false,
+  "paidSubscriptionRequired": false,
+  "redistributeRawData": false,
+  "baseAudit": {
+    "path": "config/cycle1-source-audit-v2.json",
+    "auditHash": "a100830882199a477dfe3d2ee41c58cf19eb1849e7657aa9ddab14b337916a6f",
+    "unchangedSeries": [
+      "SHILLER_IE_DATA_CAPE",
+      "DGS3MO",
+      "CPIAUCSL",
+      "INDPRO",
+      "BAA",
+      "ALPACA_SPY_QQQ_DAILY_SIP_RAW",
+      "ALPACA_SPY_QQQ_CORPORATE_ACTIONS",
+      "QQQ_SPECIFIC_HISTORICAL_VALUATION",
+      "IBKR_SPY_QQQ_DAILY_TRADES",
+      "IBKR_SPY_QQQ_DAILY_ADJUSTED_LAST",
+      "SSGA_SPY_HISTORICAL_DISTRIBUTIONS",
+      "INVESCO_QQQ_HISTORICAL_DISTRIBUTIONS",
+      "TIINGO_SPY_QQQ_EOD_STARTER"
+    ]
+  },
+  "providers": [
+    {
+      "providerId": "fred-alfred-credit-amendment",
+      "providerName": "Federal Reserve Economic Data and Archival FRED",
+      "documentationUrl": "https://fred.stlouisfed.org/docs/api/fred/",
+      "termsUrl": "https://fred.stlouisfed.org/legal/",
+      "licensePolicy": "Archive Federal Reserve H.15 MPRIME and GS3M responses locally with FRED and Board of Governors attribution; retain NFCI only as diagnostic evidence under its existing local-research restriction; Moody's BAA remains excluded.",
+      "redistributionAllowed": false,
+      "series": [
+        {
+          "seriesId": "MPRIME",
+          "requestUrl": "https://api.stlouisfed.org/fred/series/observations",
+          "endpointSemantics": "Enumerate /fred/series/vintagedates through the frozen as-of date, then request /fred/series/observations with series_id=MPRIME, file_type=json, units=lin, sort_order=asc, output_type=3, and deterministic batches of exactly 100 vintage dates except the final remainder; reconstruct real-time intervals from returned change events.",
+          "fieldSemantics": "Monthly Bank Prime Loan Rate from the Federal Reserve Board H.15 release, percent per annum; it is the credit-rate numerator in the frozen spread.",
+          "coverageStart": "observation=1949-01-01;first-ALFRED-vintage=1996-12-03",
+          "coverageEndRule": "latest-observation-and-vintage-at-or-before-2026-09-05",
+          "frequency": "monthly",
+          "publicationBehavior": "A value is admitted only when its ALFRED real-time start is at or before the forecast cutoff.",
+          "revisionBehavior": "Retain all returned real-time intervals; later revisions cannot overwrite a pinned earlier vintage.",
+          "pointInTimeTier": "POINT_IN_TIME_ADMISSIBLE",
+          "licenseRestriction": "Federal Reserve Board H.15 public data; FRED API terms and attribution still apply; no raw redistribution from this project.",
+          "missingnessPolicy": "The spread is unavailable unless MPRIME and GS3M share an observation month and both values were published by cutoff; no interpolation or one-sided carry-forward.",
+          "releaseLagRule": "realtimeStart<=snapshotCutoff",
+          "decision": "ACCEPTED",
+          "decisionReason": "Official metadata and non-persisting probes returned 440 monthly observations over 1990-2026 and 359 ALFRED vintages beginning 1996-12-03, providing adequate point-in-time coverage without the Moody's storage restriction."
+        },
+        {
+          "seriesId": "GS3M",
+          "requestUrl": "https://api.stlouisfed.org/fred/series/observations",
+          "endpointSemantics": "Enumerate /fred/series/vintagedates through the frozen as-of date, then request /fred/series/observations with series_id=GS3M, file_type=json, units=lin, sort_order=asc, output_type=3, and deterministic batches of exactly 100 vintage dates except the final remainder; reconstruct real-time intervals from returned change events.",
+          "fieldSemantics": "Monthly market yield on three-month constant-maturity U.S. Treasury securities, investment basis, percent per annum; it is the risk-free denominator in the frozen spread.",
+          "coverageStart": "observation=1981-09-01;first-ALFRED-vintage=1996-12-03",
+          "coverageEndRule": "latest-observation-and-vintage-at-or-before-2026-09-05",
+          "frequency": "monthly",
+          "publicationBehavior": "A value is admitted only when its ALFRED real-time start is at or before the forecast cutoff.",
+          "revisionBehavior": "Retain all returned real-time intervals; later revisions cannot overwrite a pinned earlier vintage.",
+          "pointInTimeTier": "POINT_IN_TIME_ADMISSIBLE",
+          "licenseRestriction": "Federal Reserve Board H.15 public data; FRED API terms and attribution still apply; no raw redistribution from this project.",
+          "missingnessPolicy": "The spread is unavailable unless MPRIME and GS3M share an observation month and both values were published by cutoff; no interpolation or one-sided carry-forward.",
+          "releaseLagRule": "realtimeStart<=snapshotCutoff",
+          "decision": "ACCEPTED",
+          "decisionReason": "Official metadata and non-persisting probes returned 440 monthly observations over 1990-2026 and 359 ALFRED vintages beginning 1996-12-03, matching MPRIME's vintage boundary and supporting deterministic same-month alignment."
+        },
+        {
+          "seriesId": "NFCI",
+          "requestUrl": "https://api.stlouisfed.org/fred/series/observations",
+          "endpointSemantics": "Historical v2 ALFRED capture retained as diagnostic evidence only; it is not reacquired into or consumed by the v3 core dataset.",
+          "fieldSemantics": "Chicago Fed National Financial Conditions Index, weekly ending Friday; positive values indicate tighter-than-average conditions and negative values looser-than-average conditions.",
+          "coverageStart": "observation=1971-01-08;first-ALFRED-vintage=2011-05-25",
+          "coverageEndRule": "diagnostic-v2-archive-through-2026-09-02",
+          "frequency": "weekly-ending-friday",
+          "publicationBehavior": "ALFRED exposes no vintage before 2011-05-25, regardless of the reconstructed observation-history start.",
+          "revisionBehavior": "The complete curve is revised as inputs and weights change; only pinned v2 vintage records may be used diagnostically.",
+          "pointInTimeTier": "POINT_IN_TIME_ADMISSIBLE",
+          "licenseRestriction": "Copyrighted, citation required; local nonredistributed research only under the source download offering and site terms.",
+          "missingnessPolicy": "Never backfill pre-2011 forecast cutoffs from a later reconstructed curve and never substitute NFCI into a promotion-eligible v4 feature.",
+          "releaseLagRule": "diagnostic-only-realtimeStart<=snapshotCutoff",
+          "decision": "ACCEPTED_DIAGNOSTIC_ONLY",
+          "decisionReason": "The first ALFRED vintage is 2011-05-25; after the frozen normalization warm-up it yielded only 147 labeled rows, below the immutable 228-row gate."
+        }
+      ]
+    }
+  ],
+  "runtimeSourcePlan": {
+    "ibkrCatalogPath": "datasets/ibkr/contracts/catalog-20260904T233249778093Z-525ae22c5fd89a35.json",
+    "ibkrCatalogHash": "525ae22c5fd89a35077298f53d109268063d98f77ac3e706d7823a03158354d0",
+    "ibkrDuration": "40 Y",
+    "dailyPriceSeries": "IBKR_SPY_QQQ_DAILY_TRADES",
+    "coreMacroSeries": ["DGS3MO", "CPIAUCSL", "INDPRO", "MPRIME", "GS3M"],
+    "creditSpread": {
+      "numeratorSeries": "MPRIME",
+      "denominatorSeries": "GS3M",
+      "formula": "MPRIME_t-GS3M_t",
+      "alignment": "latest-common-observation-month-whose-both-vintages-were-published-by-cutoff"
+    },
+    "distributionSeries": {
+      "SPY": "SSGA_SPY_HISTORICAL_DISTRIBUTIONS",
+      "QQQ": "INVESCO_QQQ_HISTORICAL_DISTRIBUTIONS"
+    },
+    "diagnosticSeries": [
+      "NFCI",
+      "IBKR_SPY_QQQ_DAILY_ADJUSTED_LAST",
+      "ALPACA_SPY_QQQ_DAILY_SIP_RAW",
+      "ALPACA_SPY_QQQ_CORPORATE_ACTIONS"
+    ],
+    "manualQqqSnapshotPath": "datasets/cycle1/manual-sources/invesco-qqq-distributions.csv",
+    "distributionCoverage": {
+      "SPY": {"firstExDate": "1993-03-19", "lastExDate": "2026-06-18", "records": 135},
+      "QQQ": {"firstExDate": "2003-12-24", "lastExDate": "2026-06-22", "records": 88}
+    }
+  },
+  "runtimeCoverageGates": {
+    "asOfDate": "2026-09-05",
+    "requestedInstrumentStartDates": {"SPY": "1993-01-29", "QQQ": "1999-03-10"},
+    "requiredInstruments": ["SPY", "QQQ"],
+    "firstCreditSpreadVintage": "1996-12-03",
+    "minimumTrainingMonths": 120,
+    "purgeAndEmbargoMonths": 12,
+    "minimumConfirmationLabeledMonths": 96,
+    "minimumEffectiveAnnualBlocks": 8,
+    "minimumCoreFeatureCoveragePercent": 95.0,
+    "minimumCompleteFeatureTargetRows": 228,
+    "confirmationResolutionRule": "For each instrument, reserve the final 96 months with complete 12-month labels after all core-source coverage gates pass; record exact dates in the dataset manifest without changing scientific fields."
+  },
+  "protectedFieldPolicy": "Preregistration v4 changes only the two NFCI-derived feature definitions to the MPRIME-minus-GS3M spread level and three-month change. Targets, states, models, partitions, promotion gates, thresholds, seeds, decision vocabulary, no-HMM rule and ten-evaluation budget remain unchanged.",
+  "auditHash": "80a80d252c65abe9b13a8533e6d5ad23d65e68e3df993ab2734594c5ab8f3a90"
+}

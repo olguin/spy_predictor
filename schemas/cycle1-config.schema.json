@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/cycle1-config-v1.json",
+  "title": "Cycle1Preregistration",
+  "type": "object",
+  "required": [
+    "schemaVersion", "experimentId", "status", "amendment", "attribution", "instruments",
+    "decisionFrequency", "targets", "features", "states", "models",
+    "partitions", "promotionGates", "hypothesisBudget", "decisionVocabulary",
+    "prohibitions"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "cycle1-preregistration-v4"},
+    "experimentId": {"const": "CYCLE-ASYMMETRY-001"},
+    "status": {"const": "frozen-before-source-acquisition"},
+    "amendment": {
+      "type": "object",
+      "required": ["supersedesSchemaVersion", "reason", "changedFields", "unchangedFields", "candidateOutputExistedBeforeAmendment"],
+      "properties": {
+        "supersedesSchemaVersion": {"const": "cycle1-preregistration-v3"},
+        "reason": {"type": "string", "minLength": 20},
+        "changedFields": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "unchangedFields": {"type": "string", "minLength": 20},
+        "candidateOutputExistedBeforeAmendment": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "attribution": {
+      "type": "object",
+      "required": ["modelDescription", "proprietaryModelClaimed"],
+      "properties": {
+        "modelDescription": {"type": "string", "minLength": 20},
+        "proprietaryModelClaimed": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "instruments": {"const": ["SPY", "QQQ"]},
+    "decisionFrequency": {"$ref": "#/$defs/nonEmptyObject"},
+    "targets": {
+      "type": "object",
+      "required": ["primary", "secondary", "diagnostic", "endpointFallback", "labelAvailabilityRule"],
+      "properties": {
+        "primary": {"$ref": "#/$defs/target"},
+        "secondary": {"$ref": "#/$defs/target"},
+        "diagnostic": {"$ref": "#/$defs/target"},
+        "endpointFallback": {"type": "string", "minLength": 1},
+        "labelAvailabilityRule": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "features": {"$ref": "#/$defs/nonEmptyObject"},
+    "states": {"$ref": "#/$defs/nonEmptyObject"},
+    "models": {
+      "type": "object",
+      "required": ["perInstrument", "preprocessing", "hyperparameterSearch", "hmmIncluded", "randomSeeds"],
+      "properties": {
+        "perInstrument": {
+          "type": "array", "minItems": 5, "maxItems": 5,
+          "items": {"type": "object", "required": ["id", "kind", "promotionRole"]}
+        },
+        "preprocessing": {"type": "string", "minLength": 1},
+        "hyperparameterSearch": {"const": "none"},
+        "hmmIncluded": {"const": false},
+        "randomSeeds": {"const": [42]}
+      },
+      "additionalProperties": false
+    },
+    "partitions": {"$ref": "#/$defs/nonEmptyObject"},
+    "promotionGates": {"$ref": "#/$defs/nonEmptyObject"},
+    "hypothesisBudget": {
+      "type": "object",
+      "required": ["instruments", "modelsPerInstrument", "primaryEvaluations", "optionalHmmEvaluations"],
+      "properties": {
+        "instruments": {"const": 2},
+        "modelsPerInstrument": {"const": 5},
+        "primaryEvaluations": {"const": 10},
+        "optionalHmmEvaluations": {"const": 0}
+      },
+      "additionalProperties": false
+    },
+    "decisionVocabulary": {
+      "type": "object",
+      "required": ["experiment", "instrument", "evidenceTier"],
+      "properties": {
+        "experiment": {"const": ["FREEZE_CYCLE_TARGET", "NO_CYCLE_TARGET_ADEQUATE"]},
+        "instrument": {"const": ["QUALIFIED", "REJECTED"]},
+        "evidenceTier": {"const": ["POINT_IN_TIME_ADMISSIBLE", "RECONSTRUCTED_RESEARCH_ONLY"]}
+      },
+      "additionalProperties": false
+    },
+    "prohibitions": {
+      "type": "object",
+      "required": ["paidData", "llmCalls", "agentCalls", "accountQueries", "orders", "leverageRecommendations", "postConfirmationChanges"],
+      "properties": {
+        "paidData": {"const": true}, "llmCalls": {"const": true},
+        "agentCalls": {"const": true}, "accountQueries": {"const": true},
+        "orders": {"const": true}, "leverageRecommendations": {"const": true},
+        "postConfirmationChanges": {"const": true}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "target": {"type": "object", "minProperties": 5},
+    "nonEmptyObject": {"type": "object", "minProperties": 1},
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": false
+}

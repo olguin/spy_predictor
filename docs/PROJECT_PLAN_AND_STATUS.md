@@ -2,26 +2,94 @@
 
 ## Project plan, implementation status, and next-session handoff
 
-**Status date:** 2026-09-05
+**Status date:** 2026-09-07
 **Repository:** `spy_predictor`
-**Current milestone:** `TARGET-TOURNAMENT-001` complete with
-`NO_TARGET_ADEQUATE`
-**Latest completed work:** immutable two-year Alpaca/Massive dataset, explicit
-futures rolls, four-provider comparisons, and sealed-confirmation tournament
-**Immediate next task:** review the no-target result and decide whether to widen
-the preregistered target search before beginning `REALITY-STORE-001`
+**Current milestone:** `CYCLE-ASYMMETRY-001` pre-evaluation repair. Acquisition
+and reproduction completed, but v4 is suspended for evaluation: cash
+publication coverage and selection feasibility failed deeper review.
+**Latest completed work:** preregistration v4 and source audit v3, immutable
+MPRIME-minus-GS3M credit-spread vintages, inception-length IBKR-plus-sponsor
+ETF histories, exact XNYS cutoffs, targets, trailing-only features and states,
+resolved sealed partitions, a fail-closed dataset runner, exploratory cycle
+tools, and two execution-verified explanatory notebooks
+**Immediate next task:** resolve cash-source and evaluation-contract
+prerequisites in [CYCLE1_REPAIR.md](CYCLE1_REPAIR.md), then issue a versioned
+amendment and rebuild. Do not begin increment 5 or open confirmation output.
+
+### 2026-09-07 repair authority — supersedes the earlier handoff
+
+Cash accrual now respects vintage publication at each holding-period start;
+the spread change uses exactly three observation months; dataset construction
+checks mature training labels and consecutive calendar partitions. Candidate
+evaluation under v4 is explicitly suspended.
+
+`npm run cycle1:preflight` produces a deterministic metadata-only audit (exit
+code 2 means blocked). SPY has 68 selection forecasts under archived eligibility,
+but only one after removing starts without published DGS3MO. QQQ has zero
+selection forecasts with 120 matured labels. The earliest pinned DGS3MO
+publication is 2005-06-28; older observations are not earlier publication evidence.
+
+The repaired offline dataset build deliberately fails on cash publication
+coverage. Existing archives and dataset identities are preserved historical
+artifacts, **not evaluation-approved inputs**. No replacement dataset is
+qualified. Zero candidate evaluations and no confirmation metrics have been
+opened. Earlier completion tables and work orders below describe pre-repair
+status and are superseded wherever they conflict with this section. Full
+findings, proposed contract, and remaining work are in
+[CYCLE1_REPAIR.md](CYCLE1_REPAIR.md).
+
+The date-only alternative audit now establishes the concrete unblock: GS3M
+has publication-admissible coverage for every model-eligible start, SPY retains
+68 selection forecasts, and QQQ has 126 mature selection labels at the first
+confirmation cutoff. The next amendment will use GS3M, make SPY the development
+track, and make QQQ a non-promotable external transfer check. The remaining
+blocker is the exact evaluation contract and its synthetic whole-procedure
+power audit, not source acquisition.
+
+### Current worktree continuation note
+
+The validated active authority remains `config/cycle1.json` (v4), with its
+matching schema and `config/cycle1-source-audit-v3.json`. Proposed v5 changes
+are preserved separately in `config/cycle1-v5-draft.json`; they are not yet a
+valid runnable authority. `config/cycle1-v4.json` and
+`schemas/cycle1-config-v4.schema.json` are retained as explicit v4 archives.
+Do not run candidate evaluation against the v5 draft until its schema,
+semantic loader, source audit, dataset identity, and power-audit gate are
+implemented and tested.
+
+Repair implementation files are `python/src/spy_predictor_quant/cycle1_targets.py`,
+`cycle1_features.py`, and `cycle1_feasibility.py`; tests include
+`python/tests/test_cycle1_feasibility.py` and the expanded target/feature tests.
+Run the metadata-only audit with:
+
+```bash
+npm run cycle1:preflight
+```
+
+Expected result for the preserved v4 archive is exit code 2 with
+`V5_AMENDMENT_NOT_YET_FROZEN`, `EVALUATION_CONTRACT_INCOMPLETE`, and
+`ARCHIVED_SPREAD_LAG_REQUIRES_REBUILD`. Candidate and confirmation metrics
+remain unopened. The latest deterministic audit is
+`docs/audits/cycle1-repair-352a046a5c12b63e.json`.
+
+Before continuing, run `git status --short` and `npm run check`. Preserve the
+existing uncommitted work and ignored raw archives. Finish the v5 schema/loader
+and source-audit amendment, then run the synthetic power audit. Only after
+those pass should the monthly dataset be rebuilt and model code begin.
 
 ### Executive status audit
 
 This table compares the original phase acceptance criteria with code, tests,
 generated artifacts, and integration runs present as of the status date.
-Overall: two of thirteen phases are complete, three have partial/scaffold work,
-and eight have not started.
+Overall: two of thirteen original phases are complete, one bounded Phase 1B
+extension is active, three phases have partial/scaffold work, and eight have not
+started.
 
 | Phase | Status | What exists now | What is still required |
 |---|---|---|---|
 | 0 — `FOUNDATION-001` | **Complete** | Reproducible experiment identity, point-in-time guards, snapshots/targets, purged partitions, resumable filesystem/PostgreSQL persistence, schemas, Parquet/DuckDB materialization, CI, and a provider-neutral runtime interface | No Phase 0 acceptance item remains; keep the foundation green while extending it |
 | 1 — `TARGET-TOURNAMENT-001` | **Complete — no target frozen** | Immutable Alpaca SPY/QQQ plus Massive ES/NQ minute data, 18 verified futures contracts, explicit rolls, 779,985 normalized bars, four passing IBKR comparisons, 24 candidate evaluations, and 100 sealed confirmation observations each | No acceptance item remains. The result is `NO_TARGET_ADEQUATE`; any wider target search must be a new preregistered hypothesis set |
+| 1B — `CYCLE-ASYMMETRY-001` | **Active — increments 1–4 complete; dataset qualified** | Frozen ten-candidate preregistration v4, immutable source audit v3, inception-length IBKR-plus-sponsor data, point-in-time MPRIME-minus-GS3M credit spread, three-track dataset, 100% core-feature coverage, exact sealed partitions, targets, states, schemas, tests, safe runner, analysis tools, and two notebooks | Implement the five frozen models per instrument and hypothesis ledger; run selection-only development, then purged walk-forward and the one-time sealed confirmation; issue `FREEZE_CYCLE_TARGET` or `NO_CYCLE_TARGET_ADEQUATE` |
 | 2 — `REALITY-STORE-001` | **Foundation subset only** | Generic market provider/cutoff guard, source manifests, immutable snapshots, and immutable/hash-addressed IBKR raw/history/live artifacts | A provider-neutral persistent store spanning market, macro, SEC, news, revisions/vintages, quality flags, and deterministic arbitrary-date replay |
 | 3 — `BASELINE-001` | **Prototype subset only** | Tournament implementations of logistic/tree/rule baselines, historical/EWMA volatility, walk-forward metrics, calibration, regime/year breakdowns, and simple costs | First freeze the target; then build the production feature set and benchmark artifacts, add the selected boosted-tree equivalent and remaining volatility/reliability work, and pass the Phase 3 acceptance run |
 | 4 — `AGENT-RUNTIME-001` | **Scaffold only** | `AgentRuntime` contract and `MockAgentRuntime` | Pi/Ollama adapters, validated signal schema, restricted tools, prompt/genome persistence, deterministic cache, accounting, failure handling, and a persisted cache-hit acceptance test |
@@ -35,13 +103,15 @@ and eight have not started.
 | 12 — `CONTROLLED-LIVE-001` | **Not started** | No order-submission code; IBKR integration deliberately fails closed to paper/read-only market data | Only after paper evidence: isolated execution plus hard risk, loss, instrument, kill-switch, and manual-disable controls |
 
 The critical path has therefore not reached agents or trading. Phase 1 closed
-without a target, so the current decision point is:
+without a target. The approved next path is:
 
 ```text
-review NO_TARGET_ADEQUATE evidence
-→ either preregister a bounded target-search extension and rerun
-→ or stop target discovery
-→ only after a target is frozen: build the broader point-in-time Reality Store
+preserve TARGET-TOURNAMENT-001 and its NO_TARGET_ADEQUATE result unchanged
+→ preregister CYCLE-ASYMMETRY-001 before inspecting candidate outputs
+→ build the minimal point-in-time monthly SPY/QQQ cycle dataset
+→ test the frozen SPY and QQQ candidates and issue one immutable decision
+→ if all fail: stop or explicitly design a new hypothesis family
+→ only if one target is frozen: build the broader point-in-time Reality Store
 → complete the production quantitative baseline
 → test fixed agents before evolution
 ```
@@ -95,6 +165,775 @@ numerically trivial logistic smoothing pass despite identical economic actions.
 The acceptance gate was corrected to require an absolute 0.005 Brier improvement
 and incremental net return before Phase 1 was closed. The conservative final
 result rejects every candidate rather than promoting that artifact.
+
+### Next-session handoff: CYCLE-ASYMMETRY-001 (Phase 1B)
+
+**Status:** increments 1–4 and the safe dataset runner are complete and tested.
+The final online acquisition and offline reproduction both passed. No candidate
+model has been run, no confirmation output has been opened, and the hypothesis
+counter remains zero. This section is the next-session authority.
+
+#### 2026-09-07 final v4/v3 dataset qualification
+
+The first complete source composition exposed an honest scientific
+incompatibility: ALFRED's first `NFCI` vintage is 2011-05-25. After the frozen
+24-month percentile warm-up, NFCI produced features only from April 2013 and
+left 147 complete feature/12-month-target rows, below the immutable 228-row
+minimum. The gate failed before any candidate output.
+
+Moody's `BAA` was reconsidered but remains prohibited: its source restriction
+is incompatible with persistent immutable storage. Preregistration v4 therefore
+replaces only the two NFCI-derived core features with the Federal Reserve H.15
+bank-prime-minus-three-month-Treasury spread:
+
+```text
+credit spread level:      MPRIME_t - GS3M_t
+credit spread change 3m:  spread_t - spread_t-3m
+alignment:                latest common observation month for which both
+                          ALFRED vintages were published by the cutoff
+```
+
+Both series have ALFRED vintages beginning 1996-12-03. Higher spread is signed
+as higher stress; a widening spread is signed as weaker direction. NFCI remains
+diagnostic-only in the hash-linked v2 archive and is neither reacquired nor
+consumed by the v4 core dataset. Targets, state rules, other features, models,
+partitions, gates, thresholds, seed 42, no-HMM rule, and the exact five-model by
+two-instrument budget did not change. No candidate result existed before the
+v4 amendment.
+
+Frozen identities:
+
+```text
+preregistration:  cycle1-preregistration-v4
+config hash:      887ab9410f79e7fd2884af731c029d81ba2f0d57d4d3c3e22b9bb68671bfdbc8
+source audit:     cycle1-source-audit-v3
+audit hash:       80a80d252c65abe9b13a8533e6d5ad23d65e68e3df993ab2734594c5ab8f3a90
+dataset version:  cycle1-monthly-19ccd95384e690de
+dataset hash:     19ccd95384e690dee2fd529c3889a5b1ce17d956f8b9a1efffe551ec73e87753
+hypotheses run:   0
+```
+
+Final manifest:
+
+```text
+datasets/cycle1/cycle1-monthly-19ccd95384e690de/manifest.json
+```
+
+The preceding `cycle1-monthly-905652bac5f970d7` directory is an intermediate
+pre-partition-manifest identity and is not the evaluation input. Use only the
+final `19ccd95384e690de` dataset above.
+
+Source results:
+
+- Shiller: 1,833 reconstructed discovery months, 1871-01 through 2023-09.
+- FRED/ALFRED core: DGS3MO 11,749 intervals; CPIAUCSL 3,361; INDPRO
+  39,356; MPRIME 936; GS3M 540. The configured FRED key and all endpoints
+  worked. No current FRED outage exists.
+- IBKR paper/read-only: 8,456 SPY sessions and 6,916 real QQQ sessions from
+  inception through 2026-09-04. One QQQ row dated 2005-02-21 was an IBKR
+  zero-volume, zero-trade, flat-OHLC holiday placeholder; raw bytes remain
+  pinned, while normalization excludes only that exact class of non-session
+  placeholder and fails on any non-session activity.
+- State Street: 135 exact SPY cash distributions, 1993-03-19 through
+  2026-06-18.
+- Invesco: 88 exact QQQ distributions, 2003-12-24 through 2026-06-22,
+  including 2004-12-17 and 2005-06-17. The browser-saved source and immutable
+  copy both hash to
+  `dbe9351a005efbc97387a767b3cfd31a93f22cc703974b7172097e2ed2d4c938`.
+  The importer accepts Invesco's literal `--` empty-value representation.
+- Invesco automated access still returns HTTP 406; the supplied one-time
+  browser snapshot resolves that limitation. Tiingo Starter and Moody's BAA
+  remain excluded for storage-license reasons. No external service currently
+  blocks the next phase.
+
+Validation coverage and sealed partitions are recorded in each track manifest:
+
+| Track | Features | Coverage | Eligible labels | Selection | Embargo | Sealed confirmation |
+|---|---:|---:|---:|---|---|---|
+| SPY | 322 | 100% | 308 (`1999-11-30`–`2025-07-31`) | 200 (`1999-11-30`–`2016-06-30`) | 12 (`2016-07-29`–`2017-06-30`) | 96 (`2017-07-31`–`2025-07-31`) |
+| QQQ | 248 | 100% | 234 (`2006-01-31`–`2025-07-31`) | 126 (`2006-01-31`–`2016-06-30`) | 12 (`2016-07-29`–`2017-06-30`) | 96 (`2017-07-31`–`2025-07-31`) |
+
+Each confirmation block is mechanically split into two 48-month halves:
+2017-07-31 through 2021-06-30 and 2021-07-30 through 2025-07-31.
+
+Both commands completed with the identical dataset and track identities:
+
+```bash
+npm run cycle1 -- --dataset-only
+npm run cycle1 -- --dataset-only --offline
+```
+
+The exact scheduled XNYS close is used for every cutoff, including early
+closes. Incomplete trailing months are excluded; completed months missing their
+final session fail closed. Resolved partitions are part of the dataset identity,
+so changing them creates a new dataset instead of overwriting this one.
+
+Reusable manual-analysis tools remain in
+`python/src/spy_predictor_quant/cycle_analysis_tools.py`, separately from the
+frozen candidate set. The two notebooks under `notebooks/` cover structural
+trend, log-price deviation, expectations, credit/risk feedback, deterministic
+and optional latent states, nested cycles, top score, and defensive/aggressive
+exposure. An HMM is illustrative notebook material only and is prohibited from
+the first Cycle 1 evaluation.
+
+#### Exact next-session work order
+
+1. Read this handoff, `docs/CYCLE-ASYMMETRY-001.md`, `config/cycle1.json`,
+   `config/cycle1-source-audit-v3.json`, and the final dataset manifest.
+2. Run `git status --short` and `npm run check`; preserve the current uncommitted
+   work and ignored raw archives. Do not clean or overwrite them.
+3. Implement increment 5 only: unconditional-history, valuation-only,
+   direction-only, fixed-cycle-score tertile, and regularized-cycle models for
+   SPY and QQQ. Do not add variants, tune hyperparameters, or add an HMM.
+4. Create an immutable hypothesis ledger containing exactly ten primary entries
+   before producing candidate metrics.
+5. Implement fold-local preprocessing and target-aware eligibility using the
+   resolved partitions. Develop and debug on the selection partition only.
+6. Implement both expanding and rolling walk-forward modes, purge/embargo,
+   CRPS and drawdown metrics, dependence-aware bootstrap, calibration,
+   monotonicity, era/stability, concentration, multiple-testing, and policy
+   gates exactly as frozen.
+7. Add an explicit one-time confirmation-opening guard. Do not inspect the
+   2017-07-31 through 2025-07-31 confirmation metrics while implementing or
+   debugging selection evaluation.
+8. Only after tests and selection-only artifacts are complete, open the sealed
+   confirmation once, write one immutable report, and issue either
+   `FREEZE_CYCLE_TARGET` or `NO_CYCLE_TARGET_ADEQUATE`.
+
+Bare `npm run cycle1` must continue to fail closed until the complete candidate
+evaluation/report layer and its guards exist. No order, account-query, agent,
+LLM, leverage, or paper/live execution code belongs in this phase.
+
+#### Why this extension exists
+
+`TARGET-TOURNAMENT-001` tested whether recent market-price behavior could
+support calibrated directional forecasts over minutes, overnight, or one
+trading session. It found no defensible predictive and economic edge. That
+negative result remains final and must not be edited or reinterpreted as a
+partial success.
+
+The proposed extension asks a different question:
+
+> At a monthly point-in-time cutoff, do valuation, credit/risk conditions,
+> macro conditions, market stress, and technical direction materially alter
+> the distribution of SPY or QQQ real excess returns and drawdown risk over the
+> following 12 months?
+
+This is not an attempt to rescue an intraday result by adding features. It is a
+new, economically motivated hypothesis family with different observations,
+targets, horizons, data, baselines, and gates. A market may be unpredictable
+tomorrow while still offering different medium-term return distributions after
+extreme valuation, stress, or recovery conditions.
+
+#### Intellectual origin and attribution boundary
+
+The design is inspired by the user's synthesis of Howard Marks's public cycle
+framework and public descriptions of Mariela Capezzuoli's ("Maru Cape")
+cyclical approach. In this document the combined idea is called a
+**multivariable contracyclical investment model** or **cycle-asymmetry model**.
+
+The public conceptual material does not provide a complete mathematical
+formula, fixed weights, thresholds, or a reproducible algorithm attributable to
+Maru Cape. Therefore this project must:
+
+- describe the implementation as an independent quantitative formalization
+  inspired by those concepts, not as Maru Cape's proprietary or exact model;
+- never invent weights or rules and attribute them to her;
+- cite the original public sources if a later research report discusses the
+  intellectual history;
+- freeze every implemented transform, sign, weight, state rule, and threshold
+  as this project's own preregistered specification.
+
+#### Conceptual model to preserve
+
+The foundational proposition is that a market cycle is not a clock or a fixed
+periodic function:
+
+```text
+cycle != periodic_function(time)
+cycle = nonlinear feedback among fundamentals, expectations, credit,
+        risk tolerance, prices, leverage, and subsequent corrections
+```
+
+A favorable causal sequence can create its own future fragility:
+
+```text
+good results
+→ optimism
+→ easier credit and greater risk tolerance
+→ investment, leverage, and rising prices
+→ extrapolation and overpricing
+→ low margin of safety and latent fragility
+→ disappointment or constraint
+→ selling, tighter credit, fear, and falling prices
+→ underpricing and improved future asymmetry
+→ recovery
+```
+
+The mechanism is **excess followed by correction**, not a recession or market
+turn that must occur every fixed number of years.
+
+Psychology is part of the state, not independent noise. Markets can move
+between fear and greed, skepticism and credulity, risk aversion and risk
+tolerance, forced selling and urgency to buy. Price changes reinforce the
+narrative that produced them:
+
+```text
+price rises → optimism / narrative confirmation → FOMO / buying → price rises
+price falls → perceived risk / fear → selling / withdrawal → price falls
+```
+
+That feedback can invert the ordinary demand response: higher financial-asset
+prices sometimes attract rather than repel demand. Consequently perceived risk
+and actual forward risk can diverge:
+
+```text
+low perceived risk + high price + low margin of safety
+    may imply high future downside risk
+
+high perceived risk + forced selling + low price
+    may imply favorable future return asymmetry
+```
+
+Neither statement is unconditional. A cheap asset can have permanent
+fundamental impairment, and an expensive asset can keep rising for a long time.
+The method estimates an asymmetry or probability distribution; it does not know
+the date of the next reversal.
+
+The central investment question is therefore not merely whether the economy or
+company is good. It is:
+
+> How does price compare with normalized fundamentals and with the expectations
+> already embedded in that price?
+
+Excellent news can be a poor investment setup when perfection is already
+priced. Terrible news can be a favorable setup when the price discounts an even
+worse future, provided the asset remains viable.
+
+#### Structural trend, excess, and normalization
+
+The qualitative idea of a long-run structural mean can be represented as:
+
+```text
+log(real_price[t]) = structural_trend[t] + cyclical_deviation[t] + noise[t]
+```
+
+Large negative deviations may identify crisis or undervaluation; values near
+the trend may be reasonable; large positive deviations may indicate greed or
+euphoria. This is only an operational hypothesis. A structural trend is not
+known truth and may shift because of productivity, inflation, tax, monetary,
+market-composition, accounting, or institutional changes.
+
+The implementation must never estimate the trend on the complete sample. At
+each timestamp `t`, the regression, smoother, scale, percentile, or other
+normalizer may see only data known by `t`. Full-sample detrending would leak
+future information and make old extremes look artificially obvious.
+
+The preregistration must select at most a very small number of trailing-only
+definitions, such as a robust trailing log-real-price trend standardized by a
+trailing median absolute deviation and an expanding or trailing historical
+percentile. Every alternative counts as a separate hypothesis. The project may
+not try many windows and retain the one with the best historical story.
+
+#### Cycles within cycles
+
+The framework permits a long structural or "mega" cycle to contain smaller
+rallies, corrections, and recoveries:
+
+```text
+structural cycle
+├── minor cycle: rally → correction → recovery
+├── minor cycle: rally → correction → recovery
+└── late-cycle excess → major correction or regime change
+```
+
+A correction does not by itself prove the end of a secular trend. Conversely,
+a renewed rally does not prove that valuation risk disappeared. Phase 1B will
+not attempt to fit simultaneous short, medium, and mega-cycle turning points.
+Its initial scope is one monthly decision frequency and a 12-month primary
+horizon. Longer-horizon output is diagnostic only.
+
+#### Valuation is not timing
+
+The method explicitly separates cheapness from entry confirmation:
+
+```text
+cheap != immediate bottom
+cheap + extreme stress + continuing deterioration != confirmed recovery
+cheap + improving direction / easing stress = stronger recovery evidence
+```
+
+Prices may fall substantially after first becoming cheap. Technical direction
+is therefore used in context rather than as a standalone `RSI < 30` rule.
+Macro/credit/valuation estimate location and risk temperature; trend helps
+distinguish deterioration from recovery.
+
+The eventual policy vocabulary is **more aggressive versus more defensive**,
+not **all-in versus all-out**. No-stop-loss language must never be interpreted
+as no risk management. Position sizing, diversification, fundamental viability,
+and maximum-risk constraints would remain mandatory in later phases.
+
+Phase 1B itself predicts outcomes and evaluates a simple research policy only
+after predictive gates pass. It does not submit orders, recommend leverage, or
+authorize live trading.
+
+#### Credit as an amplifier
+
+Credit is included because successful, low-default periods can reduce risk
+aversion, compress spreads, weaken underwriting, and increase leverage. Those
+actions manufacture later fragility. After failures, the reverse process can
+produce tighter standards and better prospective pricing:
+
+```text
+success → confidence → risk taking → leverage / fragility → failure
+failure → fear → risk avoidance → tighter credit / better pricing
+        → improved future opportunity
+```
+
+This is a feedback hypothesis, not proof that a particular spread causes equity
+returns. Price, credit, macro data, and expectations are endogenous. Reports
+must use predictive language and must not convert correlation into a causal
+claim.
+
+#### Translation from the Argentina-specific formulation to US markets
+
+The Argentina examples motivate the architecture but cannot be copied
+literally. Phase 1B uses US-market analogues:
+
+| Argentina-oriented concept | US Phase 1B analogue | Caveat |
+|---|---|---|
+| Merval in real CCL dollars | Real S&P composite/total-return history for discovery; actual SPY and QQQ adjusted returns for modern validation | A reconstructed historical S&P composite is not identical to SPY; QQQ has a much shorter live history |
+| Country risk | Corporate-credit spread and broad financial-conditions measures | These are correlated risk-temperature proxies, not direct causal variables |
+| GDP/activity growth | Point-in-time industrial production and a minimal preregistered growth indicator | Use original release vintages and publication lags, not revised history |
+| Real exchange-rate/peso strength | US real-rate, curve, dollar, or liquidity measures only if a no-cost, long, point-in-time source passes the audit | Do not add variables merely because they improve the backtest |
+| Historical P/B or local valuation | S&P CAPE/earnings yield and instrument-specific valuation only when provenance is adequate | S&P CAPE is not QQQ-specific valuation and must not be mislabeled as such |
+| Fear/euphoria | Credit stress, financial conditions, volatility, drawdown, and price-derived momentum | VIX history is shorter than the price history |
+| Technical trend | Six-/twelve-month momentum and price versus a preregistered long trend | Technical evidence confirms direction; it does not define value |
+
+#### Research instruments and the SPY/QQQ distinction
+
+Both SPY and QQQ must receive the same target-level analysis, report structure,
+walk-forward protocol, economic-cost treatment, and pass/fail discipline. They
+must not be pooled as if their monthly observations were independent.
+
+**SPY track:** SPY is the primary tradable expression. The long-run S&P
+composite can support discovery of valuation relationships across many decades;
+actual SPY history must validate whether those relationships transfer to the
+ETF. The full model may use S&P valuation inputs, with their provenance and
+reconstruction limitations explicitly reported.
+
+**QQQ track:** QQQ is a full secondary instrument candidate, not an ignored
+appendix. It receives QQQ-specific real returns, structural-price deviation,
+momentum, realized volatility, drawdown targets, costs, metrics, state outcomes,
+and an independent eligibility decision. It may share macro, credit, and broad
+US risk-temperature inputs with SPY.
+
+QQQ's shorter live history contains far fewer independent major cycles.
+Consistent, no-cost, point-in-time Nasdaq-100 valuation history may also be
+unavailable. Therefore:
+
+- S&P CAPE may be used only as a broad-market temperature input for QQQ and
+  must never be described as QQQ valuation;
+- a QQQ-specific valuation feature is included only if the source audit finds
+  a reproducible, legally usable, point-in-time or honestly reconstructed
+  series with adequate coverage;
+- missing QQQ valuation must not be silently filled by present-day constituent
+  fundamentals or a survivorship-biased reconstruction;
+- SPY-selected weights and thresholds may be applied to QQQ as an external
+  transfer test without QQQ retuning;
+- any QQQ-specific fitted model is a separately counted candidate and must pass
+  its own coverage, sample, stability, and sealed-confirmation gates;
+- a strong SPY result cannot promote QQQ, and a strong QQQ result cannot promote
+  SPY.
+
+The final report can freeze either instrument, both exact independently
+qualified targets, or neither. It must not select whichever instrument happened
+to have the prettier full-history curve.
+
+#### Frozen target family to preregister
+
+The next session must turn the following recommendation into a versioned schema
+and configuration before computing results:
+
+```text
+decision frequency: monthly
+snapshot cutoff:     after the final US equity session close of each month
+                     using only records released/known by that cutoff
+primary horizon:     12-month forward real total return in excess of the
+                     contemporaneously observable 3-month Treasury-bill return
+secondary target:    maximum drawdown during the following 12 months
+diagnostic horizon:  24-month forward real excess return
+instruments:         SPY and QQQ, evaluated separately
+```
+
+The exact return endpoints, dividend treatment, CPI lag, Treasury compounding,
+next-tradable-price rule, and behavior when the endpoint is not a trading day
+must be frozen. Predictive evaluation and any economic policy simulation must
+remain separate. If a signal is finalized after a month-end close, a policy
+cannot pretend it transacted at that already-observed close; the economic
+simulation must trade no earlier than its preregistered next executable price.
+
+The 24-month target is diagnostic only in the initial run because its overlapping
+labels sharply reduce effective sample size. It cannot rescue failure of the
+12-month primary target.
+
+#### Defensible cycle representation
+
+Do not begin with a six-state Hidden Markov Model. With few independent cycles,
+an unconstrained HMM can create attractive state histories whose labels and
+transition probabilities are unstable outside the sample.
+
+Start with three transparent dimensions:
+
+```text
+CycleState[t] = f(Valuation[t], Stress[t], Direction[t])
+```
+
+1. **Valuation / structural position**
+   - CAPE or earnings-yield historical percentile for the S&P track.
+   - Real price deviation from a trailing-only structural trend.
+   - QQQ-specific valuation only if it passes the source/provenance audit.
+
+2. **Stress / risk temperature**
+   - A long-lived corporate-credit spread.
+   - A Federal Reserve financial-conditions measure where available.
+   - Realized volatility and VIX where available.
+   - Drawdown from the trailing market high.
+
+3. **Direction / confirmation**
+   - Six- and twelve-month momentum.
+   - Price relative to a preregistered long moving average or trailing trend.
+   - Credit stress rising or falling.
+   - Point-in-time industrial production accelerating or deteriorating.
+
+Each component must have an economic sign fixed in advance. Scaling must use
+only expanding or trailing data. The primary composite should use simple fixed
+or equal weights within each dimension; optimized weights belong only to a
+regularized challenger and count as additional model selection.
+
+Descriptive states can then be assigned by frozen observable rules:
+
+| State | Approximate observable evidence |
+|---|---|
+| `EUPHORIA` | Expensive, easy credit, low stress, strong positive direction |
+| `CORRECTION` | Expensive or formerly expensive, direction deteriorating, stress rising |
+| `CRISIS` | Cheap, high stress, weak direction |
+| `EARLY_RECOVERY` | Cheap, stress declining, direction improving |
+| `NORMAL` | No valuation/stress extreme and mixed or ordinary direction |
+| `GREED` | Expensive and positively trending, but below the preregistered euphoria extreme |
+
+These names are deterministic descriptions of current observables. Never hand
+label 2000, 2008, 2020, or any other famous episode and train a model to
+rediscover those labels.
+
+A small two- or three-state HMM may be a challenger only if its feature set,
+state-count choices, fitting rules, label-mapping rule, seed handling, and
+promotion eligibility are preregistered before confirmation. It must beat the
+transparent fixed-score model, not merely draw a plausible historical chart.
+
+#### Minimal candidate budget
+
+The first run should remain deliberately small. Recommended promotion-eligible
+models per instrument are:
+
+```text
+1. unconditional historical distribution
+2. structural-position / valuation-only baseline
+3. direction / momentum-only baseline
+4. fixed-weight transparent cycle score
+5. regularized statistical cycle challenger
+```
+
+This produces ten primary instrument/model evaluations for the 12-month target
+before any optional HMM. The secondary drawdown output accompanies the same
+monthly forecasts; the 24-month result is diagnostic. If an HMM is included,
+it increases the hypothesis count and must be present in the initial config.
+
+Do not add dozens of indicator windows, technical oscillators, state counts, or
+weight grids. Every variation counts in the hypothesis ledger and the
+multiple-testing correction.
+
+#### Zero-paid-data source plan
+
+No new paid subscription is authorized for Phase 1B. Candidate no-cost sources
+and their roles are:
+
+| Source | Intended role | Required handling |
+|---|---|---|
+| Robert Shiller, Yale, US Stock Markets 1871-present and CAPE | Long-run monthly S&P price, dividends, earnings, CPI, valuation discovery | Archive exact raw bytes and source metadata; document that reconstructed/composite history is not identical to SPY and audit whether observations are monthly averages or endpoints before defining targets |
+| FRED/ALFRED | Macro, Treasury, credit/financial conditions, release and revision vintages | A free API account/key may be required; persist real-time/vintage fields, release dates, revisions, raw responses, terms, and attribution |
+| Existing Alpaca account | Modern actual SPY/QQQ adjusted/daily validation subject to the account's available history | Reuse the provider boundary and immutable-page/hash design; audit adjustment semantics and daily coverage rather than assuming the minute plan applies unchanged |
+| Existing IBKR account | Limited recent cross-provider checks only | Market-data/read-only mode; no orders and no paid real-time entitlement |
+| Public issuer/exchange source, only if found in the audit | Possible QQQ-specific valuation or total-return validation | Exclude if history, licensing, constituent methodology, or point-in-time provenance is inadequate |
+
+Reference starting points:
+
+- Shiller data: https://www.econ.yale.edu/~shiller/data.htm
+- FRED/ALFRED API: https://fred.stlouisfed.org/docs/api/fred/overview.html
+- ALFRED archive behavior: https://fred.stlouisfed.org/docs/api/fred/alfred.html
+- FRED terms: https://fred.stlouisfed.org/legal/
+- Alpaca plan/history documentation:
+  https://docs.alpaca.markets/us/docs/about-market-data-api
+
+The ICE BofA high-yield OAS series must not be a core long-history dependency;
+FRED currently indicates that it exposes only a short recent window. Prefer a
+longer-lived Baa-versus-Treasury spread or a Federal Reserve financial-conditions
+measure, subject to a series-level license and availability audit. Do not assume
+that because a series is visible through FRED it can be redistributed without
+restriction.
+
+Massive futures data are not required for this experiment. The completed Phase
+1 Massive archive remains immutable but should not be expanded for Phase 1B.
+
+#### Point-in-time and provenance rules
+
+The monthly dataset needs two evidence tiers:
+
+1. **Point-in-time admissible:** the exact value and release/revision record
+   known by the historical snapshot cutoff can be reconstructed, normally
+   through ALFRED or an equivalent release archive.
+2. **Reconstructed research-only:** a present-day historical series is used
+   because original vintages are unavailable. It is clearly flagged and cannot
+   silently support a strong replay-safe claim.
+
+For every observation persist, where applicable:
+
+```text
+observation/effective date
+publication/release timestamp
+first-seen or vintage interval
+revision identifier
+local ingestion timestamp
+source request and response hash
+availability and quality flags
+```
+
+Macro values enter a snapshot only after publication. Later revisions never
+replace the value that would have been known at an earlier cutoff. Slow-moving
+earnings/CAPE inputs need their own availability assumptions; a month printed
+on a spreadsheet is not automatically its historical publication timestamp.
+
+If long-run valuation data cannot be made point-in-time safe, the first report
+must separate exploratory reconstructed-history evidence from a stricter modern
+vintage-aware confirmation. It must not blend the two and call the result fully
+replay safe.
+
+#### Evaluation design
+
+Monthly rows are not independent when labels cover the next 12 or 24 months.
+A dataset with hundreds of overlapping monthly labels may contain only dozens
+of effectively independent annual outcomes and few major cycles. Report both
+the row count and an effective non-overlapping block count.
+
+Required evaluation behavior:
+
+- chronological expanding and rolling walk-forward modes;
+- a purge/embargo at least as long as the primary target overlap, and long
+  enough for any promotion-eligible 24-month target if that policy changes;
+- no random train/test split;
+- all preprocessing fitted inside each training fold;
+- block bootstrap or another dependence-aware uncertainty estimate;
+- a sealed final chronological confirmation segment whose minimum calendar
+  span and labeled observations are frozen after the source-coverage audit;
+- metrics by instrument, era, cycle state, and both confirmation halves;
+- concentration reporting so one famous crash/recovery cannot dominate the
+  claimed edge;
+- missing-feature and coverage reports for every candidate;
+- explicit hypothesis count and multiple-testing adjustment.
+
+Because the project team already knows the broad history of famous US crises,
+the historical holdout can be mechanically sealed from model output but is not
+honestly a human-unknown market history. The report must disclose this. The
+strongest evidence for a later positive claim would be forward data accumulated
+after the specification is frozen. Phase 1B may still reject a candidate using
+historical evidence; it must be more conservative about claiming discovery.
+
+#### What the cycle model must beat
+
+A complicated cycle model is useful only if it improves on all relevant simple
+alternatives:
+
+- the unconditional historical return/drawdown distribution;
+- valuation or structural deviation alone;
+- momentum/direction alone;
+- a simple valuation-plus-trend rule;
+- for economic evaluation, a static risk-matched allocation after transaction
+  costs, not merely an unmatched all-equity or all-cash comparison.
+
+The preregistration must choose continuous-return metrics and a probabilistic
+drawdown definition before results. Expected candidates include MAE/RMSE or a
+proper distributional score for forward real excess return, and Brier/log loss,
+calibration, and discrimination for a frozen drawdown event threshold.
+
+Promotion must require, at minimum:
+
+- material out-of-sample predictive improvement over the required baselines;
+- calibrated drawdown probabilities if the drawdown output is used;
+- sensible monotonic or otherwise preregistered ordering across cycle-score
+  groups;
+- stability across expanding and rolling modes, predeclared eras, and both
+  confirmation halves;
+- no dependence on a single crash, rebound, or decade;
+- a dependence-aware uncertainty interval supporting the claimed improvement;
+- adequate source coverage and effective independent blocks;
+- after costs, improved return/drawdown trade-off for any derived policy versus
+  a risk-matched static allocation;
+- low enough turnover for a monthly regime policy;
+- no threshold or feature changes after confirmation metrics are opened.
+
+Numeric thresholds are intentionally not invented in this handoff. They must be
+justified, encoded, reviewed, and committed during preregistration before the
+candidate-output command is allowed to run.
+
+#### Prediction before exposure policy
+
+The first scientific product is a forecast, for example:
+
+```text
+expected 12-month real excess return
+return prediction interval or distribution quantiles
+probability of the frozen 12-month drawdown event
+valuation, stress, and direction component scores
+deterministic descriptive cycle state
+data quality and confidence flags
+```
+
+Only after predictive gates pass may the experiment evaluate a deliberately
+simple long/cash aggressive-to-defensive policy. The cash return must use the
+same observable Treasury series as the excess-return target. The simulation
+must be executable with a defined one-session lag, costs, no hidden leverage,
+and risk-matched static baselines.
+
+An attractive policy backtest cannot compensate for a failed or uncalibrated
+forecast. Policy, instrument expression, and execution remain later layers.
+
+#### Phase 1B implementation plan
+
+1. **Preregister the hypothesis — complete (v4).**
+   - Create `docs/CYCLE-ASYMMETRY-001.md`.
+   - Create a versioned config and JSON Schema.
+   - Freeze SPY/QQQ roles, exact monthly cutoff, target formulas, adjustment and
+     CPI rules, feature signs/windows, models, seeds, partitions, embargo,
+     metrics, numeric gates, hypothesis budget, and final decision vocabulary.
+   - Add a guard that refuses candidate evaluation when required preregistration
+     fields or numeric gates are missing.
+
+2. **Audit and pin the no-cost sources — complete (audit v3).**
+   - Confirm exact Shiller field semantics and update/release behavior.
+   - Inventory required FRED/ALFRED series, start dates, revisions, licenses,
+     release lags, and vintage coverage.
+   - Determine the longest honest actual-SPY and actual-QQQ history obtainable
+     from existing no-cost accounts/sources.
+   - Decide before modeling which rows are point-in-time admissible versus
+     reconstructed research-only.
+   - Do not add a paid source to repair a coverage failure.
+
+3. **Build the immutable monthly dataset — complete and reproduced offline.**
+   - Implement resumable raw downloads with request identity, response hashes,
+     and offline verification.
+   - Normalize calendars, CPI/real returns, dividends, rates, macro vintages,
+     and missingness without overwriting raw records.
+   - Produce separate long-run S&P discovery, actual-SPY validation, and
+     actual-QQQ validation manifests.
+   - Emit source-level and feature-level coverage/quality reports.
+
+4. **Calculate trailing-only features and states — complete.**
+   - Fit trend, scaling, percentiles, imputation, and any regularization only on
+     information available at each cutoff and inside each fold.
+   - Emit valuation, stress, and direction components independently.
+   - Apply the frozen deterministic state rules.
+   - Add tests proving future observations and revisions cannot affect an old
+     feature vector or state.
+
+5. **Build the minimal baselines and challengers — next.**
+   - Implement the unconditional, valuation-only, direction-only, fixed-cycle,
+     and regularized challenger models for both instruments.
+   - Apply SPY-frozen parameters to QQQ as a transfer test where specified.
+   - Include an HMM only if it was already preregistered; otherwise defer it.
+   - Record every candidate and variation in the hypothesis ledger.
+
+6. **Run purged walk-forward evaluation — pending increment 5.**
+   - Use rolling and expanding modes with the frozen embargo.
+   - Produce continuous-return, drawdown, calibration, regime/era, coverage,
+     concentration, and uncertainty metrics.
+   - Report overlapping monthly rows and non-overlapping effective blocks.
+   - Run prediction metrics before constructing any policy result.
+
+7. **Open the sealed confirmation once — pending and still sealed.**
+   - Require the configured minimum span, labeled observations, effective
+     blocks, and coverage for SPY and QQQ independently.
+   - Do not change features, models, weights, thresholds, or gates after opening
+     aggregate confirmation output.
+   - If a defect requires a scientific-policy change, invalidate that
+     confirmation use, document it, and require a new unseen/forward block for
+     any later positive claim.
+
+8. **Issue one immutable report and decision — pending confirmation.**
+   - Report every SPY and QQQ candidate, gate, failure reason, source caveat,
+     and hypothesis count.
+   - Freeze only the exact instrument/target/model/config that passes all gates.
+   - Otherwise emit `NO_CYCLE_TARGET_ADEQUATE` and stop rather than adding
+     complexity.
+   - Keep LLM calls, agents, account queries, order construction, and order
+     submission out of the Phase 1B path.
+
+Target operational interface after implementation:
+
+```bash
+npm run cycle1
+npm run cycle1 -- --offline
+```
+
+One command should ultimately build or resume the immutable dataset and run the
+complete evaluation; the offline form should reproduce all dataset/report
+identities from the same pinned raw bytes. The safe runner currently supports
+the acquisition stage explicitly:
+
+```bash
+npm run cycle1 -- --dataset-only
+npm run cycle1 -- --dataset-only --offline
+```
+
+Until candidate evaluation is implemented, the bare command fails closed after
+validating the preregistration and source audit.
+
+#### Phase 1B acceptance criteria
+
+Phase 1B is complete only when:
+
+```text
+one command reproducibly builds/resumes the monthly dataset and evaluation
+same raw bytes + config + code reproduce dataset and report identities
+SPY and QQQ have separate explicit coverage, provenance, metrics, and gates
+all candidate variations are present in the hypothesis ledger
+all features and macro releases obey the historical cutoff
+overlap-aware purge/embargo and uncertainty handling are tested
+the sealed confirmation meets frozen observation, span, block, and coverage minima
+the report distinguishes reconstructed from point-in-time-admissible evidence
+no paid data subscription was added
+no LLM, agent, account-query, leverage recommendation, or order code is involved
+a clean-commit run freezes an exact target or rejects every candidate explicitly
+```
+
+#### Interpretation boundaries
+
+A successful result could support only this conclusion:
+
+> The frozen observable conditions materially alter the out-of-sample
+> distribution of an exact instrument's 12-month real excess return or drawdown
+> risk enough to justify later testing of an aggressive/defensive exposure
+> overlay.
+
+It would not establish the exact top or bottom, the date of a crash, causal
+control of markets, next-day predictability, one objectively true six-state
+cycle, transfer from SPY to QQQ without testing, or a reason to buy financially
+impaired individual companies. It would not authorize paper or live trading.
+
+If Phase 1B returns `NO_CYCLE_TARGET_ADEQUATE`, the project should preserve that
+negative result, avoid post-hoc indicator proliferation, and stop or require a
+new explicitly justified hypothesis family. If it freezes a target, proceed to
+the broader `REALITY-STORE-001` and production `BASELINE-001` using that exact
+target before introducing LLM agents or evolution.
 
 ### 2026-09-04 IBKR adapter update
 
@@ -225,9 +1064,9 @@ models, and agent runtimes must remain replaceable.
 
 ---
 
-## 2. Initial research target
+## 2. Research targets and current decision
 
-Default hypothesis:
+The original default hypothesis was:
 
 ```text
 Instrument: SPY
@@ -251,8 +1090,23 @@ Trading policy and instrument selection remain separate from prediction. Valid
 actions eventually include `LONG`, `SHORT`, `LONG_VOL`, `SHORT_VOL`, and
 `NO_TRADE`. The system must not be rewarded for trading frequently.
 
-The SPY 30-minute target is only a default. `TARGET-TOURNAMENT-001` must test it
-against other instruments and horizons before it becomes the frozen V1 target.
+`TARGET-TOURNAMENT-001` tested this target and 23 alternatives across SPY, QQQ,
+ES, and NQ. It completed with `NO_TARGET_ADEQUATE`; the SPY 30-minute target was
+not frozen and is no longer the active default.
+
+The approved next target-search family is `CYCLE-ASYMMETRY-001`:
+
+```text
+instruments:        SPY and QQQ, evaluated and promoted independently
+decision frequency: monthly
+primary target:     12-month forward real total return minus observable
+                    3-month Treasury-bill return
+secondary target:   maximum drawdown during the following 12 months
+diagnostic target:  24-month forward real excess return
+```
+
+The detailed next-session handoff above controls its preregistration. No cycle
+target is frozen, and no cycle result exists yet.
 
 ---
 
@@ -391,6 +1245,34 @@ later GARCH and HAR-style volatility
 Rank targets by forecast metrics, calibration, regime/year stability,
 transaction-cost sensitivity, liquidity, data quality, sample size, and economic
 value. Freeze the V1 target only after this report.
+
+**Outcome:** complete with `NO_TARGET_ADEQUATE`. All 24 candidates are rejected.
+
+### Phase 1B — CYCLE-ASYMMETRY-001
+
+No LLM calls, agents, account queries, or orders. No new paid subscription.
+
+Evaluate SPY and QQQ independently at a monthly decision frequency using a
+preregistered multivariable contracyclical model:
+
+```text
+structural position / valuation
++ credit and financial stress
++ macro direction
++ technical direction / recovery confirmation
+→ calibrated 12-month real excess-return and drawdown forecasts
+```
+
+Use a transparent fixed-score model as the primary cycle representation and
+simple unconditional, valuation-only, direction-only, and regularized
+challengers. No HMM is included in the first Cycle 1 run. Use immutable no-cost source archives,
+ALFRED-style release vintages where available, trailing-only transforms,
+overlap-aware purged walk-forward evaluation, dependence-aware uncertainty,
+and separate SPY/QQQ promotion gates.
+
+Acceptance is defined in the detailed next-session handoff above. Freeze an
+exact monthly target only after the report; otherwise close with
+`NO_CYCLE_TARGET_ADEQUATE`.
 
 ### Phase 2 — REALITY-STORE-001
 
@@ -607,14 +1489,44 @@ switch, and manual-disable controls. Forecast agents can never bypass them.
 - explicit safety boundary: no account queries, order construction, or order
   submission in the IBKR market-data adapter
 
+### Approved and partially implemented
+
+- `CYCLE-ASYMMETRY-001` Phase 1B is the current bounded target-search extension.
+- Its detailed SPY/QQQ philosophy, source plan, preregistration requirements,
+  eight implementation steps, acceptance criteria, and interpretation limits
+  are recorded in the next-session handoff near the top of this document.
+- Preregistration v4, source audits v1/v2/v3, provider acquisition, immutable
+  dataset construction, targets, trailing-only features, deterministic states,
+  resolved partitions, schemas, exploratory cycle-analysis tools, notebooks,
+  and tests exist. The final Cycle 1 dataset passes online/offline identity and
+  coverage gates. No model result or report has been produced yet.
+- `npm run cycle1 -- --dataset-only` is the live acquisition interface;
+  `--offline` refuses network access and requires the pinned raw archive.
+- Candidate evaluation remains unavailable and fails closed. No candidate
+  performance or sealed-confirmation result has been computed or viewed.
+
 ### Verified commands and results
 
 ```text
 npm run check
-  reverified: 2026-09-05
+  reverified: 2026-09-07
   TypeScript build: passed
   TypeScript tests: 15 passed
-  Python tests: 23 passed
+  Python tests: 88 passed
+
+npm run cycle1 -- --dataset-only
+  status: dataset-ready
+  dataset: cycle1-monthly-19ccd95384e690de
+  identity: 19ccd95384e690dee2fd529c3889a5b1ce17d956f8b9a1efffe551ec73e87753
+  SPY eligible/core coverage: 308 / 100%
+  QQQ eligible/core coverage: 234 / 100%
+  hypotheses evaluated: 0
+
+npm run cycle1 -- --dataset-only --offline
+  status: dataset-ready
+  identity: identical to online build
+  track identities: identical to online build
+  network access: disabled
 
 npm run foundation
   observations: 35
@@ -674,8 +1586,9 @@ implementation status: migrations and integration path previously verified
 ```
 
 The IBKR/Alpaca adapter increment was committed as `ee1bf42`; the Phase 1
-implementation was committed as `196f5be`. A clean-source offline rerun from
-the pinned bytes reproduced the final identities.
+implementation was committed as `196f5be`; and the final clean-run closure was
+committed as `cda7003`. A clean-source offline rerun from the pinned bytes
+reproduced the final identities.
 
 ### Clean-tree reproducibility verification
 
@@ -937,16 +1850,18 @@ the report recommends a target or explicitly concludes that none is adequate
 Do not proceed directly to agents or trading. The recommended decision is:
 
 1. Treat all 24 current candidates as rejected and keep the final report sealed.
-2. Decide whether there is a small, economically motivated target-search
-   extension worth preregistering, such as changing neutral thresholds or adding
-   one or two horizons. Record it as a new hypothesis family rather than editing
-   the completed Phase 1 result.
-3. If no bounded extension is justified, stop this research branch; do not add
-   complexity to manufacture signal.
-4. If a later extension freezes a target, proceed to `REALITY-STORE-001` and
-   then `BASELINE-001` before Pi, Ollama, fixed agents, or evolution.
-5. Keep the zero-new-cost constraint. Do not purchase deeper futures history or
-   IBKR real-time subscriptions.
+2. Implement `CYCLE-ASYMMETRY-001` as the separately preregistered Phase 1B
+   hypothesis family documented above. Do not alter Phase 1 candidates or gates.
+3. Analyze both SPY and QQQ with the same target-level protocol while preserving
+   separate inputs, limitations, metrics, gates, and promotion decisions.
+4. Preserve the completed v4 preregistration, v3 source audit, final dataset,
+   and resolved partitions unchanged while implementing candidate evaluation.
+5. If Phase 1B rejects all candidates, stop or require a genuinely new,
+   explicitly justified hypothesis family; do not add indicators post hoc.
+6. If Phase 1B freezes an exact target, proceed to `REALITY-STORE-001` and then
+   `BASELINE-001` before Pi, Ollama, fixed agents, or evolution.
+7. Keep the zero-new-cost constraint. Do not purchase valuation history, deeper
+   futures history, or IBKR real-time subscriptions for Phase 1B.
 
 ---
 
@@ -957,8 +1872,13 @@ Run:
 ```bash
 git status --short
 npm run check
-npm run db:status
-npm run foundation
+```
+
+The completed Phase 1 result does not need to be rerun before writing the new
+specification. If a regression audit is desired, its reproducible offline
+command remains:
+
+```bash
 npm run phase1 -- --offline
 ```
 
@@ -969,40 +1889,47 @@ npm run db:up
 npm run check:db
 ```
 
-The database is currently stopped; starting it is only necessary for database
-integration work. It is not required for the next historical-provider
-increment.
+The database was stopped at the last verification. Starting it is unnecessary
+for the initial Phase 1B specification and source audit; use `npm run db:status`
+and the commands above only when database integration work begins.
 
 Read these files first:
 
 ```text
 docs/PROJECT_PLAN_AND_STATUS.md
+docs/CYCLE-ASYMMETRY-001.md
 docs/FOUNDATION-001.md
 docs/TARGET-TOURNAMENT-001.md
-docs/IBKR_SETUP.md
 README.md
+config/cycle1.json
+config/cycle1-source-audit-v3.json
+datasets/cycle1/cycle1-monthly-19ccd95384e690de/manifest.json
 config/foundation.json
 config/target-tournament.json
 config/phase1.json
-config/ibkr-contracts.json
-config/ibkr-history.json
-config/ibkr-live.json
 apps/cli/src/foundation.ts
 apps/cli/src/alpaca-check.ts
-apps/cli/src/ibkr-*.ts
 packages/domain/src/*
 packages/data-providers/src/provider.ts
 packages/snapshot-engine/src/*
-python/src/spy_predictor_quant/ibkr_*.py
 python/src/spy_predictor_quant/market_archive.py
-python/src/spy_predictor_quant/market_comparison.py
 python/src/spy_predictor_quant/phase1_*.py
 migrations/001_foundation.sql
 ```
 
-Immediate next task: review the completed `NO_TARGET_ADEQUATE` report and decide
-whether to preregister a bounded target-search extension. Do not enable IBKR
-order submission and do not begin Pi, Ollama, agents, or evolution.
+Next-session work order:
+
+1. Treat `cycle1-monthly-19ccd95384e690de` as the only final Cycle 1 dataset.
+2. Optionally rerun `npm run cycle1 -- --dataset-only --offline`; require hash
+   `19ccd95384e690dee2fd529c3889a5b1ce17d956f8b9a1efffe551ec73e87753`.
+3. Implement the five preregistered models per instrument and an immutable
+   hypothesis ledger containing exactly ten primary entries.
+4. Develop and test walk-forward machinery on the selection partitions only.
+   Keep the final 96-month confirmation block sealed until the explicit
+   one-time opening guard and immutable report path are ready.
+
+Do not enable IBKR order submission and do not begin Pi, Ollama, agents,
+evolution, or candidate-result exploration during preregistration.
 
 ---
 
@@ -1027,10 +1954,11 @@ continuous self-modifying production prompts
 The shortest trustworthy path remains:
 
 ```text
-complete the qualifying bulk dataset
-→ rerun and close TARGET-TOURNAMENT-001
-→ freeze a target or explicitly reject the current candidates
-→ complete the Reality Store
+preserve the completed TARGET-TOURNAMENT-001 rejection
+→ preregister CYCLE-ASYMMETRY-001
+→ build immutable point-in-time monthly SPY/QQQ evidence at zero added cost
+→ freeze one exact cycle target or explicitly reject every candidate
+→ complete the Reality Store only for a frozen target
 → complete the quantitative benchmark
 → test fixed agent incremental value
 → only then introduce evolution
