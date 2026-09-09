@@ -65,6 +65,20 @@ def _load_cycle1_source_audit(
     if payload["containsModelOutput"] or payload["paidSubscriptionRequired"]:
         raise ValueError("Source audit must contain no model output and require no paid data")
 
+    if version == "cycle1-source-audit-v4-draft":
+        if plan.raw["schemaVersion"] != "cycle1-preregistration-v5":
+            raise ValueError("Source audit v4 proposal requires the v5 plan")
+        base_path = _repo_relative(path, payload["baseAudit"]["path"])
+        base = _load_cycle1_source_audit(base_path, plan=plan, require_plan_match=False)
+        if base.audit_hash != payload["baseAudit"]["auditHash"]:
+            raise ValueError("Source audit v4 base-audit hash mismatch")
+        if payload["archiveReuse"]["sourceAuditHash"] != base.audit_hash:
+            raise ValueError("Archive reuse must reference the verified base audit")
+        if payload["coreMacroSeries"] != ["CPIAUCSL", "INDPRO", "MPRIME", "GS3M"]:
+            raise ValueError("Source audit v4 core macro series differ")
+        return Cycle1SourceAudit(payload, expected_hash, base.accepted_series,
+                                 base.excluded_series)
+
     series = [entry for provider in payload["providers"] for entry in provider["series"]]
     ids = [entry["seriesId"] for entry in series]
     if len(ids) != len(set(ids)):
@@ -169,6 +183,7 @@ def _default_schema_path(path: Path, version: str) -> Path:
         "cycle1-source-audit-v1": "cycle1-source-audit.schema.json",
         "cycle1-source-audit-v2": "cycle1-source-audit-v2.schema.json",
         "cycle1-source-audit-v3": "cycle1-source-audit-v3.schema.json",
+        "cycle1-source-audit-v4-draft": "cycle1-source-audit-v4-draft.schema.json",
     }
     filename = filenames.get(version, "cycle1-source-audit.schema.json")
     for parent in path.resolve().parents:

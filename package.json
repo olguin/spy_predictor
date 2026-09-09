@@ -30,7 +30,19 @@
     "db:integration": "DATABASE_URL=${DATABASE_URL:-postgresql://spy_predictor:spy_predictor_dev@127.0.0.1:54329/spy_predictor} tsx apps/cli/src/db-integration.ts",
     "check:db": "npm run db:migrate && npm run db:verify && npm run db:integration",
     "db:status": "docker compose ps postgres",
-    "db:down": "docker compose down"
+    "db:down": "docker compose down",
+    "cycle1:synthetic-profile": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_synthetic_profile",
+    "cycle1:optimize-profile": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_optimization",
+    "cycle1:power-audit": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_power_gate",
+    "cycle1:redesign-review": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_redesign",
+    "cycle1:null-law-check": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_null_law",
+    "cycle1:equation-check": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_successor_equations",
+    "cycle1:successor-readiness": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_successor_readiness",
+    "cycle1:successor": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_successor_runtime",
+    "cycle:current-snapshot": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle_workbench_snapshot",
+    "cycle1:integration-check": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_successor_fixture",
+    "cycle1:repair-check": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle1_successor_repair_review",
+    "cycle:workbench": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.cycle_workbench"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

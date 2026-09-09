@@ -50,6 +50,8 @@ def build_cycle1_dataset(
     acquirer: Acquirer | None = None,
     schema_root: Path | None = None,
 ) -> tuple[Path, dict[str, Any]]:
+    if plan.raw.get("schemaVersion") != "cycle1-preregistration-v4":
+        raise RuntimeError("Dataset build blocked: v5 requires power approval and source migration qualification")
     schemas = schema_root or repo_root
     raw_root = repo_root / "datasets" / "cycle1" / "raw" / audit.audit_hash[:16]
     raw_root.mkdir(parents=True, exist_ok=True)

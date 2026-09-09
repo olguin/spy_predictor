@@ -52,7 +52,7 @@ def load_cycle1_plan(path: Path, *, schema_path: Path | None = None) -> Cycle1Pl
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
         raise ValueError("Cycle 1 preregistration must be a JSON object")
-    schema_file = schema_path or _default_schema_path(path)
+    schema_file = schema_path or _default_schema_path(path, payload.get("schemaVersion"))
     schema = json.loads(schema_file.read_text(encoding="utf-8"))
     errors = sorted(
         Draft202012Validator(schema).iter_errors(payload),
@@ -73,13 +73,19 @@ def load_cycle1_plan(path: Path, *, schema_path: Path | None = None) -> Cycle1Pl
         config_hash=content_hash(payload),
         instruments=instruments,
         model_ids=models,
-        hypothesis_count=len(instruments) * len(models),
+        hypothesis_count=(len(payload["evaluationLedger"]) if "evaluationLedger" in payload
+                          else len(instruments) * len(models)),
     )
 
 
 def assert_candidate_evaluation_allowed(plan: Cycle1Plan) -> None:
     """Recheck the immutable scientific budget at the evaluation boundary."""
     _validate_semantics(plan.raw)
+    if plan.raw["schemaVersion"] == "cycle1-preregistration-v5":
+        raise RuntimeError(
+            "Cycle 1 v5 is proposed-synthetic-only: simulation design, whole-procedure "
+            "power approval, and a qualified dataset are required; real evaluation is blocked."
+        )
     if plan.hypothesis_count != 10:
         raise ValueError("Candidate evaluation requires exactly ten hypotheses")
     if plan.raw["schemaVersion"] == "cycle1-preregistration-v4":
@@ -90,9 +96,15 @@ def assert_candidate_evaluation_allowed(plan: Cycle1Plan) -> None:
         )
 
 
-def _default_schema_path(config_path: Path) -> Path:
+def _default_schema_path(config_path: Path, version: str | None = None) -> Path:
+    filenames = {
+        "cycle1-preregistration-v4": "cycle1-config-v4.schema.json",
+        "cycle1-preregistration-v5": "cycle1-config-v5-draft.schema.json",
+    }
+    if version not in filenames:
+        raise ValueError(f"Unsupported Cycle 1 preregistration version {version}")
     for parent in config_path.resolve().parents:
-        candidate = parent / "schemas" / "cycle1-config.schema.json"
+        candidate = parent / "schemas" / filenames[version]
         if candidate.exists():
             return candidate
     raise FileNotFoundError("Cannot locate schemas/cycle1-config.schema.json")
@@ -118,6 +130,11 @@ def _reject_placeholders(value: Any, path: str = "$") -> None:
 
 
 def _validate_semantics(payload: dict[str, Any]) -> None:
+    if payload.get("schemaVersion") == "cycle1-preregistration-v5":
+        _validate_v5_semantics(payload)
+        return
+    if payload.get("schemaVersion") != "cycle1-preregistration-v4":
+        raise ValueError("Unsupported Cycle 1 preregistration version")
     required_paths = (
         "decisionFrequency.frequency", "decisionFrequency.calendar",
         "decisionFrequency.timezone", "decisionFrequency.snapshotSessionRule",
@@ -291,6 +308,43 @@ def _validate_semantics(payload: dict[str, Any]) -> None:
         if isinstance(value, bool) or not isinstance(value, (int, float)) or value <= 0:
             raise ValueError(f"Numeric promotion gate {name} must be explicitly positive")
     _reject_zero_numeric_gates(gates)
+
+
+def _validate_v5_semantics(payload: dict[str, Any]) -> None:
+    """Check linked roles and test accounting independently of schema shape."""
+    models = payload["models"]["perInstrument"]
+    ids = [model["id"] for model in models]
+    expected = ["unconditional-history", "volatility-conditioned-history",
+                "valuation-only", "direction-only", "position-plus-direction",
+                "fixed-cycle-score", "regularized-cycle"]
+    if ids != expected:
+        raise ValueError("v5 requires seven ordered SPY models")
+    ledger = payload["evaluationLedger"]
+    expected_entries = [("SPY", model) for model in expected] + [
+        ("QQQ", model) for model in [*expected[-2:], expected[0]]
+    ]
+    if [(row["instrument"], row["modelId"]) for row in ledger] != expected_entries:
+        raise ValueError("v5 requires ten explicit ledger entries with conditional QQQ transfer")
+    if len({row["entryId"] for row in ledger}) != 10:
+        raise ValueError("v5 ledger entry identities must be unique")
+    comparison = payload["evaluationContract"]["comparisons"]
+    if (comparison["primaryHypotheses"] != expected[-2:]
+            or comparison["challengerBaselines"] != expected[:5]
+            or comparison["holmFamily"] != "two-SPY-composite-cycle-claims"):
+        raise ValueError("v5 requires two composite claims against all five comparators")
+    budget = payload["hypothesisBudget"]
+    if (budget["totalLedgerEntries"] != 10 or budget["compositePrimaryClaims"] != 2
+            or budget["componentTestsPerClaim"] != 10):
+        raise ValueError("v5 ledger and comparison budgets disagree")
+    if (payload["status"] != "proposed-synthetic-only"
+            or payload["execution"]["realCandidateEvaluationAllowed"] is not False
+            or payload["execution"]["datasetBuildAllowed"] is not False
+            or payload["execution"]["confirmationOpeningAllowed"] is not False):
+        raise ValueError("v5 proposal cannot authorize real data or confirmation")
+    if payload["targets"]["primary"]["cashReturn"]["seriesId"] != "GS3M":
+        raise ValueError("v5 cash proxy must be GS3M")
+    if payload["partitions"]["qqqSelectionMetricsAllowed"] is not False:
+        raise ValueError("QQQ cannot participate in development")
 
 
 def _required(payload: dict[str, Any], path: str) -> Any:

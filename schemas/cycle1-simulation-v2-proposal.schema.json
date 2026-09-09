@@ -1,0 +1,408 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cycle1-simulation-v2-proposal.schema.json",
+  "title": "Closed pre-output Cycle 1 successor proposal; not a simulation release",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "purpose",
+    "predecessor",
+    "preregistrationPath",
+    "preregistrationHash",
+    "sourceAuditPath",
+    "sourceAuditHash",
+    "redesign",
+    "permissions",
+    "preserved",
+    "acceptance",
+    "streams",
+    "pathContract",
+    "unresolvedBeforeFreeze",
+    "releaseGates",
+    "proposalHash"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "cycle1-simulation-v2-proposal"
+    },
+    "status": {
+      "const": "PROPOSED_NO_DRAWS"
+    },
+    "purpose": {
+      "const": "single-successor-design-review-for-full-path-synthetic-evidence"
+    },
+    "predecessor": {
+      "const": {
+        "designPath": "config/cycle1-simulation-v1.json",
+        "designHash": "4cd8f85baa83178d53fcdbf4fae2a86732bf41e6f30b6841aeff82cab67dba20",
+        "decisionPath": "experiments/cycle1-power-v1/decision.json",
+        "recordHash": "f849019fb6bd90ebafbb1071249c05d94817b67c2d34f92a91eaf62516b52e71",
+        "reportPath": "reports/cycle1-power-stop-7d7b93257f67e058/report.json",
+        "reportHash": "7d7b93257f67e058d725a526f5625b4a68048346a36c3667e12c2e7b6a2e3ef1",
+        "reportSha256": "4991b2882717c7985f06a1735f35ef485a2ed6251b2c0e7c69f06a5eca3f8651"
+      }
+    },
+    "preregistrationPath": {
+      "const": "config/cycle1-v5-draft.json"
+    },
+    "preregistrationHash": {
+      "const": "74a486ed3c65bfb116ca28eca06c831dbce213bbafe08396310a3677b51ebeda"
+    },
+    "sourceAuditPath": {
+      "const": "config/cycle1-source-audit-v4-draft.json"
+    },
+    "sourceAuditHash": {
+      "const": "e0728302088de54c57080bc6837f9e084bf0c941cc554323c451eabfe1870886"
+    },
+    "redesign": {
+      "const": {
+        "maximum": 1,
+        "slotConsumption": "atomic-separate-registration-of-final-frozen-successor-before-first-development-draw",
+        "registrationPath": "experiments/cycle1-power-redesign/registration.json",
+        "proposalConsumesSlot": false,
+        "predecessorMayReopen": false,
+        "automaticValidation": false,
+        "postOutputScientificRetuning": false
+      }
+    },
+    "permissions": {
+      "const": {
+        "developmentDraws": false,
+        "lockedValidation": false,
+        "realCandidateEvaluation": false,
+        "datasetRebuild": false,
+        "sourceMigration": false,
+        "historicalConfirmation": false,
+        "deployment": false
+      }
+    },
+    "preserved": {
+      "const": {
+        "calendar": {
+          "warmupStart": "1990-01",
+          "pathEnd": "2026-07",
+          "spyOriginStart": "1999-11",
+          "qqqOriginStart": "2006-01",
+          "selectionForecastStart": "2010-11",
+          "selectionEnd": "2016-06",
+          "embargoStart": "2016-07",
+          "embargoEnd": "2017-06",
+          "confirmationStart": "2017-07",
+          "confirmationEnd": "2025-07",
+          "halfSplit": "2021-07",
+          "expectedSelectionForecasts": 68,
+          "expectedConfirmationForecasts": 97
+        },
+        "effects": {
+          "locationBoundaryAnnualAmplitude": 0.02,
+          "locationDesignAnnualAmplitude": 0.08,
+          "scaleBoundaryLogLoading": 0.15,
+          "scaleDesignLogLoading": 0.6,
+          "rationale": "annualized-one-step-conditional-location-range-up-to-4pp-at-boundary-and-16pp-at-design;scale-high-low-ratio-exp(0.3)-or-exp(1.2);deliberately-large-design-effects-test-whether-this-short-calendar-can-detect-even-substantial-skill;not-a-claim-these-market-effects-exist-or-are-profitable",
+          "materialityIsNotDesignEffect": true,
+          "effectEscalationToPassProhibited": true
+        },
+        "budget": {
+          "maximumDevelopmentReplicationsPerScenario": 3,
+          "maximumValidationRuns": 1,
+          "maximumValidationWallSeconds": 3600,
+          "maximumProfileWallSeconds": 120,
+          "bootstrapResamples": 10000,
+          "bootstrapBlockMonths": 12,
+          "requiredOuterReplicationsPerScenario": 2000,
+          "budgetFailureDecision": "INSUFFICIENT_EVIDENCE_COMPUTATIONAL_BUDGET;no-reduced-replication-approval"
+        },
+        "scenarios": [
+          {
+            "id": "null-no-skill",
+            "signal": "none",
+            "annualLocationAmplitude": 0,
+            "logScaleLoading": 0,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "false-qualification-upper-bound"
+          },
+          {
+            "id": "null-persistent-heavy-tails",
+            "signal": "none",
+            "annualLocationAmplitude": 0,
+            "logScaleLoading": 0,
+            "predictorPersistence": 0.99,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 4,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "false-qualification-upper-bound"
+          },
+          {
+            "id": "partial-null-strong-baseline",
+            "signal": "position-direction",
+            "annualLocationAmplitude": 0.08,
+            "logScaleLoading": 0,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "false-qualification-upper-bound"
+          },
+          {
+            "id": "usefulness-location",
+            "signal": "cycle",
+            "annualLocationAmplitude": 0.02,
+            "logScaleLoading": 0,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "report-only"
+          },
+          {
+            "id": "design-location",
+            "signal": "cycle",
+            "annualLocationAmplitude": 0.08,
+            "logScaleLoading": 0,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "power-lower-bound"
+          },
+          {
+            "id": "usefulness-scale",
+            "signal": "stress",
+            "annualLocationAmplitude": 0,
+            "logScaleLoading": 0.15,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "report-only"
+          },
+          {
+            "id": "design-scale",
+            "signal": "stress",
+            "annualLocationAmplitude": 0,
+            "logScaleLoading": 0.6,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "power-lower-bound"
+          },
+          {
+            "id": "structural-break",
+            "signal": "cycle",
+            "annualLocationAmplitude": 0.08,
+            "logScaleLoading": 0,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": -1,
+            "missingProbability": 0,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "report-only"
+          },
+          {
+            "id": "rare-downside",
+            "signal": "none",
+            "annualLocationAmplitude": 0,
+            "logScaleLoading": 0,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0,
+            "crashProbability": 0.01,
+            "crashLogReturn": -0.25,
+            "requirement": "false-qualification-upper-bound"
+          },
+          {
+            "id": "missingness",
+            "signal": "none",
+            "annualLocationAmplitude": 0,
+            "logScaleLoading": 0,
+            "predictorPersistence": 0.95,
+            "volatilityPersistence": 0.95,
+            "volatilityInnovationSd": 0.12,
+            "studentDegreesOfFreedom": 8,
+            "breakMonth": "2020-01",
+            "afterBreakMultiplier": 1,
+            "missingProbability": 0.02,
+            "crashProbability": 0,
+            "crashLogReturn": -0.25,
+            "requirement": "false-qualification-upper-bound"
+          }
+        ]
+      }
+    },
+    "acceptance": {
+      "const": {
+        "family": "either-SPY-cycle-claim-passes-both-selection-and-confirmation",
+        "interval": "one-sided-95-percent-exact-Clopper-Pearson",
+        "falseQualificationUpperMaximum": 0.1,
+        "powerLowerMinimum": 0.8,
+        "bothDesignScenariosMustPass": true,
+        "failureDecision": "INSUFFICIENT_EVIDENCE",
+        "invalidComputationDecision": "INVALID_EVALUATION",
+        "maximumPreOutputRedesigns": 1
+      }
+    },
+    "streams": {
+      "const": {
+        "bitGenerator": "PCG64",
+        "developmentEntropy": 2026090803,
+        "validationEntropy": 2026090804,
+        "developmentReplicationsPerScenario": 3,
+        "validationReplicationsPerScenario": 2000,
+        "bootstrapSeed": 42,
+        "substreams": [
+          "macro-state",
+          "macro-first-release",
+          "macro-revision",
+          "volatility",
+          "spy-overnight",
+          "spy-intraday",
+          "qqq-overnight",
+          "qqq-intraday",
+          "crash-session",
+          "source-missingness",
+          "corporate-actions"
+        ],
+        "seedSequenceRule": "SeedSequence([entropy,scenarioOrdinal,replicationIndex,substream]);new-final-design-identity-required-before-any-draw",
+        "status": "PROPOSED_UNOPENED"
+      }
+    },
+    "pathContract": {
+      "const": {
+        "calendar": "exact-XNYS-scheduled-opens-and-closes-including-holidays-and-early-closes;full-session-inventory-hashed",
+        "generationOrder": [
+          "advance-macro-observations-and-release-events",
+          "at-month-end-select-only-admissible-vintages",
+          "derive-instrument-features-from-own-history-through-cutoff",
+          "freeze-next-month-conditional-return-parameters",
+          "generate-each-next-session-open-and-close-chronologically",
+          "apply-split-and-distribution-unit-conventions",
+          "derive-primary-labels-daily-drawdowns-and-execution-tapes-from-shared-path"
+        ],
+        "feedback": "only-completed-month-feature-state-may-affect-next-month-returns;no-independent-latent-vector-substitution-for-computed-dimensions",
+        "preFeatureWarmup": "use-base-drift-and-volatility-with-zero-skill-loading-until-all-required-features-exist;do-not-change-origin-calendar-to-improve-coverage",
+        "marketFields": [
+          "instrument",
+          "sessionDate",
+          "openTime",
+          "closeTime",
+          "splitAdjustedOpen",
+          "splitAdjustedClose",
+          "cashDistribution",
+          "distributionAvailability",
+          "splitFactor",
+          "evidenceTier"
+        ],
+        "marketEvidenceTier": "SYNTHETIC_ONLY",
+        "macroSeries": [
+          "CPIAUCSL",
+          "INDPRO",
+          "MPRIME",
+          "GS3M"
+        ],
+        "macroFields": [
+          "seriesId",
+          "observationDate",
+          "availableAt",
+          "realtimeStart",
+          "value",
+          "missing",
+          "vintageId"
+        ],
+        "macroAvailability": "inclusive-publication-at-feature-cutoff;strict-publication-before-each-cash-holding-start;later-revision-cannot-rewrite-earlier-as-of-input",
+        "features": "all-nine-v5-features-and-expanding-normalization-from-generated-daily-market-and-released-macro-records;SPY-and-QQQ-use-own-market-history",
+        "primary": "12-month-log-close-total-return-minus-sum-of-monthly-log-GS3M-simple-accrual-actual365;CPI-does-not-gate-cancelled-excess-label",
+        "downside": "daily-total-return-close-running-peak-including-origin-through-12-month-end;event-at-minus20percent;all-scheduled-sessions-required",
+        "policy": "next-session-open-to-next-session-open-equity-and-cash-returns-with-distributions-in-consistent-units;never-use-annual-labels-as-monthly-returns",
+        "missingness": "retain-fixed-origin-calendar;record-unavailable-features-target-paths-and-execution-intervals-separately;never-compress-internal-calendar-gaps",
+        "transfer": "retain-SPY-fits-and-standardizers;apply-to-QQQ-own-causal-features;QQQ-reference-only-may-fit-QQQ-labels;shared-shocks-not-independent-evidence",
+        "branchCoverage": "fixture-exercise-downside-policy-transfer-and-confirmation-even-when-development-selection-fails;exercises-do-not-change-qualification-counts",
+        "scopeCompletion": "requires-path-provenance-and-all-branch-tests-plus-complete-profile;field-presence-or-code-availability-alone-is-not-evidence"
+      }
+    },
+    "unresolvedBeforeFreeze": {
+      "const": [
+        {
+          "id": "ANNUAL_NULL_LAW",
+          "requirement": "Specify and justify the conditional 12-month label law under no-skill and strong-baseline partial-null cases with feedback. A one-step stress coefficient of zero does not prove annual incremental-information null. Keep the original scenario requirements; do not relabel failures report-only."
+        },
+        {
+          "id": "DAILY_AND_MACRO_EQUATIONS",
+          "requirement": "Freeze numerical overnight/intraday allocation, day-count scaling, cross-instrument shocks, crash timing, positive macro transforms, release lags/revisions/missing tombstones, cash and corporate-action generators. No random performance runs to choose these values."
+        },
+        {
+          "id": "FULL_PATH_IMPLEMENTATION_PARITY",
+          "requirement": "Verify one feature/target implementation is shared with eventual research evaluation; resolve missing-vintage semantics and unit/calendar fixtures without modifying the stopped v1 implementation identities."
+        },
+        {
+          "id": "SUCCESSOR_AUTHORITY_TRANSITION",
+          "requirement": "Version the final simulation schema, linked proposal/source-audit authority and single-redesign registry together. Do not mutate the v1 decision or treat this draft as its successor release."
+        }
+      ]
+    },
+    "releaseGates": {
+      "const": [
+        "all-unresolved-design-items-resolved-in-final-version-before-output",
+        "atomic-single-redesign-registration-bound-to-predecessor-stop-and-final-design",
+        "hand-checkable-full-path-fixtures-and-future-data-noninterference",
+        "new-development-stream-identity-and-three-replications-per-scenario-only",
+        "complete-procedure-profile-within-120-second-profile-and-3600-second-validation-budgets",
+        "atomic-locked-opening-bound-to-code-config-sources-design-ledger-and-profile",
+        "20000-locked-replications-complete-with-no-intermediate-feedback",
+        "exact-monte-carlo-bounds-and-explicit-pass-stop-or-invalid-report"
+      ]
+    },
+    "proposalHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

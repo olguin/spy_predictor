@@ -2,6 +2,13 @@
 
 ## Status and boundary
 
+**Planning authority, 2026-09-07:** use
+[PROJECT_PLAN_AND_STATUS.md](PROJECT_PLAN_AND_STATUS.md) for current status and
+[PROJECT_STRATEGY.md](PROJECT_STRATEGY.md) for the next work order. The v4
+specification, qualification statements, commands, and next-increment directions
+below are preserved historical context under the suspension notice. They do
+not authorize evaluation of the archived dataset or override the repair plan.
+
 **2026-09-07 repair notice:** v4 is suspended for candidate evaluation.
 The corrected implementation rejects unqualified DGS3MO publication history;
 QQQ has no selection forecasts with 120 mature training labels. The spread lag

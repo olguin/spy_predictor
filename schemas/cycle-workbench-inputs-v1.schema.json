@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cycle-workbench-inputs-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "cycle-workbench-inputs-v1"
+    },
+    "transformation_version": {
+      "const": "illustrative-raw-metrics-v1"
+    },
+    "instrument_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instrument_type": {
+      "enum": [
+        "company",
+        "etf"
+      ]
+    },
+    "market_id": {
+      "const": "US_EQUITY"
+    },
+    "evidence": {
+      "enum": [
+        "SYNTHETIC",
+        "RECONSTRUCTED_RESEARCH",
+        "OBSERVED_AS_OF"
+      ]
+    },
+    "required_components": {
+      "const": [
+        "growth",
+        "credit",
+        "psychology",
+        "stress",
+        "quality",
+        "valuation",
+        "timing"
+      ]
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "transformation_version",
+    "instrument_id",
+    "instrument_type",
+    "market_id",
+    "evidence",
+    "required_components",
+    "snapshot"
+  ],
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "cycle-workbench-observations-v1"
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "metric": {
+                "enum": [
+                  "growth_yoy_pct",
+                  "credit_spread_bps",
+                  "bullish_survey_pct",
+                  "realized_vol_pct",
+                  "operating_margin_pct",
+                  "trailing_pe",
+                  "price_to_ma200_ratio"
+                ]
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "unit": {
+                "enum": [
+                  "percent",
+                  "basis_points",
+                  "multiple",
+                  "ratio"
+                ]
+              },
+              "instrument_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "observed_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "published_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "first_seen_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "retrieved_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "source_url": {
+                "type": "string",
+                "minLength": 1
+              },
+              "publisher": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_reference": {
+                "type": "string",
+                "minLength": 1
+              },
+              "revision": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "AVAILABLE",
+                  "WITHDRAWN"
+                ]
+              },
+              "max_age_days": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 366
+              },
+              "evidence": {
+                "enum": [
+                  "SYNTHETIC",
+                  "RECONSTRUCTED_RESEARCH",
+                  "OBSERVED_AS_OF"
+                ]
+              }
+            },
+            "required": [
+              "metric",
+              "value",
+              "unit",
+              "instrument_id",
+              "observed_at",
+              "published_at",
+              "first_seen_at",
+              "retrieved_at",
+              "source_url",
+              "publisher",
+              "source_reference",
+              "revision",
+              "status",
+              "max_age_days",
+              "evidence"
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "observations"
+      ]
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import { spawn } from "node:child_process";
 
+const args = process.argv.slice(2);
+const proposal = args.includes("--contract-only");
 const child = spawn(
   "uv",
   [
@@ -10,12 +12,12 @@ const child = spawn(
     "-m",
     "spy_predictor_quant.cycle1",
     "--config",
-    "config/cycle1.json",
+    proposal ? "config/cycle1-v5-draft.json" : "config/cycle1.json",
     "--source-audit",
-    "config/cycle1-source-audit-v3.json",
+    proposal ? "config/cycle1-source-audit-v4-draft.json" : "config/cycle1-source-audit-v3.json",
     "--repo-root",
     ".",
-    ...process.argv.slice(2)
+    ...args
   ],
   {
     env: { ...process.env, UV_CACHE_DIR: ".uv-cache" },

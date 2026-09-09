@@ -1,10 +1,10 @@
 {
   "schemaVersion": "cycle1-preregistration-v5",
   "experimentId": "CYCLE-ASYMMETRY-001",
-  "status": "frozen-before-candidate-output",
+  "status": "proposed-synthetic-only",
   "amendment": {
     "supersedesSchemaVersion": "cycle1-preregistration-v4",
-    "reason": "Pre-evaluation audit found DGS3MO publication coverage and QQQ development infeasible, plus underspecified distribution and testing contracts. GS3M restores cutoff-safe monthly cash coverage; SPY becomes development and QQQ an external transfer track before any candidate output.",
+    "reason": "Pre-output amendment: GS3M cash proxy, SPY development and QQQ transfer, five stronger comparators, two composite cycle claims, fixed partitions, separate forecast/downside/policy decisions, and mandatory whole-procedure synthetic power evidence.",
     "changedFields": [
       "targets.primary.cashReturn",
       "instrumentRoles",
@@ -13,9 +13,17 @@
       "evaluationContract",
       "promotionGates",
       "hypothesisBudget",
-      "decisionVocabulary"
+      "decisionVocabulary",
+      "status",
+      "execution",
+      "evaluationLedger",
+      "features.availability.reconstructedRule",
+      "targets.primary.inflation.primaryEligibility",
+      "targets.labelAvailabilityRule",
+      "partitions.fixedCalendarCounts",
+      "evaluationContract.scoreOrdering"
     ],
-    "unchangedFields": "primary and diagnostic horizons, equity return and drawdown formulas, feature set and signs, deterministic states, fixed penalties, seed 42, confirmation dates, no-HMM rule, no-paid-data rule",
+    "unchangedFields": "12/24-month horizons, equity and drawdown formulas, feature set and signs, deterministic states, ridge/logistic penalties, fixed confirmation dates, no-HMM and no-paid-data rules; bootstrap seed 42 retained; simulation streams require separate preregistration",
     "candidateOutputExistedBeforeAmendment": false,
     "confirmationOutputOpenedBeforeAmendment": false
   },
@@ -61,7 +69,8 @@
         "labelVintage": "latest-vintage-pinned-at-ingestion",
         "method": "log-index-ratio",
         "commonDeflatorRule": "subtract-the-same-log-cpi-change-from-equity-and-cash",
-        "excessIdentity": "real-equity-minus-real-cash-equals-nominal-equity-minus-nominal-cash"
+        "excessIdentity": "real-equity-minus-real-cash-equals-nominal-equity-minus-nominal-cash",
+        "primaryEligibility": "common-deflator-cancels;CPI-levels-and-publication-do-not-gate-primary-excess-label;separate-real-leg-diagnostics-may-be-unavailable"
       }
     },
     "secondary": {
@@ -84,14 +93,14 @@
       "mayRescuePrimaryFailure": false
     },
     "endpointFallback": "use-final-scheduled-session-of-target-calendar-month",
-    "labelAvailabilityRule": "target-path-and-endpoint-must-be-complete-before-training-forecast-cutoff"
+    "labelAvailabilityRule": "primary-path-and-endpoint-availability;strictly-before-training-cutoff;CPI-release-does-not-delay-cancelled-excess-label"
   },
   "features": {
     "minimumRawHistoryMonths": 60,
     "missingValuePolicy": "candidate-row-unavailable-no-imputation",
     "availability": {
       "pointInTimeRule": "use-latest-vintage-whose-publicationTimestamp-is-at-or-before-cutoff",
-      "reconstructedRule": "diagnostic-only-never-silently-promotable"
+      "reconstructedRule": "reconstructed-ETF-market-inputs-eligible-for-historical-research-only-after-full-path-qualification;CAPE-and-NFCI-remain-diagnostic-only"
     },
     "normalization": {
       "percentileMethod": "expanding-midrank",
@@ -111,7 +120,7 @@
             "windowMonths": 60,
             "method": "exact-theil-sen-log-linear-trend-with-mad-residual-scale",
             "madConsistencyFactor": 1.4826,
-            "madFloor": 1e-9,
+            "madFloor": 1e-09,
             "economicSign": -1,
             "promotionEligible": true
           }
@@ -293,6 +302,21 @@
         "promotionRole": "baseline"
       },
       {
+        "id": "position-plus-direction",
+        "kind": "ridge-location-and-logistic-l2",
+        "returnInputs": [
+          "valuation",
+          "direction"
+        ],
+        "drawdownInputs": [
+          "valuation",
+          "direction"
+        ],
+        "ridgeAlpha": 10,
+        "logisticC": 0.1,
+        "promotionRole": "baseline"
+      },
+      {
         "id": "fixed-cycle-score",
         "kind": "training-only-score-tertile-empirical-distribution",
         "input": "cycleScore",
@@ -339,10 +363,9 @@
     "primaryLabelOverlapMonths": 12,
     "purgeMonths": 12,
     "selectionConfirmationEmbargoMonths": 12,
-    "confirmationBoundaryRule": "final-96-complete-primary-label-months-per-instrument",
+    "confirmationBoundaryRule": "literal-fixed-calendar-no-ingestion-relative-boundaries",
     "minimumConfirmationLabeledMonths": 96,
     "minimumConfirmationCalendarYears": 8,
-    "minimumEffectiveAnnualBlocks": 8,
     "confirmationHalves": 2,
     "minimumLabeledMonthsPerHalf": 48,
     "bootstrap": {
@@ -356,7 +379,29 @@
     "externalTransferInstrument": "QQQ",
     "minimumSelectionForecastsPerMode": 60,
     "qqqSelectionMetricsAllowed": false,
-    "confirmationRefitRule": "at-each-cutoff-refit-the-unchanged-algorithm-using-only-labels-mature-before-cutoff;no-human-inspection-until-immutable-report-complete"
+    "confirmationRefitRule": "at-each-cutoff-refit-the-unchanged-algorithm-using-only-labels-mature-before-cutoff;no-human-inspection-until-immutable-report-complete",
+    "fixedCalendar": {
+      "selectionEnd": "2016-06-30",
+      "selectionForecastStart": "2010-11-30",
+      "embargoStart": "2016-07-29",
+      "embargoEnd": "2017-06-30",
+      "confirmationStart": "2017-07-31",
+      "confirmationFirstHalfEnd": "2021-06-30",
+      "confirmationSecondHalfStart": "2021-07-30",
+      "confirmationEnd": "2025-07-31",
+      "selectionOriginStart": "1999-11-30",
+      "qqqOriginStart": "2006-01-31"
+    },
+    "embargoOriginTraining": "excluded-throughout-experiment",
+    "calendarAnnualBlocksAreIndependent": false,
+    "fixedCalendarCounts": {
+      "selection": 68,
+      "confirmation": 97,
+      "confirmationHalves": [
+        48,
+        49
+      ]
+    }
   },
   "promotionGates": {
     "minimumCoreFeatureCoveragePercent": 95,
@@ -393,7 +438,7 @@
     "multipleTesting": {
       "method": "holm-bonferroni",
       "familyWiseAlpha": 0.1,
-      "family": "five-SPY-primary-hypotheses"
+      "family": "two-SPY-composite-cycle-claims"
     },
     "economicPolicy": {
       "evaluateOnlyAfterPredictivePass": true,
@@ -414,10 +459,12 @@
   },
   "hypothesisBudget": {
     "developmentInstrument": "SPY",
-    "referenceModels": 1,
-    "primaryDevelopmentEvaluations": 5,
-    "externalTransferChecks": 5,
-    "totalLedgerEntries": 11,
+    "developmentEntries": 7,
+    "externalTransferChecks": 2,
+    "transferReferenceEntries": 1,
+    "totalLedgerEntries": 10,
+    "compositePrimaryClaims": 2,
+    "componentTestsPerClaim": 10,
     "optionalHmmEvaluations": 0
   },
   "decisionVocabulary": {
@@ -471,7 +518,16 @@
       "ridgeDistribution": "point-forecast-plus-centered-in-sample-training-residual-empirical-distribution",
       "residualCenter": "arithmetic-mean",
       "minimumResidualObservations": 120,
-      "quantiles": "left-continuous-empirical-inverse-cdf"
+      "quantiles": "left-continuous-empirical-inverse-cdf",
+      "standardization": "training-population-mean-and-standard-deviation;zero-variance-column-maps-to-zero",
+      "ridgeObjective": "sum-squared-errors-plus-alpha-times-sum-squared-slopes",
+      "crpsUnits": "excess-log-return",
+      "rmseScope": "predictive-mean-against-every-comparator-in-each-mode",
+      "intervalProbabilities": [
+        0.05,
+        0.5,
+        0.95
+      ]
     },
     "tertiles": {
       "quantileMethod": "linear-interpolation-equivalent-to-numpy-method-linear",
@@ -484,37 +540,57 @@
       "logisticInterceptPenalized": false,
       "minimumClassObservations": 10,
       "degenerateFoldRule": "drawdown-forecast-unavailable-and-counted-in-coverage;return-forecast-remains-eligible",
-      "secondaryMayQualifyPrimary": false
+      "secondaryMayQualifyPrimary": false,
+      "minimumDistinctEventEpisodes": 10,
+      "episodeDefinition": "connected-components-of-overlapping-positive-target-holding-intervals",
+      "supportScope": "each-evaluated-partition",
+      "insufficientSupport": "INSUFFICIENT_SUPPORT-no-policy-use",
+      "probabilityClip": 1e-06,
+      "calibrationBins": 10,
+      "calibrationBinsRule": "equal-width-on-[0,1];last-bin-includes-one",
+      "calibrationSlope": "unpenalized-logistic-event-on-logit-clipped-probability-with-intercept;nonfinite-fit-is-insufficient-support",
+      "comparisonScope": "all-five-comparators-both-modes;separate-secondary-composite-Holm-family-of-two",
+      "claimCannotRescuePrimary": true
     },
     "training": {
       "labelRule": "target-end-and-label-availability-strictly-before-forecast-cutoff",
       "rollingWindowUnit": "calendar-months",
       "purgeRule": "label-maturity-implements-the-12-month-overlap-purge;do-not-stack-a-second-row-purge",
       "causalPercentiles": "retain-expanding-history-through-forecast-cutoff;never-refit-on-outcomes",
-      "fittedTransforms": "standardizers-use-training-rows-only"
+      "fittedTransforms": "standardizers-use-training-rows-only",
+      "sourceAvailabilityScope": "primary-equity-and-cash-path;exclude-CPI-diagnostic-release"
     },
     "comparisons": {
       "reference": "unconditional-history",
       "primaryHypotheses": [
-        "volatility-conditioned-history",
-        "valuation-only",
-        "direction-only",
         "fixed-cycle-score",
         "regularized-cycle"
       ],
       "challengerBaselines": [
+        "unconditional-history",
         "volatility-conditioned-history",
         "valuation-only",
-        "direction-only"
+        "direction-only",
+        "position-plus-direction"
       ],
       "challengerMustBeatEveryBaseline": true,
-      "pairedImprovement": "reference-crps-minus-candidate-crps",
+      "pairedImprovement": "comparator-crps-minus-challenger-crps",
       "testAlternative": "mean-paired-improvement-greater-than-zero",
       "bootstrapPValue": "one-plus-null-centered-moving-block-means-at-least-observed-divided-by-resamples-plus-one",
       "confidenceInterval": "percentile-interval-of-uncentered-moving-block-means",
-      "crossModePValue": "maximum-of-expanding-and-rolling-one-sided-p-values",
-      "holmFamily": "five-SPY-primary-hypotheses",
-      "qqqPValuesAffectPromotion": false
+      "holmFamily": "two-SPY-composite-cycle-claims",
+      "qqqPValuesAffectPromotion": false,
+      "compositePValue": "maximum-over-five-comparators-and-both-modes",
+      "skippedClaimPValue": 1,
+      "sharedResamplingIndices": true,
+      "materialityScope": "each-comparator-in-both-modes-on-full-partition",
+      "halfRequirement": "strictly-positive-mean-improvement-against-every-comparator-in-both-halves-no-half-significance-test",
+      "bootstrapBlocks": "all-overlapping-contiguous-12-calendar-month-blocks;sample-block-starts-uniformly-with-replacement;concatenate-and-truncate-to-partition-length",
+      "intervalQuantiles": [
+        0.05,
+        0.95
+      ],
+      "selectionRule": "all-full-partition-return-materiality-significance-coverage-rmse-and-stability-gates;no-confirmation-halves-in-selection;score-ordering-is-a-separate-diagnostic"
     },
     "eras": {
       "selection": [
@@ -552,22 +628,49 @@
         }
       ],
       "minimumObservationsPerEra": 18,
-      "insufficientEraRule": "qualification-fails"
+      "insufficientEraRule": "qualification-fails",
+      "positiveFractionRule": "positive-era-count/evaluable-era-count>=0.67;three-eras-therefore-require-three-positive",
+      "comparatorScope": "every-comparator-in-both-modes"
     },
     "concentration": {
       "blockLengthMonths": 12,
       "alignment": "start-at-first-evaluated-forecast-in-each-partition-and-mode",
-      "benefit": "sum-of-positive-paired-crps-improvements-by-block",
-      "zeroTotalBenefitRule": "qualification-fails"
+      "benefit": "for-each-fixed-calendar-block-sum-max(comparator-crps-minus-challenger-crps,0)",
+      "zeroTotalBenefitRule": "qualification-fails",
+      "fraction": "maximum-block-benefit/divided-by-total-positive-benefit",
+      "partialFinalBlock": "included",
+      "comparatorScope": "every-comparator-in-both-modes"
     },
     "economicPolicy": {
       "rebalanceFrequency": "monthly",
       "execution": "next-scheduled-session-open",
       "holdingReturn": "next-execution-open-to-following-execution-open-total-return-with-cash-distributions",
       "weightDrift": "weights-drift-with-equity-and-cash-returns-between-rebalances",
-      "riskAdjustedMetric": "annualized-mean-monthly-excess-return-divided-by-annualized-monthly-volatility",
+      "riskAdjustedMetric": "sqrt(12)*mean(arithmetic-monthly-equity-policy-return-minus-monthly-cash-proxy-return)/sample-standard-deviation-of-that-excess-return;ddof=1;zero-volatility-is-unavailable",
       "staticBenchmark": "selection-only-weight-in-0.01-grid-minimizing-absolute-volatility-difference",
-      "overlappingAnnualLabelsAsReturnsProhibited": true
+      "overlappingAnnualLabelsAsReturnsProhibited": true,
+      "forecastTertiles": "at-each-cutoff-tertiles-of-fitted-model-training-row-predictive-means;linear-quantiles-and-same-tie-rules-as-model-bins",
+      "staticBenchmarkTieRule": "lowest-equity-weight",
+      "staticBenchmarkGrid": {
+        "minimum": 0,
+        "maximum": 1,
+        "step": 0.01
+      },
+      "benchmarks": [
+        "buy-and-hold",
+        "cash",
+        "selection-volatility-matched-static-allocation"
+      ],
+      "comparisonScope": "report-all-three-benchmarks-at-base-and-double-cost;qualification-risk-ratio-return-shortfall-and-drawdown-improvement-against-static-risk-matched-benchmark;require-positive-mean-excess-over-cash;buy-and-hold-is-contextual",
+      "turnover": "sum-absolute-target-equity-weight-minus-pretrade-drifted-equity-weight;annualize-times-12/holding-month-count",
+      "initialEquityWeight": 0,
+      "terminalLiquidation": true,
+      "returnAnnualization": "compound-wealth-ratio-to-power-12/holding-month-count-minus-one",
+      "maxDrawdown": "positive-peak-to-trough-fraction-on-monthly-wealth",
+      "downsideInput": "none;policy-uses-return-predictive-mean-only",
+      "unavailableForecast": "policy-not-qualified;do-not-impute-favorable-weight",
+      "qualification": "separate-downstream-result;never-required-to-report-historical-return-skill",
+      "cashRiskRatio": "not-defined-for-zero-excess-volatility;do-not-treat-as-zero-or-infinity"
     },
     "evidence": {
       "SPY": "reconstructed-research-only-historical-qualification-requires-later-prospective-confirmation",
@@ -577,17 +680,247 @@
       "requiredBeforeCandidateEvaluation": true,
       "scenarios": [
         "null-no-skill",
-        "minimum-useful-location-effect",
-        "minimum-useful-scale-effect"
+        "partial-null-strong-baseline-matches-cycle",
+        "usefulness-boundary-location",
+        "design-effect-location",
+        "usefulness-boundary-scale",
+        "design-effect-scale",
+        "heavy-tails",
+        "structural-break",
+        "rare-downside-episodes",
+        "missingness"
       ],
       "processes": [
-        "overlapping-12m-labels",
-        "persistent-predictors",
+        "overlapping-12m-labels-derived-from-monthly-paths",
+        "persistent-predictors-beyond-12-months",
         "clustered-volatility"
       ],
       "measure": "whole-promotion-procedure-family-wise-false-positive-rate-and-power",
       "minimumReplications": 2000,
-      "seed": 42
+      "seed": 42,
+      "status": "DESIGN_FROZEN_IMPLEMENTATION_PENDING",
+      "monteCarloInterval": "one-sided-95-percent-exact-Clopper-Pearson",
+      "maximumFalseQualificationUpperBound": 0.1,
+      "minimumPowerLowerBound": 0.8,
+      "maximumPreOutputRedesigns": 1,
+      "failedOrIndeterminateDecision": "INSUFFICIENT_EVIDENCE",
+      "realOutputPermittedOnFailure": false,
+      "requiredBeforeSimulation": [
+        "versioned-path-generators-and-feature-scope",
+        "economically-justified-numeric-design-effects-and-usefulness-boundary",
+        "locked-development-and-validation-streams",
+        "fixed-computational-budget",
+        "scenario-to-claim-acceptance-matrix"
+      ],
+      "designPath": "config/cycle1-simulation-v1.json"
+    },
+    "coverage": {
+      "denominator": "fixed-eligible-calendar-before-model-fitting",
+      "minimumPercent": 95,
+      "pairedDates": "intersection-of-challenger-and-all-five-comparators-in-both-modes",
+      "failedFold": "missing-counted-against-fixed-calendar",
+      "pairedMinimumPercent": 95,
+      "missingInternalCalendarBlock": "INVALID_EVALUATION-no-compression-of-time-for-bootstrap"
+    },
+    "reportDimensions": {
+      "validity": [
+        "VALID",
+        "INVALID_EVALUATION"
+      ],
+      "historicalReturn": [
+        "RESEARCH_QUALIFIED",
+        "NO_CYCLE_TARGET_ADEQUATE",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "downside": [
+        "QUALIFIED_SECONDARY",
+        "FAILED",
+        "INSUFFICIENT_SUPPORT",
+        "NOT_EVALUATED"
+      ],
+      "policy": [
+        "QUALIFIED_FOR_FURTHER_TESTING",
+        "FAILED",
+        "NOT_EVALUATED"
+      ],
+      "transfer": [
+        "TRANSFER_SUPPORTS",
+        "TRANSFER_DOES_NOT_SUPPORT",
+        "TRANSFER_INSUFFICIENT",
+        "NOT_RUN"
+      ],
+      "deployment": [
+        "NOT_QUALIFIED"
+      ]
+    },
+    "scoreOrdering": {
+      "role": "diagnostic-only-not-required-for-return-distribution-qualification",
+      "bins": "training-cycle-score-tertiles-at-each-fold;same-boundaries-and-ties-as-fixed-cycle-model",
+      "measurement": "mean-realized-return-by-origin-score-bin;strict-increase-and-minimum-12-per-bin",
+      "reason": "proper-distribution-skill-can-be-scale-only;mean-ordering-would-test-an-additional-location-claim"
     }
+  },
+  "evaluationLedger": [
+    {
+      "entryId": "SPY:unconditional-history",
+      "instrument": "SPY",
+      "modelId": "unconditional-history",
+      "role": "reference",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "selection",
+        "confirmation"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "entryId": "SPY:volatility-conditioned-history",
+      "instrument": "SPY",
+      "modelId": "volatility-conditioned-history",
+      "role": "baseline",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "selection",
+        "confirmation"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "entryId": "SPY:valuation-only",
+      "instrument": "SPY",
+      "modelId": "valuation-only",
+      "role": "baseline",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "selection",
+        "confirmation"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "entryId": "SPY:direction-only",
+      "instrument": "SPY",
+      "modelId": "direction-only",
+      "role": "baseline",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "selection",
+        "confirmation"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "entryId": "SPY:position-plus-direction",
+      "instrument": "SPY",
+      "modelId": "position-plus-direction",
+      "role": "baseline",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "selection",
+        "confirmation"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "entryId": "SPY:fixed-cycle-score",
+      "instrument": "SPY",
+      "modelId": "fixed-cycle-score",
+      "role": "challenger",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "selection",
+        "confirmation"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "entryId": "SPY:regularized-cycle",
+      "instrument": "SPY",
+      "modelId": "regularized-cycle",
+      "role": "challenger",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "selection",
+        "confirmation"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "entryId": "QQQ:fixed-cycle-score",
+      "instrument": "QQQ",
+      "modelId": "fixed-cycle-score",
+      "role": "transfer",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "confirmation"
+      ],
+      "requiresSpyEntry": "SPY:fixed-cycle-score",
+      "status": "CONDITIONAL",
+      "skipStatus": "SKIPPED_SPY_NOT_QUALIFIED"
+    },
+    {
+      "entryId": "QQQ:regularized-cycle",
+      "instrument": "QQQ",
+      "modelId": "regularized-cycle",
+      "role": "transfer",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "confirmation"
+      ],
+      "requiresSpyEntry": "SPY:regularized-cycle",
+      "status": "CONDITIONAL",
+      "skipStatus": "SKIPPED_SPY_NOT_QUALIFIED"
+    },
+    {
+      "entryId": "QQQ:unconditional-history",
+      "instrument": "QQQ",
+      "modelId": "unconditional-history",
+      "role": "transfer-reference",
+      "modes": [
+        "expanding",
+        "rolling"
+      ],
+      "partitions": [
+        "confirmation"
+      ],
+      "status": "CONDITIONAL",
+      "skipStatus": "SKIPPED_NO_SPY_SURVIVOR"
+    }
+  ],
+  "execution": {
+    "allowedMode": "contract-only",
+    "realCandidateEvaluationAllowed": false,
+    "datasetBuildAllowed": false,
+    "confirmationOpeningAllowed": false,
+    "powerApproval": "NOT_RUN",
+    "requiredDatasetIdentity": "UNQUALIFIED",
+    "sourceAuditPath": "config/cycle1-source-audit-v4-draft.json"
   }
 }

@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "auditId",
+    "status",
+    "preregistrationSchemaVersion",
+    "preregistrationHash",
+    "containsModelOutput",
+    "paidSubscriptionRequired",
+    "redistributeRawData",
+    "baseAudit",
+    "coreMacroSeries",
+    "cashProxy",
+    "archiveReuse",
+    "instrumentRoles",
+    "fixedCalendar",
+    "evidencePolicy",
+    "auditHash"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "cycle1-source-audit-v4-draft"
+    },
+    "auditId": {
+      "const": "CYCLE-ASYMMETRY-001-SOURCE-AUDIT-V4-PROPOSAL-2026-09-08"
+    },
+    "status": {
+      "const": "PROPOSED_NO_ACQUISITION_OR_EVALUATION"
+    },
+    "preregistrationSchemaVersion": {
+      "const": "cycle1-preregistration-v5"
+    },
+    "preregistrationHash": {
+      "const": "74a486ed3c65bfb116ca28eca06c831dbce213bbafe08396310a3677b51ebeda"
+    },
+    "containsModelOutput": {
+      "const": false
+    },
+    "paidSubscriptionRequired": {
+      "const": false
+    },
+    "redistributeRawData": {
+      "const": false
+    },
+    "baseAudit": {
+      "type": "object",
+      "required": [
+        "path",
+        "auditHash"
+      ],
+      "properties": {
+        "path": {
+          "const": "config/cycle1-source-audit-v3.json"
+        },
+        "auditHash": {
+          "const": "80a80d252c65abe9b13a8533e6d5ad23d65e68e3df993ab2734594c5ab8f3a90"
+        }
+      },
+      "additionalProperties": false
+    },
+    "coreMacroSeries": {
+      "const": [
+        "CPIAUCSL",
+        "INDPRO",
+        "MPRIME",
+        "GS3M"
+      ]
+    },
+    "cashProxy": {
+      "type": "object",
+      "required": [
+        "seriesId",
+        "interpretation",
+        "availability",
+        "qualification"
+      ],
+      "properties": {
+        "seriesId": {
+          "const": "GS3M"
+        },
+        "interpretation": {
+          "const": "modeled-monthly-cash-accrual-not-investable-total-return"
+        },
+        "availability": {
+          "const": "vintage-publication-strictly-before-each-holding-start;date-only-publications-conservative-end-of-day"
+        },
+        "qualification": {
+          "const": "every-internal-holding-period-required;not-yet-qualified"
+        }
+      },
+      "additionalProperties": false
+    },
+    "archiveReuse": {
+      "type": "object",
+      "required": [
+        "sourceAuditHash",
+        "rawRoot",
+        "manualQqqSnapshotPath",
+        "rule",
+        "migrationAllowed",
+        "independentBackupRestore"
+      ],
+      "properties": {
+        "sourceAuditHash": {
+          "const": "80a80d252c65abe9b13a8533e6d5ad23d65e68e3df993ab2734594c5ab8f3a90"
+        },
+        "rawRoot": {
+          "const": "datasets/cycle1/raw/80a80d252c65abe9"
+        },
+        "manualQqqSnapshotPath": {
+          "const": "datasets/cycle1/manual-sources/invesco-qqq-distributions.csv"
+        },
+        "rule": {
+          "const": "verify-each-resource-against-pinned-manifest-hash-before-reference;no-copy-to-new-audit-root-or-reacquisition"
+        },
+        "migrationAllowed": {
+          "const": false
+        },
+        "independentBackupRestore": {
+          "const": "NOT_VERIFIED"
+        }
+      },
+      "additionalProperties": false
+    },
+    "instrumentRoles": {
+      "type": "object",
+      "required": [
+        "development",
+        "externalTransfer"
+      ],
+      "properties": {
+        "development": {
+          "type": "object",
+          "required": [
+            "instrument",
+            "selectionEligible",
+            "independentlyPromotable"
+          ],
+          "properties": {
+            "instrument": {
+              "const": "SPY"
+            },
+            "selectionEligible": {
+              "const": true
+            },
+            "independentlyPromotable": {
+              "const": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "externalTransfer": {
+          "type": "object",
+          "required": [
+            "instrument",
+            "selectionEligible",
+            "independentlyPromotable",
+            "rule"
+          ],
+          "properties": {
+            "instrument": {
+              "const": "QQQ"
+            },
+            "selectionEligible": {
+              "const": false
+            },
+            "independentlyPromotable": {
+              "const": false
+            },
+            "rule": {
+              "const": "apply-SPY-frozen-transforms-models-and-gates-without-QQQ-retuning"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "fixedCalendar": {
+      "type": "object",
+      "required": [
+        "selectionEnd",
+        "selectionForecastStart",
+        "embargoStart",
+        "embargoEnd",
+        "confirmationStart",
+        "confirmationFirstHalfEnd",
+        "confirmationSecondHalfStart",
+        "confirmationEnd",
+        "selectionOriginStart",
+        "qqqOriginStart"
+      ],
+      "properties": {
+        "selectionEnd": {
+          "const": "2016-06-30"
+        },
+        "selectionForecastStart": {
+          "const": "2010-11-30"
+        },
+        "embargoStart": {
+          "const": "2016-07-29"
+        },
+        "embargoEnd": {
+          "const": "2017-06-30"
+        },
+        "confirmationStart": {
+          "const": "2017-07-31"
+        },
+        "confirmationFirstHalfEnd": {
+          "const": "2021-06-30"
+        },
+        "confirmationSecondHalfStart": {
+          "const": "2021-07-30"
+        },
+        "confirmationEnd": {
+          "const": "2025-07-31"
+        },
+        "selectionOriginStart": {
+          "const": "1999-11-30"
+        },
+        "qqqOriginStart": {
+          "const": "2006-01-31"
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidencePolicy": {
+      "type": "object",
+      "required": [
+        "historicalEtf",
+        "historicalQualification",
+        "deploymentQualified",
+        "diagnostics",
+        "inheritedExclusions"
+      ],
+      "properties": {
+        "historicalEtf": {
+          "const": "RECONSTRUCTED_RESEARCH_ONLY"
+        },
+        "historicalQualification": {
+          "const": "conditional-on-power-and-full-path-dataset-qualification"
+        },
+        "deploymentQualified": {
+          "const": false
+        },
+        "diagnostics": {
+          "const": [
+            "NFCI",
+            "SHILLER_IE_DATA_CAPE",
+            "DGS3MO"
+          ]
+        },
+        "inheritedExclusions": {
+          "const": "unchanged-base-audit-chain"
+        }
+      },
+      "additionalProperties": false
+    },
+    "auditHash": {
+      "const": "e0728302088de54c57080bc6837f9e084bf0c941cc554323c451eabfe1870886"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,2303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cycle 1 v5 closed scientific proposal",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "experimentId",
+    "status",
+    "amendment",
+    "attribution",
+    "instruments",
+    "decisionFrequency",
+    "targets",
+    "features",
+    "states",
+    "models",
+    "partitions",
+    "promotionGates",
+    "hypothesisBudget",
+    "decisionVocabulary",
+    "prohibitions",
+    "instrumentRoles",
+    "evaluationContract",
+    "evaluationLedger",
+    "execution"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "cycle1-preregistration-v5"
+    },
+    "experimentId": {
+      "const": "CYCLE-ASYMMETRY-001"
+    },
+    "status": {
+      "const": "proposed-synthetic-only"
+    },
+    "amendment": {
+      "type": "object",
+      "required": [
+        "supersedesSchemaVersion",
+        "reason",
+        "changedFields",
+        "unchangedFields",
+        "candidateOutputExistedBeforeAmendment",
+        "confirmationOutputOpenedBeforeAmendment"
+      ],
+      "properties": {
+        "supersedesSchemaVersion": {
+          "const": "cycle1-preregistration-v4"
+        },
+        "reason": {
+          "const": "Pre-output amendment: GS3M cash proxy, SPY development and QQQ transfer, five stronger comparators, two composite cycle claims, fixed partitions, separate forecast/downside/policy decisions, and mandatory whole-procedure synthetic power evidence."
+        },
+        "changedFields": {
+          "const": [
+            "targets.primary.cashReturn",
+            "instrumentRoles",
+            "models",
+            "partitions",
+            "evaluationContract",
+            "promotionGates",
+            "hypothesisBudget",
+            "decisionVocabulary",
+            "status",
+            "execution",
+            "evaluationLedger",
+            "features.availability.reconstructedRule",
+            "targets.primary.inflation.primaryEligibility",
+            "targets.labelAvailabilityRule",
+            "partitions.fixedCalendarCounts",
+            "evaluationContract.scoreOrdering"
+          ]
+        },
+        "unchangedFields": {
+          "const": "12/24-month horizons, equity and drawdown formulas, feature set and signs, deterministic states, ridge/logistic penalties, fixed confirmation dates, no-HMM and no-paid-data rules; bootstrap seed 42 retained; simulation streams require separate preregistration"
+        },
+        "candidateOutputExistedBeforeAmendment": {
+          "const": false
+        },
+        "confirmationOutputOpenedBeforeAmendment": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "attribution": {
+      "type": "object",
+      "required": [
+        "modelDescription",
+        "proprietaryModelClaimed"
+      ],
+      "properties": {
+        "modelDescription": {
+          "const": "Independent quantitative cycle-asymmetry formalization inspired by public cycle-investing concepts."
+        },
+        "proprietaryModelClaimed": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "instruments": {
+      "const": [
+        "SPY",
+        "QQQ"
+      ]
+    },
+    "decisionFrequency": {
+      "type": "object",
+      "required": [
+        "frequency",
+        "calendar",
+        "timezone",
+        "snapshotSessionRule",
+        "snapshotCutoff",
+        "recordAvailabilityRule",
+        "earliestPolicyExecution"
+      ],
+      "properties": {
+        "frequency": {
+          "const": "monthly"
+        },
+        "calendar": {
+          "const": "XNYS"
+        },
+        "timezone": {
+          "const": "America/New_York"
+        },
+        "snapshotSessionRule": {
+          "const": "final-scheduled-equity-session-of-calendar-month"
+        },
+        "snapshotCutoff": {
+          "const": "scheduled-session-close"
+        },
+        "recordAvailabilityRule": {
+          "const": "publicationTimestamp<=snapshotCutoff"
+        },
+        "earliestPolicyExecution": {
+          "const": "next-scheduled-session-open"
+        }
+      },
+      "additionalProperties": false
+    },
+    "targets": {
+      "type": "object",
+      "required": [
+        "primary",
+        "secondary",
+        "diagnostic",
+        "endpointFallback",
+        "labelAvailabilityRule"
+      ],
+      "properties": {
+        "primary": {
+          "type": "object",
+          "required": [
+            "id",
+            "horizonMonths",
+            "promotionEligible",
+            "startEndpoint",
+            "endEndpoint",
+            "equityReturn",
+            "cashReturn",
+            "inflation"
+          ],
+          "properties": {
+            "id": {
+              "const": "forward-real-excess-total-return-12m"
+            },
+            "horizonMonths": {
+              "const": 12
+            },
+            "promotionEligible": {
+              "const": true
+            },
+            "startEndpoint": {
+              "const": "snapshot-session-total-return-close"
+            },
+            "endEndpoint": {
+              "const": "final-scheduled-session-total-return-close-of-calendar-month-plus-12"
+            },
+            "equityReturn": {
+              "type": "object",
+              "required": [
+                "method",
+                "splitTreatment",
+                "dividendTreatment"
+              ],
+              "properties": {
+                "method": {
+                  "const": "log-total-return-index-ratio"
+                },
+                "splitTreatment": {
+                  "const": "split-adjusted"
+                },
+                "dividendTreatment": {
+                  "const": "cash-distribution-reinvested-on-ex-date-at-split-adjusted-close"
+                }
+              },
+              "additionalProperties": false
+            },
+            "cashReturn": {
+              "type": "object",
+              "required": [
+                "seriesId",
+                "frequency",
+                "method",
+                "rateSelection",
+                "dayCount",
+                "formula"
+              ],
+              "properties": {
+                "seriesId": {
+                  "const": "GS3M"
+                },
+                "frequency": {
+                  "const": "monthly"
+                },
+                "method": {
+                  "const": "monthly-rolled-simple-accrual-log-return"
+                },
+                "rateSelection": {
+                  "const": "latest-observation-month-whose-vintage-was-published-strictly-before-each-monthly-holding-period-start"
+                },
+                "dayCount": {
+                  "const": "actual-365"
+                },
+                "formula": {
+                  "const": "sum(log(1+(annualPercent/100)*actualDays/365))"
+                }
+              },
+              "additionalProperties": false
+            },
+            "inflation": {
+              "type": "object",
+              "required": [
+                "seriesId",
+                "labelVintage",
+                "method",
+                "commonDeflatorRule",
+                "excessIdentity",
+                "primaryEligibility"
+              ],
+              "properties": {
+                "seriesId": {
+                  "const": "CPIAUCSL"
+                },
+                "labelVintage": {
+                  "const": "latest-vintage-pinned-at-ingestion"
+                },
+                "method": {
+                  "const": "log-index-ratio"
+                },
+                "commonDeflatorRule": {
+                  "const": "subtract-the-same-log-cpi-change-from-equity-and-cash"
+                },
+                "excessIdentity": {
+                  "const": "real-equity-minus-real-cash-equals-nominal-equity-minus-nominal-cash"
+                },
+                "primaryEligibility": {
+                  "const": "common-deflator-cancels;CPI-levels-and-publication-do-not-gate-primary-excess-label;separate-real-leg-diagnostics-may-be-unavailable"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "secondary": {
+          "type": "object",
+          "required": [
+            "id",
+            "horizonMonths",
+            "promotionEligible",
+            "pathFrequency",
+            "pathStart",
+            "pathEnd",
+            "runningPeakIncludesStart",
+            "formula",
+            "eventOperator",
+            "eventThreshold"
+          ],
+          "properties": {
+            "id": {
+              "const": "forward-maximum-drawdown-12m"
+            },
+            "horizonMonths": {
+              "const": 12
+            },
+            "promotionEligible": {
+              "const": false
+            },
+            "pathFrequency": {
+              "const": "daily-session-close"
+            },
+            "pathStart": {
+              "const": "snapshot-session-total-return-close"
+            },
+            "pathEnd": {
+              "const": "primary-target-endpoint-inclusive"
+            },
+            "runningPeakIncludesStart": {
+              "const": true
+            },
+            "formula": {
+              "const": "min(level/maximum(levels-from-start-through-current)-1)"
+            },
+            "eventOperator": {
+              "const": "<="
+            },
+            "eventThreshold": {
+              "const": -0.2
+            }
+          },
+          "additionalProperties": false
+        },
+        "diagnostic": {
+          "type": "object",
+          "required": [
+            "id",
+            "horizonMonths",
+            "promotionEligible",
+            "formula",
+            "mayRescuePrimaryFailure"
+          ],
+          "properties": {
+            "id": {
+              "const": "forward-real-excess-total-return-24m"
+            },
+            "horizonMonths": {
+              "const": 24
+            },
+            "promotionEligible": {
+              "const": false
+            },
+            "formula": {
+              "const": "primary-target-formula-with-24-month-endpoint"
+            },
+            "mayRescuePrimaryFailure": {
+              "const": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "endpointFallback": {
+          "const": "use-final-scheduled-session-of-target-calendar-month"
+        },
+        "labelAvailabilityRule": {
+          "const": "primary-path-and-endpoint-availability;strictly-before-training-cutoff;CPI-release-does-not-delay-cancelled-excess-label"
+        }
+      },
+      "additionalProperties": false
+    },
+    "features": {
+      "type": "object",
+      "required": [
+        "minimumRawHistoryMonths",
+        "missingValuePolicy",
+        "availability",
+        "normalization",
+        "dimensions",
+        "dimensionAggregation",
+        "cycleScoreAggregation"
+      ],
+      "properties": {
+        "minimumRawHistoryMonths": {
+          "const": 60
+        },
+        "missingValuePolicy": {
+          "const": "candidate-row-unavailable-no-imputation"
+        },
+        "availability": {
+          "type": "object",
+          "required": [
+            "pointInTimeRule",
+            "reconstructedRule"
+          ],
+          "properties": {
+            "pointInTimeRule": {
+              "const": "use-latest-vintage-whose-publicationTimestamp-is-at-or-before-cutoff"
+            },
+            "reconstructedRule": {
+              "const": "reconstructed-ETF-market-inputs-eligible-for-historical-research-only-after-full-path-qualification;CAPE-and-NFCI-remain-diagnostic-only"
+            }
+          },
+          "additionalProperties": false
+        },
+        "normalization": {
+          "type": "object",
+          "required": [
+            "percentileMethod",
+            "percentileMinimumHistoryMonths",
+            "percentileFormula",
+            "fitScope",
+            "clipMinimum",
+            "clipMaximum"
+          ],
+          "properties": {
+            "percentileMethod": {
+              "const": "expanding-midrank"
+            },
+            "percentileMinimumHistoryMonths": {
+              "const": 24
+            },
+            "percentileFormula": {
+              "const": "2*((countLess+0.5*countEqual)/count)-1"
+            },
+            "fitScope": {
+              "const": "available-history-through-cutoff-within-fold"
+            },
+            "clipMinimum": {
+              "const": -1
+            },
+            "clipMaximum": {
+              "const": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "dimensions": {
+          "type": "object",
+          "required": [
+            "valuation",
+            "stress",
+            "direction"
+          ],
+          "properties": {
+            "valuation": {
+              "type": "object",
+              "required": [
+                "weight",
+                "features",
+                "diagnostics"
+              ],
+              "properties": {
+                "weight": {
+                  "const": 1
+                },
+                "features": {
+                  "const": [
+                    {
+                      "id": "real-price-trend-deviation",
+                      "source": "instrument-total-return-index-deflated-by-cpi",
+                      "windowMonths": 60,
+                      "method": "exact-theil-sen-log-linear-trend-with-mad-residual-scale",
+                      "madConsistencyFactor": 1.4826,
+                      "madFloor": 1e-09,
+                      "economicSign": -1,
+                      "promotionEligible": true
+                    }
+                  ]
+                },
+                "diagnostics": {
+                  "const": [
+                    {
+                      "id": "shiller-cape-expanding-percentile",
+                      "source": "SHILLER_IE_DATA_CAPE",
+                      "economicSign": -1,
+                      "promotionEligible": false,
+                      "reason": "publication history is reconstructed unless the source audit proves otherwise"
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "stress": {
+              "type": "object",
+              "required": [
+                "weight",
+                "features",
+                "diagnostics"
+              ],
+              "properties": {
+                "weight": {
+                  "const": 1
+                },
+                "features": {
+                  "const": [
+                    {
+                      "id": "bank-prime-minus-treasury-credit-spread",
+                      "sources": [
+                        "MPRIME",
+                        "GS3M"
+                      ],
+                      "alignment": "latest-common-observation-month-whose-both-vintages-were-published-by-cutoff",
+                      "formula": "MPRIME_t-GS3M_t",
+                      "transform": "percentage-point-spread-level",
+                      "economicSign": 1,
+                      "promotionEligible": true
+                    },
+                    {
+                      "id": "realized-volatility-3m",
+                      "source": "instrument-daily-total-return",
+                      "windowMonths": 3,
+                      "annualizationSessions": 252,
+                      "economicSign": 1,
+                      "promotionEligible": true
+                    },
+                    {
+                      "id": "drawdown-from-trailing-high-12m",
+                      "source": "instrument-daily-total-return-index",
+                      "windowMonths": 12,
+                      "transform": "positive-drawdown-magnitude",
+                      "economicSign": 1,
+                      "promotionEligible": true
+                    }
+                  ]
+                },
+                "diagnostics": {
+                  "const": [
+                    {
+                      "id": "national-financial-conditions-index",
+                      "source": "NFCI",
+                      "economicSign": 1,
+                      "promotionEligible": false,
+                      "reason": "first ALFRED vintage is 2011-05-25 and cannot satisfy the frozen 228-row validation gate"
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "direction": {
+              "type": "object",
+              "required": [
+                "weight",
+                "features"
+              ],
+              "properties": {
+                "weight": {
+                  "const": 1
+                },
+                "features": {
+                  "const": [
+                    {
+                      "id": "momentum-6m",
+                      "source": "instrument-month-end-total-return-index",
+                      "windowMonths": 6,
+                      "transform": "log-return",
+                      "economicSign": 1,
+                      "promotionEligible": true
+                    },
+                    {
+                      "id": "momentum-12m",
+                      "source": "instrument-month-end-total-return-index",
+                      "windowMonths": 12,
+                      "transform": "log-return",
+                      "economicSign": 1,
+                      "promotionEligible": true
+                    },
+                    {
+                      "id": "price-versus-moving-average-10m",
+                      "source": "instrument-real-month-end-total-return-index",
+                      "windowMonths": 10,
+                      "transform": "log-level-minus-log-arithmetic-moving-average",
+                      "economicSign": 1,
+                      "promotionEligible": true
+                    },
+                    {
+                      "id": "bank-prime-minus-treasury-credit-spread-change-3m",
+                      "source": "bank-prime-minus-treasury-credit-spread",
+                      "windowMonths": 3,
+                      "formula": "spread_t-spread_t_minus_3_months",
+                      "transform": "current-minus-lagged",
+                      "economicSign": -1,
+                      "promotionEligible": true
+                    },
+                    {
+                      "id": "industrial-production-growth-6m",
+                      "source": "INDPRO",
+                      "windowMonths": 6,
+                      "transform": "log-change",
+                      "economicSign": 1,
+                      "promotionEligible": true
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "dimensionAggregation": {
+          "const": "equal-weight-arithmetic-mean-of-available-preregistered-features-require-all"
+        },
+        "cycleScoreAggregation": {
+          "const": "equal-weight-arithmetic-mean-of-three-dimension-scores"
+        }
+      },
+      "additionalProperties": false
+    },
+    "states": {
+      "type": "object",
+      "required": [
+        "scoreRange",
+        "thresholds",
+        "precedence",
+        "rules"
+      ],
+      "properties": {
+        "scoreRange": {
+          "const": [
+            -1,
+            1
+          ]
+        },
+        "thresholds": {
+          "type": "object",
+          "required": [
+            "cheapValuationMinimum",
+            "expensiveValuationMaximum",
+            "highStressMinimum",
+            "easyStressMaximum",
+            "positiveDirectionMinimum",
+            "weakDirectionMaximum",
+            "stressChangeMagnitude",
+            "formerlyExpensiveLookbackMonths"
+          ],
+          "properties": {
+            "cheapValuationMinimum": {
+              "const": 0.5
+            },
+            "expensiveValuationMaximum": {
+              "const": -0.5
+            },
+            "highStressMinimum": {
+              "const": 0.5
+            },
+            "easyStressMaximum": {
+              "const": -0.5
+            },
+            "positiveDirectionMinimum": {
+              "const": 0.25
+            },
+            "weakDirectionMaximum": {
+              "const": -0.25
+            },
+            "stressChangeMagnitude": {
+              "const": 0.25
+            },
+            "formerlyExpensiveLookbackMonths": {
+              "const": 12
+            }
+          },
+          "additionalProperties": false
+        },
+        "precedence": {
+          "const": [
+            "EUPHORIA",
+            "EARLY_RECOVERY",
+            "CRISIS",
+            "CORRECTION",
+            "GREED",
+            "NORMAL"
+          ]
+        },
+        "rules": {
+          "type": "object",
+          "required": [
+            "EUPHORIA",
+            "EARLY_RECOVERY",
+            "CRISIS",
+            "CORRECTION",
+            "GREED",
+            "NORMAL"
+          ],
+          "properties": {
+            "EUPHORIA": {
+              "const": "expensive-and-easy-stress-and-positive-direction"
+            },
+            "EARLY_RECOVERY": {
+              "const": "cheap-and-high-stress-and-stress-declining-and-positive-direction"
+            },
+            "CRISIS": {
+              "const": "cheap-and-high-stress-and-weak-direction"
+            },
+            "CORRECTION": {
+              "const": "currently-or-formerly-expensive-and-direction-weak-or-stress-rising"
+            },
+            "GREED": {
+              "const": "expensive-and-positive-direction"
+            },
+            "NORMAL": {
+              "const": "fallback"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "models": {
+      "type": "object",
+      "required": [
+        "perInstrument",
+        "preprocessing",
+        "hyperparameterSearch",
+        "hmmIncluded",
+        "randomSeeds",
+        "evaluationRoles"
+      ],
+      "properties": {
+        "perInstrument": {
+          "const": [
+            {
+              "id": "unconditional-history",
+              "kind": "empirical-distribution",
+              "minimumObservations": 120,
+              "promotionRole": "reference"
+            },
+            {
+              "id": "volatility-conditioned-history",
+              "kind": "training-only-feature-tertile-empirical-distribution",
+              "input": "realized-volatility-3m",
+              "binCount": 3,
+              "minimumBinObservations": 20,
+              "promotionRole": "baseline"
+            },
+            {
+              "id": "valuation-only",
+              "kind": "ridge-location-and-logistic-l2",
+              "returnInputs": [
+                "valuation"
+              ],
+              "drawdownInputs": [
+                "valuation"
+              ],
+              "ridgeAlpha": 10,
+              "logisticC": 0.1,
+              "promotionRole": "baseline"
+            },
+            {
+              "id": "direction-only",
+              "kind": "ridge-location-and-logistic-l2",
+              "returnInputs": [
+                "direction"
+              ],
+              "drawdownInputs": [
+                "direction"
+              ],
+              "ridgeAlpha": 10,
+              "logisticC": 0.1,
+              "promotionRole": "baseline"
+            },
+            {
+              "id": "position-plus-direction",
+              "kind": "ridge-location-and-logistic-l2",
+              "returnInputs": [
+                "valuation",
+                "direction"
+              ],
+              "drawdownInputs": [
+                "valuation",
+                "direction"
+              ],
+              "ridgeAlpha": 10,
+              "logisticC": 0.1,
+              "promotionRole": "baseline"
+            },
+            {
+              "id": "fixed-cycle-score",
+              "kind": "training-only-score-tertile-empirical-distribution",
+              "input": "cycleScore",
+              "binCount": 3,
+              "minimumBinObservations": 20,
+              "promotionRole": "challenger"
+            },
+            {
+              "id": "regularized-cycle",
+              "kind": "ridge-location-and-logistic-l2",
+              "returnInputs": [
+                "valuation",
+                "stress",
+                "direction"
+              ],
+              "drawdownInputs": [
+                "valuation",
+                "stress",
+                "direction"
+              ],
+              "ridgeAlpha": 10,
+              "logisticC": 0.1,
+              "promotionRole": "challenger"
+            }
+          ]
+        },
+        "preprocessing": {
+          "const": "fit-within-each-training-fold-only"
+        },
+        "hyperparameterSearch": {
+          "const": "none"
+        },
+        "hmmIncluded": {
+          "const": false
+        },
+        "randomSeeds": {
+          "const": [
+            42
+          ]
+        },
+        "evaluationRoles": {
+          "type": "object",
+          "required": [
+            "SPY",
+            "QQQ"
+          ],
+          "properties": {
+            "SPY": {
+              "const": "fit-and-evaluate-on-selection-then-open-confirmation-once"
+            },
+            "QQQ": {
+              "const": "apply-SPY-frozen-fitted-specification-as-external-transfer-with-QQQ-unconditional-reference-and-no-retuning"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "partitions": {
+      "type": "object",
+      "required": [
+        "modes",
+        "minimumTrainingMonths",
+        "rollingWindowMonths",
+        "primaryLabelOverlapMonths",
+        "purgeMonths",
+        "selectionConfirmationEmbargoMonths",
+        "confirmationBoundaryRule",
+        "minimumConfirmationLabeledMonths",
+        "minimumConfirmationCalendarYears",
+        "confirmationHalves",
+        "minimumLabeledMonthsPerHalf",
+        "bootstrap",
+        "developmentInstrument",
+        "externalTransferInstrument",
+        "minimumSelectionForecastsPerMode",
+        "qqqSelectionMetricsAllowed",
+        "confirmationRefitRule",
+        "fixedCalendar",
+        "embargoOriginTraining",
+        "calendarAnnualBlocksAreIndependent",
+        "fixedCalendarCounts"
+      ],
+      "properties": {
+        "modes": {
+          "const": [
+            "expanding",
+            "rolling"
+          ]
+        },
+        "minimumTrainingMonths": {
+          "const": 120
+        },
+        "rollingWindowMonths": {
+          "const": 180
+        },
+        "primaryLabelOverlapMonths": {
+          "const": 12
+        },
+        "purgeMonths": {
+          "const": 12
+        },
+        "selectionConfirmationEmbargoMonths": {
+          "const": 12
+        },
+        "confirmationBoundaryRule": {
+          "const": "literal-fixed-calendar-no-ingestion-relative-boundaries"
+        },
+        "minimumConfirmationLabeledMonths": {
+          "const": 96
+        },
+        "minimumConfirmationCalendarYears": {
+          "const": 8
+        },
+        "confirmationHalves": {
+          "const": 2
+        },
+        "minimumLabeledMonthsPerHalf": {
+          "const": 48
+        },
+        "bootstrap": {
+          "type": "object",
+          "required": [
+            "method",
+            "blockLengthMonths",
+            "resamples",
+            "confidenceLevel",
+            "seed"
+          ],
+          "properties": {
+            "method": {
+              "const": "moving-block"
+            },
+            "blockLengthMonths": {
+              "const": 12
+            },
+            "resamples": {
+              "const": 10000
+            },
+            "confidenceLevel": {
+              "const": 0.9
+            },
+            "seed": {
+              "const": 42
+            }
+          },
+          "additionalProperties": false
+        },
+        "developmentInstrument": {
+          "const": "SPY"
+        },
+        "externalTransferInstrument": {
+          "const": "QQQ"
+        },
+        "minimumSelectionForecastsPerMode": {
+          "const": 60
+        },
+        "qqqSelectionMetricsAllowed": {
+          "const": false
+        },
+        "confirmationRefitRule": {
+          "const": "at-each-cutoff-refit-the-unchanged-algorithm-using-only-labels-mature-before-cutoff;no-human-inspection-until-immutable-report-complete"
+        },
+        "fixedCalendar": {
+          "type": "object",
+          "required": [
+            "selectionEnd",
+            "selectionForecastStart",
+            "embargoStart",
+            "embargoEnd",
+            "confirmationStart",
+            "confirmationFirstHalfEnd",
+            "confirmationSecondHalfStart",
+            "confirmationEnd",
+            "selectionOriginStart",
+            "qqqOriginStart"
+          ],
+          "properties": {
+            "selectionEnd": {
+              "const": "2016-06-30"
+            },
+            "selectionForecastStart": {
+              "const": "2010-11-30"
+            },
+            "embargoStart": {
+              "const": "2016-07-29"
+            },
+            "embargoEnd": {
+              "const": "2017-06-30"
+            },
+            "confirmationStart": {
+              "const": "2017-07-31"
+            },
+            "confirmationFirstHalfEnd": {
+              "const": "2021-06-30"
+            },
+            "confirmationSecondHalfStart": {
+              "const": "2021-07-30"
+            },
+            "confirmationEnd": {
+              "const": "2025-07-31"
+            },
+            "selectionOriginStart": {
+              "const": "1999-11-30"
+            },
+            "qqqOriginStart": {
+              "const": "2006-01-31"
+            }
+          },
+          "additionalProperties": false
+        },
+        "embargoOriginTraining": {
+          "const": "excluded-throughout-experiment"
+        },
+        "calendarAnnualBlocksAreIndependent": {
+          "const": false
+        },
+        "fixedCalendarCounts": {
+          "type": "object",
+          "required": [
+            "selection",
+            "confirmation",
+            "confirmationHalves"
+          ],
+          "properties": {
+            "selection": {
+              "const": 68
+            },
+            "confirmation": {
+              "const": 97
+            },
+            "confirmationHalves": {
+              "const": [
+                48,
+                49
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "promotionGates": {
+      "type": "object",
+      "required": [
+        "minimumCoreFeatureCoveragePercent",
+        "returnDistribution",
+        "drawdown",
+        "monotonicity",
+        "stability",
+        "multipleTesting",
+        "economicPolicy"
+      ],
+      "properties": {
+        "minimumCoreFeatureCoveragePercent": {
+          "const": 95
+        },
+        "returnDistribution": {
+          "type": "object",
+          "required": [
+            "primaryMetric",
+            "minimumRelativeImprovement",
+            "minimumAbsoluteImprovement",
+            "maximumRmseDegradation",
+            "requireBothWalkForwardModes",
+            "requireBothConfirmationHalves",
+            "bootstrapLowerBoundMustExceed"
+          ],
+          "properties": {
+            "primaryMetric": {
+              "const": "crps"
+            },
+            "minimumRelativeImprovement": {
+              "const": 0.02
+            },
+            "minimumAbsoluteImprovement": {
+              "const": 0.001
+            },
+            "maximumRmseDegradation": {
+              "const": 0.005
+            },
+            "requireBothWalkForwardModes": {
+              "const": true
+            },
+            "requireBothConfirmationHalves": {
+              "const": true
+            },
+            "bootstrapLowerBoundMustExceed": {
+              "const": 0.0001
+            }
+          },
+          "additionalProperties": false
+        },
+        "drawdown": {
+          "type": "object",
+          "required": [
+            "primaryMetric",
+            "minimumAbsoluteBrierImprovement",
+            "maximumLogLossDegradation",
+            "maximumExpectedCalibrationError",
+            "minimumCalibrationSlope",
+            "maximumCalibrationSlope"
+          ],
+          "properties": {
+            "primaryMetric": {
+              "const": "brier"
+            },
+            "minimumAbsoluteBrierImprovement": {
+              "const": 0.01
+            },
+            "maximumLogLossDegradation": {
+              "const": 0.01
+            },
+            "maximumExpectedCalibrationError": {
+              "const": 0.1
+            },
+            "minimumCalibrationSlope": {
+              "const": 0.5
+            },
+            "maximumCalibrationSlope": {
+              "const": 1.5
+            }
+          },
+          "additionalProperties": false
+        },
+        "monotonicity": {
+          "type": "object",
+          "required": [
+            "groups",
+            "minimumObservationsPerGroup",
+            "returnOrdering",
+            "drawdownProbabilityOrdering"
+          ],
+          "properties": {
+            "groups": {
+              "const": 3
+            },
+            "minimumObservationsPerGroup": {
+              "const": 12
+            },
+            "returnOrdering": {
+              "const": "strictly-increasing-with-cycle-score"
+            },
+            "drawdownProbabilityOrdering": {
+              "const": "diagnostic-non-increasing-with-cycle-score-not-required-for-return-qualification"
+            }
+          },
+          "additionalProperties": false
+        },
+        "stability": {
+          "type": "object",
+          "required": [
+            "minimumEvaluableEras",
+            "minimumPositiveEraFraction",
+            "maximumRelativeLossDegradationAnyEra",
+            "maximumSingleBlockBenefitFraction",
+            "minimumObservationsPerEra"
+          ],
+          "properties": {
+            "minimumEvaluableEras": {
+              "const": 3
+            },
+            "minimumPositiveEraFraction": {
+              "const": 0.67
+            },
+            "maximumRelativeLossDegradationAnyEra": {
+              "const": 0.02
+            },
+            "maximumSingleBlockBenefitFraction": {
+              "const": 0.5
+            },
+            "minimumObservationsPerEra": {
+              "const": 18
+            }
+          },
+          "additionalProperties": false
+        },
+        "multipleTesting": {
+          "type": "object",
+          "required": [
+            "method",
+            "familyWiseAlpha",
+            "family"
+          ],
+          "properties": {
+            "method": {
+              "const": "holm-bonferroni"
+            },
+            "familyWiseAlpha": {
+              "const": 0.1
+            },
+            "family": {
+              "const": "two-SPY-composite-cycle-claims"
+            }
+          },
+          "additionalProperties": false
+        },
+        "economicPolicy": {
+          "type": "object",
+          "required": [
+            "evaluateOnlyAfterPredictivePass",
+            "equityWeightsByForecastTertile",
+            "oneWayTransactionCostBps",
+            "stressCostMultiplier",
+            "maximumAnnualTurnover",
+            "minimumRiskAdjustedTradeoffImprovement",
+            "maximumAnnualizedReturnShortfall",
+            "minimumMaximumDrawdownImprovement",
+            "benchmark",
+            "riskAdjustedMetric"
+          ],
+          "properties": {
+            "evaluateOnlyAfterPredictivePass": {
+              "const": true
+            },
+            "equityWeightsByForecastTertile": {
+              "const": [
+                0.5,
+                0.75,
+                1
+              ]
+            },
+            "oneWayTransactionCostBps": {
+              "const": 5
+            },
+            "stressCostMultiplier": {
+              "const": 2
+            },
+            "maximumAnnualTurnover": {
+              "const": 3
+            },
+            "minimumRiskAdjustedTradeoffImprovement": {
+              "const": 0.1
+            },
+            "maximumAnnualizedReturnShortfall": {
+              "const": 0.005
+            },
+            "minimumMaximumDrawdownImprovement": {
+              "const": 0.05
+            },
+            "benchmark": {
+              "const": "selection-period-volatility-matched-static-equity-cash-allocation"
+            },
+            "riskAdjustedMetric": {
+              "const": "annualized-mean-monthly-excess-return-divided-by-annualized-monthly-volatility"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "hypothesisBudget": {
+      "type": "object",
+      "required": [
+        "developmentInstrument",
+        "developmentEntries",
+        "externalTransferChecks",
+        "transferReferenceEntries",
+        "totalLedgerEntries",
+        "compositePrimaryClaims",
+        "componentTestsPerClaim",
+        "optionalHmmEvaluations"
+      ],
+      "properties": {
+        "developmentInstrument": {
+          "const": "SPY"
+        },
+        "developmentEntries": {
+          "const": 7
+        },
+        "externalTransferChecks": {
+          "const": 2
+        },
+        "transferReferenceEntries": {
+          "const": 1
+        },
+        "totalLedgerEntries": {
+          "const": 10
+        },
+        "compositePrimaryClaims": {
+          "const": 2
+        },
+        "componentTestsPerClaim": {
+          "const": 10
+        },
+        "optionalHmmEvaluations": {
+          "const": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "decisionVocabulary": {
+      "type": "object",
+      "required": [
+        "experiment",
+        "SPY",
+        "QQQ",
+        "evidenceTier"
+      ],
+      "properties": {
+        "experiment": {
+          "const": [
+            "FREEZE_SPY_CYCLE_TARGET",
+            "NO_CYCLE_TARGET_ADEQUATE",
+            "INSUFFICIENT_EVIDENCE",
+            "INVALID_EVALUATION"
+          ]
+        },
+        "SPY": {
+          "const": [
+            "QUALIFIED",
+            "REJECTED",
+            "INSUFFICIENT_EVIDENCE"
+          ]
+        },
+        "QQQ": {
+          "const": [
+            "TRANSFER_SUPPORTS",
+            "TRANSFER_DOES_NOT_SUPPORT",
+            "TRANSFER_INSUFFICIENT"
+          ]
+        },
+        "evidenceTier": {
+          "const": [
+            "POINT_IN_TIME_ADMISSIBLE",
+            "RECONSTRUCTED_RESEARCH_ONLY"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "prohibitions": {
+      "type": "object",
+      "required": [
+        "paidData",
+        "llmCalls",
+        "agentCalls",
+        "accountQueries",
+        "orders",
+        "leverageRecommendations",
+        "postConfirmationChanges"
+      ],
+      "properties": {
+        "paidData": {
+          "const": true
+        },
+        "llmCalls": {
+          "const": true
+        },
+        "agentCalls": {
+          "const": true
+        },
+        "accountQueries": {
+          "const": true
+        },
+        "orders": {
+          "const": true
+        },
+        "leverageRecommendations": {
+          "const": true
+        },
+        "postConfirmationChanges": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "instrumentRoles": {
+      "type": "object",
+      "required": [
+        "development",
+        "externalTransfer"
+      ],
+      "properties": {
+        "development": {
+          "type": "object",
+          "required": [
+            "instrument",
+            "selectionEligible",
+            "independentlyPromotable"
+          ],
+          "properties": {
+            "instrument": {
+              "const": "SPY"
+            },
+            "selectionEligible": {
+              "const": true
+            },
+            "independentlyPromotable": {
+              "const": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "externalTransfer": {
+          "type": "object",
+          "required": [
+            "instrument",
+            "selectionEligible",
+            "independentlyPromotable",
+            "rule"
+          ],
+          "properties": {
+            "instrument": {
+              "const": "QQQ"
+            },
+            "selectionEligible": {
+              "const": false
+            },
+            "independentlyPromotable": {
+              "const": false
+            },
+            "rule": {
+              "const": "apply-SPY-frozen-transforms-models-and-gates-without-QQQ-retuning"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "evaluationContract": {
+      "type": "object",
+      "required": [
+        "returnDistribution",
+        "tertiles",
+        "drawdown",
+        "training",
+        "comparisons",
+        "eras",
+        "concentration",
+        "economicPolicy",
+        "evidence",
+        "powerAudit",
+        "coverage",
+        "reportDimensions",
+        "scoreOrdering"
+      ],
+      "properties": {
+        "returnDistribution": {
+          "type": "object",
+          "required": [
+            "empiricalCrpsFormula",
+            "ridgeLocation",
+            "ridgeDistribution",
+            "residualCenter",
+            "minimumResidualObservations",
+            "quantiles",
+            "standardization",
+            "ridgeObjective",
+            "crpsUnits",
+            "rmseScope",
+            "intervalProbabilities"
+          ],
+          "properties": {
+            "empiricalCrpsFormula": {
+              "const": "mean(abs(samples-y))-0.5*mean(abs(samples_i-samples_j))"
+            },
+            "ridgeLocation": {
+              "const": "unpenalized-intercept;L2-penalized-slopes;closed-form-deterministic-solver"
+            },
+            "ridgeDistribution": {
+              "const": "point-forecast-plus-centered-in-sample-training-residual-empirical-distribution"
+            },
+            "residualCenter": {
+              "const": "arithmetic-mean"
+            },
+            "minimumResidualObservations": {
+              "const": 120
+            },
+            "quantiles": {
+              "const": "left-continuous-empirical-inverse-cdf"
+            },
+            "standardization": {
+              "const": "training-population-mean-and-standard-deviation;zero-variance-column-maps-to-zero"
+            },
+            "ridgeObjective": {
+              "const": "sum-squared-errors-plus-alpha-times-sum-squared-slopes"
+            },
+            "crpsUnits": {
+              "const": "excess-log-return"
+            },
+            "rmseScope": {
+              "const": "predictive-mean-against-every-comparator-in-each-mode"
+            },
+            "intervalProbabilities": {
+              "const": [
+                0.05,
+                0.5,
+                0.95
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "tertiles": {
+          "type": "object",
+          "required": [
+            "quantileMethod",
+            "boundaries",
+            "collapsedBoundaryRule",
+            "minimumBinObservations"
+          ],
+          "properties": {
+            "quantileMethod": {
+              "const": "linear-interpolation-equivalent-to-numpy-method-linear"
+            },
+            "boundaries": {
+              "const": "low<=q_one_third;middle>q_one_third-and<=q_two_thirds;high>q_two_thirds"
+            },
+            "collapsedBoundaryRule": {
+              "const": "candidate-unavailable-for-that-fold"
+            },
+            "minimumBinObservations": {
+              "const": 20
+            }
+          },
+          "additionalProperties": false
+        },
+        "drawdown": {
+          "type": "object",
+          "required": [
+            "eventSmoothing",
+            "logisticInterceptPenalized",
+            "minimumClassObservations",
+            "degenerateFoldRule",
+            "secondaryMayQualifyPrimary",
+            "minimumDistinctEventEpisodes",
+            "episodeDefinition",
+            "supportScope",
+            "insufficientSupport",
+            "probabilityClip",
+            "calibrationBins",
+            "calibrationBinsRule",
+            "calibrationSlope",
+            "comparisonScope",
+            "claimCannotRescuePrimary"
+          ],
+          "properties": {
+            "eventSmoothing": {
+              "const": "laplace-alpha-1-beta-1"
+            },
+            "logisticInterceptPenalized": {
+              "const": false
+            },
+            "minimumClassObservations": {
+              "const": 10
+            },
+            "degenerateFoldRule": {
+              "const": "drawdown-forecast-unavailable-and-counted-in-coverage;return-forecast-remains-eligible"
+            },
+            "secondaryMayQualifyPrimary": {
+              "const": false
+            },
+            "minimumDistinctEventEpisodes": {
+              "const": 10
+            },
+            "episodeDefinition": {
+              "const": "connected-components-of-overlapping-positive-target-holding-intervals"
+            },
+            "supportScope": {
+              "const": "each-evaluated-partition"
+            },
+            "insufficientSupport": {
+              "const": "INSUFFICIENT_SUPPORT-no-policy-use"
+            },
+            "probabilityClip": {
+              "const": 1e-06
+            },
+            "calibrationBins": {
+              "const": 10
+            },
+            "calibrationBinsRule": {
+              "const": "equal-width-on-[0,1];last-bin-includes-one"
+            },
+            "calibrationSlope": {
+              "const": "unpenalized-logistic-event-on-logit-clipped-probability-with-intercept;nonfinite-fit-is-insufficient-support"
+            },
+            "comparisonScope": {
+              "const": "all-five-comparators-both-modes;separate-secondary-composite-Holm-family-of-two"
+            },
+            "claimCannotRescuePrimary": {
+              "const": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "training": {
+          "type": "object",
+          "required": [
+            "labelRule",
+            "rollingWindowUnit",
+            "purgeRule",
+            "causalPercentiles",
+            "fittedTransforms",
+            "sourceAvailabilityScope"
+          ],
+          "properties": {
+            "labelRule": {
+              "const": "target-end-and-label-availability-strictly-before-forecast-cutoff"
+            },
+            "rollingWindowUnit": {
+              "const": "calendar-months"
+            },
+            "purgeRule": {
+              "const": "label-maturity-implements-the-12-month-overlap-purge;do-not-stack-a-second-row-purge"
+            },
+            "causalPercentiles": {
+              "const": "retain-expanding-history-through-forecast-cutoff;never-refit-on-outcomes"
+            },
+            "fittedTransforms": {
+              "const": "standardizers-use-training-rows-only"
+            },
+            "sourceAvailabilityScope": {
+              "const": "primary-equity-and-cash-path;exclude-CPI-diagnostic-release"
+            }
+          },
+          "additionalProperties": false
+        },
+        "comparisons": {
+          "type": "object",
+          "required": [
+            "reference",
+            "primaryHypotheses",
+            "challengerBaselines",
+            "challengerMustBeatEveryBaseline",
+            "pairedImprovement",
+            "testAlternative",
+            "bootstrapPValue",
+            "confidenceInterval",
+            "holmFamily",
+            "qqqPValuesAffectPromotion",
+            "compositePValue",
+            "skippedClaimPValue",
+            "sharedResamplingIndices",
+            "materialityScope",
+            "halfRequirement",
+            "bootstrapBlocks",
+            "intervalQuantiles",
+            "selectionRule"
+          ],
+          "properties": {
+            "reference": {
+              "const": "unconditional-history"
+            },
+            "primaryHypotheses": {
+              "const": [
+                "fixed-cycle-score",
+                "regularized-cycle"
+              ]
+            },
+            "challengerBaselines": {
+              "const": [
+                "unconditional-history",
+                "volatility-conditioned-history",
+                "valuation-only",
+                "direction-only",
+                "position-plus-direction"
+              ]
+            },
+            "challengerMustBeatEveryBaseline": {
+              "const": true
+            },
+            "pairedImprovement": {
+              "const": "comparator-crps-minus-challenger-crps"
+            },
+            "testAlternative": {
+              "const": "mean-paired-improvement-greater-than-zero"
+            },
+            "bootstrapPValue": {
+              "const": "one-plus-null-centered-moving-block-means-at-least-observed-divided-by-resamples-plus-one"
+            },
+            "confidenceInterval": {
+              "const": "percentile-interval-of-uncentered-moving-block-means"
+            },
+            "holmFamily": {
+              "const": "two-SPY-composite-cycle-claims"
+            },
+            "qqqPValuesAffectPromotion": {
+              "const": false
+            },
+            "compositePValue": {
+              "const": "maximum-over-five-comparators-and-both-modes"
+            },
+            "skippedClaimPValue": {
+              "const": 1
+            },
+            "sharedResamplingIndices": {
+              "const": true
+            },
+            "materialityScope": {
+              "const": "each-comparator-in-both-modes-on-full-partition"
+            },
+            "halfRequirement": {
+              "const": "strictly-positive-mean-improvement-against-every-comparator-in-both-halves-no-half-significance-test"
+            },
+            "bootstrapBlocks": {
+              "const": "all-overlapping-contiguous-12-calendar-month-blocks;sample-block-starts-uniformly-with-replacement;concatenate-and-truncate-to-partition-length"
+            },
+            "intervalQuantiles": {
+              "const": [
+                0.05,
+                0.95
+              ]
+            },
+            "selectionRule": {
+              "const": "all-full-partition-return-materiality-significance-coverage-rmse-and-stability-gates;no-confirmation-halves-in-selection;score-ordering-is-a-separate-diagnostic"
+            }
+          },
+          "additionalProperties": false
+        },
+        "eras": {
+          "type": "object",
+          "required": [
+            "selection",
+            "confirmation",
+            "minimumObservationsPerEra",
+            "insufficientEraRule",
+            "positiveFractionRule",
+            "comparatorScope"
+          ],
+          "properties": {
+            "selection": {
+              "const": [
+                {
+                  "id": "selection-early",
+                  "start": "2010-11-30",
+                  "end": "2012-12-31"
+                },
+                {
+                  "id": "selection-middle",
+                  "start": "2013-01-01",
+                  "end": "2014-12-31"
+                },
+                {
+                  "id": "selection-late",
+                  "start": "2015-01-01",
+                  "end": "2016-06-30"
+                }
+              ]
+            },
+            "confirmation": {
+              "const": [
+                {
+                  "id": "confirmation-early",
+                  "start": "2017-07-31",
+                  "end": "2019-12-31"
+                },
+                {
+                  "id": "confirmation-middle",
+                  "start": "2020-01-01",
+                  "end": "2022-12-31"
+                },
+                {
+                  "id": "confirmation-late",
+                  "start": "2023-01-01",
+                  "end": "2025-07-31"
+                }
+              ]
+            },
+            "minimumObservationsPerEra": {
+              "const": 18
+            },
+            "insufficientEraRule": {
+              "const": "qualification-fails"
+            },
+            "positiveFractionRule": {
+              "const": "positive-era-count/evaluable-era-count>=0.67;three-eras-therefore-require-three-positive"
+            },
+            "comparatorScope": {
+              "const": "every-comparator-in-both-modes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "concentration": {
+          "type": "object",
+          "required": [
+            "blockLengthMonths",
+            "alignment",
+            "benefit",
+            "zeroTotalBenefitRule",
+            "fraction",
+            "partialFinalBlock",
+            "comparatorScope"
+          ],
+          "properties": {
+            "blockLengthMonths": {
+              "const": 12
+            },
+            "alignment": {
+              "const": "start-at-first-evaluated-forecast-in-each-partition-and-mode"
+            },
+            "benefit": {
+              "const": "for-each-fixed-calendar-block-sum-max(comparator-crps-minus-challenger-crps,0)"
+            },
+            "zeroTotalBenefitRule": {
+              "const": "qualification-fails"
+            },
+            "fraction": {
+              "const": "maximum-block-benefit/divided-by-total-positive-benefit"
+            },
+            "partialFinalBlock": {
+              "const": "included"
+            },
+            "comparatorScope": {
+              "const": "every-comparator-in-both-modes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "economicPolicy": {
+          "type": "object",
+          "required": [
+            "rebalanceFrequency",
+            "execution",
+            "holdingReturn",
+            "weightDrift",
+            "riskAdjustedMetric",
+            "staticBenchmark",
+            "overlappingAnnualLabelsAsReturnsProhibited",
+            "forecastTertiles",
+            "staticBenchmarkTieRule",
+            "staticBenchmarkGrid",
+            "benchmarks",
+            "comparisonScope",
+            "turnover",
+            "initialEquityWeight",
+            "terminalLiquidation",
+            "returnAnnualization",
+            "maxDrawdown",
+            "downsideInput",
+            "unavailableForecast",
+            "qualification",
+            "cashRiskRatio"
+          ],
+          "properties": {
+            "rebalanceFrequency": {
+              "const": "monthly"
+            },
+            "execution": {
+              "const": "next-scheduled-session-open"
+            },
+            "holdingReturn": {
+              "const": "next-execution-open-to-following-execution-open-total-return-with-cash-distributions"
+            },
+            "weightDrift": {
+              "const": "weights-drift-with-equity-and-cash-returns-between-rebalances"
+            },
+            "riskAdjustedMetric": {
+              "const": "sqrt(12)*mean(arithmetic-monthly-equity-policy-return-minus-monthly-cash-proxy-return)/sample-standard-deviation-of-that-excess-return;ddof=1;zero-volatility-is-unavailable"
+            },
+            "staticBenchmark": {
+              "const": "selection-only-weight-in-0.01-grid-minimizing-absolute-volatility-difference"
+            },
+            "overlappingAnnualLabelsAsReturnsProhibited": {
+              "const": true
+            },
+            "forecastTertiles": {
+              "const": "at-each-cutoff-tertiles-of-fitted-model-training-row-predictive-means;linear-quantiles-and-same-tie-rules-as-model-bins"
+            },
+            "staticBenchmarkTieRule": {
+              "const": "lowest-equity-weight"
+            },
+            "staticBenchmarkGrid": {
+              "type": "object",
+              "required": [
+                "minimum",
+                "maximum",
+                "step"
+              ],
+              "properties": {
+                "minimum": {
+                  "const": 0
+                },
+                "maximum": {
+                  "const": 1
+                },
+                "step": {
+                  "const": 0.01
+                }
+              },
+              "additionalProperties": false
+            },
+            "benchmarks": {
+              "const": [
+                "buy-and-hold",
+                "cash",
+                "selection-volatility-matched-static-allocation"
+              ]
+            },
+            "comparisonScope": {
+              "const": "report-all-three-benchmarks-at-base-and-double-cost;qualification-risk-ratio-return-shortfall-and-drawdown-improvement-against-static-risk-matched-benchmark;require-positive-mean-excess-over-cash;buy-and-hold-is-contextual"
+            },
+            "turnover": {
+              "const": "sum-absolute-target-equity-weight-minus-pretrade-drifted-equity-weight;annualize-times-12/holding-month-count"
+            },
+            "initialEquityWeight": {
+              "const": 0
+            },
+            "terminalLiquidation": {
+              "const": true
+            },
+            "returnAnnualization": {
+              "const": "compound-wealth-ratio-to-power-12/holding-month-count-minus-one"
+            },
+            "maxDrawdown": {
+              "const": "positive-peak-to-trough-fraction-on-monthly-wealth"
+            },
+            "downsideInput": {
+              "const": "none;policy-uses-return-predictive-mean-only"
+            },
+            "unavailableForecast": {
+              "const": "policy-not-qualified;do-not-impute-favorable-weight"
+            },
+            "qualification": {
+              "const": "separate-downstream-result;never-required-to-report-historical-return-skill"
+            },
+            "cashRiskRatio": {
+              "const": "not-defined-for-zero-excess-volatility;do-not-treat-as-zero-or-infinity"
+            }
+          },
+          "additionalProperties": false
+        },
+        "evidence": {
+          "type": "object",
+          "required": [
+            "SPY",
+            "QQQ"
+          ],
+          "properties": {
+            "SPY": {
+              "const": "reconstructed-research-only-historical-qualification-requires-later-prospective-confirmation"
+            },
+            "QQQ": {
+              "const": "external-transfer-robustness-only-no-independent-qualification"
+            }
+          },
+          "additionalProperties": false
+        },
+        "powerAudit": {
+          "type": "object",
+          "required": [
+            "requiredBeforeCandidateEvaluation",
+            "scenarios",
+            "processes",
+            "measure",
+            "minimumReplications",
+            "seed",
+            "status",
+            "monteCarloInterval",
+            "maximumFalseQualificationUpperBound",
+            "minimumPowerLowerBound",
+            "maximumPreOutputRedesigns",
+            "failedOrIndeterminateDecision",
+            "realOutputPermittedOnFailure",
+            "requiredBeforeSimulation",
+            "designPath"
+          ],
+          "properties": {
+            "requiredBeforeCandidateEvaluation": {
+              "const": true
+            },
+            "scenarios": {
+              "const": [
+                "null-no-skill",
+                "partial-null-strong-baseline-matches-cycle",
+                "usefulness-boundary-location",
+                "design-effect-location",
+                "usefulness-boundary-scale",
+                "design-effect-scale",
+                "heavy-tails",
+                "structural-break",
+                "rare-downside-episodes",
+                "missingness"
+              ]
+            },
+            "processes": {
+              "const": [
+                "overlapping-12m-labels-derived-from-monthly-paths",
+                "persistent-predictors-beyond-12-months",
+                "clustered-volatility"
+              ]
+            },
+            "measure": {
+              "const": "whole-promotion-procedure-family-wise-false-positive-rate-and-power"
+            },
+            "minimumReplications": {
+              "const": 2000
+            },
+            "seed": {
+              "const": 42
+            },
+            "status": {
+              "const": "DESIGN_FROZEN_IMPLEMENTATION_PENDING"
+            },
+            "monteCarloInterval": {
+              "const": "one-sided-95-percent-exact-Clopper-Pearson"
+            },
+            "maximumFalseQualificationUpperBound": {
+              "const": 0.1
+            },
+            "minimumPowerLowerBound": {
+              "const": 0.8
+            },
+            "maximumPreOutputRedesigns": {
+              "const": 1
+            },
+            "failedOrIndeterminateDecision": {
+              "const": "INSUFFICIENT_EVIDENCE"
+            },
+            "realOutputPermittedOnFailure": {
+              "const": false
+            },
+            "requiredBeforeSimulation": {
+              "const": [
+                "versioned-path-generators-and-feature-scope",
+                "economically-justified-numeric-design-effects-and-usefulness-boundary",
+                "locked-development-and-validation-streams",
+                "fixed-computational-budget",
+                "scenario-to-claim-acceptance-matrix"
+              ]
+            },
+            "designPath": {
+              "const": "config/cycle1-simulation-v1.json"
+            }
+          },
+          "additionalProperties": false
+        },
+        "coverage": {
+          "type": "object",
+          "required": [
+            "denominator",
+            "minimumPercent",
+            "pairedDates",
+            "failedFold",
+            "pairedMinimumPercent",
+            "missingInternalCalendarBlock"
+          ],
+          "properties": {
+            "denominator": {
+              "const": "fixed-eligible-calendar-before-model-fitting"
+            },
+            "minimumPercent": {
+              "const": 95
+            },
+            "pairedDates": {
+              "const": "intersection-of-challenger-and-all-five-comparators-in-both-modes"
+            },
+            "failedFold": {
+              "const": "missing-counted-against-fixed-calendar"
+            },
+            "pairedMinimumPercent": {
+              "const": 95
+            },
+            "missingInternalCalendarBlock": {
+              "const": "INVALID_EVALUATION-no-compression-of-time-for-bootstrap"
+            }
+          },
+          "additionalProperties": false
+        },
+        "reportDimensions": {
+          "type": "object",
+          "required": [
+            "validity",
+            "historicalReturn",
+            "downside",
+            "policy",
+            "transfer",
+            "deployment"
+          ],
+          "properties": {
+            "validity": {
+              "const": [
+                "VALID",
+                "INVALID_EVALUATION"
+              ]
+            },
+            "historicalReturn": {
+              "const": [
+                "RESEARCH_QUALIFIED",
+                "NO_CYCLE_TARGET_ADEQUATE",
+                "INSUFFICIENT_EVIDENCE"
+              ]
+            },
+            "downside": {
+              "const": [
+                "QUALIFIED_SECONDARY",
+                "FAILED",
+                "INSUFFICIENT_SUPPORT",
+                "NOT_EVALUATED"
+              ]
+            },
+            "policy": {
+              "const": [
+                "QUALIFIED_FOR_FURTHER_TESTING",
+                "FAILED",
+                "NOT_EVALUATED"
+              ]
+            },
+            "transfer": {
+              "const": [
+                "TRANSFER_SUPPORTS",
+                "TRANSFER_DOES_NOT_SUPPORT",
+                "TRANSFER_INSUFFICIENT",
+                "NOT_RUN"
+              ]
+            },
+            "deployment": {
+              "const": [
+                "NOT_QUALIFIED"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "scoreOrdering": {
+          "type": "object",
+          "required": [
+            "role",
+            "bins",
+            "measurement",
+            "reason"
+          ],
+          "properties": {
+            "role": {
+              "const": "diagnostic-only-not-required-for-return-distribution-qualification"
+            },
+            "bins": {
+              "const": "training-cycle-score-tertiles-at-each-fold;same-boundaries-and-ties-as-fixed-cycle-model"
+            },
+            "measurement": {
+              "const": "mean-realized-return-by-origin-score-bin;strict-increase-and-minimum-12-per-bin"
+            },
+            "reason": {
+              "const": "proper-distribution-skill-can-be-scale-only;mean-ordering-would-test-an-additional-location-claim"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "evaluationLedger": {
+      "const": [
+        {
+          "entryId": "SPY:unconditional-history",
+          "instrument": "SPY",
+          "modelId": "unconditional-history",
+          "role": "reference",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "selection",
+            "confirmation"
+          ],
+          "status": "PLANNED"
+        },
+        {
+          "entryId": "SPY:volatility-conditioned-history",
+          "instrument": "SPY",
+          "modelId": "volatility-conditioned-history",
+          "role": "baseline",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "selection",
+            "confirmation"
+          ],
+          "status": "PLANNED"
+        },
+        {
+          "entryId": "SPY:valuation-only",
+          "instrument": "SPY",
+          "modelId": "valuation-only",
+          "role": "baseline",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "selection",
+            "confirmation"
+          ],
+          "status": "PLANNED"
+        },
+        {
+          "entryId": "SPY:direction-only",
+          "instrument": "SPY",
+          "modelId": "direction-only",
+          "role": "baseline",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "selection",
+            "confirmation"
+          ],
+          "status": "PLANNED"
+        },
+        {
+          "entryId": "SPY:position-plus-direction",
+          "instrument": "SPY",
+          "modelId": "position-plus-direction",
+          "role": "baseline",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "selection",
+            "confirmation"
+          ],
+          "status": "PLANNED"
+        },
+        {
+          "entryId": "SPY:fixed-cycle-score",
+          "instrument": "SPY",
+          "modelId": "fixed-cycle-score",
+          "role": "challenger",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "selection",
+            "confirmation"
+          ],
+          "status": "PLANNED"
+        },
+        {
+          "entryId": "SPY:regularized-cycle",
+          "instrument": "SPY",
+          "modelId": "regularized-cycle",
+          "role": "challenger",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "selection",
+            "confirmation"
+          ],
+          "status": "PLANNED"
+        },
+        {
+          "entryId": "QQQ:fixed-cycle-score",
+          "instrument": "QQQ",
+          "modelId": "fixed-cycle-score",
+          "role": "transfer",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "confirmation"
+          ],
+          "requiresSpyEntry": "SPY:fixed-cycle-score",
+          "status": "CONDITIONAL",
+          "skipStatus": "SKIPPED_SPY_NOT_QUALIFIED"
+        },
+        {
+          "entryId": "QQQ:regularized-cycle",
+          "instrument": "QQQ",
+          "modelId": "regularized-cycle",
+          "role": "transfer",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "confirmation"
+          ],
+          "requiresSpyEntry": "SPY:regularized-cycle",
+          "status": "CONDITIONAL",
+          "skipStatus": "SKIPPED_SPY_NOT_QUALIFIED"
+        },
+        {
+          "entryId": "QQQ:unconditional-history",
+          "instrument": "QQQ",
+          "modelId": "unconditional-history",
+          "role": "transfer-reference",
+          "modes": [
+            "expanding",
+            "rolling"
+          ],
+          "partitions": [
+            "confirmation"
+          ],
+          "status": "CONDITIONAL",
+          "skipStatus": "SKIPPED_NO_SPY_SURVIVOR"
+        }
+      ]
+    },
+    "execution": {
+      "type": "object",
+      "required": [
+        "allowedMode",
+        "realCandidateEvaluationAllowed",
+        "datasetBuildAllowed",
+        "confirmationOpeningAllowed",
+        "powerApproval",
+        "requiredDatasetIdentity",
+        "sourceAuditPath"
+      ],
+      "properties": {
+        "allowedMode": {
+          "const": "contract-only"
+        },
+        "realCandidateEvaluationAllowed": {
+          "const": false
+        },
+        "datasetBuildAllowed": {
+          "const": false
+        },
+        "confirmationOpeningAllowed": {
+          "const": false
+        },
+        "powerApproval": {
+          "const": "NOT_RUN"
+        },
+        "requiredDatasetIdentity": {
+          "const": "UNQUALIFIED"
+        },
+        "sourceAuditPath": {
+          "const": "config/cycle1-source-audit-v4-draft.json"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

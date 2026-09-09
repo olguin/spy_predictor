@@ -1,0 +1,55 @@
+{
+  "annualNull": {
+    "conditionalLatentAnnualVariances": {
+      "-0.5": 0.012635909909948222,
+      "0.0": 0.02576861413801234,
+      "0.5": 0.05340801787344189
+    },
+    "conditioning": "log volatility used in the last completed month; independent proposed innovations",
+    "formula": "0.15^2/12 * sum(j=1..12, exp(2*phi^j*g + 2*omega^2*sum(i=0..j-1, phi^(2*i))))",
+    "limitation": "Latent-state dependence is not a proof of incremental predictability from the supplied features.",
+    "requiredProof": "Annual return-law equality conditional on each declared baseline versus added cycle features, including the strong-baseline null.",
+    "status": "UNPROVEN_FOR_ACTUAL_FEATURES"
+  },
+  "annualNullProven": false,
+  "configHash": "74a486ed3c65bfb116ca28eca06c831dbce213bbafe08396310a3677b51ebeda",
+  "dividendSupport": {
+    "condition": "overnight_log_increment < log(dividend_fraction)",
+    "error": "Price, split and total-return levels must be positive",
+    "exDate": "2020-03-02",
+    "otherInnovations": "dataclass defaults",
+    "status": "POSITIVE_PRICE_SUPPORT_FAILURE",
+    "suppliedSpyOvernightNormal": -2000.0,
+    "tailProbabilityEstimated": false,
+    "threshold": -5.991464547107982
+  },
+  "equationHash": "cfdf91f8eccfc95e248347d3733875052ba5c44ea8179ab05086d288ac1ae08d",
+  "fullProcedureQualified": false,
+  "implementationHashes": {
+    "cycle1_calendar.py": "c33482ebbd54b2a4d43e610fbbbccf546c58263026578191baf513e31ba1949f",
+    "cycle1_features.py": "70a7d286c08561d67faf4c41957f9cc3c4ebe9912851b0bc4533e2af3f9ca5dc",
+    "cycle1_successor_calendar.py": "5611531be1b6634d8d19252c40c1c88e979bea8e275f17eb92996d368cd32b12",
+    "cycle1_successor_equations.py": "02405fed495d02de0ee4c1bebce16257273022c60f6c8b39e991303e47fd5e19",
+    "cycle1_successor_features.py": "7e16c3dc9ca9048ae7d7b33f3e0632dbb7b8f0659ea7b1cdc9fc7cd1c4debc2e",
+    "cycle1_successor_inputs.py": "ef639ce005c5c76c470fb7431971fcb41db0d1e2df02e4463e53d3ccbb483063",
+    "cycle1_successor_readiness.py": "a7205cd986f0ac5d94017277c8c4ddafa56adbd530becfff6b4c0ef49f416358"
+  },
+  "nextSteps": [
+    "Specify coherent positive-price dividend/return support without silent clipping or rejected-draw replacement.",
+    "Establish the actual annual conditional null; reconcile any scenario changes explicitly before freeze.",
+    "Bind final equations, laws, feature parity and authority hashes; atomically register the single redesign.",
+    "Only then run development full-procedure profiling and the gated locked power audit."
+  ],
+  "proposalHash": "d498c5d55ab206fd870e70e6cdcf0eafdd7c03bb051124ab25e876a21f7e6708",
+  "randomDraws": 0,
+  "realDataApproval": false,
+  "redesignSlotsConsumedByReview": 0,
+  "reportHash": "3b7d5d92f7457de2a0050761a4b1c2d4e465755d73aaea24f848fab79688d58d",
+  "runtimeProfile": {
+    "reason": "Scientific prerequisites for successor release are unmet.",
+    "status": "NOT_RUN"
+  },
+  "scenarioHash": "0eb97a1f766458ce69f7bd48c8d62eaf5c69cb3697c0481164ae62ac1dab3c06",
+  "schemaVersion": "cycle1-successor-readiness-v1",
+  "status": "NOT_READY_TO_FREEZE"
+}

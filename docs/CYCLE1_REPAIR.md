@@ -1,5 +1,12 @@
 # Cycle 1 pre-evaluation repair
 
+**Planning update, 2026-09-07:** the current implementation sequence is in
+[PROJECT_STRATEGY.md](PROJECT_STRATEGY.md), with the executable status in
+[PROJECT_PLAN_AND_STATUS.md](PROJECT_PLAN_AND_STATUS.md). Implemented repair
+findings below remain evidence. The proposed amendment/work order below is
+historical context; the new strategy refines its roster, claim tests, power
+gate, and forecast-versus-policy qualification. No v5 protocol is active yet.
+
 Status: 2026-09-07. Correctness repairs implemented; v4 candidate evaluation
 is suspended. This document supersedes the earlier instruction to implement
 increment 5 using dataset `cycle1-monthly-19ccd95384e690de`.
