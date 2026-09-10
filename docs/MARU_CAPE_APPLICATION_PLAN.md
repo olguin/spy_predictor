@@ -1,17 +1,31 @@
 # Parallel plan: practical cycle-investing analysis
 
-Update 2026-09-09: both notebooks now use a verified current macro-only snapshot
-with source archives, extraction cross-check and observed-as-of manifests. Fresh
-SPY/QQQ price acquisition is implemented and waiting for read-only IBKR Gateway.
-See [current snapshot](WORKBENCH_CURRENT_SNAPSHOT.md); remaining coverage is explicit.
-The original implementation-stage description below is historical context.
+New requested extension, 2026-09-09: [META analysis plan and runnable starter](META_ANALYSIS_PLAN.md)
+adds a current watchlist indicator packet, specialist prompt contracts and a
+staged implementation plan. The [orchestrating prompt](META_ANALYSIS_PROMPT.md)
+describes source retrieval, calculations, specialist analysis and synthesis.
+This is a secondary application extension, not a change to Cycle 1 authorities.
 
-Plan and public-source review: 2026-09-08. Status: **first M1 synthetic workbench
-implemented in both notebooks and CLI, now connected to validated local raw-metric
-manifests**. The input schema, integrity/timing/unit checks and explicit metric
-transforms exist. Live acquisition, independent extraction verification, broader
-fundamentals and qualified current snapshots remain pending. Owner: the secondary application
-workstream, alongside the main Cycle 1 synthetic audit.
+Update 2026-09-10: both notebooks use the verified September 9 current snapshot,
+and the separate META workbench has now produced and prospectively registered a
+fresh September 10 five-symbol quant-only packet. SEC submissions/company facts
+are present for AAPL/MSFT/NVDA; SPY holdings are partial and QQQ holdings remain
+missing. Paper/read-only IBKR delayed quotes are verified for SPY/QQQ/ES/NQ, while
+paid real-time API entitlement is absent. The META outcome/scoring loop, guarded
+post-close command, delayed-context importer, VIX/VIX3M proxy, transparent
+risk-appetite components and explicit ES/NQ rollover rule are now implemented;
+all 15 first-observation targets remain `NOT_DUE`. See
+[current snapshot](WORKBENCH_CURRENT_SNAPSHOT.md), [META plan](META_ANALYSIS_PLAN.md)
+and [operations runbook](META_OBSERVATION_OPERATIONS.md); remaining coverage is explicit. The
+original implementation-stage description below is historical context.
+
+Plan and public-source review: 2026-09-08. Current implementation status:
+**M1 is complete and substantial M2/M3 evidence plumbing is operational**. The
+input schema, integrity/timing/unit checks and explicit metric transforms exist;
+qualified current snapshots, SEC evidence, manual ETF holdings and prospective
+META registration and outcome evaluation now run. Broader ETF/issuer/event
+evidence, derived valuation and production agents remain pending. Owner: the secondary
+application workstream, separate from the stopped Cycle 1 audit.
 
 ## Objective and relationship to the main goal
 
@@ -329,19 +343,28 @@ useful; it cannot justify advertising calibrated returns or profitable allocatio
 
 ## Parallel execution and next handoff
 
-The primary agent owns increment B and its frozen contracts. The secondary agent
-owns M0–M1 and separate workbench files. Keep benchmark workloads out of M1 so
-the main synthetic compute budget remains interpretable. Shared utility edits
-require coordination; changes to Cycle 1 numerical rules are outside this plan.
+The primary Cycle 1 track and this application track remain isolated. The current
+source snapshot, five-symbol SEC-enabled META packet, immutable first forecast,
+outcome/scoring loop and guarded post-close runner are complete. Optional future
+packets can add type-3 delayed IBKR context, an explicit ten-day ES/NQ rollover,
+VIX/VIX3M structure and the transparent risk-appetite proxy. These additions do
+not change Cycle 1 numerical rules or authorize its historical holdout.
 
-The initial synthetic notebook/CLI increment is implemented. Immediate next work
-is **qualify a current source snapshot and expand the component calculation
-coverage**. The secondary manifest adapter and first raw-metric transforms now
-feed the existing notebooks. It can proceed without a predictive
-Cycle 1 result. M2–M3 source
-qualification and application development can proceed separately, but this plan
-does not authorize opening the main historical holdout through notebooks,
-secondary reports, or exploratory charts.
+The dated operational sequence is now:
+
+1. After a new XNYS close plus 20 minutes, issue another observation with
+   `npm run meta:postclose`; the next normal window begins September 11, 2026 at
+   20:20 UTC / 17:20 Buenos Aires.
+2. Run `npm run meta:outcomes -- update` on or after September 17 at 20:20 UTC to
+   capture and score the first five-session outcomes. It is a no-write no-op before
+   maturity.
+3. Refresh QQQ holdings only through a permitted browser-saved sponsor table;
+   continue primary event/calendar and issuer evidence adapters.
+4. Keep production agents and any probability combiner conditional on prospective
+   comparison against the quant-only records.
+
+Exact commands and state semantics are in
+[META_OBSERVATION_OPERATIONS.md](META_OBSERVATION_OPERATIONS.md).
 
 Open research gaps: exact Maru Cape indicator formulas and parameters; any
 authoritative numerical strategy rules; free, permitted, dated ETF aggregate

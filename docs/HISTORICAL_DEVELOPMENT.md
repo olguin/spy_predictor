@@ -149,6 +149,15 @@ or an IBKR data correction for the missing dates. Gateway connectivity is no
 longer the blocker; source completeness and series compatibility are. Preserve
 the first development scores, unchanged models, and the sealed final period.
 
+User direction on 2026-09-09 closed this gap investigation and authorized moving
+forward. No further missing-session work is planned. The accepted development
+dataset retains its explicit unavailable windows. Post-output
+[stability diagnostics](../reports/historical-development/diagnostics-9af70a0b94be3a96/summary.md)
+show that model rankings change by origin year and leave-one-year-out slice.
+This evidence supports collecting prospective benchmark observations instead of
+searching the same 42 overlapping outcomes. See
+[PROSPECTIVE_OBSERVATION.md](PROSPECTIVE_OBSERVATION.md).
+
 ## Follow-up: verify request correctness
 
 The user challenged whether the Gateway was being queried correctly. Four more

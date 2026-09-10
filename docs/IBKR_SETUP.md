@@ -123,6 +123,39 @@ record; the adapter does not claim that the record was originally observable at
 its market timestamp. Requests default to twenty minutes behind real time so an
 account without up-to-the-second API data can still retrieve recent history.
 
+## Delayed top-of-book quotes
+
+For accounts without paid API market-data subscriptions, capture a bounded
+delayed quote snapshot for SPY, QQQ, ES, and NQ:
+
+```bash
+npm run ibkr:delayed
+```
+
+The command explicitly requests IBKR market-data type `3` and archives the raw
+callbacks plus the latest bid, ask, last, sizes, session OHLC/volume, mark price,
+and exchange last-trade timestamp where supplied. The report computes quote age
+from that timestamp rather than assuming the nominal delay. IBKR normally delays
+US stocks by 15 minutes and US futures by 10 minutes. Delayed data works through
+`reqMktData` and historical requests; IBKR does not provide delayed five-second
+`reqRealTimeBars`, so this command is intentionally separate from `ibkr:capture`.
+
+For META context, use the explicit catalog-based rollover rule:
+
+```bash
+npm run ibkr:delayed -- \
+  --auto-roll-futures --minimum-days-to-expiry 10 --duration-seconds 15
+```
+
+The default remains the exact contracts pinned in `config/ibkr-live.json`. With
+the flag, ES and NQ select the first verified catalog expiration at least ten
+calendar days away; the manifest records the rule, as-of date, selected conIds,
+local symbols, expirations and days to expiry. The September 10 verification
+selected ESZ6 and NQZ6. This deterministic calendar rule prevents accidental use
+of a nearly expired contract but does not claim to identify the highest-volume
+contract. Pass the resulting `quotes.json` to `meta:postclose` as documented in
+[META_OBSERVATION_OPERATIONS.md](META_OBSERVATION_OPERATIONS.md).
+
 ## Alpaca/IBKR comparison
 
 Compare the newest successful IBKR archive against raw, one-minute Alpaca SIP

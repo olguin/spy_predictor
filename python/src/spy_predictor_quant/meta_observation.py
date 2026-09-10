@@ -1,0 +1,96 @@
+"""Immutable prospective records for META quantitative and context forecasts."""
+from __future__ import annotations
+
+from datetime import date, datetime, timedelta, timezone
+import json
+from pathlib import Path
+
+import exchange_calendars as xcals
+
+from spy_predictor_quant.cycle_workbench import _instant
+from spy_predictor_quant.meta_analysis import HORIZONS, digest
+from spy_predictor_quant.market_archive import file_sha256, write_json_exclusive
+
+VERSION = "meta-observation-v1"
+
+
+def _verified(path: Path, hash_field: str) -> dict:
+    value = json.loads(path.read_text())
+    identity = value.pop(hash_field)
+    if digest(value) != identity:
+        raise ValueError(f"{hash_field} integrity mismatch")
+    value[hash_field] = identity
+    return value
+
+
+def target_sessions(origin: str) -> dict[str, str]:
+    day = date.fromisoformat(origin)
+    cal = xcals.get_calendar("XNYS")
+    if not cal.is_session(day.isoformat()):
+        raise ValueError("Forecast origin must be an XNYS session")
+    future = cal.sessions_in_range((day+timedelta(days=1)).isoformat(),
+                                   (day+timedelta(days=160)).isoformat())
+    if len(future) < max(HORIZONS):
+        raise ValueError("Unable to resolve forecast target sessions")
+    return {str(horizon): future[horizon-1].date().isoformat() for horizon in HORIZONS}
+
+
+def register(packet_path: Path, output_root: Path, meta_report_path: Path | None = None,
+             now: datetime | None = None) -> Path:
+    packet = _verified(packet_path, "packet_hash")
+    issued_at = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
+    report = json.loads(meta_report_path.read_text()) if meta_report_path else None
+    if report and report.get("packet_hash") != packet["packet_hash"]:
+        raise ValueError("Agent report belongs to a different packet")
+    if report and report.get("validation") != "SCHEMA_AND_CITATION_MEMBERSHIP_ONLY;SEMANTIC_CLAIMS_REQUIRE_REVIEW":
+        raise ValueError("Agent report lacks the runner validation identity")
+    symbols = {}
+    for symbol in packet["symbols"]:
+        instrument = packet["instruments"][symbol]
+        scenarios = instrument.get("reference_scenarios", [])
+        if instrument.get("status") != "FRESH" or {row.get("trading_days") for row in scenarios} != set(HORIZONS):
+            symbols[symbol] = {"status": "NO_FORECAST", "reason": "FRESH_COMPLETE_REFERENCE_REQUIRED"}
+            continue
+        origin = instrument["price_date"]
+        _require_issue_window(origin, _instant(packet["as_of"]), issued_at)
+        symbols[symbol] = {"status": "ISSUED", "origin_session": origin,
+                           "origin_close": instrument["latest_close"],
+                           "target_sessions": target_sessions(origin),
+                           "quantitative_reference": scenarios,
+                           "context_synthesis": _context_for(report, symbol),
+                           "context_status": "RECORDED" if report and _context_for(report, symbol) else "NOT_AVAILABLE"}
+    core = {"version": VERSION, "packet_hash": packet["packet_hash"],
+            "packet_path": str(packet_path.resolve()), "registered_at": issued_at.isoformat(),
+            "information_cutoff": packet["as_of"], "symbols": symbols,
+            "agent_report_hash": file_sha256(meta_report_path) if meta_report_path else None,
+            "forecast_status": "QUANT_AND_CONTEXT" if report else "QUANT_ONLY",
+            "calibrated_meta_forecast": None,
+            "evaluation_plan": {"event_scores": ["brier", "log_loss"],
+                                "distribution_scores": ["crps", "pinball", "interval_coverage"],
+                                "comparison": "common eligible symbol-origin-horizon records",
+                                "overlap": "time-block uncertainty required"},
+            "notice": "Prospective record of an uncalibrated reference; registration does not qualify predictive skill."}
+    core["forecast_hash"] = digest(core)
+    output_root.mkdir(parents=True, exist_ok=True)
+    origins = [row["origin_session"] for row in symbols.values() if row["status"] == "ISSUED"]
+    origin_key = max(origins) if origins else "no-forecast"
+    path = output_root/f"{origin_key}-{packet['packet_hash'][:16]}.json"
+    write_json_exclusive(path, core)
+    return path
+
+
+def _require_issue_window(origin: str, cutoff: datetime, issued_at: datetime) -> None:
+    cal = xcals.get_calendar("XNYS")
+    close = cal.session_close(origin).to_pydatetime()
+    next_session = cal.next_session(origin)
+    next_open = cal.session_open(next_session).to_pydatetime()
+    if cutoff < close or not cutoff <= issued_at < next_open:
+        raise ValueError("Prospective issue must occur after packet cutoff and before the next XNYS open")
+
+
+def _context_for(report: dict | None, symbol: str) -> dict | None:
+    if not report:
+        return None
+    synthesis = report.get("results", {}).get("synthesis", {})
+    rows = [row for row in synthesis.get("assessments", []) if row.get("symbol") == symbol]
+    return rows[0] if len(rows) == 1 else None

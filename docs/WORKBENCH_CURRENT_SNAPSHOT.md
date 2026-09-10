@@ -1,70 +1,49 @@
-# Verified current macro snapshot and pending price capture
+# Verified current SPY/QQQ snapshot
 
-2026-09-09. The secondary notebooks now have an observed-data input beyond their
-synthetic examples. This first snapshot is deliberately **macro-only**. It cannot
-support a complete market/instrument assessment; both SPY and QQQ reports abstain
-with missing inputs visible.
+Completed 2026-09-09. Snapshot root:
+`datasets/workbench/current-20260909`. Cutoff:
+`2026-09-10T00:29:26.933636+00:00` (September 9 in New York and Buenos Aires).
 
-Snapshot root: `datasets/workbench/current-20260909-macro`.
-Cutoff/first-seen bound: `2026-09-09T15:28:59.500746+00:00`.
+The read-only paper Gateway resolved exact SPY and QQQ contracts and returned one
+year of regular-session daily TRADES bars. The verifier selected 200 consecutive
+XNYS sessions through September 9, rejected duplicates, gaps, stale captures and
+invalid OHLC, and independently recomputed every reported price statistic using
+NumPy and scalar arithmetic.
 
-The Federal Reserve's August 18, 2026 G.17 release reports **July industrial
-production 1.1% above July 2025**, seasonally adjusted and preliminary. We extracted
-the narrative value and independently parsed the corresponding Total IP year-on-year
-cell in Table 1, requiring matching values, release dates and observation year.
-These are two extraction routes from the **same publisher**, not two independent
-economic estimates. [Fed release](https://www.federalreserve.gov/releases/g17/20260818/default.htm),
-[Table 1](https://www.federalreserve.gov/releases/g17/20260818/table1.htm).
+| Instrument | Latest close | Price / SMA200 | 63-session realized volatility |
+|---|---:|---:|---:|
+| SPY | 762.40 | 1.0690 | 12.82% |
+| QQQ | 716.31 | 1.0871 | 23.56% |
 
-Both original HTML files are archived with SHA256 in
-[verification.json](../datasets/workbench/current-20260909-macro/verification.json).
-Date-only publication is conservatively admitted at the end of August 18. The
-first-seen time is the current verification instant; no historical first-seen
-claim is inferred from the dated release. The latest-release source was checked
-on the Fed website at acquisition. The 75-day observation-age allowance is an
-explicit snapshot choice for this monthly release, not a daily freshness claim.
+The prices are split-adjusted and exclude cash dividends. Volatility is the
+sample standard deviation of 63 daily log returns, annualized by sqrt(252).
+SPY volatility supplies the broad-equity stress component in both assessments;
+QQQ volatility is an instrument diagnostic. The current capture does not claim
+historical point-in-time availability.
 
-The [SPY manifest](../datasets/workbench/current-20260909-macro/SPY-manifest.json)
-and [QQQ manifest](../datasets/workbench/current-20260909-macro/QQQ-manifest.json)
-pin their raw-metric extracts, which use the existing illustrative growth transform.
-JSON/HTML assessments and input-audit receipts are under `assessments/SPY` and
-`assessments/QQQ`. Only industrial production is currently measured. Credit,
-psychology, realized volatility, timing, ETF quality and ETF valuation remain
-missing. No synthetic row fills a gap, and no company P/E or operating margin
-is passed off as ETF fundamentals.
+The Federal Reserve's August 18, 2026 G.17 release reports July industrial
+production 1.1% above July 2025, seasonally adjusted and preliminary. The release
+narrative and its Table 1 cell independently produce the same number; they remain
+two extraction routes from one publisher. The HTML inputs and every price capture
+are hash-pinned in [verification.json](../datasets/workbench/current-20260909/verification.json).
 
-`cycle_workbench_snapshot.py` also implements a bounded read-only IBKR capture:
-resolve exact SPY/QQQ stock contracts, request one year of regular-session daily
-TRADES bars, and archive replies separately from Cycle 1. The metric verifier
-requires 200 consecutive scheduled closes through the latest completed session,
-rejects duplicates/gaps/stale captures/invalid OHLC, and excludes the current
-unfinished session. It cross-checks NumPy and scalar calculations of price/SMA200
-and 63-session sample log-return volatility annualized by sqrt(252). These are
-split-adjusted **price** statistics excluding cash dividends. SPY volatility
-represents the broad-equity stress proxy in both instrument reports; QQQ volatility
-is a separate diagnostic. Today's historical download is not a historical
-point-in-time panel.
+[SPY inputs](../datasets/workbench/current-20260909/SPY-manifest.json) and
+[QQQ inputs](../datasets/workbench/current-20260909/QQQ-manifest.json) now include
+growth, timing and stress measurements. Credit, psychology, ETF quality, and
+fundamental valuation remain explicitly missing. The assessments therefore remain
+conditional and cannot establish predictive performance or support an allocation.
+No synthetic value fills a missing component.
 
-Gateway connection attempts failed at localhost:4002. Once the read-only paper
-Gateway is running, capture into the already prepared, separate full-snapshot root:
+Reports and input-audit receipts:
 
-```bash
-IBKR_MODE=paper IBKR_READ_ONLY=true npm run cycle:current-snapshot -- capture-prices --root datasets/workbench/current-20260909
-npm run cycle:current-snapshot -- build --root datasets/workbench/current-20260909
-```
+- [SPY assessment](../datasets/workbench/current-20260909/assessments/SPY/1d0e9a2fb4b544adc7763672028cf73977f8386b41395acc66eef1f1f86580b4.html)
+- [QQQ assessment](../datasets/workbench/current-20260909/assessments/QQQ/23c4464ebda94cd0683ffea7b2ce0833964d5fad32e3e6187384827b4df57eb3.html)
 
-That root already contains the pinned Fed source files but no published manifests.
-The macro-only snapshot remains immutable. Switch both notebooks' `WORKBENCH_INPUT_ROOT`
-to the completed full-snapshot directory after its verification succeeds. Do not
-overwrite a published snapshot to refresh it; create a separately identified one.
-The notebook workbench panels use observed inputs; their earlier educational
-price-history charts and six scenario comparisons remain explicitly synthetic.
+Both notebooks now default to this full snapshot. The earlier
+`current-20260909-macro` snapshot remains immutable as the initial macro-only
+artifact. Refreshes must use a new directory instead of overwriting either
+published snapshot.
 
-Public-source verification and deterministic calculation checks establish this
-snapshot's stated scope, not predictive value or a qualified allocation policy.
-This track cannot reopen either stopped Cycle 1 experiment.
-
-Verification: both notebooks executed end-to-end on this macro-only snapshot;
-executed copies are in `/tmp/cycle-workbench-current-check`. `npm run check`
-passed (15 TypeScript and 296 Python tests), including source cross-checks,
-independent price-metric arithmetic, missing-session rejection and cutoff tests.
+The operational capture completed the previously blocked secondary increment.
+It remains separate from Cycle 1 and from the
+[prospective observation cohort](PROSPECTIVE_OBSERVATION.md).

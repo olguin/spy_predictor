@@ -18,10 +18,12 @@ rows, and retain the 120-label minimum. Qualification establishes 42 trainable
 forecasts per mode. Missing periods are reported, not imputed. Details, source
 identities, runnable commands and limitations are in the development note.
 
-Subsequent Gateway repair attempt, 2026-09-09: ten bounded requests did not yield
-compatible replacements for the two missing sessions. No new dataset or model
-run was produced. A compatible source correction or separately qualified source
-is now needed; see the development note's linked immutable repair audit.
+The user closed the missing-session investigation on 2026-09-09. Post-output
+diagnostics showed unstable rankings across years and leave-one-year-out slices.
+The project therefore stops model search on this small development sample and
+collects new observations through the frozen, static-reference
+[prospective cohort](PROSPECTIVE_OBSERVATION.md). The current SPY/QQQ workbench
+snapshot is also complete. No final historical evaluation was opened.
 
 The A–E sequence below remains the historical **Cycle 1 research qualification
 plan**, not the dependency chain for the separately authorized development track.
@@ -470,12 +472,15 @@ or authorize orders. Any later predictive or policy claim needs its own frozen
 evaluation and unseen evidence. Keep the no-new-paid-data constraint and use
 separate report identities, configurations and output directories.
 
-Implementation progress: both notebooks now run shared synthetic market and
-instrument assessments with explicit cutoffs, component/source panels, scenario
-comparisons and export. Main-track deterministic annual-law and vintage/cash
-fixtures also exist. These are functional increments; no full-path random audit
-or current-market investment assessment has been run. See the handoff for the
-next scientific and application increments.
+Implementation progress: both notebooks run shared synthetic market and instrument
+assessments with explicit cutoffs, component/source panels, scenario comparisons
+and export. The separate META track has also archived a current five-symbol
+SEC-enabled packet, registered its first quant-only forecast, and implemented
+immutable outcome acquisition/scoring plus guarded post-close operation. Future
+packets support VIX/VIX3M, transparent risk-appetite and delayed IBKR context.
+This is operational research evidence, not a current investment recommendation,
+calibrated probability model or Cycle 1 qualification. See the handoff and
+[META runbook](META_OBSERVATION_OPERATIONS.md) for the next dated operations.
 
 ## 6. Resource discipline, stopping rules, and maintenance
 

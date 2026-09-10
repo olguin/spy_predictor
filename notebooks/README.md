@@ -44,7 +44,7 @@ workbench manifest panel described below.
 Both notebooks now include a shared assessment panel connected to validated local
 input manifests. Set `WORKBENCH_INPUT_MODE='manifest'`, `WORKBENCH_MANIFEST`,
 `WORKBENCH_INPUT_ROOT`, and timezone-aware `WORKBENCH_AS_OF`. The default manifest
-is now `datasets/workbench/current-20260909-macro/SPY-manifest.json`, a verified
+is now `datasets/workbench/current-20260909/SPY-manifest.json`, a verified
 observed macro-only snapshot. Its cutoff is read from `verification.json`; choose
 `QQQ-manifest.json` for the other instrument panel. Price/volatility and the other
 missing components stay unavailable pending their own inputs. See

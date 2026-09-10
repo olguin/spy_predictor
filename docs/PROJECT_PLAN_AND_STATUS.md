@@ -1,6 +1,6 @@
 # Project plan, status, and next-session handoff
 
-Status reviewed: 2026-09-09. Repository: `spy_predictor`.
+Status reviewed: 2026-09-10. Repository: `spy_predictor`.
 
 ## Current decision and next action
 
@@ -33,13 +33,27 @@ dates. The result is descriptive and no model is promoted. Dataset identity
 `03608a029ae35517`, report folder `5ffd4a7b879d3237`; the development note contains
 full hashes.
 
-The user subsequently made Gateway available and authorized the repair/rerun.
-Ten bounded IBKR requests found no compatible replacements: SMART daily/hourly
-responses still omit both dates; ARCA returns the 2007 date but its neighboring
-closes differ from SMART. The [repair audit](../reports/historical-development/gap-audit-6d79f6498c132ac6/summary.md)
-is `DATA_REPAIR_NOT_QUALIFIED`. No new dataset or training run was produced.
-Next: obtain a compatible source correction or separately qualify another source;
-connectivity is resolved, data completeness is not. Keep final evaluation closed.
+The user closed the missing-session investigation on 2026-09-09. Preserve its
+`DATA_REPAIR_NOT_QUALIFIED` audit and the original missingness-aware run; do not
+spend more work on those dates. Post-output
+[diagnostics](../reports/historical-development/diagnostics-9af70a0b94be3a96/summary.md)
+show unstable year-by-year rankings and generally pessimistic, wide distributions.
+No further model search on the same 42 overlapping outcomes is planned.
+
+**Next active operational action:** run the guarded META post-close workflow for
+new trading-session origins and run the outcome updater when targets mature. The
+outcome/maturity/scoring subsystem is implemented; the first observation has 15
+`NOT_DUE` symbol-horizon records and its five-session targets become available
+September 17, 2026 at 20:20 UTC. Engineering can now continue with policy-compliant
+QQQ manual holdings, primary event/calendar sources and a production agent adapter,
+without opening any historical holdout. See the latest META milestone below.
+
+Separately operate the registered [prospective observation cohort](PROSPECTIVE_OBSERVATION.md),
+identity `415e6dcbc1f4964095147591850400e26d81eecb7840e46ab3b8b94483dc1592`.
+It freezes the simplest unconditional reference for 12 monthly origins beginning
+September 30, 2026. `npm run prospective:status` currently reports `NOT_DUE`.
+Run `npm run prospective:issue` only during each post-close/pre-next-open window.
+It has no trading path, no interim performance review, and no final-evaluation access.
 
 ## Goal and critical path
 
@@ -77,10 +91,16 @@ observed-as-of or reconstructed research inputs after structural validation.
 Validated local manifests and raw-metric transformations are now connected to
 both notebooks. The included input sample is synthetic; schema/hash/unit/time
 validation does not authenticate a publisher or establish investment performance.
-A verified current macro snapshot now supplies observed industrial-production
-growth in both notebooks; [snapshot details](WORKBENCH_CURRENT_SNAPSHOT.md).
-SPY/QQQ price capture is implemented but Gateway at localhost:4002 was unavailable.
-Next: add fresh prices/realized volatility, then expand remaining components. Public method descriptions and our independent proxies must remain
+A verified [current snapshot](WORKBENCH_CURRENT_SNAPSHOT.md) supplies observed
+industrial-production growth plus complete SPY/QQQ price-to-SMA200 and realized
+volatility inputs in both notebooks. The separate [META workbench](META_ANALYSIS_PLAN.md)
+now adds a five-symbol post-close packet, policy-aware SEC evidence, partial SPY
+holdings, bounded news, staged specialist prompts and a quant-only prospective
+record. Its outcome/scoring loop, guarded post-close runner, optional delayed-IBKR
+context, VIX term proxy and transparent risk-appetite components are implemented.
+Next: operate the prospective cadence and expand ETF quality, valuation and
+primary-source event coverage. Public method descriptions
+and our independent proxies must remain
 distinguishable. This exploratory track can advance while Cycle 1 is stopped;
 its outputs cannot qualify Cycle 1 or imply tested investment performance.
 
@@ -100,11 +120,11 @@ their terminal decisions with expected exit 2.
 | Foundation — Phase 0 | Complete research spine: identity, snapshots, cutoff guards, resumability, schemas, calendars, storage, CI; synthetic baseline is infrastructure evidence |
 | Target tournament — Phase 1 | Complete: `NO_TARGET_ADEQUATE`; 24 SPY/QQQ/ES/NQ instrument/horizon candidates, no target frozen |
 | Cycle research — Phase 1B | Unqualified v4 archive; synthetic evaluator and downstream fixture implementations exist; frozen simulation v1 stopped for insufficient evidence scope; no locked validation |
-| Reality Store / production baseline — Phases 2–3 | Foundation subsets only; extend them for a surviving target rather than build the full platform upfront |
-| Agent runtime — Phase 4 | Interface and mock only |
+| Reality Store / production baseline — Phases 2–3 | Monthly observation-only registry frozen; first issue due 2026-09-30. Separate META quant-only observation issued for 2026-09-10; no scheduler or trading |
+| Agent runtime — Phase 4 | Seven-stage META prompt/validation runner and mock exist; no production provider adapter or real specialist run |
 | Anti-overfitting — original Phase 7 | Some chronological controls exist; Cycle 1 claim tests, power gate, ledger, and one-time confirmation mechanism are prerequisites now |
 | Agents, evolution, options, expression, paper, live — remaining phases | Not implemented; conditional on evidence, with separate live authorization |
-| IBKR integration | Paper/read-only market-data adapter; no order submission; prior live capture was entitlement-limited, current entitlement not rechecked |
+| IBKR integration | Paper/read-only verified; paid live API entitlements absent; delayed type-3 quotes carry measured exchange timestamps rather than assumed freshness. Latest rollover run used SPY/QQQ and ESZ6/NQZ6; no order submission |
 
 Passing tests establish implemented behavior, not statistical power or market
 predictive value. The old online/offline dataset identity match established
@@ -129,6 +149,10 @@ reproduction; later correctness findings superseded its qualification.
 | [v4 dataset manifest](../datasets/cycle1/cycle1-monthly-19ccd95384e690de/manifest.json) | Local, Git-ignored archive; suspended for evaluation |
 | [Phase 1 final report](../reports/phase1-cd393a5b710cd176/report.json) | Completed negative result; preserve unchanged |
 | [DATA_DURABILITY.md](DATA_DURABILITY.md) | Archive/database backup and separate restore verification; local restore verified; independent archive restore remains unverified |
+| [META analysis plan](META_ANALYSIS_PLAN.md) | Current five-symbol evidence, prompt, source-policy and prospective-evaluation plan |
+| [META operations runbook](META_OBSERVATION_OPERATIONS.md) | Exact post-close, delayed-context and outcome/status commands |
+| [first META observation](../datasets/meta-observation/forecasts/2026-09-10-6a5d97828bc216d5.json) | Immutable September 10 quant-only origin; 15 target records currently `NOT_DUE` |
+| [latest delayed rollover manifest](../datasets/ibkr/delayed/delayed-20260910T213722560270Z-17390a1b/manifest.json) | Paper/read-only type-3 evidence; ESZ6/NQZ6 selected by explicit ten-day rule |
 
 Historical identities, for verification rather than evaluation approval:
 
@@ -206,12 +230,34 @@ unnecessary for the amendment work.
 
 1. Verify `npm run cycle1:successor -- status` (expected exit 2); preserve both
    stopped experiments and their artifacts unchanged.
-2. Continue the separately authorized [historical development track](HISTORICAL_DEVELOPMENT.md):
-   verify its qualification receipt, run the fixed baseline/challenger roster,
-   and review development-only scores and missingness. No final evaluation access.
-3. The [secondary snapshot](WORKBENCH_CURRENT_SNAPSHOT.md) remains independently
-   available. Gateway on port 4002 was reachable during the gap repair; current
-   snapshot refresh is separate from this historical-data task.
+2. Run `npm run prospective:status`. If and only if it reports `DUE`, run
+   `npm run prospective:issue` before the next XNYS open. Do not backfill a missed
+   window or inspect aggregate outcomes before all 12 mature.
+3. Operate the [META workbench](META_ANALYSIS_PLAN.md). The September 10
+   quant-only observation is issued and its outcome/scoring machinery is complete.
+   `npm run meta:outcomes -- update` is safe to run now and returns a no-write
+   `NOT_DUE` result. For another origin, first run the delayed quote capture below,
+   then run the guarded post-close command after the XNYS close plus 20 minutes
+   and before the next open. The next normal window begins September 11, 2026 at
+   20:20 UTC / 17:20 Buenos Aires. Do not backfill or bypass duplicate-origin checks.
+
+```bash
+npm run ibkr:delayed -- \
+  --auto-roll-futures --minimum-days-to-expiry 10 --duration-seconds 15
+
+npm run meta:postclose -- \
+  --symbols SPY QQQ AAPL MSFT NVDA --etfs SPY QQQ \
+  --etf-holdings SPY=datasets/workbench/manual-sources/spy-top-holdings-20260909.csv \
+  --ibkr-delayed-context=/exact/path/to/the/new/quotes.json
+
+npm run meta:outcomes -- update
+```
+
+QQQ holdings remain an explicit gap unless a fresh browser-saved sponsor file is
+supplied. Do not automate the audited Invesco browser endpoint. The first five
+outcomes become eligible September 17, 2026 at 20:20 UTC / 17:20 Buenos Aires.
+The separate monthly prospective cohort's first issue window begins after the
+September 30 XNYS close; its `prospective:status` guard remains authoritative.
 
 ## Remaining phases at a glance
 
@@ -225,7 +271,7 @@ unnecessary for the amendment work.
 | C — Rebuild and qualify real dataset | Pending passing B | Final authorities, independent restore, admissible cash paths, corrected spread lag, role-aware coverage and identical offline rebuild |
 | D — SPY selection | Pending C | Evaluate fixed candidates on selection only; publish survivors or a negative decision |
 | E — One historical confirmation | Conditional on D | Persist opening identity before scoring; publish one immutable decision including eligible QQQ/secondary checks |
-| Operational forecasts and prospective evidence | Conditional on research qualification | Timestamp monthly forecasts before outcomes and test calibration on newly arriving evidence |
+| Operational forecasts and prospective evidence | Observation-only static baseline registered | First issue window after 2026-09-30 close; 12 outcomes required before descriptive review |
 | Allocation/paper workflow | Later, separately qualified | Validate costs, risk and operational reliability; historical forecast success alone is insufficient |
 | Agents, evolution, options, live execution | Conditional later work | Demonstrate incremental value; live execution needs separate authorization |
 
@@ -240,12 +286,11 @@ cutoff/revision/missingness handling, manifest hashes and confined input roots,
 component provenance panels, and JSON/HTML exports in both expanded notebooks.
 The included manifest is synthetic and both notebooks ran successfully on it.
 
-Current macro-only snapshot: `datasets/workbench/current-20260909-macro`. Fed
-release narrative and Table 1 independently extract the same July 2026 IP growth;
-source files, SHA256, availability times, SPY/QQQ manifests and assessments exist.
-Both notebooks use this snapshot. Gateway was unavailable for fresh price capture.
-Next: capture and verify SPY/QQQ daily prices to add timing and realized volatility.
-Expand missing components and instrument-specific definitions (especially ETF
+Current full snapshot: `datasets/workbench/current-20260909`. Fed release
+narrative and Table 1 independently extract the same July 2026 IP growth. Read-only
+IBKR capture supplies verified 200-session SPY/QQQ windows through September 9,
+including price-to-SMA200 and realized volatility. Both notebooks now use this
+snapshot. Expand missing components and instrument-specific definitions (especially ETF
 quality/valuation), keeping public method descriptions separate from our proxy
 formulas. Later predictive claims need a separate frozen evaluation. This work
 can proceed independently while the main simulator is not ready to freeze.
@@ -263,18 +308,58 @@ Preserve unrelated work, ignored raw archives, source snapshots, and historical
 reports. Keep source credentials private. No account-query, order, agent, or
 LLM work belongs in Cycle 1. Trading and scheduler deployment are separate work.
 
-Latest verification, 2026-09-09: `npm run check` passed (15 TypeScript and
-296 Python tests). Both notebooks executed on the observed macro-only snapshot;
-executed copies are in `/tmp/cycle-workbench-current-check`. The registered
+Latest META milestone, 2026-09-10: a fresh post-close five-symbol capture completed
+with zero acquisition errors. It archived September 10 Alpaca daily prices for
+SPY, QQQ, AAPL, MSFT and NVDA; nine current FRED series; 50 bounded news items;
+the dated SPY top-ten holdings table; and SEC ticker identity, recent submissions
+and standardized company facts for AAPL, MSFT and NVDA. The built packet hash is
+`6a5d97828bc216d5ba05028e7f5d6db55c8a40a013e4d8c1bcea07e5884b0ba3`.
+Its quant-only observation was registered at `2026-09-10T20:55:00.966487+00:00`
+with forecast hash
+`f5c0610172460dd47e46c2ebfae96bb3283d266fe6db3840ce57310e6f9ef5a5`.
+All five origins are September 10; fixed target sessions are September 17
+(5), October 9 (21), and December 9 (63). `calibrated_meta_forecast` remains null.
+QQQ holdings, survey sentiment, real specialist execution and a trained probability
+combiner remain missing. Paper IB Gateway also returned delayed type-3 top-of-book
+quotes in consecutive runs without a Gateway restart; complimentary real-time
+display data did not confer API entitlements.
+
+META continuation, 2026-09-10: [the operations runbook](META_OBSERVATION_OPERATIONS.md)
+now documents a single guarded `meta:postclose` command and the independent
+`meta:outcomes` status/update loop. Forecasts, outcomes and scores are separate
+hash-linked immutable records. Maturity uses the exact XNYS target close plus the
+20-minute provider buffer; current status is 15 `NOT_DUE`, zero waiting, ready or
+scored. Event and distribution scoring includes multiclass Brier/log loss,
+probability-up Brier, direction accuracy only for non-50/50 calls, pinball loss,
+80/90% coverage, median error and current-reference lognormal CRPS. Future packets
+can include a separately timestamped IBKR delayed panel, VIX/VIX3M structure and
+the transparent risk-appetite proxy. A live paper/read-only rollover check selected
+ESZ6 and NQZ6 under the explicit ten-day minimum-expiry rule; exact contract and
+quote age are retained. QQQ scheduled scraping remains prohibited by the current
+source-policy decision, while fresh browser-saved sponsor data remains supported.
+
+Latest application/development milestone, 2026-09-09: the full current snapshot
+passed continuity and independent arithmetic checks. The prospective observation
+cohort registered with 161 frozen development labels and reports `NOT_DUE`, next
+origin 2026-09-30. The registered
 successor's one development replication completed in 88.75 seconds and caused
 the computational stop, with decision identity
 `238b3770f41551a2ff85480739c5552b28bef0bf10825d9618984615b7d54268`.
 `cycle1:successor -- status` verifies and reproduces the stop without another draw.
 Registration identity is
 `88b0d0498607721d6140b45fe4dcec8cca974fb884dae17ec140d2083a12d59f`.
-The secondary input receipt is
-`datasets/workbench/current-20260909-macro/verification.json`; current-price
-capture is waiting for the paper/read-only Gateway on localhost:4002.
+The full secondary input receipt is
+`datasets/workbench/current-20260909/verification.json`.
+
+Latest verification after the September 10 META outcome/source increment:
+`npm run check` passed (15 TypeScript and 359 Python tests). The SEC-enabled
+capture, offline META build and prospective registration remain verified; the
+new maturity, scoring, post-close, delayed-context and rollover tests pass. Both notebooks had
+previously executed end-to-end with the full current
+snapshot. `npm run prospective:status` reproduced cohort identity
+`415e6dcbc1f4964095147591850400e26d81eecb7840e46ab3b8b94483dc1592`,
+zero issued forecasts, next origin 2026-09-30, performance review closed, and
+final evaluation unopened.
 
 Earlier integration verification on 2026-09-09: `npm run check` passed (15 TypeScript,
 283 Python tests). `cycle1:integration-check` published report
