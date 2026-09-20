@@ -1,0 +1,1384 @@
+{
+  "agent_contract_version": "meta-agent-output-v4",
+  "implementation_sha256": "f88ab98ac730239c5e2b2069d7305b8acfc97de6dacb0556951b80f1ffc96fd9",
+  "input_hash": "7398870c6a9b510ffe7297d17716139ab7fdd295e474609c2a5fd0ad2dc5b3b2",
+  "instructions": "This is a small archived numerical-parity diagnostic, not a market assessment. Call submit_result once using the v4 schema. Give one assessment with INSUFFICIENT_EVIDENCE, UNKNOWN view, named missing specialist evidence, empty claims, and exactly 5/21/63 horizon assessments. Use INSUFFICIENT_EVIDENCE and UNKNOWN on each horizon, empty support/opposition arrays, UNAVAILABLE confirmation/invalidation triggers with null level and no evidence IDs. Copy all three golden decision rows exactly from the supplied numerical forecast, using forecast_ref /symbols/ANET/horizons/0, /1, /2 respectively. Keep explanations short. Research priority is not buy attractiveness. Set new_material_contradiction to null. Do not invent claims or current facts.",
+  "output_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "assessments": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "claim_id": {
+                    "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+                    "type": "string"
+                  },
+                  "classification": {
+                    "enum": [
+                      "FACT",
+                      "INFERENCE"
+                    ]
+                  },
+                  "evidence_family": {
+                    "maxLength": 80,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "evidence_ids": {
+                    "items": false,
+                    "minItems": 1,
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "horizons": {
+                    "items": {
+                      "enum": [
+                        5,
+                        21,
+                        63
+                      ]
+                    },
+                    "minItems": 1,
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "invalidation": {
+                    "maxLength": 2000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "numeric_values": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "packet_path": {
+                          "pattern": "^/",
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "packet_path",
+                        "value"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 30,
+                    "type": "array"
+                  },
+                  "stance": {
+                    "enum": [
+                      "SUPPORT",
+                      "OPPOSE",
+                      "CONTEXT"
+                    ]
+                  },
+                  "statement": {
+                    "maxLength": 3000,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "claim_id",
+                  "classification",
+                  "stance",
+                  "evidence_family",
+                  "statement",
+                  "evidence_ids",
+                  "horizons",
+                  "invalidation",
+                  "numeric_values"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "counterevidence": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "horizon_assessments": {
+              "items": {
+                "additionalProperties": false,
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "status": {
+                          "const": "INSUFFICIENT_EVIDENCE"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "direction": {
+                          "const": "UNKNOWN"
+                        },
+                        "missing_evidence": {
+                          "minItems": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "status": {
+                          "const": "SUPPORTED"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "direction": {
+                          "not": {
+                            "const": "UNKNOWN"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "properties": {
+                  "action_implication": {
+                    "maxLength": 2000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "confirmation": {
+                    "additionalProperties": false,
+                    "allOf": [
+                      {
+                        "if": {
+                          "properties": {
+                            "availability": {
+                              "const": "AVAILABLE"
+                            }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "evidence_ids": {
+                              "minItems": 1
+                            },
+                            "level": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "availability": {
+                              "const": "UNAVAILABLE"
+                            }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "comparison": {
+                              "const": "UNAVAILABLE"
+                            },
+                            "evidence_ids": {
+                              "maxItems": 0
+                            },
+                            "level": {
+                              "type": "null"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "properties": {
+                      "availability": {
+                        "enum": [
+                          "AVAILABLE",
+                          "UNAVAILABLE"
+                        ]
+                      },
+                      "comparison": {
+                        "enum": [
+                          "ABOVE",
+                          "AT_OR_ABOVE",
+                          "BELOW",
+                          "AT_OR_BELOW",
+                          "EQUALS",
+                          "UNAVAILABLE"
+                        ]
+                      },
+                      "confirmation_interval": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "evidence_ids": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                      },
+                      "expiry": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "field": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "level": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "units": {
+                        "minLength": 1,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "availability",
+                      "field",
+                      "comparison",
+                      "level",
+                      "units",
+                      "confirmation_interval",
+                      "expiry",
+                      "evidence_ids"
+                    ],
+                    "type": "object"
+                  },
+                  "direction": {
+                    "enum": [
+                      "BULLISH",
+                      "BEARISH",
+                      "NEUTRAL",
+                      "MIXED",
+                      "UNKNOWN"
+                    ]
+                  },
+                  "invalidation_trigger": {
+                    "additionalProperties": false,
+                    "allOf": [
+                      {
+                        "if": {
+                          "properties": {
+                            "availability": {
+                              "const": "AVAILABLE"
+                            }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "evidence_ids": {
+                              "minItems": 1
+                            },
+                            "level": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "availability": {
+                              "const": "UNAVAILABLE"
+                            }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "comparison": {
+                              "const": "UNAVAILABLE"
+                            },
+                            "evidence_ids": {
+                              "maxItems": 0
+                            },
+                            "level": {
+                              "type": "null"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "properties": {
+                      "availability": {
+                        "enum": [
+                          "AVAILABLE",
+                          "UNAVAILABLE"
+                        ]
+                      },
+                      "comparison": {
+                        "enum": [
+                          "ABOVE",
+                          "AT_OR_ABOVE",
+                          "BELOW",
+                          "AT_OR_BELOW",
+                          "EQUALS",
+                          "UNAVAILABLE"
+                        ]
+                      },
+                      "confirmation_interval": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "evidence_ids": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                      },
+                      "expiry": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "field": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "level": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "units": {
+                        "minLength": 1,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "availability",
+                      "field",
+                      "comparison",
+                      "level",
+                      "units",
+                      "confirmation_interval",
+                      "expiry",
+                      "evidence_ids"
+                    ],
+                    "type": "object"
+                  },
+                  "missing_evidence": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "criticality": {
+                          "enum": [
+                            "CRITICAL",
+                            "ADVISORY"
+                          ]
+                        },
+                        "item": {
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "item",
+                        "criticality"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "review": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "event": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "when": {
+                        "minLength": 1,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "when",
+                      "event"
+                    ],
+                    "type": "object"
+                  },
+                  "status": {
+                    "enum": [
+                      "SUPPORTED",
+                      "INSUFFICIENT_EVIDENCE"
+                    ]
+                  },
+                  "strongest_opposition_claim_ids": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "strongest_support_claim_ids": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "trading_days": {
+                    "enum": [
+                      5,
+                      21,
+                      63
+                    ]
+                  }
+                },
+                "required": [
+                  "trading_days",
+                  "status",
+                  "direction",
+                  "strongest_support_claim_ids",
+                  "strongest_opposition_claim_ids",
+                  "action_implication",
+                  "confirmation",
+                  "invalidation_trigger",
+                  "missing_evidence",
+                  "review"
+                ],
+                "type": "object"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            },
+            "invalidation": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "missing": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "status": {
+              "enum": [
+                "SUPPORTED",
+                "INSUFFICIENT_EVIDENCE"
+              ]
+            },
+            "symbol": {
+              "enum": [
+                "ANET"
+              ]
+            },
+            "thesis": {
+              "maxLength": 6000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "view": {
+              "enum": [
+                "BULLISH",
+                "BEARISH",
+                "NEUTRAL",
+                "MIXED",
+                "UNKNOWN"
+              ]
+            }
+          },
+          "required": [
+            "symbol",
+            "status",
+            "view",
+            "thesis",
+            "counterevidence",
+            "invalidation",
+            "missing",
+            "claims",
+            "horizon_assessments"
+          ],
+          "type": "object"
+        },
+        "maxItems": 1,
+        "minItems": 1,
+        "type": "array"
+      },
+      "golden_conclusions": {
+        "additionalProperties": false,
+        "properties": {
+          "critical_findings": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 5,
+            "type": "array"
+          },
+          "decision_rows": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "action_now": {
+                  "enum": [
+                    "WAIT"
+                  ]
+                },
+                "existing_position_action": {
+                  "enum": [
+                    "POSITION_CONTEXT_REQUIRED"
+                  ]
+                },
+                "explanation": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "forecast_ref": {
+                  "enum": [
+                    "/symbols/ANET/horizons/0",
+                    "/symbols/ANET/horizons/1",
+                    "/symbols/ANET/horizons/2"
+                  ]
+                },
+                "new_position_action": {
+                  "enum": [
+                    "WAIT"
+                  ]
+                },
+                "probability_price_up": {
+                  "enum": [
+                    0.5317844810019781,
+                    0.5347472996833051,
+                    0.5727197016731103
+                  ]
+                },
+                "symbol": {
+                  "enum": [
+                    "ANET"
+                  ]
+                },
+                "trading_days": {
+                  "enum": [
+                    5,
+                    21,
+                    63
+                  ]
+                },
+                "what_changes_action": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "what_could_go_wrong": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "symbol",
+                "trading_days",
+                "action_now",
+                "new_position_action",
+                "existing_position_action",
+                "probability_price_up",
+                "forecast_ref",
+                "explanation",
+                "what_changes_action",
+                "what_could_go_wrong"
+              ],
+              "type": "object"
+            },
+            "maxItems": 3,
+            "minItems": 3,
+            "type": "array"
+          },
+          "evidence_limitations": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "immediate_review_triggers": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "market_regime": {
+            "maxLength": 3000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "new_material_contradiction": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "overall_conclusion": {
+            "maxLength": 3000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "research_priorities": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "buy_attractiveness": {
+                  "enum": [
+                    "ATTRACTIVE",
+                    "CONDITIONAL",
+                    "UNATTRACTIVE",
+                    "NO_SETUP",
+                    "UNKNOWN"
+                  ]
+                },
+                "priority": {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "rationale": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "symbol": {
+                  "enum": [
+                    "ANET"
+                  ]
+                }
+              },
+              "required": [
+                "symbol",
+                "priority",
+                "buy_attractiveness",
+                "rationale"
+              ],
+              "type": "object"
+            },
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "overall_conclusion",
+          "market_regime",
+          "critical_findings",
+          "decision_rows",
+          "research_priorities",
+          "immediate_review_triggers",
+          "evidence_limitations",
+          "new_material_contradiction"
+        ],
+        "type": "object"
+      },
+      "input_hash": {
+        "const": "7398870c6a9b510ffe7297d17716139ab7fdd295e474609c2a5fd0ad2dc5b3b2"
+      },
+      "role": {
+        "const": "synthesis"
+      }
+    },
+    "required": [
+      "role",
+      "input_hash",
+      "assessments",
+      "golden_conclusions"
+    ],
+    "type": "object"
+  },
+  "packet": {
+    "as_of": "2026-09-16T14:10:10.463607+00:00",
+    "evidence": {},
+    "instruments": {},
+    "notice": "Archived numerical-only synthesis diagnostic. No current-operation or full-chain qualification.",
+    "symbols": [
+      "ANET"
+    ],
+    "version": "meta-analysis-v1"
+  },
+  "parent_input_hash": "098c56b58b388c8ea731d4db8fa5be58121ee8b8074e59779199b23ac82da047",
+  "prior_results": {
+    "numerical_forecast": {
+      "schema_version": "meta-structured-forecast-v3",
+      "symbols": {
+        "ANET": {
+          "horizons": [
+            {
+              "distribution": {
+                "distribution_family": "LOG_RETURN_NORMAL",
+                "event_definitions": {
+                  "bear": "terminal completed-session return is below -2.0%",
+                  "bull": "terminal completed-session return is above 2.0%",
+                  "neutral": "terminal completed-session return is between -2.0% and 2.0% inclusive",
+                  "path_exclusion": "These events do not describe touching a target or avoiding a stop before the terminal close.",
+                  "price_up": "terminal completed-session close is above the declared reference price"
+                },
+                "expected_simple_return_pct": 1.0365291408455768,
+                "formula": "log(P_h/P_0) ~ Normal(bounded_signal*max_shift*RV63*sqrt(h/252), (RV63/100)^2*h/252)",
+                "mean_log_return": 0.007047074527556171,
+                "median_simple_return_pct": 0.7071963587925685,
+                "price_quantiles": {
+                  "0.05": 170.03301509905302,
+                  "0.1": 175.09871214605766,
+                  "0.25": 183.90228890034516,
+                  "0.5": 194.2037574582956,
+                  "0.75": 205.0822729637582,
+                  "0.9": 215.3933569737546,
+                  "0.95": 221.81044892340174
+                },
+                "probabilities": {
+                  "bear": 0.36797492969843537,
+                  "bull": 0.43728649010543397,
+                  "neutral": 0.19473858019613066
+                },
+                "probability_price_up": 0.5347472996833051,
+                "return_threshold_pct": 2.0,
+                "sigma_log_return": 0.08080675217993359,
+                "status": "EXPERIMENTAL_UNCALIBRATED",
+                "trading_days": 5,
+                "variant": "experimental_meta_v3"
+              },
+              "recommendation": {
+                "action_now": "WAIT",
+                "advisory_gaps": [],
+                "condition_audits": [
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNSUPPORTED_CONFIRMATION_INTERVAL"
+                    ],
+                    "source_role": "technical",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNSUPPORTED_CONFIRMATION_INTERVAL"
+                    ],
+                    "source_role": "technical",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNACCEPTED_PROVENANCE",
+                      "UNGROUNDED_PRICE_LEVEL"
+                    ],
+                    "source_role": "macro_cycle",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNACCEPTED_PROVENANCE",
+                      "UNGROUNDED_PRICE_LEVEL"
+                    ],
+                    "source_role": "macro_cycle",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "fundamental",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "fundamental",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "news",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "news",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "geopolitical",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "geopolitical",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  }
+                ],
+                "conditional_trigger": null,
+                "critical_gaps": [
+                  "fundamental: Dated earnings/outlook surprise and expectations",
+                  "geopolitical: ANET-specific exposure and enacted/proposed policy transmission",
+                  "macro_cycle: ANET issuer exposure and qualified expectations",
+                  "news: ANET-specific new information and exposure mechanism"
+                ],
+                "decision_reason": "WAIT_DATA",
+                "existing_position_action": "POSITION_CONTEXT_REQUIRED",
+                "invalidation_availability": "UNAVAILABLE",
+                "invalidation_trigger": null,
+                "measured_edge_status": "UNPROVEN_HEURISTIC_RESEARCH_ONLY",
+                "new_position_action": "WAIT",
+                "next_review": "technical: 2026-09-23T21:00:00Z — next completed weekly technical review; macro_cycle: 2026-09-23T21:00:00Z — one-week price and financial-conditions review; fundamental: On next supplied filing or outlook event — Assess updated fundamentals and guidance.; news: 2026-09-23T20:00:00+00:00 — Review upon a supplied ANET-specific disclosure or catalyst.; geopolitical: 2026-09-23T20:00:00+00:00 — Review new sourced exposure or policy evidence.",
+                "notice": "Deterministic research action from an uncalibrated distribution; no order or personalized sizing is implied.",
+                "portfolio_sizing": "OUT_OF_SCOPE",
+                "reason_codes": [
+                  "INSUFFICIENT_ACCEPTED_CONTEXT_ROLES",
+                  "CRITICAL_EVIDENCE_GAP",
+                  "SPECIALIST_CONFLICT_OR_DISAGREEMENT"
+                ],
+                "review_events": [
+                  {
+                    "event": "next completed weekly technical review",
+                    "source_role": "technical",
+                    "when": "2026-09-23T21:00:00Z"
+                  },
+                  {
+                    "event": "one-week price and financial-conditions review",
+                    "source_role": "macro_cycle",
+                    "when": "2026-09-23T21:00:00Z"
+                  },
+                  {
+                    "event": "Assess updated fundamentals and guidance.",
+                    "source_role": "fundamental",
+                    "when": "On next supplied filing or outlook event"
+                  },
+                  {
+                    "event": "Review upon a supplied ANET-specific disclosure or catalyst.",
+                    "source_role": "news",
+                    "when": "2026-09-23T20:00:00+00:00"
+                  },
+                  {
+                    "event": "Review new sourced exposure or policy evidence.",
+                    "source_role": "geopolitical",
+                    "when": "2026-09-23T20:00:00+00:00"
+                  }
+                ],
+                "wait_for": [
+                  "fundamental: Dated earnings/outlook surprise and expectations",
+                  "geopolitical: ANET-specific exposure and enacted/proposed policy transmission",
+                  "macro_cycle: ANET issuer exposure and qualified expectations",
+                  "news: ANET-specific new information and exposure mechanism",
+                  "at least 3 specialist families with critic-accepted horizon claims"
+                ]
+              },
+              "reference": {
+                "availability_status": "KNOWN",
+                "contract_version": "meta-target-v1",
+                "corporate_action_basis": "split;cash-dividends-excluded",
+                "entry_basis_warning": "This completed-close forecast is not a profitability estimate for an intraday entry price.",
+                "forecast_origin": "2026-09-16T14:10:10.463607+00:00",
+                "information_cutoff": "2026-09-16T14:10:10.463607+00:00",
+                "origin_kind": "PRIOR_COMPLETED_CLOSE",
+                "origin_session": "2026-09-15",
+                "reference_evidence_ids": [
+                  "price-ANET"
+                ],
+                "reference_feed": "sip",
+                "reference_price": 192.84,
+                "reference_price_basis": "LATEST_COMPLETED_SESSION_CLOSE",
+                "reference_price_observed_at": "2026-09-15T20:00:00+00:00",
+                "return_basis": "PRICE_RETURN",
+                "session_calendar": "XNYS",
+                "source_available_at": "2026-09-16T14:09:39.879533+00:00",
+                "target_timestamp": "2026-09-22T20:00:00+00:00",
+                "target_trading_session": "2026-09-22"
+              },
+              "status": "EXPERIMENTAL_UNCALIBRATED",
+              "trading_days": 5
+            },
+            {
+              "distribution": {
+                "distribution_family": "LOG_RETURN_NORMAL",
+                "event_definitions": {
+                  "bear": "terminal completed-session return is below -5.0%",
+                  "bull": "terminal completed-session return is above 5.0%",
+                  "neutral": "terminal completed-session return is between -5.0% and 5.0% inclusive",
+                  "path_exclusion": "These events do not describe touching a target or avoiding a stop before the terminal close.",
+                  "price_up": "terminal completed-session close is above the declared reference price"
+                },
+                "expected_simple_return_pct": 2.728608058682802,
+                "formula": "log(P_h/P_0) ~ Normal(bounded_signal*max_shift*RV63*sqrt(h/252), (RV63/100)^2*h/252)",
+                "mean_log_return": 0.013208016121252362,
+                "median_simple_return_pct": 1.3295627264385763,
+                "price_quantiles": {
+                  "0.05": 148.8104845848804,
+                  "0.1": 158.03840287631405,
+                  "0.25": 174.75242637439104,
+                  "0.5": 195.40392876166416,
+                  "0.75": 218.49593832643333,
+                  "0.9": 241.6039056366352,
+                  "0.95": 256.586056298435
+                },
+                "probabilities": {
+                  "bear": 0.34845687662736424,
+                  "bull": 0.41493740777829513,
+                  "neutral": 0.23660571559434063
+                },
+                "probability_price_up": 0.5317844810019781,
+                "return_threshold_pct": 5.0,
+                "sigma_log_return": 0.1656045622289756,
+                "status": "EXPERIMENTAL_UNCALIBRATED",
+                "trading_days": 21,
+                "variant": "experimental_meta_v3"
+              },
+              "recommendation": {
+                "action_now": "WAIT",
+                "advisory_gaps": [],
+                "condition_audits": [
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNSUPPORTED_CONFIRMATION_INTERVAL"
+                    ],
+                    "source_role": "technical",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNSUPPORTED_CONFIRMATION_INTERVAL"
+                    ],
+                    "source_role": "technical",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNACCEPTED_PROVENANCE",
+                      "UNGROUNDED_PRICE_LEVEL"
+                    ],
+                    "source_role": "macro_cycle",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNACCEPTED_PROVENANCE",
+                      "UNGROUNDED_PRICE_LEVEL"
+                    ],
+                    "source_role": "macro_cycle",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "fundamental",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "fundamental",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "news",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "news",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "geopolitical",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "geopolitical",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  }
+                ],
+                "conditional_trigger": null,
+                "critical_gaps": [
+                  "fundamental: Comparable-period fundamental trend and valuation",
+                  "geopolitical: ANET-specific exposure and policy timing",
+                  "macro_cycle: ANET earnings and exposure data",
+                  "news: ANET-specific demand and earnings evidence"
+                ],
+                "decision_reason": "WAIT_DATA",
+                "existing_position_action": "POSITION_CONTEXT_REQUIRED",
+                "invalidation_availability": "UNAVAILABLE",
+                "invalidation_trigger": null,
+                "measured_edge_status": "UNPROVEN_HEURISTIC_RESEARCH_ONLY",
+                "new_position_action": "WAIT",
+                "next_review": "technical: 2026-10-14T21:00:00Z — 21-session review; macro_cycle: 2026-10-16T21:00:00Z — 21-session review; fundamental: On next supplied filing — Compare reported trends and valuation inputs.; news: 2026-10-15T20:00:00+00:00 — Review new ANET-specific primary disclosure.; geopolitical: 2026-10-15T20:00:00+00:00 — Review new sourced exposure or policy evidence.",
+                "notice": "Deterministic research action from an uncalibrated distribution; no order or personalized sizing is implied.",
+                "portfolio_sizing": "OUT_OF_SCOPE",
+                "reason_codes": [
+                  "INSUFFICIENT_ACCEPTED_CONTEXT_ROLES",
+                  "CRITICAL_EVIDENCE_GAP",
+                  "SPECIALIST_CONFLICT_OR_DISAGREEMENT"
+                ],
+                "review_events": [
+                  {
+                    "event": "21-session review",
+                    "source_role": "technical",
+                    "when": "2026-10-14T21:00:00Z"
+                  },
+                  {
+                    "event": "21-session review",
+                    "source_role": "macro_cycle",
+                    "when": "2026-10-16T21:00:00Z"
+                  },
+                  {
+                    "event": "Compare reported trends and valuation inputs.",
+                    "source_role": "fundamental",
+                    "when": "On next supplied filing"
+                  },
+                  {
+                    "event": "Review new ANET-specific primary disclosure.",
+                    "source_role": "news",
+                    "when": "2026-10-15T20:00:00+00:00"
+                  },
+                  {
+                    "event": "Review new sourced exposure or policy evidence.",
+                    "source_role": "geopolitical",
+                    "when": "2026-10-15T20:00:00+00:00"
+                  }
+                ],
+                "wait_for": [
+                  "fundamental: Comparable-period fundamental trend and valuation",
+                  "geopolitical: ANET-specific exposure and policy timing",
+                  "macro_cycle: ANET earnings and exposure data",
+                  "news: ANET-specific demand and earnings evidence",
+                  "at least 3 specialist families with critic-accepted horizon claims"
+                ]
+              },
+              "reference": {
+                "availability_status": "KNOWN",
+                "contract_version": "meta-target-v1",
+                "corporate_action_basis": "split;cash-dividends-excluded",
+                "entry_basis_warning": "This completed-close forecast is not a profitability estimate for an intraday entry price.",
+                "forecast_origin": "2026-09-16T14:10:10.463607+00:00",
+                "information_cutoff": "2026-09-16T14:10:10.463607+00:00",
+                "origin_kind": "PRIOR_COMPLETED_CLOSE",
+                "origin_session": "2026-09-15",
+                "reference_evidence_ids": [
+                  "price-ANET"
+                ],
+                "reference_feed": "sip",
+                "reference_price": 192.84,
+                "reference_price_basis": "LATEST_COMPLETED_SESSION_CLOSE",
+                "reference_price_observed_at": "2026-09-15T20:00:00+00:00",
+                "return_basis": "PRICE_RETURN",
+                "session_calendar": "XNYS",
+                "source_available_at": "2026-09-16T14:09:39.879533+00:00",
+                "target_timestamp": "2026-10-14T20:00:00+00:00",
+                "target_trading_session": "2026-10-14"
+              },
+              "status": "EXPERIMENTAL_UNCALIBRATED",
+              "trading_days": 21
+            },
+            {
+              "distribution": {
+                "distribution_family": "LOG_RETURN_NORMAL",
+                "event_definitions": {
+                  "bear": "terminal completed-session return is below -10.0%",
+                  "bull": "terminal completed-session return is above 10.0%",
+                  "neutral": "terminal completed-session return is between -10.0% and 10.0% inclusive",
+                  "path_exclusion": "These events do not describe touching a target or avoiding a stop before the terminal close.",
+                  "price_up": "terminal completed-session close is above the declared reference price"
+                },
+                "expected_simple_return_pct": 9.824670270529467,
+                "formula": "log(P_h/P_0) ~ Normal(bounded_signal*max_shift*RV63*sqrt(h/252), (RV63/100)^2*h/252)",
+                "mean_log_return": 0.05257769500561425,
+                "median_simple_return_pct": 5.398444822504602,
+                "price_quantiles": {
+                  "0.05": 126.8031756350633,
+                  "0.1": 140.73012092606933,
+                  "0.25": 167.49791596375655,
+                  "0.5": 203.25036099571787,
+                  "0.75": 246.63416859364688,
+                  "0.9": 293.5456103714404,
+                  "0.95": 325.7860778170172
+                },
+                "probabilities": {
+                  "bear": 0.2909460951049708,
+                  "bull": 0.44078507910639253,
+                  "neutral": 0.26826882578863664
+                },
+                "probability_price_up": 0.5727197016731103,
+                "return_threshold_pct": 10.0,
+                "sigma_log_return": 0.2868355157457876,
+                "status": "EXPERIMENTAL_UNCALIBRATED",
+                "trading_days": 63,
+                "variant": "experimental_meta_v3"
+              },
+              "recommendation": {
+                "action_now": "WAIT",
+                "advisory_gaps": [],
+                "condition_audits": [
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNSUPPORTED_CONFIRMATION_INTERVAL"
+                    ],
+                    "source_role": "technical",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNSUPPORTED_CONFIRMATION_INTERVAL"
+                    ],
+                    "source_role": "technical",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNACCEPTED_PROVENANCE",
+                      "UNGROUNDED_PRICE_LEVEL"
+                    ],
+                    "source_role": "macro_cycle",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "UNSUPPORTED_FIELD",
+                      "UNACCEPTED_PROVENANCE",
+                      "UNGROUNDED_PRICE_LEVEL"
+                    ],
+                    "source_role": "macro_cycle",
+                    "status": "REJECTED",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "fundamental",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "fundamental",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "news",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "news",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "confirmation",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "geopolitical",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  },
+                  {
+                    "condition": "invalidation_trigger",
+                    "reason_codes": [
+                      "NO_AVAILABLE_CONDITION"
+                    ],
+                    "source_role": "geopolitical",
+                    "status": "UNAVAILABLE",
+                    "trigger": null
+                  }
+                ],
+                "conditional_trigger": null,
+                "critical_gaps": [
+                  "fundamental: Forward outlook and qualified valuation evidence",
+                  "geopolitical: ANET-specific exposure and policy transmission",
+                  "macro_cycle: Fitted ANET macro-return relationship",
+                  "news: ANET-specific medium-term order and supply evidence"
+                ],
+                "decision_reason": "WAIT_DATA",
+                "existing_position_action": "POSITION_CONTEXT_REQUIRED",
+                "invalidation_availability": "UNAVAILABLE",
+                "invalidation_trigger": null,
+                "measured_edge_status": "UNPROVEN_HEURISTIC_RESEARCH_ONLY",
+                "new_position_action": "WAIT",
+                "next_review": "technical: 2026-12-16T21:00:00Z — 63-session review; macro_cycle: 2026-12-16T21:00:00Z — 63-session review; fundamental: On next supplied quarterly filing — Reassess sustained operating performance.; news: 2026-12-15T20:00:00+00:00 — Review new ANET-specific primary disclosure.; geopolitical: 2026-12-15T20:00:00+00:00 — Review new sourced exposure or policy evidence.",
+                "notice": "Deterministic research action from an uncalibrated distribution; no order or personalized sizing is implied.",
+                "portfolio_sizing": "OUT_OF_SCOPE",
+                "reason_codes": [
+                  "INSUFFICIENT_ACCEPTED_CONTEXT_ROLES",
+                  "CRITICAL_EVIDENCE_GAP"
+                ],
+                "review_events": [
+                  {
+                    "event": "63-session review",
+                    "source_role": "technical",
+                    "when": "2026-12-16T21:00:00Z"
+                  },
+                  {
+                    "event": "63-session review",
+                    "source_role": "macro_cycle",
+                    "when": "2026-12-16T21:00:00Z"
+                  },
+                  {
+                    "event": "Reassess sustained operating performance.",
+                    "source_role": "fundamental",
+                    "when": "On next supplied quarterly filing"
+                  },
+                  {
+                    "event": "Review new ANET-specific primary disclosure.",
+                    "source_role": "news",
+                    "when": "2026-12-15T20:00:00+00:00"
+                  },
+                  {
+                    "event": "Review new sourced exposure or policy evidence.",
+                    "source_role": "geopolitical",
+                    "when": "2026-12-15T20:00:00+00:00"
+                  }
+                ],
+                "wait_for": [
+                  "fundamental: Forward outlook and qualified valuation evidence",
+                  "geopolitical: ANET-specific exposure and policy transmission",
+                  "macro_cycle: Fitted ANET macro-return relationship",
+                  "news: ANET-specific medium-term order and supply evidence",
+                  "at least 3 specialist families with critic-accepted horizon claims"
+                ]
+              },
+              "reference": {
+                "availability_status": "KNOWN",
+                "contract_version": "meta-target-v1",
+                "corporate_action_basis": "split;cash-dividends-excluded",
+                "entry_basis_warning": "This completed-close forecast is not a profitability estimate for an intraday entry price.",
+                "forecast_origin": "2026-09-16T14:10:10.463607+00:00",
+                "information_cutoff": "2026-09-16T14:10:10.463607+00:00",
+                "origin_kind": "PRIOR_COMPLETED_CLOSE",
+                "origin_session": "2026-09-15",
+                "reference_evidence_ids": [
+                  "price-ANET"
+                ],
+                "reference_feed": "sip",
+                "reference_price": 192.84,
+                "reference_price_basis": "LATEST_COMPLETED_SESSION_CLOSE",
+                "reference_price_observed_at": "2026-09-15T20:00:00+00:00",
+                "return_basis": "PRICE_RETURN",
+                "session_calendar": "XNYS",
+                "source_available_at": "2026-09-16T14:09:39.879533+00:00",
+                "target_timestamp": "2026-12-14T21:00:00+00:00",
+                "target_trading_session": "2026-12-14"
+              },
+              "status": "EXPERIMENTAL_UNCALIBRATED",
+              "trading_days": 63
+            }
+          ]
+        }
+      }
+    },
+    "results": {}
+  },
+  "recovery_implementation_sha256": "9ce3bd21f1d42bc782fdfed50b86b60fa76c39b2cbfbe5292baabe25419efe75",
+  "role": "synthesis",
+  "runtime": {
+    "attempts": 1,
+    "max_output_tokens": 5000,
+    "model": "openai-codex/gpt-6-astra",
+    "reasoning_effort": "medium",
+    "tools": [],
+    "transport": "sse"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "sequence", "state", "prior_state", "occurred_at", "details", "state_hash"],
+  "properties": {
+    "schema_version": {"const": "meta-operation-state-v1"},
+    "sequence": {"type": "integer", "minimum": 0},
+    "state": {"enum": ["PLANNED", "PREFLIGHT", "ACQUIRING", "VALIDATING", "AGENTS", "FORECASTING", "RENDERING", "REGISTERING", "COMPLETE", "DEGRADED", "BLOCKED"]},
+    "prior_state": {"type": ["string", "null"]},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "details": {"type": "object"},
+    "state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

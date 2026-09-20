@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "investment-research-mandate-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "watchlist",
+    "objective",
+    "horizon_sessions",
+    "currency",
+    "perspective",
+    "mode",
+    "sources",
+    "runtime",
+    "budgets",
+    "network"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "investment-research-mandate-v1"
+    },
+    "watchlist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "symbol",
+          "kind",
+          "benchmark",
+          "sector_benchmark"
+        ],
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "company",
+              "etf"
+            ]
+          },
+          "benchmark": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "sector_benchmark": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 5
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 12000
+    },
+    "horizon_sessions": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 63
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "currency": {
+      "const": "USD"
+    },
+    "perspective": {
+      "const": "long_only_research"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "fixture",
+        "live"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "title",
+          "publisher",
+          "url",
+          "fixture_text",
+          "published_at",
+          "available_at",
+          "kind",
+          "critical"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "publisher": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fixture_text": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "published_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "available_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "company",
+              "macro",
+              "market",
+              "policy",
+              "etf"
+            ]
+          },
+          "critical": {
+            "type": "boolean"
+          }
+        }
+      },
+      "maxItems": 30
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "argv",
+        "model",
+        "reasoning_effort",
+        "max_output_tokens",
+        "timeout_seconds"
+      ],
+      "properties": {
+        "argv": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "reasoning_effort": {
+          "type": "string",
+          "enum": [
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 256,
+          "maximum": 20000
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        }
+      }
+    },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_attempts",
+        "model_calls",
+        "source_requests",
+        "tool_calls",
+        "input_tokens",
+        "output_tokens",
+        "catalog_cost_usd",
+        "wall_seconds",
+        "followup_rounds",
+        "reserved_final_calls",
+        "document_bytes"
+      ],
+      "properties": {
+        "task_attempts": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 16
+        },
+        "model_calls": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 40
+        },
+        "source_requests": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 250
+        },
+        "tool_calls": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "input_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "output_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "catalog_cost_usd": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 25
+        },
+        "wall_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1200
+        },
+        "followup_rounds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "reserved_final_calls": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 20
+        },
+        "document_bytes": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 1000000
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "user_agent",
+        "minimum_spacing_seconds"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "user_agent": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "minimum_spacing_seconds": {
+          "type": "number",
+          "minimum": 0.2,
+          "maximum": 10
+        }
+      }
+    }
+  }
+}

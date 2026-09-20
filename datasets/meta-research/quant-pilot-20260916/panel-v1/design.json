@@ -1,0 +1,73 @@
+{
+  "created_before_price_panel_inspection": true,
+  "protocol": {
+    "block_length_multiplier": 2,
+    "bootstrap_resamples": 10000,
+    "candidates": [
+      "historical_frequency",
+      "market_sector",
+      "momentum",
+      "regularized_quant",
+      "current_heuristic"
+    ],
+    "challenger": "regularized_quant",
+    "contamination_controls": [
+      "source_only_extraction",
+      "ticker_blind_perturbation",
+      "human_audit",
+      "prospective_frozen_model"
+    ],
+    "familywise_alpha": 0.05,
+    "feature_groups": {
+      "market_sector": [
+        "market_return_pct",
+        "sector_return_pct"
+      ],
+      "quant": [
+        "market_return_pct",
+        "sector_return_pct",
+        "momentum_pct",
+        "annual_volatility_pct",
+        "quant_score"
+      ]
+    },
+    "final_holdout_start": "2026-09-16T00:00:00+00:00",
+    "heuristic_score_feature": "quant_score",
+    "horizons": [
+      5,
+      21,
+      63
+    ],
+    "max_log_loss_regression": 0.0,
+    "max_pinball_regression": 0.0,
+    "minimum_effective_blocks": 30,
+    "minimum_material_brier_improvement": 0.005,
+    "minimum_train_origins": 126,
+    "momentum_feature": "momentum_pct",
+    "primary_metric": "direction_brier",
+    "promotion": "No automatic promotion; final holdout and mature prospective evidence required.",
+    "research_mode": "DIAGNOSTIC_REVISED_PRICES",
+    "research_track": "IMPROVEMENT_PLAN_3_NEW_COHORT",
+    "schema_version": "meta-experiment-protocol-v2",
+    "scope": {
+      "excluded_period": "2017-07-01 through 2025-07-31 never queried by this experiment.",
+      "history_end": "2026-09-15",
+      "history_start": "2025-08-01",
+      "price_vintage": "Latest historical revisions are diagnostic inputs, not certified historical availability.",
+      "selection": "Fixed named ETF case study selected before this new experiment; no broad-universe or survivorship claim.",
+      "symbols": [
+        "SPY",
+        "QQQ",
+        "XLK"
+      ],
+      "training_rationale": "126 origins permits an engineering pilot within the permitted post-July-2025 window; all significance, materiality and effective-block thresholds unchanged.",
+      "warmup_sessions": 63
+    },
+    "seed": 310916,
+    "status": "FROZEN_DIAGNOSTIC_DESIGN_BEFORE_OUTCOME_INSPECTION",
+    "test_origins_per_fold": 21,
+    "volatility_feature": "annual_volatility_pct"
+  },
+  "protocol_hash": "8ce0ebcf7cea94f687ac915029c215131fd4c7270fedf74463e3e3a9351eeae1",
+  "purpose": "ENGINEERING_DIAGNOSTIC_ONLY"
+}

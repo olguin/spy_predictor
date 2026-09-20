@@ -1,0 +1,240 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "Independent risk view: evidence supports elevated short-horizon price dispersion and technology/semiconductor concentration, but lacks company market valuation and dated fundamental-risk detail needed to assess 21/63-session asymmetry. Treat all symbols as insufficient-evidence pending those inputs.",
+      "assessment": "insufficient_evidence",
+      "claims": [
+        {
+          "claim_id": "task-1-c1",
+          "classification": "fact",
+          "text": "MU had the highest supplied 63-session realized volatility (89.56%) and remained 16.30% below its 252-session high as of 2026-09-18; its 21- and 63-session returns were 8.40% and -10.42%, respectively. This is descriptive, not a forecast.",
+          "evidence_ids": [
+            "e11"
+          ],
+          "symbols": [
+            "MU"
+          ]
+        },
+        {
+          "claim_id": "task-1-c2",
+          "classification": "fact",
+          "text": "META's supplied price was 8.32% above its 20-session average after a 21-session price return of 21.93%; its RSI14 was 77.87 as of 2026-09-18. These technical observations flag reversal sensitivity but do not establish overvaluation.",
+          "evidence_ids": [
+            "e12"
+          ],
+          "symbols": [
+            "META"
+          ]
+        },
+        {
+          "claim_id": "task-1-c3",
+          "classification": "fact",
+          "text": "QQQ's sponsor profile reported a 30.08 P/E as of 2026-08-31. The supplied holdings table, marked stale, placed NVDA, MU and META at 8.45%, 4.85% and 3.07%, respectively, totaling 16.37% by arithmetic; QQQ's top ten represented 47.17%.",
+          "evidence_ids": [
+            "e19",
+            "e20",
+            "e23"
+          ],
+          "symbols": [
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-1-c4",
+          "classification": "inference",
+          "text": "The watchlist has a shared technology/AI-related market-factor risk: QQQ includes meaningful dated weights in NVDA, MU and META, while ANET, MU and NVDA use XLK as sector benchmark. A broad technology de-rating or semiconductor risk-off episode could therefore affect several names together; constituent weights outside the three disclosed holdings and business linkage evidence remain incomplete.",
+          "evidence_ids": [
+            "e20",
+            "e23"
+          ],
+          "symbols": [
+            "ANET",
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-1-c5",
+          "classification": "fact",
+          "text": "Latest normalized filings show strong reported profitability but different reporting periods: ANET reported a 44.14% operating margin for the six months ended 2026-06-30; MU 70.40% for nine months ended 2026-05-28; META 35.56% for six months ended 2026-06-30; and NVDA 65.94% for six months ended 2026-07-26. These historical margins cannot establish current valuation or forward durability.",
+          "evidence_ids": [
+            "e2",
+            "e4",
+            "e6",
+            "e8"
+          ],
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "No market-derived valuation multiple, forward earnings basis, or company-specific scenario inputs are supplied for ANET, MU, META, or NVDA; 21/63-session valuation asymmetry cannot be assessed.",
+          "critical": true,
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "description": "QQQ holdings look-through is marked stale (age 8 days versus maximum age 7), preventing a current dated composition assessment.",
+          "critical": true,
+          "symbols": [
+            "QQQ"
+          ]
+        },
+        {
+          "description": "No dated, substantive macro/rates observations or company filing excerpts on customer concentration, demand, supply, policy, or geopolitics were examined in this independent pass.",
+          "critical": false,
+          "symbols": [
+            "ANET",
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        }
+      ],
+      "assumptions": [
+        "Price observations are split-adjusted completed-session price returns and are not forecasts.",
+        "The disclosed QQQ weights are used only as a dated candidate shared-exposure indicator, not as a portfolio allocation or proof of economic dependence.",
+        "Reported SEC financial metrics are historical and period lengths differ by issuer."
+      ],
+      "counter_thesis": "Strong reported historical profitability, positive recent relative performance for several names, and QQQ's broad 103-holding structure could cushion company-specific risk; without valuation, current holdings, and forward demand evidence, this cannot resolve downside asymmetry.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review after current company valuation inputs and forward-demand/risk disclosures are sourced for the four companies.",
+          "symbol": null,
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e2",
+            "e4",
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "kind": "human_review",
+          "description": "Refresh QQQ sponsor holdings before relying on look-through exposure; current supplied table is stale.",
+          "symbol": "QQQ",
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e20",
+            "e23"
+          ]
+        }
+      ],
+      "objections": [
+        {
+          "objection_id": "task-1-o1",
+          "claim_ids": [
+            "task-1-c5"
+          ],
+          "severity": "critical",
+          "description": "Historical margins do not support an investability or valuation conclusion without observed market valuation, normalized/forward earnings, and sensitivity assumptions.",
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "objection_id": "task-1-o2",
+          "claim_ids": [
+            "task-1-c3",
+            "task-1-c4"
+          ],
+          "severity": "critical",
+          "description": "QQQ look-through uses a holdings table explicitly marked stale; current constituent weights and exposure cannot be assumed.",
+          "symbols": [
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "objection_id": "task-1-o3",
+          "claim_ids": [
+            "task-1-c1",
+            "task-1-c2"
+          ],
+          "severity": "material",
+          "description": "Momentum, distance from moving averages, RSI, volatility and drawdown are descriptive statistics, not evidence of a 21/63-session reversal or continuation.",
+          "symbols": [
+            "MU",
+            "META"
+          ]
+        },
+        {
+          "objection_id": "task-1-o4",
+          "claim_ids": [
+            "task-1-c4"
+          ],
+          "severity": "material",
+          "description": "A common technology/AI risk mechanism is plausible but unproven from the supplied evidence; business-level demand linkage, policy exposure, and supply-chain evidence are absent.",
+          "symbols": [
+            "ANET",
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        }
+      ],
+      "dispositions": [],
+      "question_effects": [],
+      "shared_exposures": [
+        {
+          "symbols": [
+            "ANET",
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ],
+          "mechanism": "Candidate common technology-factor exposure: QQQ has dated disclosed weights in NVDA, MU and META, while the remaining companies are benchmarked to XLK in the mandate.",
+          "evidence_ids": [
+            "e20",
+            "e23"
+          ],
+          "qualification": "QQQ holdings table is stale; no portfolio weights, full constituent overlap, or company-level economic linkage is established."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 20583,
+    "output_tokens": 1728,
+    "catalog_cost_usd": 0.061902,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 63750,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

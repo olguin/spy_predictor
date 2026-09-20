@@ -1,0 +1,365 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "ANET_macro_facts",
+          "classification": "FACT",
+          "evidence_ids": [
+            "CPIAUCSL",
+            "DFF",
+            "DGS10",
+            "DFII10",
+            "NFCI"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated when later qualified observations replace these dated readings.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/DFF/value",
+              "value": 3.63
+            },
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.95
+            },
+            {
+              "packet_path": "/market/DFII10/value",
+              "value": 2.55
+            },
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            }
+          ],
+          "statement": "As of the supplied observations, CPI year-over-year inflation was 3.353016322755642%, the effective federal funds rate was 3.63%, the 10-year Treasury yield was 4.95%, the 10-year real yield was 2.55%, and NFCI was -0.564."
+        },
+        {
+          "claim_id": "ANET_cycle_inference",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "NFCI",
+            "CPIAUCSL",
+            "DFII10",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated if the cited financial, inflation, real-rate, and oil signals cease to conflict.",
+          "numeric_values": [],
+          "statement": "Easy financial-conditions readings support risk appetite, while positive inflation, elevated real yields, and rising oil create an offsetting constraint; therefore the macro signal is mixed rather than a directional ANET thesis."
+        }
+      ],
+      "counterevidence": [
+        "Inflation, nominal yields, real yields, and oil have risen over the reported windows, which can sustain discount-rate and cost-pressure risk.",
+        "High-yield and investment-grade bond price proxies have weakened, despite favorable NFCI readings."
+      ],
+      "invalidation": [
+        "A material deterioration in financial conditions or credit proxies would invalidate the supportive portion of the cycle interpretation.",
+        "A sustained easing in inflation, oil pressure, and yields would invalidate the restrictive-constraint portion."
+      ],
+      "missing": [
+        "No ANET issuer fundamentals, earnings, valuation, backlog, or company-specific policy exposure were supplied to this role.",
+        "No calibrated mapping from the macro panel to ANET returns was supplied."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "Macro evidence describes a still-accommodative financial-conditions backdrop but a restrictive inflation-and-rate constraint. It supports a mixed, not ticker-specific directional, cycle view for ANET across the stated horizons.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "QQQ_macro_facts",
+          "classification": "FACT",
+          "evidence_ids": [
+            "VIXCLS",
+            "VXVCLS",
+            "primary-fomc-meeting-calendar-2026-09-16"
+          ],
+          "horizons": [
+            5,
+            21
+          ],
+          "invalidation": "Invalidated when later volatility observations or a confirmed meeting outcome supersede these inputs.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/VIXCLS/value",
+              "value": 15.84
+            },
+            {
+              "packet_path": "/market/VXVCLS/value",
+              "value": 18.6
+            },
+            {
+              "packet_path": "/market/vix_term_structure_proxy/value",
+              "value": 0.8516129032258064
+            }
+          ],
+          "statement": "VIX was 15.84 and below the three-month volatility proxy of 18.6; the resulting VIX/VIX3M ratio was 0.8516129032258064. A scheduled FOMC meeting ends on 2026-09-16."
+        },
+        {
+          "claim_id": "QQQ_cycle_inference",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "VIXCLS",
+            "NFCI",
+            "CPIAUCSL",
+            "DFII10",
+            "market-context-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated if risk, inflation, and real-rate indicators align decisively in one direction.",
+          "numeric_values": [],
+          "statement": "Benign volatility and financial conditions are supportive for broad risk appetite, but inflation and real-yield pressure make the macro implication for the rate-sensitive growth proxy mixed."
+        }
+      ],
+      "counterevidence": [
+        "Oil has risen over the reported window and the long-Treasury proxy has weakened.",
+        "QQQ's recent completed-session return was negative despite being above its long moving average; momentum is not fundamental value."
+      ],
+      "invalidation": [
+        "Worsening financial conditions or volatility would invalidate the supportive component.",
+        "Clear easing of inflation and rate pressure would invalidate the restrictive component."
+      ],
+      "missing": [
+        "No constituent earnings, valuation, index concentration, or calibrated macro-beta analysis was supplied to this role.",
+        "The supplied FOMC calendar gives a meeting date but no policy outcome."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "The cycle panel supports a mixed QQQ backdrop: financial conditions and volatility are benign, but inflation, real yields, and an imminent scheduled FOMC meeting retain rate-sensitive risk.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "MU_macro_facts",
+          "classification": "FACT",
+          "evidence_ids": [
+            "INDPRO",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Invalidated when later qualified production or oil observations replace these dated readings.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/INDPRO/yoy_pct",
+              "value": 1.0794551200266955
+            },
+            {
+              "packet_path": "/market/INDPRO/change_90_calendar_days",
+              "value": 0.47409999999999286
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/value",
+              "value": 97.26
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            }
+          ],
+          "statement": "Industrial production had a 1.0794551200266955% year-over-year change and a 0.47409999999999286 change over 90 calendar days; WTI oil was 97.26 with a 5.680000000000007 change over 90 calendar days."
+        },
+        {
+          "claim_id": "MU_cycle_inference",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "INDPRO",
+            "NFCI",
+            "DCOILWTICO",
+            "CPIAUCSL",
+            "DFII10"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Invalidated if growth, financial conditions, and inflation-pressure indicators converge materially toward one cycle regime.",
+          "numeric_values": [],
+          "statement": "Positive industrial-production data and easy financial conditions are consistent with a continuing-cycle hypothesis, while oil, inflation, and real yields support an inflation-pressure hypothesis; the net macro implication is mixed."
+        }
+      ],
+      "counterevidence": [
+        "Credit-price proxies have fallen over their reported windows.",
+        "The macro panel contains no semiconductor supply, pricing, or end-market demand data."
+      ],
+      "invalidation": [
+        "Weakening production or tighter financial conditions would invalidate the supportive component.",
+        "Cooling inflation, oil, and yields would invalidate the adverse component."
+      ],
+      "missing": [
+        "No MU earnings, memory pricing, inventory, capex, valuation, or company-specific event evidence was supplied to this role.",
+        "No empirically calibrated transmission from industrial production or oil to MU returns was supplied."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "MU",
+      "thesis": "Macro conditions offer a mixed cyclical setting for MU: industrial production has expanded and financial conditions are favorable, but inflation, oil, and higher real yields remain adverse macro constraints. This is not a company-specific demand thesis.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "META_macro_facts",
+          "classification": "FACT",
+          "evidence_ids": [
+            "NFCI",
+            "STLFSI4",
+            "VIXCLS"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated when later qualified financial-condition, stress, or volatility observations replace these dated readings.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/STLFSI4/value",
+              "value": -0.7884
+            },
+            {
+              "packet_path": "/market/VIXCLS/value",
+              "value": 15.84
+            }
+          ],
+          "statement": "NFCI was -0.564, the financial-stress index was -0.7884, and VIX was 15.84 on their respective latest observations."
+        },
+        {
+          "claim_id": "META_cycle_inference",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "NFCI",
+            "STLFSI4",
+            "VIXCLS",
+            "CPIAUCSL",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated if the supportive and restrictive macro signals no longer conflict.",
+          "numeric_values": [],
+          "statement": "The benign financial-condition and volatility data favor risk appetite, but inflation and positive real yields preserve a competing discount-rate constraint; this supports a mixed macro view."
+        }
+      ],
+      "counterevidence": [
+        "Oil and nominal yields increased over the reported windows.",
+        "No META-specific earnings, advertising-demand, spending, valuation, or regulatory-impact data was supplied to this role."
+      ],
+      "invalidation": [
+        "Tighter financial conditions or higher volatility would invalidate the supportive component.",
+        "Disinflation and declining real yields would invalidate the headwind component."
+      ],
+      "missing": [
+        "No META issuer releases or direct company fundamentals were supplied in this role projection.",
+        "No calibrated relation between this macro evidence and META returns was supplied."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "META",
+      "thesis": "The macro panel supports a mixed META backdrop rather than an issuer view: broad financial conditions and low volatility are supportive, while inflation and real-rate conditions remain a valuation-sensitive headwind.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "NVDA_macro_facts",
+          "classification": "FACT",
+          "evidence_ids": [
+            "DGS10",
+            "DFII10",
+            "primary-fomc-meeting-calendar-2026-09-16"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated when later qualified yield readings or a confirmed policy decision supersede these inputs.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.95
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.46999999999999975
+            },
+            {
+              "packet_path": "/market/DFII10/value",
+              "value": 2.55
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.3799999999999999
+            }
+          ],
+          "statement": "The 10-year Treasury yield was 4.95% after a 0.46999999999999975 change over 90 calendar days; the 10-year real yield was 2.55% after a 0.3799999999999999 change. The FOMC meeting is scheduled to end on 2026-09-16."
+        },
+        {
+          "claim_id": "NVDA_cycle_inference",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "NFCI",
+            "VIXCLS",
+            "VXVCLS",
+            "DGS10",
+            "DFII10",
+            "primary-fomc-meeting-calendar-2026-09-16"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated if financial conditions, volatility, yields, and policy resolution produce a coherent rather than offsetting macro signal.",
+          "numeric_values": [],
+          "statement": "Favorable financial conditions and a non-stressed volatility term structure support risk appetite, but higher yields and an unresolved near-term policy event make the cycle signal mixed for a rate-sensitive equity exposure."
+        }
+      ],
+      "counterevidence": [
+        "The 10-year Treasury yield and real yield rose over the reported window.",
+        "The FOMC meeting scheduled to end shortly after the packet cutoff is an unresolved policy event."
+      ],
+      "invalidation": [
+        "A deterioration in credit/financial conditions or volatility would invalidate the support.",
+        "A durable reduction in inflation, oil pressure, and yields would invalidate the restrictive signal."
+      ],
+      "missing": [
+        "No NVDA earnings, demand, supply-chain, valuation, or detailed issuer release content was supplied to this role projection.",
+        "No calibrated macro-to-NVDA return model was supplied."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "NVDA",
+      "thesis": "The macro panel supports a mixed backdrop for NVDA: favorable financial conditions and contained volatility are supportive, while rising oil, inflation, and real yields retain macro risk. No issuer-specific conclusion follows from this cycle evidence.",
+      "view": "MIXED"
+    }
+  ],
+  "input_hash": "98b060f3ad775f8db623d686d0b6aba01a21f0d2d9998d9d6a090796ffa6621f",
+  "role": "macro_cycle"
+}

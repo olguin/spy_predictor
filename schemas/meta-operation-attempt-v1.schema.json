@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "attempt_id", "mode", "origin_session", "symbols", "policy_hash", "created_at", "attempt_hash"],
+  "properties": {
+    "schema_version": {"const": "meta-operation-attempt-v1"},
+    "attempt_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "mode": {"enum": ["ON_DEMAND", "PROSPECTIVE", "OUTCOMES"]},
+    "origin_session": {"type": "string", "format": "date"},
+    "symbols": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9.-]{0,9}$"}},
+    "policy_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "attempt_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

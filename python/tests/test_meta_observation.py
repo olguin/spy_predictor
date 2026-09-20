@@ -5,6 +5,7 @@ import json
 import pytest
 
 from spy_predictor_quant.meta_analysis import digest, reference_scenarios
+from spy_predictor_quant.market_archive import file_sha256
 from spy_predictor_quant.meta_observation import register, target_sessions
 
 
@@ -62,3 +63,35 @@ def test_late_registration_and_precutoff_registration_rejected(tmp_path):
         register(packet_path, tmp_path/"late", now=datetime(2026, 9, 10, 14, tzinfo=timezone.utc))
     with pytest.raises(ValueError, match="after packet cutoff"):
         register(packet_path, tmp_path/"early", now=datetime(2026, 9, 10, 1, tzinfo=timezone.utc))
+
+
+def test_registers_exact_structured_forecast_and_governance_cohort(tmp_path):
+    value = packet()
+    packet_path = tmp_path / "packet.json"
+    packet_path.write_text(json.dumps(value))
+    report = {"packet_hash": value["packet_hash"], "results": {},
+              "validation": "SCHEMA_CLAIM_CITATION_AND_NUMERIC_PATHS;SEMANTIC_CLAIMS_REQUIRE_REVIEW"}
+    report_path = tmp_path / "meta-report.json"
+    report_path.write_text(json.dumps(report))
+    rows = [{"trading_days": horizon, "status": "EXPERIMENTAL_UNCALIBRATED",
+             "distribution": {}, "recommendation": {}} for horizon in (5, 21, 63)]
+    structured = {
+        "schema_version": "meta-structured-forecast-v1",
+        "packet_hash": value["packet_hash"], "agent_report_sha256": file_sha256(report_path),
+        "probability_status": "EXPERIMENTAL_UNCALIBRATED",
+        "symbols": {"SPY": {"status": "EXPERIMENTAL_UNCALIBRATED", "horizons": rows}},
+        "governance": {"cohort_id": "cohort", "prospective_qualification": {
+            "minimum_scored_records": 180, "minimum_distinct_origins": 60,
+            "minimum_records_per_horizon": 40}},
+    }
+    structured["artifact_hash"] = digest(structured)
+    structured_path = tmp_path / "structured.json"
+    structured_path.write_text(json.dumps(structured))
+    output = register(packet_path, tmp_path / "ledger", report_path,
+                      now=datetime(2026, 9, 10, 12, tzinfo=timezone.utc),
+                      structured_forecast_path=structured_path)
+    forecast = json.loads(output.read_text())
+    assert forecast["forecast_status"] == "QUANT_CONTEXT_AND_STRUCTURED_EXPERIMENTAL"
+    assert forecast["symbols"]["SPY"]["structured_meta_forecast"] == rows
+    assert forecast["governance"]["cohort_id"] == "cohort"
+    assert forecast["calibrated_meta_forecast"] is None

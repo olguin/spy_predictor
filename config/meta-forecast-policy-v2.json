@@ -1,0 +1,42 @@
+{
+  "schema_version": "meta-forecast-policy-v2",
+  "status": "experimental-uncalibrated",
+  "direction_scores": {
+    "BULLISH": 1.0,
+    "BEARISH": -1.0,
+    "NEUTRAL": 0.0
+  },
+  "role_weights": {
+    "macro_cycle": 0.15,
+    "technical": 0.30,
+    "fundamental": 0.25,
+    "news": 0.15,
+    "geopolitical": 0.15
+  },
+  "combination": {
+    "quant_weight": 0.65,
+    "context_weight": 0.35,
+    "minimum_accepted_context_roles": 3,
+    "maximum_mean_shift_volatility_units": 0.35
+  },
+  "recommendation_policy": {
+    "maximum_directional_disagreement_range": 0.75,
+    "bullish_research_probability": 0.60,
+    "conditional_entry_probability": 0.55,
+    "reduce_risk_probability": 0.45,
+    "bearish_research_probability": 0.40,
+    "conditional_actions_require_measurable_trigger": true,
+    "critical_gaps_force_wait": true,
+    "unresolved_material_claims_force_wait": true
+  },
+  "freshness_policy": {
+    "intraday_max_age_seconds_at_publication": 900,
+    "critical_families": ["price_completed_close", "fundamentals"],
+    "advisory_families": ["price_intraday", "price_intraday_trade", "price_intraday_quote", "news", "market_macro", "market_proxy_completed_close", "volatility_intraday", "etf_holdings", "etf_sponsor_profile"]
+  },
+  "prospective_qualification": {
+    "minimum_scored_records": 180,
+    "minimum_distinct_origins": 60,
+    "minimum_records_per_horizon": 40
+  }
+}

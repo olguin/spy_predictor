@@ -1,0 +1,119 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "Unable to determine filing-supported China/cross-border revenue, export-control, or supply-chain-concentration figures from the available inspected material. Latest 10-Q filing records are identified for all four issuers, but ANET, MU and META filings were not retrieved as evidence, and the NVDA 10-Q excerpt is truncated before geographic-revenue notes and risk factors.",
+      "assessment": "insufficient_evidence",
+      "claims": [
+        {
+          "claim_id": "task-8-c1",
+          "classification": "fact",
+          "text": "SEC submission records identify the latest 2026 quarterly filings as ANET (period ended June 30), MU (May 28), META (June 30), and NVDA (July 26).",
+          "evidence_ids": [
+            "e1",
+            "e3",
+            "e5",
+            "e7"
+          ],
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-8-c2",
+          "classification": "fact",
+          "text": "The inspected NVDA July 26, 2026 Form 10-Q excerpt is truncated and reaches only the beginning of the notes; it does not provide an inspectable geographic-revenue, export-control, or supply-chain-concentration disclosure in the supplied excerpt.",
+          "evidence_ids": [
+            "e25"
+          ],
+          "symbols": [
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-8-c3",
+          "classification": "inference",
+          "text": "No filing-supported exposure figure can be reported for ANET, MU, META, or NVDA on this record; absence of an inspectable figure is not evidence that the issuer made no such disclosure.",
+          "evidence_ids": [
+            "e1",
+            "e3",
+            "e5",
+            "e7",
+            "e25"
+          ],
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "The operative portions of the latest ANET, MU, and META 10-Q filings were not retrieved/inspected, so geographic revenue, export-control and supplier/geographic concentration disclosures remain unknown.",
+          "critical": true,
+          "symbols": [
+            "ANET",
+            "MU",
+            "META"
+          ]
+        },
+        {
+          "description": "NVDA's retrieved latest 10-Q is truncated before the relevant notes/risk-factor content; China/cross-border revenue, export-control restrictions, and supply-chain concentration remain unknown from inspectable evidence.",
+          "critical": true,
+          "symbols": [
+            "NVDA"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "counter_thesis": "The missing filing excerpts may contain quantitative geographic/customer or concentration disclosures; this task cannot establish either their presence or absence.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review after full latest 10-Q/10-K geographic-revenue, customer-concentration, export-control and supply-chain-risk sections are inspected for each issuer.",
+          "symbol": null,
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e1",
+            "e3",
+            "e5",
+            "e7",
+            "e25"
+          ]
+        }
+      ],
+      "objections": [],
+      "dispositions": [],
+      "question_effects": [
+        {
+          "question_id": "question-6",
+          "effect": "unresolved",
+          "reason": "Latest filings are identified but relevant ANET/MU/META content was not retrieved and NVDA's excerpt is truncated before relevant disclosures; no figures can be verified."
+        }
+      ],
+      "shared_exposures": []
+    }
+  },
+  "receipt": {
+    "input_tokens": 32314,
+    "output_tokens": 747,
+    "catalog_cost_usd": 0.07359199999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 28414,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

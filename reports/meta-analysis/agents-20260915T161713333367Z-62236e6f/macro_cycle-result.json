@@ -1,0 +1,999 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "anet_fc",
+          "classification": "FACT",
+          "evidence_family": "financial_conditions",
+          "evidence_ids": [
+            "NFCI",
+            "DGS10",
+            "DGS2"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate the supportive reading if NFCI rises to or above zero on a subsequent observation.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/yield_curve/slopes_percentage_points/10y_minus_2y",
+              "value": 0.33000000000000007
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "As of 2026-09-04, NFCI was negative, indicating comparatively loose conditions; the 10y-2y curve was positive on 2026-09-11."
+        },
+        {
+          "claim_id": "anet_rates",
+          "classification": "FACT",
+          "evidence_family": "inflation_rates",
+          "evidence_ids": [
+            "CPIAUCSL",
+            "DGS10",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate this headwind if subsequent nominal and real yield changes over 90 days turn non-positive.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Inflation was 3.353% year over year in August, while the 10-year nominal and real yields rose over the prior 90 calendar days through 2026-09-11."
+        },
+        {
+          "claim_id": "anet_oil",
+          "classification": "INFERENCE",
+          "evidence_family": "energy_inflation",
+          "evidence_ids": [
+            "DCOILWTICO",
+            "market-context-USO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if oil's 90-day change is at or below zero on a later observation.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            },
+            {
+              "packet_path": "/global_market_context/market_proxies/USO/return21_pct",
+              "value": 25.297928497160683
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "The oil rise is an inflation-risk channel that can limit duration-sensitive equity upside, although it does not establish ANET-specific impact."
+        }
+      ],
+      "counterevidence": [
+        "Oil and nominal/real yields rose over 90 days.",
+        "No ANET issuer fundamentals or earnings evidence is supplied to this role."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Treat macro backdrop as mixed; wait for broad-tech confirmation.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "next completed daily close",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/global_market_context/market_proxies/QQQ/price_to_sma20",
+            "level": 1,
+            "units": "ratio"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "next completed daily close",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/global_market_context/market_proxies/QQQ/price_to_sma200",
+            "level": 1,
+            "units": "ratio"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "ANET-specific near-term catalyst data"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "anet_rates",
+            "anet_oil"
+          ],
+          "strongest_support_claim_ids": [
+            "anet_fc"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Maintain a conditional, non-directional macro stance.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "two completed daily closes",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-15",
+            "field": "/global_market_context/market_proxies/QQQ/price_to_sma20",
+            "level": 1,
+            "units": "ratio"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "DCOILWTICO"
+            ],
+            "expiry": "2026-10-15",
+            "field": "/market/DCOILWTICO/change_90_calendar_days",
+            "level": 5.680000000000007,
+            "units": "USD per barrel change"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "ANET-specific earnings and demand data"
+            }
+          ],
+          "review": {
+            "event": "Reassess rates, oil, and financial conditions.",
+            "when": "2026-10-15"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "anet_rates",
+            "anet_oil"
+          ],
+          "strongest_support_claim_ids": [
+            "anet_fc"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Do not infer a company-level 63-session direction from macro inputs alone.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/NFCI/value",
+            "level": 0,
+            "units": "standard deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "two completed daily closes",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/global_market_context/market_proxies/QQQ/price_to_sma200",
+            "level": 1,
+            "units": "ratio"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "ANET-specific multi-quarter fundamentals"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "anet_rates",
+            "anet_oil"
+          ],
+          "strongest_support_claim_ids": [
+            "anet_fc"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A sustained QQQ break below its 200-day average would negate the constructive cycle backdrop."
+      ],
+      "missing": [
+        "ANET-specific demand, earnings, valuation, and estimate-revision evidence were not supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "Cycle inputs support neither a clean risk-on nor risk-off conclusion: financial conditions remain easy and the curve is positive, but inflation/rates and oil have risen. This macro view is shared-context only, not company-specific evidence.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "qqq_trend",
+          "classification": "FACT",
+          "evidence_family": "broad_tech_market",
+          "evidence_ids": [
+            "market-context-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if QQQ price-to-200-day-average falls below one.",
+          "numeric_values": [
+            {
+              "packet_path": "/global_market_context/market_proxies/QQQ/price_to_sma200",
+              "value": 1.0734433346098362
+            },
+            {
+              "packet_path": "/global_market_context/market_proxies/QQQ/price_to_sma20",
+              "value": 0.992452141032378
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "QQQ closed above its 200-day average on 2026-09-14, despite being slightly below its 20-day average."
+        },
+        {
+          "claim_id": "qqq_conditions",
+          "classification": "FACT",
+          "evidence_family": "financial_conditions",
+          "evidence_ids": [
+            "NFCI",
+            "DGS10",
+            "DGS2"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if NFCI is at or above zero.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/yield_curve/slopes_percentage_points/10y_minus_2y",
+              "value": 0.33000000000000007
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "NFCI remained negative on 2026-09-04 and the 10y-2y slope was positive on 2026-09-11."
+        },
+        {
+          "claim_id": "qqq_rate_headwind",
+          "classification": "INFERENCE",
+          "evidence_family": "inflation_rates",
+          "evidence_ids": [
+            "DGS10",
+            "DFII10",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if 90-day yield and oil changes are non-positive.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Rising nominal and real yields alongside higher oil create a competing inflation/rate headwind for QQQ."
+        }
+      ],
+      "counterevidence": [
+        "QQQ had negative 5-, 21-, and 63-session returns through 2026-09-14.",
+        "Higher yields and oil can pressure growth multiples."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Require a completed-close recovery above the 20-day average.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "next completed daily close",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/global_market_context/market_proxies/QQQ/price_to_sma20",
+            "level": 1,
+            "units": "ratio"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "next completed daily close",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/global_market_context/market_proxies/QQQ/price_to_sma200",
+            "level": 1,
+            "units": "ratio"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward earnings and valuation"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "qqq_rate_headwind"
+          ],
+          "strongest_support_claim_ids": [
+            "qqq_conditions"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Keep macro exposure conditional on trend confirmation.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "two completed daily closes",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-15",
+            "field": "/global_market_context/market_proxies/QQQ/price_to_sma20",
+            "level": 1,
+            "units": "ratio"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-10-15",
+            "field": "/market/NFCI/value",
+            "level": 0,
+            "units": "standard deviations"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward earnings and valuation"
+            }
+          ],
+          "review": {
+            "event": "Reassess financial conditions and yields.",
+            "when": "2026-10-15"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "qqq_rate_headwind"
+          ],
+          "strongest_support_claim_ids": [
+            "qqq_trend",
+            "qqq_conditions"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Longer horizon remains contingent on financial conditions staying easy.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/NFCI/value",
+            "level": 0,
+            "units": "standard deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "two completed daily closes",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/global_market_context/market_proxies/QQQ/price_to_sma200",
+            "level": 1,
+            "units": "ratio"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Constituent earnings and valuation data"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "qqq_rate_headwind"
+          ],
+          "strongest_support_claim_ids": [
+            "qqq_trend",
+            "qqq_conditions"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "QQQ below its 200-day average would invalidate the constructive longer-cycle component."
+      ],
+      "missing": [
+        "Forward earnings, valuation and constituent-level fundamental data were not supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "Easy financial conditions and a positive curve support the cycle backdrop, while rising inflation, yields and oil oppose duration-sensitive growth. QQQ is near its 20-day average but above its 200-day average, reinforcing a mixed rather than directional view.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "mu_macro",
+          "classification": "FACT",
+          "evidence_family": "macro_conditions",
+          "evidence_ids": [
+            "NFCI",
+            "DGS10",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Context changes if NFCI reaches zero or yield changes turn non-positive.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "Financial conditions were easy on 2026-09-04, while nominal and real yields rose over 90 days through 2026-09-11."
+        }
+      ],
+      "counterevidence": [
+        "Rising yields and oil oppose risk assets.",
+        "MU-specific supply, pricing, earnings and valuation inputs were not supplied to this role."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "No macro-only directional implication for MU.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-09-22",
+            "field": "MU-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-09-22",
+            "field": "MU-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "MU earnings, memory pricing, and inventory data"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "No macro-only directional implication for MU.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-10-15",
+            "field": "MU-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-10-15",
+            "field": "MU-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "MU earnings, memory pricing, and inventory data"
+            }
+          ],
+          "review": {
+            "event": "Reassess macro conditions.",
+            "when": "2026-10-15"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "No macro-only directional implication for MU.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-12-15",
+            "field": "MU-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-12-15",
+            "field": "MU-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "MU multi-quarter fundamentals"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "No company-specific macro thesis is asserted."
+      ],
+      "missing": [
+        "MU-specific fundamental and industry-cycle evidence were not supplied to this role."
+      ],
+      "status": "INSUFFICIENT_EVIDENCE",
+      "symbol": "MU",
+      "thesis": "Macro conditions are mixed, but the supplied macro-cycle evidence cannot establish a MU-specific directional thesis.",
+      "view": "UNKNOWN"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "meta_macro",
+          "classification": "FACT",
+          "evidence_family": "macro_conditions",
+          "evidence_ids": [
+            "NFCI",
+            "DCOILWTICO",
+            "DGS10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Context changes if NFCI reaches zero and oil/yield changes reverse.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "NFCI was negative on 2026-09-04, but oil and 10-year nominal yields were higher over the prior 90 days."
+        }
+      ],
+      "counterevidence": [
+        "Rates and oil have risen.",
+        "META-specific revenue, margin, earnings and valuation evidence were not supplied to this role."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "No macro-only directional implication for META.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-09-22",
+            "field": "META-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-09-22",
+            "field": "META-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "META earnings and valuation data"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "No macro-only directional implication for META.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-10-15",
+            "field": "META-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-10-15",
+            "field": "META-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "META earnings and valuation data"
+            }
+          ],
+          "review": {
+            "event": "Reassess macro conditions.",
+            "when": "2026-10-15"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "No macro-only directional implication for META.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-12-15",
+            "field": "META-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-12-15",
+            "field": "META-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "META multi-quarter fundamentals"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "No META-specific macro thesis is asserted."
+      ],
+      "missing": [
+        "META-specific fundamental and estimate-revision evidence were not supplied to this role."
+      ],
+      "status": "INSUFFICIENT_EVIDENCE",
+      "symbol": "META",
+      "thesis": "The supplied macro backdrop is mixed and does not establish a META-specific directional outlook.",
+      "view": "UNKNOWN"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "nvda_macro",
+          "classification": "FACT",
+          "evidence_family": "macro_conditions",
+          "evidence_ids": [
+            "NFCI",
+            "DGS10",
+            "DGS2",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Context changes if NFCI reaches zero or the curve turns non-positive.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/yield_curve/slopes_percentage_points/10y_minus_2y",
+              "value": 0.33000000000000007
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "The curve was positive and financial conditions were negative/easy, while real yields rose over 90 days."
+        }
+      ],
+      "counterevidence": [
+        "Inflation and rates have risen.",
+        "No NVDA earnings, demand, supply or valuation data were supplied to this role."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "No macro-only directional implication for NVDA.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-09-22",
+            "field": "NVDA-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-09-22",
+            "field": "NVDA-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "NVDA earnings, demand and valuation data"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "No macro-only directional implication for NVDA.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-10-15",
+            "field": "NVDA-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-10-15",
+            "field": "NVDA-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "NVDA earnings, demand and valuation data"
+            }
+          ],
+          "review": {
+            "event": "Reassess macro conditions.",
+            "when": "2026-10-15"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "No macro-only directional implication for NVDA.",
+          "confirmation": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-12-15",
+            "field": "NVDA-specific catalyst",
+            "level": null,
+            "units": "not supplied"
+          },
+          "direction": "UNKNOWN",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "unavailable",
+            "evidence_ids": [],
+            "expiry": "2026-12-15",
+            "field": "NVDA-specific thesis",
+            "level": null,
+            "units": "not supplied"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "NVDA multi-quarter fundamentals"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "INSUFFICIENT_EVIDENCE",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "No NVDA-specific macro thesis is asserted."
+      ],
+      "missing": [
+        "NVDA-specific fundamental and estimate-revision evidence were not supplied to this role."
+      ],
+      "status": "INSUFFICIENT_EVIDENCE",
+      "symbol": "NVDA",
+      "thesis": "Macro conditions are mixed; the supplied NVDA issuer-source listings do not provide content supporting a current company-specific directional view.",
+      "view": "UNKNOWN"
+    }
+  ],
+  "input_hash": "ce21d073bf5e384458df0fd7f9c4705420da1ecc381d159fe3a111c8b9322c8f",
+  "role": "macro_cycle"
+}

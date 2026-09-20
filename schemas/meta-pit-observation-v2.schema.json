@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/meta-pit-observation-v2.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entity",
+    "metric",
+    "value",
+    "units",
+    "source_version",
+    "revision_id",
+    "source_hash",
+    "quality_flags",
+    "period_start",
+    "period_end",
+    "effective_at",
+    "published_at",
+    "first_seen_at",
+    "available_at",
+    "captured_at",
+    "availability_lane",
+    "availability_evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "meta-pit-observation-v2"
+    },
+    "value": {
+      "type": "number"
+    },
+    "quality_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "record_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "entity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metric": {
+      "type": "string",
+      "minLength": 1
+    },
+    "units": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "first_seen_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "available_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "period_start": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "period_end": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "availability_lane": {
+      "const": "HISTORICAL_RECONSTRUCTION"
+    },
+    "availability_evidence": {
+      "type": "object",
+      "required": [
+        "kind",
+        "source_hash",
+        "locator",
+        "available_at",
+        "precision"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "SEC_ACCEPTANCE",
+            "ALFRED_VINTAGE"
+          ]
+        },
+        "source_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "available_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "precision": {
+          "enum": [
+            "SECOND",
+            "DAY_CONSERVATIVE_NEXT_DAY"
+          ]
+        }
+      }
+    }
+  }
+}

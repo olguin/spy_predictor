@@ -1,0 +1,68 @@
+{
+  "schema_version": "meta-experiment-protocol-v2",
+  "status": "FROZEN_DIAGNOSTIC_DESIGN_BEFORE_OUTCOME_INSPECTION",
+  "research_track": "IMPROVEMENT_PLAN_3_NEW_COHORT",
+  "horizons": [
+    5,
+    21,
+    63
+  ],
+  "candidates": [
+    "historical_frequency",
+    "market_sector",
+    "momentum",
+    "regularized_quant",
+    "current_heuristic"
+  ],
+  "minimum_train_origins": 126,
+  "test_origins_per_fold": 21,
+  "final_holdout_start": "2026-09-16T00:00:00+00:00",
+  "primary_metric": "direction_brier",
+  "minimum_material_brier_improvement": 0.005,
+  "familywise_alpha": 0.05,
+  "max_log_loss_regression": 0.0,
+  "max_pinball_regression": 0.0,
+  "minimum_effective_blocks": 30,
+  "block_length_multiplier": 2,
+  "bootstrap_resamples": 10000,
+  "seed": 310916,
+  "feature_groups": {
+    "market_sector": [
+      "market_return_pct",
+      "sector_return_pct"
+    ],
+    "quant": [
+      "market_return_pct",
+      "sector_return_pct",
+      "momentum_pct",
+      "annual_volatility_pct",
+      "quant_score"
+    ]
+  },
+  "momentum_feature": "momentum_pct",
+  "heuristic_score_feature": "quant_score",
+  "volatility_feature": "annual_volatility_pct",
+  "contamination_controls": [
+    "source_only_extraction",
+    "ticker_blind_perturbation",
+    "human_audit",
+    "prospective_frozen_model"
+  ],
+  "promotion": "No automatic promotion; final holdout and mature prospective evidence required.",
+  "challenger": "regularized_quant",
+  "research_mode": "DIAGNOSTIC_REVISED_PRICES",
+  "scope": {
+    "symbols": [
+      "SPY",
+      "QQQ",
+      "XLK"
+    ],
+    "history_start": "2025-08-01",
+    "history_end": "2026-09-15",
+    "warmup_sessions": 63,
+    "selection": "Fixed named ETF case study selected before this new experiment; no broad-universe or survivorship claim.",
+    "training_rationale": "126 origins permits an engineering pilot within the permitted post-July-2025 window; all significance, materiality and effective-block thresholds unchanged.",
+    "price_vintage": "Latest historical revisions are diagnostic inputs, not certified historical availability.",
+    "excluded_period": "2017-07-01 through 2025-07-31 never queried by this experiment."
+  }
+}

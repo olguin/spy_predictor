@@ -1,0 +1,1237 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "ANET-trend",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-ANET"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Completed daily close at or below the 50-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/price_to_sma50",
+              "value": 1.0105287398871798
+            },
+            {
+              "packet_path": "/instruments/ANET/price_to_sma200",
+              "value": 1.221729494349314
+            },
+            {
+              "packet_path": "/instruments/ANET/return63_pct",
+              "value": 15.051457975986281
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "ANET is above its 50- and 200-session averages and has a positive 63-session return, supporting the longer-horizon trend."
+        },
+        {
+          "claim_id": "ANET-weakness",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-ANET"
+          ],
+          "horizons": [
+            5,
+            21
+          ],
+          "invalidation": "Completed daily close above the 20-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/price_to_sma20",
+              "value": 0.9750817067693961
+            },
+            {
+              "packet_path": "/instruments/ANET/return5_pct",
+              "value": -3.080813293425533
+            },
+            {
+              "packet_path": "/instruments/ANET/return21_pct",
+              "value": -7.764463215794127
+            },
+            {
+              "packet_path": "/instruments/ANET/rsi14_simple",
+              "value": 49.7502937720329
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "ANET is below its 20-session average with negative 5- and 21-session returns; RSI is near neutral rather than showing a strong momentum recovery."
+        },
+        {
+          "claim_id": "ANET-risk",
+          "classification": "FACT",
+          "evidence_family": "risk-levels",
+          "evidence_ids": [
+            "price-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Not applicable; this is risk and level context.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/atr14_simple",
+              "value": 7.695171428571426
+            },
+            {
+              "packet_path": "/instruments/ANET/realized_vol5_pct",
+              "value": 66.66888377964524
+            },
+            {
+              "packet_path": "/instruments/ANET/realized_vol21_pct",
+              "value": 48.34179319127294
+            },
+            {
+              "packet_path": "/instruments/ANET/realized_vol63_pct",
+              "value": 57.54512891040997
+            },
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/20_session/support_close",
+              "value": 183.75
+            },
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/20_session/resistance_close",
+              "value": 202.25
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "ATR14 and realized volatility are elevated, while support is 183.75 and resistance is 202.25; these are descriptive levels, not forecasts."
+        }
+      ],
+      "counterevidence": [
+        "Five- and 21-session returns are negative and trail SPY.",
+        "Intraday bars have gaps and IEX-only coverage."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Avoid directional reliance until a daily-level break resolves recent weakness.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 202.25,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 183.75,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "reassess 20-session level break and volatility.",
+            "when": "next completed daily session"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-weakness"
+          ],
+          "strongest_support_claim_ids": [],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Intermediate trend evidence conflicts; require recovery of the 20-session average.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 192.6095,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 183.75,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review moving-average recovery.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-weakness"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-trend"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Longer trend remains constructive but volatility warrants level-based review.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 202.25,
+            "units": "USD"
+          },
+          "direction": "BULLISH",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 183.75,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review trend versus 50-session average.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [
+            "ANET-trend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed daily close below 183.75 weakens the intermediate constructive structure.",
+        "A completed daily close above 202.25 negates the near-term bearish setup."
+      ],
+      "missing": [
+        "No options-implied volatility, consolidated intraday volume, or fundamental catalyst evidence was supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "Near-term trend is mixed: price is below the 20-session average but above the 50- and 200-session averages; the 63-session return remains positive despite recent weakness.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "QQQ-shortweak",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Completed daily close above the 20-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma20",
+              "value": 0.992452141032378
+            },
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma50",
+              "value": 0.9983697901562356
+            },
+            {
+              "packet_path": "/instruments/QQQ/return5_pct",
+              "value": -1.360298208523436
+            },
+            {
+              "packet_path": "/instruments/QQQ/return21_pct",
+              "value": -3.126750174163684
+            },
+            {
+              "packet_path": "/instruments/QQQ/return63_pct",
+              "value": -1.6857515180081606
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "QQQ is below its 20- and 50-session averages and has negative 5-, 21-, and 63-session returns."
+        },
+        {
+          "claim_id": "QQQ-longtrend",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-QQQ"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Completed daily close at or below the 200-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma200",
+              "value": 1.0734433346098362
+            },
+            {
+              "packet_path": "/instruments/QQQ/rsi14_simple",
+              "value": 52.29166666666658
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "QQQ remains above its 200-session average and RSI is near neutral, supporting a non-breakdown longer-term interpretation."
+        },
+        {
+          "claim_id": "QQQ-risk",
+          "classification": "FACT",
+          "evidence_family": "risk-levels",
+          "evidence_ids": [
+            "price-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Not applicable; this is risk and level context.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/atr14_simple",
+              "value": 7.893914285714272
+            },
+            {
+              "packet_path": "/instruments/QQQ/realized_vol5_pct",
+              "value": 11.917515909365184
+            },
+            {
+              "packet_path": "/instruments/QQQ/realized_vol21_pct",
+              "value": 12.595734316422064
+            },
+            {
+              "packet_path": "/instruments/QQQ/realized_vol63_pct",
+              "value": 22.41736224799046
+            },
+            {
+              "packet_path": "/instruments/QQQ/support_resistance_candidates/20_session/support_close",
+              "value": 706.32
+            },
+            {
+              "packet_path": "/instruments/QQQ/support_resistance_candidates/20_session/resistance_close",
+              "value": 729.87
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "ATR14 is a one-session range measure, and realized volatility is lower than the individual stocks; 20-session support and resistance are 706.32 and 729.87."
+        }
+      ],
+      "counterevidence": [
+        "The 200-session trend remains positive.",
+        "Intraday evidence is IEX-only and has gaps."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Near-flat positioning around short averages supports waiting for a daily break.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 729.87,
+            "units": "USD"
+          },
+          "direction": "NEUTRAL",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 706.32,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review support break or resistance recovery.",
+            "when": "next completed daily session"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-shortweak"
+          ],
+          "strongest_support_claim_ids": [],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Short/intermediate weakness conflicts with the long moving-average trend.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 714.5735,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 706.32,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review 20-session average.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-shortweak"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-longtrend"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Maintain a mixed technical view until returns and short averages align with the 200-session trend.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 729.87,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 661.73,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review 63-session support.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-shortweak"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-longtrend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed daily close above 729.87 negates the short-term bearish case.",
+        "A completed daily close below 706.32 weakens the 200-session trend recovery case."
+      ],
+      "missing": [
+        "No options-implied volatility, consolidated intraday volume, or macro catalyst evidence was supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "QQQ is near its short moving averages but below both, with negative recent returns; it remains above its 200-session average, producing a mixed multi-horizon technical picture.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "MU-weakness",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Completed daily close above the 20-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/price_to_sma20",
+              "value": 0.9621050675208717
+            },
+            {
+              "packet_path": "/instruments/MU/price_to_sma50",
+              "value": 0.9961735886085428
+            },
+            {
+              "packet_path": "/instruments/MU/return5_pct",
+              "value": -9.104948897785736
+            },
+            {
+              "packet_path": "/instruments/MU/return21_pct",
+              "value": -2.716275544044733
+            },
+            {
+              "packet_path": "/instruments/MU/return63_pct",
+              "value": -5.865873412047562
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "MU is below its 20-session average with negative 5-, 21-, and 63-session returns; it is also slightly below its 50-session average."
+        },
+        {
+          "claim_id": "MU-longbase",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-MU"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Completed daily close at or below the 200-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/price_to_sma200",
+              "value": 1.4771062557615167
+            },
+            {
+              "packet_path": "/instruments/MU/rsi14_simple",
+              "value": 52.1559923906151
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "MU remains materially above its 200-session average and RSI is near neutral, providing longer-horizon counterevidence to the recent decline."
+        },
+        {
+          "claim_id": "MU-risk",
+          "classification": "FACT",
+          "evidence_family": "risk-levels",
+          "evidence_ids": [
+            "price-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Not applicable; this is risk and level context.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/atr14_simple",
+              "value": 43.68447857142859
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol5_pct",
+              "value": 53.928063538798966
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol21_pct",
+              "value": 56.39491284665741
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol63_pct",
+              "value": 93.52546590442891
+            },
+            {
+              "packet_path": "/instruments/MU/support_resistance_candidates/20_session/support_close",
+              "value": 910.43
+            },
+            {
+              "packet_path": "/instruments/MU/support_resistance_candidates/20_session/resistance_close",
+              "value": 1027.77
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "MU has very high realized volatility and a large one-session ATR14; 20-session support is 910.43 and resistance is 1027.77."
+        }
+      ],
+      "counterevidence": [
+        "Price remains above the 200-session average.",
+        "Intraday bars have gaps and IEX-only coverage."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Recent downside trend dominates, subject to high-volatility risk.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 910.43,
+            "units": "USD"
+          },
+          "direction": "BEARISH",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 1027.77,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review support or 20-session recovery.",
+            "when": "next completed daily session"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-weakness"
+          ],
+          "strongest_support_claim_ids": [],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Recent returns and position below the 20-session average favor downside continuation evidence.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 910.43,
+            "units": "USD"
+          },
+          "direction": "BEARISH",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 960.4252499999999,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review 20-session average.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-weakness"
+          ],
+          "strongest_support_claim_ids": [],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Long-base support conflicts with negative medium-term momentum; do not treat the 200-session average as a forecast.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 1027.77,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 910.43,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review volatility and 50-session trend.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-weakness"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-longbase"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed daily close above 1027.77 negates near-term downside continuation.",
+        "A completed daily close below 910.43 confirms a loss of nearby support."
+      ],
+      "missing": [
+        "No options-implied volatility, consolidated intraday volume, or semiconductor fundamental evidence was supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "MU",
+      "thesis": "MU has recent downside momentum below the 20-session average, but remains well above the 200-session average; exceptionally high realized volatility makes the 63-session direction mixed rather than cleanly bearish.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "META-trend",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-META"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Completed daily close below the 20-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/price_to_sma20",
+              "value": 1.127649175059233
+            },
+            {
+              "packet_path": "/instruments/META/price_to_sma50",
+              "value": 1.1046272530263568
+            },
+            {
+              "packet_path": "/instruments/META/price_to_sma200",
+              "value": 1.0675329251548913
+            },
+            {
+              "packet_path": "/instruments/META/return5_pct",
+              "value": 7.917051737276459
+            },
+            {
+              "packet_path": "/instruments/META/return21_pct",
+              "value": 11.871186782526856
+            },
+            {
+              "packet_path": "/instruments/META/return63_pct",
+              "value": 17.39391160182018
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "META is above its 20-, 50-, and 200-session averages, with positive returns at all requested horizons."
+        },
+        {
+          "claim_id": "META-stretched",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-META"
+          ],
+          "horizons": [
+            5,
+            21
+          ],
+          "invalidation": "Completed daily close above the 63-session resistance.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/rsi14_simple",
+              "value": 84.78005482313017
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/63_session/resistance_close",
+              "value": 681.31
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "META RSI14 is elevated and the price remains below its 63-session resistance, creating pullback risk despite the bullish trend."
+        },
+        {
+          "claim_id": "META-risk",
+          "classification": "FACT",
+          "evidence_family": "risk-levels",
+          "evidence_ids": [
+            "price-META"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Not applicable; this is risk and level context.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/atr14_simple",
+              "value": 21.714028571428578
+            },
+            {
+              "packet_path": "/instruments/META/realized_vol5_pct",
+              "value": 49.25764597920966
+            },
+            {
+              "packet_path": "/instruments/META/realized_vol21_pct",
+              "value": 36.7253499057877
+            },
+            {
+              "packet_path": "/instruments/META/realized_vol63_pct",
+              "value": 46.876940655352875
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/20_session/support_close",
+              "value": 543.67
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/20_session/resistance_close",
+              "value": 665.6
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "ATR14 is a one-session range measure; realized volatility is material, while 20-session support and resistance are 543.67 and 665.6."
+        }
+      ],
+      "counterevidence": [
+        "RSI14 is elevated, indicating stretched momentum.",
+        "Price is below the 63-session high and intraday data are IEX-only."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Trend is bullish, but elevated RSI calls for confirmation rather than extrapolation.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 681.31,
+            "units": "USD"
+          },
+          "direction": "BULLISH",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 590.2545,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review RSI and 63-session resistance.",
+            "when": "next completed daily session"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-stretched"
+          ],
+          "strongest_support_claim_ids": [
+            "META-trend"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Intermediate trend is constructive, conditioned on holding the 20-session average.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 681.31,
+            "units": "USD"
+          },
+          "direction": "BULLISH",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 590.2545,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review moving-average trend.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-stretched"
+          ],
+          "strongest_support_claim_ids": [
+            "META-trend"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Longer-horizon trend is bullish; resistance is a measurable confirmation level.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 681.31,
+            "units": "USD"
+          },
+          "direction": "BULLISH",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 543.67,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review 200-session trend.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [
+            "META-trend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed daily close below 590.2545 undermines the short/intermediate trend.",
+        "A completed daily close below 543.67 breaks the 20-session support level."
+      ],
+      "missing": [
+        "No options-implied volatility, consolidated intraday volume, or fundamental catalyst evidence was supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "META",
+      "thesis": "META is above all listed moving averages with positive returns across horizons and positive relative strength; elevated RSI is meaningful counterevidence to a continued near-term advance.",
+      "view": "BULLISH"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "NVDA-shortweak",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-NVDA"
+          ],
+          "horizons": [
+            5,
+            21
+          ],
+          "invalidation": "Completed daily close above the 20-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma20",
+              "value": 0.9613014205807635
+            },
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma50",
+              "value": 0.9908570236902003
+            },
+            {
+              "packet_path": "/instruments/NVDA/return5_pct",
+              "value": -8.42160097239104
+            },
+            {
+              "packet_path": "/instruments/NVDA/return21_pct",
+              "value": -6.36484687083888
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "NVDA is below its 20- and 50-session averages with negative 5- and 21-session returns."
+        },
+        {
+          "claim_id": "NVDA-longtrend",
+          "classification": "FACT",
+          "evidence_family": "daily-technical",
+          "evidence_ids": [
+            "price-NVDA"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Completed daily close at or below the 200-session average.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma200",
+              "value": 1.0675316493328562
+            },
+            {
+              "packet_path": "/instruments/NVDA/return63_pct",
+              "value": 2.8120278766021745
+            },
+            {
+              "packet_path": "/instruments/NVDA/rsi14_simple",
+              "value": 51.64021164021166
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "NVDA remains above its 200-session average, has a positive 63-session return, and RSI is near neutral."
+        },
+        {
+          "claim_id": "NVDA-risk",
+          "classification": "FACT",
+          "evidence_family": "risk-levels",
+          "evidence_ids": [
+            "price-NVDA"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Not applicable; this is risk and level context.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/atr14_simple",
+              "value": 7.765714285714286
+            },
+            {
+              "packet_path": "/instruments/NVDA/realized_vol5_pct",
+              "value": 20.885514056329516
+            },
+            {
+              "packet_path": "/instruments/NVDA/realized_vol21_pct",
+              "value": 44.114141442318555
+            },
+            {
+              "packet_path": "/instruments/NVDA/realized_vol63_pct",
+              "value": 40.616252796283014
+            },
+            {
+              "packet_path": "/instruments/NVDA/support_resistance_candidates/20_session/support_close",
+              "value": 208.48
+            },
+            {
+              "packet_path": "/instruments/NVDA/support_resistance_candidates/20_session/resistance_close",
+              "value": 230.36
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "ATR14 is a one-session range measure; realized volatility varies across horizons, with 20-session support of 208.48 and resistance of 230.36."
+        }
+      ],
+      "counterevidence": [
+        "The 200-session trend and 63-session return remain positive.",
+        "Intraday evidence is IEX-only."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Recent momentum is bearish until price recovers its 20-session average.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 208.48,
+            "units": "USD"
+          },
+          "direction": "BEARISH",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "within 5 trading days",
+            "field": "completed daily close",
+            "level": 219.45250000000001,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review support and 20-session average.",
+            "when": "next completed daily session"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-shortweak"
+          ],
+          "strongest_support_claim_ids": [],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Near-term weakness conflicts with the 200-session trend.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 230.36,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "within 21 trading days",
+            "field": "completed daily close",
+            "level": 208.48,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review 20- and 50-session averages.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-shortweak"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-longtrend"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Longer trend is constructive but lacks aligned short-average momentum.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 230.36,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "within 63 trading days",
+            "field": "completed daily close",
+            "level": 190.01,
+            "units": "USD"
+          },
+          "missing_evidence": [],
+          "review": {
+            "event": "review 63-session support and 200-session trend.",
+            "when": "weekly"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [
+            "NVDA-longtrend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed daily close above 230.36 negates the short/intermediate bearish setup.",
+        "A completed daily close below 208.48 confirms loss of nearby support."
+      ],
+      "missing": [
+        "No options-implied volatility, consolidated intraday volume, or fundamental catalyst evidence was supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "NVDA",
+      "thesis": "NVDA has negative 5- and 21-session momentum below short averages, while it remains above its 200-session average and has a positive 63-session return, yielding a mixed horizon profile.",
+      "view": "MIXED"
+    }
+  ],
+  "input_hash": "842132354557e72e621f77ee1bed5adb7811be5f8f49cd47ca29b9a1b50f916d",
+  "role": "technical"
+}

@@ -2,13 +2,31 @@
 
 Research infrastructure for point-in-time, reproducible market forecasting.
 
-Current work is the Cycle 1 pre-evaluation repair. See
-[project status](docs/PROJECT_PLAN_AND_STATUS.md) and
+The proposed next product iteration is **Agentic Investment System V1**: a
+cooperating research team for investment decisions over several weeks to three
+months. Start with the [V1 implementation plan](docs/AGENTIC_INVESTMENT_SYSTEM_V1_PLAN.md).
+Implementation under that plan has not started.
+
+The existing engineering baseline is **Improvement Plan 3**; see its
+[implementation handoff](docs/IMPROVEMENT_PLAN_3_HANDOFF.md) and
+[project status](docs/PROJECT_PLAN_AND_STATUS.md). Archived synthesis and a fresh
+chain through compact recovery are verified; ordinary-path reliability and other
+acceptance work remain. Existing historical ETF results remain diagnostic;
+statistical/data qualification is separate from engineering.
+
+The separate Cycle 1 pre-evaluation repair remains preserved; see its
 [repair findings](docs/CYCLE1_REPAIR.md).
 `npm run cycle1:preflight` audits the pinned dataset without model metrics;
 exit code 2 reports the known scientific blockers. The old v4 dataset is
 suspended for evaluation, and its repaired offline rebuild fails closed on
 missing historical cash-rate publication coverage.
+
+The separate multi-agent **GOLDEN GOAL** watchlist pipeline is implemented
+through G10. It accepts a normal set of five symbol/ETF parameters, captures
+current evidence, runs five specialists plus critic and synthesis, generates
+experimental 5/21/63-session forecasts and recommendations, and writes a
+readable local cockpit. Start with the
+[`daily operations and interpretation guide`](docs/GOLDEN_GOAL_DAILY_OPERATIONS.md).
 
 The repository contains the hardened **FOUNDATION-001** research spine and a
 no-LLM **TARGET-TOURNAMENT-001** qualification pipeline. The foundation uses a
@@ -125,11 +143,16 @@ npm run massive:check
 npm run phase1
 ```
 
+The check reports Futures and Indices separately. Phase 1 requires
+`futures.status: ok`. The META intraday VIX panel additionally requires
+`indices.status: ok` for both `I:VIX` and `I:VIX3M`; `not_entitled` is a visible
+current-volatility gap and does not imply the Futures credential is invalid.
+
 `npm run phase1` builds or resumes the immutable two-year raw archive,
 normalizes the fixed 09:30–16:00 New York research session, verifies every
 configured futures contract and roll, compares all four instruments with the
 pinned IBKR history, and runs the 24-candidate sealed-confirmation tournament.
-Massive's free five-request-per-minute limit makes the first acquisition slow;
+Massive's free Futures five-request-per-minute limit makes the first acquisition slow;
 completed pages are always reused.
 
 After the first acquisition, prove that no network access or recomputation is
@@ -152,4 +175,13 @@ npm run phase1 -- --offline
 - `migrations`: PostgreSQL metadata schema
 - `schemas`: language-neutral JSON schemas
 
-Pi, Ollama, and evolutionary optimization remain deliberately deferred.
+Pi-based META research is isolated from the Cycle 1 experiment authorities and
+has no order path. Ollama and evolutionary optimization remain deferred.
+
+### Improvement Plan 3
+
+The first contract/research engineering release uses v3 forecasts and product views
+and v4 agent requests. It adds point-in-time research storage, purged experimental
+comparisons, dated event controls, auditable conditions and price-freshness overlays.
+The ten-phase plan remains in progress; production probabilities remain heuristic
+and uncalibrated. See [delivery evidence, commands and remaining gates](docs/IMPROVEMENT_PLAN_3_IMPLEMENTATION.md).

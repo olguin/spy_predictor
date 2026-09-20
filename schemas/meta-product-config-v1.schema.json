@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/meta-product-config-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "normal_symbol_count",
+    "minimum_symbols",
+    "maximum_symbols",
+    "horizons_sessions",
+    "operating_modes",
+    "evidence_states",
+    "probability_states"
+  ],
+  "properties": {
+    "schema_version": {"const": "meta-product-config-v1"},
+    "status": {"const": "active-development"},
+    "normal_symbol_count": {"const": 5},
+    "minimum_symbols": {"const": 1},
+    "maximum_symbols": {"const": 10},
+    "horizons_sessions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [{"const": 5}, {"const": 21}, {"const": 63}],
+      "items": false
+    },
+    "operating_modes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["on_demand", "prospective"],
+      "properties": {
+        "on_demand": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["registration", "allowed_market_periods"],
+          "properties": {
+            "registration": {"const": false},
+            "allowed_market_periods": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "prefixItems": [
+                {"const": "PREMARKET"}, {"const": "REGULAR"},
+                {"const": "POSTMARKET"}, {"const": "CLOSED"}
+              ],
+              "items": false
+            }
+          }
+        },
+        "prospective": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["registration", "issue_window"],
+          "properties": {
+            "registration": {"const": true},
+            "issue_window": {"const": "XNYS_CLOSE_PLUS_25_MINUTES_TO_NEXT_XNYS_OPEN"}
+          }
+        }
+      }
+    },
+    "evidence_states": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        {"const": "REAL_TIME"}, {"const": "DELAYED"},
+        {"const": "LATEST_COMPLETED_CLOSE"}, {"const": "STALE"},
+        {"const": "MISSING"}
+      ],
+      "items": false
+    },
+    "probability_states": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {"const": "UNAVAILABLE"},
+        {"const": "EXPERIMENTAL_UNCALIBRATED"},
+        {"const": "PROSPECTIVELY_CALIBRATED"}
+      ],
+      "items": false
+    }
+  }
+}

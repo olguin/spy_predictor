@@ -3,8 +3,10 @@ from datetime import datetime, timezone
 import pytest
 
 from spy_predictor_quant.meta_evidence import (
-    company_fundamentals, etf_overlap, exposure_news_symbols, parse_holdings_csv,
-    recent_filings, sec_ticker_map,
+    company_fundamentals, company_market_valuation, etf_overlap, etf_quality_valuation,
+    exposure_news_symbols, geopolitical_transmission_coverage, instrument_evidence_profile,
+    parse_etf_profile, parse_holdings_csv, primary_source_evidence, recent_filings,
+    sec_ticker_map, validate_primary_source_config,
 )
 
 CUTOFF = datetime(2026, 9, 10, tzinfo=timezone.utc)
@@ -96,3 +98,111 @@ def test_holdings_profiles_exposure_expansion_and_overlap():
 def test_invalid_holdings_fail_closed(raw):
     with pytest.raises(ValueError):
         parse_holdings_csv(raw, "SPY", CUTOFF)
+
+
+def test_primary_rss_is_cutoff_filtered_scoped_and_replayable():
+    definition = {
+        "id": "issuer-events", "publisher": "Issuer", "kind": "issuer_event",
+        "format": "rss_atom", "url": "https://issuer.test/events.xml",
+        "publisher_domains": ["issuer.test"], "symbols": ["NVDA"], "maximum_items": 10,
+    }
+    validate_primary_source_config({"version": "meta-primary-sources-v1", "sources": [definition]})
+    raw = b'''<rss><channel>
+      <item><title>Investor day</title><link>https://issuer.test/event/1</link><pubDate>Tue, 08 Sep 2026 12:00:00 GMT</pubDate><description>Official event announcement</description></item>
+      <item><title>Future item</title><link>https://issuer.test/event/2</link><pubDate>Fri, 11 Sep 2026 12:00:00 GMT</pubDate></item>
+    </channel></rss>'''
+    rows = primary_source_evidence(raw, definition, CUTOFF, ["SPY", "NVDA"], CUTOFF.isoformat())
+    assert len(rows) == 1
+    assert rows[0]["symbols"] == ["NVDA"]
+    assert rows[0]["kind"] == "news"
+    assert rows[0]["primary_kind"] == "issuer_event"
+    assert rows == primary_source_evidence(raw, definition, CUTOFF, ["SPY", "NVDA"], CUTOFF.isoformat())
+
+
+def test_federal_register_policy_feed_is_bounded_and_watchlist_scoped():
+    definition = {
+        "id": "federal-register-tech", "publisher": "Federal Register", "kind": "sector_release",
+        "format": "federal_register_json", "url": "https://www.federalregister.gov/api/v1/documents.json",
+        "publisher_domains": ["www.federalregister.gov"], "symbols": ["*"], "maximum_items": 1,
+    }
+    raw = b'{"results":[{"document_number":"2026-1","title":"Semiconductor rule","abstract":"Notice","publication_date":"2026-09-08","html_url":"https://www.federalregister.gov/documents/2026/1","agencies":[{"name":"Commerce"}]},{"document_number":"2026-2","title":"Ignored by bound","publication_date":"2026-09-08","html_url":"https://www.federalregister.gov/documents/2026/2"}]}'
+    rows = primary_source_evidence(raw, definition, CUTOFF, ["SPY", "QQQ"], CUTOFF.isoformat())
+    assert [row["id"] for row in rows] == ["primary-federal-register-tech-2026-1"]
+    assert rows[0]["symbols"] == ["SPY", "QQQ"]
+    assert rows[0]["kind"] == "policy"
+
+
+def test_fomc_calendar_preserves_announcement_and_scheduled_date_semantics():
+    definition = {
+        "id": "fomc-calendar", "publisher": "Federal Reserve", "kind": "policy_event",
+        "format": "fomc_calendar_html", "url": "https://www.federalreserve.gov/calendar",
+        "publisher_domains": ["www.federalreserve.gov"], "symbols": ["*"], "maximum_items": 10,
+    }
+    raw = b'''<h4>2026 FOMC Meetings</h4>
+      <div class="fomc-meeting__month">September</div><div class="fomc-meeting__date">15-16*</div>
+      <div class="fomc-meeting__month">October</div><div class="fomc-meeting__date">27-28</div>
+      <footer>Last Update: August 19, 2026</footer>'''
+    rows = primary_source_evidence(raw, definition, CUTOFF, ["SPY"], CUTOFF.isoformat())
+    assert [row["scheduled_for"] for row in rows] == ["2026-09-16", "2026-10-28"]
+    assert rows[0]["published_at"] == "2026-08-19T00:00:00+00:00"
+    assert rows[0]["temporal_role"].startswith("ANNOUNCED_FUTURE")
+
+
+def test_etf_sponsor_profile_and_quality_summary_do_not_invent_missing_metrics():
+    sponsor = parse_etf_profile({
+        "symbol": "QQQ", "as_of": "2026-09-09", "source_url": "https://sponsor.test/qqq",
+        "metrics": {"expense_ratio_pct": .2, "pe_ratio": 30.5, "holdings_count": 100},
+    }, "QQQ", CUTOFF)
+    holdings = parse_holdings_csv(
+        b"as_of,source_url,ticker,name,weight_pct,sector\n2026-09-09,https://sponsor.test/qqq,NVDA,Nvidia,9,Technology\n",
+        "QQQ", CUTOFF)
+    result = etf_quality_valuation(holdings, sponsor)
+    assert result["status"] == "COMPLETE_CURRENT_INPUTS"
+    assert result["holdings_coverage_pct"] == 9
+    assert result["sector_hhi"] == pytest.approx(.0081)
+    assert result["sponsor_metrics"] == {"expense_ratio_pct": .2, "pe_ratio": 30.5, "holdings_count": 100}
+    assert "price_to_book_ratio" not in result["sponsor_metrics"]
+
+
+def test_primary_config_rejects_unapproved_domain_and_etf_profile_future_date():
+    with pytest.raises(ValueError, match="publisher domain"):
+        validate_primary_source_config({"version": "meta-primary-sources-v1", "sources": [{
+            "id": "bad-source", "kind": "policy_release", "format": "rss_atom",
+            "url": "https://other.test/feed", "publisher_domains": ["publisher.test"], "symbols": ["*"],
+        }]})
+    with pytest.raises(ValueError, match="nonfuture"):
+        parse_etf_profile({"symbol": "QQQ", "as_of": "2026-09-11", "source_url": "https://sponsor.test",
+                           "metrics": {"expense_ratio_pct": .2}}, "QQQ", CUTOFF)
+
+
+def test_company_valuation_requires_traceable_shares_and_same_date_book_value():
+    profile = company_fundamentals(companyfacts(), "AAPL", CUTOFF,
+                                   recent_filings(submissions(), "AAPL", CUTOFF))
+    assert company_market_valuation(profile, {"status": "FRESH", "latest_close": 200,
+                                              "price_date": "2026-09-09"})["status"] == "MISSING"
+    base = {"value": 10, "end": "2026-07-31", "accession": "a", "unit": "shares"}
+    profile["metrics"]["shares_outstanding"] = base
+    profile["metrics"]["equity"] = {"value": 500, "end": "2026-07-31",
+                                      "accession": "b", "unit": "USD"}
+    result = company_market_valuation(profile, {"status": "FRESH", "latest_close": 200,
+                                                "price_date": "2026-09-09"})
+    assert result["metrics"] == {"market_cap_proxy_usd": 2000, "price_to_book_proxy": 4}
+    profile["metrics"]["equity"]["end"] = "2026-06-30"
+    assert company_market_valuation(profile, {"status": "FRESH", "latest_close": 200,
+                                              "price_date": "2026-09-09"})["status"] == "PARTIAL"
+
+
+def test_instrument_and_geopolitical_profiles_make_gaps_explicit():
+    profile = company_fundamentals(companyfacts(), "AAPL", CUTOFF,
+                                   recent_filings(submissions(), "AAPL", CUTOFF))
+    company = instrument_evidence_profile(
+        "AAPL", False, fundamentals=profile, holdings=None, sponsor_profile=None,
+        instrument={"status": "FRESH", "latest_close": 200, "price_date": "2026-09-09"})
+    assert company["families"]["latest_10k"] == "AVAILABLE"
+    assert company["families"]["country_revenue_and_supply_chain"] == "MISSING"
+    evidence = {"policy-1": {"kind": "policy", "symbols": ["AAPL"],
+        "event_status": "PROPOSED", "transmission": [{"channel": "TARIFF"}]}}
+    coverage = geopolitical_transmission_coverage(evidence, ["AAPL", "QQQ"])
+    assert coverage["by_symbol"]["AAPL"]["status"] == "TRACEABLE_TRANSMISSIONS"
+    assert coverage["by_symbol"]["AAPL"]["event_status_counts"] == {"PROPOSED": 1}
+    assert coverage["by_symbol"]["QQQ"]["status"] == "MISSING"

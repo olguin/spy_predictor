@@ -1,0 +1,1325 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "anet_strength",
+          "classification": "INFERENCE",
+          "evidence_family": "price_trend",
+          "evidence_ids": [
+            "price-ANET",
+            "intraday-bars-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close below the supplied 50-session average weakens structural support; a failed closing recovery supersedes the intraday counterweight.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/sma50",
+              "value": 185.8532
+            },
+            {
+              "packet_path": "/intraday/ANET/session_last",
+              "value": 192.97
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Price above the longer moving averages and positive intermediate returns support a constructive structural trend. The IEX-only rebound counters near-term weakness but does not confirm a completed-close recovery."
+        },
+        {
+          "claim_id": "anet_correction",
+          "classification": "INFERENCE",
+          "evidence_family": "price_trend",
+          "evidence_ids": [
+            "price-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close at or above the supplied short-average level negates this corrective setup.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/sma20",
+              "value": 192.6095
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Negative recent returns and the completed close below the short moving average oppose an unqualified continuation thesis."
+        },
+        {
+          "claim_id": "anet_quality_gap",
+          "classification": "INFERENCE",
+          "evidence_family": "issuer_fundamentals",
+          "evidence_ids": [
+            "fundamentals-ANET",
+            "sec-submissions-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Qualified guidance, valuation comparisons and catalyst evidence resolve this limitation.",
+          "numeric_values": [],
+          "stance": "CONTEXT",
+          "statement": "Reported profitability provides quality context, but historical SEC facts and filing dates do not establish forward earnings, a comparable valuation or a dated return catalyst."
+        }
+      ],
+      "counterevidence": [
+        "Recent weakness opposes structural strength; the IEX rebound is not a consolidated closing confirmation."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK. The confirmation is a reassessment condition, not an entry instruction.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "next 5 trading days",
+            "field": "completed daily close",
+            "level": 192.6095,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Consolidated close, issuer guidance/catalyst and sufficient accepted specialist-family coverage"
+            }
+          ],
+          "review": {
+            "event": "Confirm or reject the IEX rebound",
+            "when": "Next completed session and after the scheduled FOMC event"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "anet_correction"
+          ],
+          "strongest_support_claim_ids": [
+            "anet_strength"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; price recovery alone does not close forward-evidence gaps.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "next 21 trading days",
+            "field": "completed daily close",
+            "level": 192.6095,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward estimates, valuation comparison, catalyst and policy transmission"
+            }
+          ],
+          "review": {
+            "event": "Resolve correction versus structural strength",
+            "when": "Next completed session or issuer disclosure, whichever comes first"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "anet_correction"
+          ],
+          "strongest_support_claim_ids": [
+            "anet_strength"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Technically constructive only. New position: WAIT. Existing holding: REVIEW_RISK; an already-satisfied trend condition does not override evidence gates.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "next 63 trading days",
+            "field": "completed daily close",
+            "level": 185.8532,
+            "units": "USD"
+          },
+          "direction": "BULLISH",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward earnings, comparable valuation, cycle sensitivity and issuer catalyst"
+            }
+          ],
+          "review": {
+            "event": "Reassess trend and earnings durability",
+            "when": "Next issuer disclosure or loss of structural support"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "anet_correction"
+          ],
+          "strongest_support_claim_ids": [
+            "anet_strength"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "Reassess the correction on a completed-close reclaim of the stated confirmation level; reassess structural strength on loss of the supplied 50-session average."
+      ],
+      "missing": [
+        "Forward guidance, comparable valuation, issuer catalyst and geographic transmission; consolidated current-session confirmation."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "The correction and incomplete intraday rebound leave the near term unresolved; the structural trend is constructive, not a qualified buy forecast.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "qqq_weakness",
+          "classification": "INFERENCE",
+          "evidence_family": "price_trend",
+          "evidence_ids": [
+            "price-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close at or above the supplied short-average level negates this setup.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/sma20",
+              "value": 714.5735
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Negative recent returns and price below short and intermediate moving averages support a bearish near-term technical reading."
+        },
+        {
+          "claim_id": "qqq_counterweight",
+          "classification": "INFERENCE",
+          "evidence_family": "price_and_constituent_context",
+          "evidence_ids": [
+            "price-QQQ",
+            "holdings-QQQ",
+            "news-61781763"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Loss of the long-average level or contrary issuer demand evidence weakens these counterweights.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/sma200",
+              "value": 660.6590000000001
+            },
+            {
+              "packet_path": "/etf_holdings/QQQ/top10_weight_pct",
+              "value": 47.17
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "The positive long-average relationship opposes a uniformly bearish view. Apple demand commentary provides limited additional counterevidence, not an ETF earnings forecast; current holdings establish exposure but not index-wide transmission."
+        },
+        {
+          "claim_id": "qqq_macro",
+          "classification": "INFERENCE",
+          "evidence_family": "rates_conditions_policy",
+          "evidence_ids": [
+            "NFCI",
+            "STLFSI4",
+            "DFII10",
+            "DCOILWTICO",
+            "primary-fomc-meeting-calendar-2026-09-16",
+            "etf-profile-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "New policy outcomes, macro observations and constituent earnings supersede the pre-event assessment.",
+          "numeric_values": [],
+          "stance": "CONTEXT",
+          "statement": "Accommodative financial-condition indicators coexist with elevated real yields and oil and a scheduled FOMC meeting ending 2026-09-16. These are cross-cutting valuation and event risks, not calibrated price transmission. Sponsor valuation aggregates remain descriptive."
+        }
+      ],
+      "counterevidence": [
+        "The longer moving-average trend remains positive; favorable Apple demand commentary is only a partial constituent counterweight."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK. The supplied upward confirmation would challenge, not confirm, the bearish bias.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "next 5 trading days",
+            "field": "completed daily close",
+            "level": 714.5735,
+            "units": "USD"
+          },
+          "direction": "BEARISH",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Verified FOMC decision, broad constituent reaction and verified sector-to-ETF transmission"
+            }
+          ],
+          "review": {
+            "event": "Policy outcome and completed-close reaction",
+            "when": "After the scheduled 2026-09-16 FOMC event"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "qqq_counterweight"
+          ],
+          "strongest_support_claim_ids": [
+            "qqq_weakness"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; a reclaim prompts review but cannot resolve allocation and earnings gaps alone.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "next 21 trading days",
+            "field": "completed daily close",
+            "level": 714.5735,
+            "units": "USD"
+          },
+          "direction": "BEARISH",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward earnings breadth, sector allocation, tracking and macro transmission"
+            }
+          ],
+          "review": {
+            "event": "Short-average recovery and earnings breadth",
+            "when": "Next completed session or material constituent update"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "qqq_counterweight"
+          ],
+          "strongest_support_claim_ids": [
+            "qqq_weakness"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; longer-trend support does not establish a return edge.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "next 63 trading days",
+            "field": "completed daily close",
+            "level": 714.5735,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward constituent earnings, allocations, macro sensitivity and longer-duration catalyst coverage"
+            }
+          ],
+          "review": {
+            "event": "Structural trend and earnings reassessment",
+            "when": "Next major constituent results or long-average test"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "qqq_counterweight"
+          ],
+          "strongest_support_claim_ids": [
+            "qqq_weakness"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed-close reclaim of the supplied short average weakens the bearish setup; loss of the long average removes structural support."
+      ],
+      "missing": [
+        "Post-FOMC reaction, forward constituent earnings breadth, allocation and tracking evidence, verified policy transmission."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "Weak recent momentum supports near-term caution, while the longer trend prevents a uniformly bearish conclusion.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "mu_correction",
+          "classification": "INFERENCE",
+          "evidence_family": "price_trend",
+          "evidence_ids": [
+            "price-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close at or above the supplied short-average level weakens the corrective setup.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/sma20",
+              "value": 960.4252499999999
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol63_pct",
+              "value": 93.52546590442891
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Negative measured returns and price below short and intermediate moving averages support corrective momentum. High realized volatility makes a simple recovery narrative particularly uncertain."
+        },
+        {
+          "claim_id": "mu_counterweight",
+          "classification": "INFERENCE",
+          "evidence_family": "structural_trend_and_fundamentals",
+          "evidence_ids": [
+            "price-MU",
+            "fundamentals-MU",
+            "news-61792028"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A structural trend break or issuer evidence of weakening demand, pricing or margins removes this counterweight.",
+          "numeric_values": [],
+          "stance": "OPPOSE",
+          "statement": "Price above its long average and strong historical profitability oppose an entirely bearish structural view. The reported memory-shortage outlook is an attributed hypothesis requiring issuer verification, not independently confirmed forward demand."
+        },
+        {
+          "claim_id": "mu_gap",
+          "classification": "INFERENCE",
+          "evidence_family": "issuer_coverage",
+          "evidence_ids": [
+            "fundamentals-MU",
+            "sec-submissions-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Issuer-verified forward operating data and exposure mapping resolve the limitation.",
+          "numeric_values": [],
+          "stance": "CONTEXT",
+          "statement": "Historical SEC results and filing metadata do not establish forward inventory, pricing, comparable valuation or policy exposure. Generic semiconductor safety commentary is not used as directional MU evidence."
+        }
+      ],
+      "counterevidence": [
+        "Reported profitability is historical; the shortage outlook is third-party commentary, not Micron guidance."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; the upward confirmation challenges the bearish setup rather than authorizing a trade.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "next 5 trading days",
+            "field": "completed daily close",
+            "level": 960.4252499999999,
+            "units": "USD"
+          },
+          "direction": "BEARISH",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Issuer current demand/pricing, completed-session reaction and verified asset-level transmission"
+            }
+          ],
+          "review": {
+            "event": "Recovery test and demand verification",
+            "when": "Next completed session or issuer update"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "mu_counterweight"
+          ],
+          "strongest_support_claim_ids": [
+            "mu_correction"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; do not promote the shortage report into a buy signal.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "next 21 trading days",
+            "field": "completed daily close",
+            "level": 960.4252499999999,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Verified orders, pricing, inventory, forward estimates and valuation comparison"
+            }
+          ],
+          "review": {
+            "event": "Resolve operating outlook against price weakness",
+            "when": "Next Micron issuer disclosure or confirmation-level test"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "mu_counterweight"
+          ],
+          "strongest_support_claim_ids": [
+            "mu_correction"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; historical profitability is not proof of cycle durability.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "next 63 trading days",
+            "field": "completed daily close",
+            "level": 960.4252499999999,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Issuer-verified memory-cycle guidance, valuation and policy exposure"
+            }
+          ],
+          "review": {
+            "event": "Cycle durability and valuation reassessment",
+            "when": "Next earnings/guidance disclosure or material trend change"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "mu_counterweight"
+          ],
+          "strongest_support_claim_ids": [
+            "mu_correction"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed-close reclaim of the supplied short average weakens the correction; weaker issuer pricing or demand removes the favorable operating counterweight."
+      ],
+      "missing": [
+        "Issuer orders, pricing, inventory, guidance, verified earnings date, comparable valuation and geographic transmission."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "MU",
+      "thesis": "The near-term correction is bearish; historical profitability and structural support make longer horizons two-sided rather than a verified memory-cycle opportunity.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "meta_trend",
+          "classification": "INFERENCE",
+          "evidence_family": "price_trend",
+          "evidence_ids": [
+            "price-META"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close below the supplied short-average level weakens the aligned trend.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/sma20",
+              "value": 590.2545
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Positive measured returns and price above the short, intermediate and long moving averages support bullish trend alignment."
+        },
+        {
+          "claim_id": "meta_extension",
+          "classification": "INFERENCE",
+          "evidence_family": "price_momentum",
+          "evidence_ids": [
+            "price-META"
+          ],
+          "horizons": [
+            5,
+            21
+          ],
+          "invalidation": "Momentum cools on completed-session observations while the price trend holds.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/rsi14_simple",
+              "value": 84.78005482313017
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Elevated RSI tempers near-term continuation expectations without independently predicting a reversal."
+        },
+        {
+          "claim_id": "meta_gap",
+          "classification": "INFERENCE",
+          "evidence_family": "fundamentals_and_regulatory_context",
+          "evidence_ids": [
+            "fundamentals-META",
+            "news-61780946"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Official rule text and issuer outlook with qualified valuation inputs resolve these gaps.",
+          "numeric_values": [],
+          "stance": "CONTEXT",
+          "statement": "Historical profitability does not resolve missing matched valuation or forward ad-demand and capex sensitivity. Reported EU child-safety plans remain unverified as enacted policy and lack a quantified META impact."
+        }
+      ],
+      "counterevidence": [
+        "Elevated RSI does not prove reversal. Regulatory reporting does not establish enactment or financial impact."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; the already-satisfied trend level does not resolve overextension or evidence gaps.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "next 5 trading days",
+            "field": "completed daily close",
+            "level": 590.2545,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Near-term issuer guidance, official regulatory evidence and policy transmission"
+            }
+          ],
+          "review": {
+            "event": "Trend persistence versus overextension",
+            "when": "Next completed session or official policy update"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "meta_extension"
+          ],
+          "strongest_support_claim_ids": [
+            "meta_trend"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; momentum cannot substitute for valuation and earnings evidence.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "next 21 trading days",
+            "field": "completed daily close",
+            "level": 590.2545,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Matched market valuation, forward estimates, capex outlook and official regulatory outcome"
+            }
+          ],
+          "review": {
+            "event": "Resolve forward earnings and regulatory uncertainty",
+            "when": "Next issuer/regulatory disclosure or trend break"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "meta_extension"
+          ],
+          "strongest_support_claim_ids": [
+            "meta_trend"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Technically bullish only. New position: WAIT. Existing holding: REVIEW_RISK; no qualified fundamental return edge is established.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "next 63 trading days",
+            "field": "completed daily close",
+            "level": 590.2545,
+            "units": "USD"
+          },
+          "direction": "BULLISH",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward earnings, valuation, advertising/capex sensitivity and verified regulatory impact"
+            }
+          ],
+          "review": {
+            "event": "Validate operating durability and valuation",
+            "when": "Next earnings disclosure or loss of trend support"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [],
+          "strongest_support_claim_ids": [
+            "meta_trend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "Loss of the supplied short-average level weakens the bullish trend; cooling RSI while trend persists weakens the overextension concern."
+      ],
+      "missing": [
+        "Matched valuation, forward advertising and capex outlook, official regulatory scope and quantified exposure."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "META",
+      "thesis": "The strongest aligned trend in this set is offset near term by overextension; the longer technical bias remains constructive without establishing buy attractiveness.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "nvda_correction",
+          "classification": "INFERENCE",
+          "evidence_family": "price_trend",
+          "evidence_ids": [
+            "price-NVDA"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close at or above the supplied short-average level negates this corrective setup.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/sma20",
+              "value": 219.45250000000001
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Negative recent returns and price below short and intermediate averages support a bearish near-term technical bias."
+        },
+        {
+          "claim_id": "nvda_growth",
+          "classification": "INFERENCE",
+          "evidence_family": "issuer_releases_and_structural_trend",
+          "evidence_ids": [
+            "primary-nvidia-press-releases-77a71c9ef7da3f1e2093",
+            "primary-nvidia-press-releases-b20d78c5f74389c98858",
+            "price-NVDA"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Reduced issuer demand expectations, collaboration reversal or loss of structural trend support weakens this counterweight.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/sma200",
+              "value": 197.61475
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Issuer-reported quarterly revenue growth, expanded AWS collaboration and a positive long-average relationship oppose a uniformly bearish medium-term view. Announced infrastructure is not assured future revenue."
+        },
+        {
+          "claim_id": "nvda_risks",
+          "classification": "INFERENCE",
+          "evidence_family": "valuation_and_capex_risk",
+          "evidence_ids": [
+            "fundamentals-NVDA",
+            "news-61783152",
+            "news-61788866"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Matched valuation and issuer/customer evidence establish demand and capex durability.",
+          "numeric_values": [],
+          "stance": "CONTEXT",
+          "statement": "Historical SEC profitability and partial valuation do not establish forward returns. Reports of crowding and concentration warrant demand verification but are not proven outcomes. The rejected memory-shortage-to-NVIDIA benefit inference is excluded."
+        }
+      ],
+      "counterevidence": [
+        "Issuer announcements are not assured revenue; crowding and concentration warnings are third-party commentary, not verified deterioration."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; the supplied upward confirmation challenges the bearish setup, not a buy authorization.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "next 5 trading days",
+            "field": "completed daily close",
+            "level": 219.45250000000001,
+            "units": "USD"
+          },
+          "direction": "BEARISH",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Post-FOMC completed close, current issuer demand and verified policy exposure"
+            }
+          ],
+          "review": {
+            "event": "Price recovery and demand confirmation",
+            "when": "After the scheduled FOMC event or next issuer update"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "nvda_growth"
+          ],
+          "strongest_support_claim_ids": [
+            "nvda_correction"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; reconcile issuer growth with weak market pricing.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "next 21 trading days",
+            "field": "completed daily close",
+            "level": 219.45250000000001,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Updated issuer guidance, customer orders, matched valuation and policy transmission"
+            }
+          ],
+          "review": {
+            "event": "Revenue realization and demand validation",
+            "when": "Next NVIDIA/customer disclosure or confirmation-level test"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "nvda_growth"
+          ],
+          "strongest_support_claim_ids": [
+            "nvda_correction"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "New position: WAIT. Existing holding: REVIEW_RISK; structural and issuer support do not settle valuation or capex durability.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "next 63 trading days",
+            "field": "completed daily close",
+            "level": 219.45250000000001,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "UNAVAILABLE",
+            "comparison": "UNAVAILABLE",
+            "confirmation_interval": "N/A",
+            "evidence_ids": [],
+            "expiry": "N/A",
+            "field": "No policy invalidation trigger supplied",
+            "level": null,
+            "units": "N/A"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Independent infrastructure demand/capex validation, current valuation and policy sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Demand durability and valuation reassessment",
+            "when": "Next earnings/customer-capex evidence or structural trend break"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "nvda_growth"
+          ],
+          "strongest_support_claim_ids": [
+            "nvda_correction"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed-close reclaim of the supplied short average weakens the correction; reduced demand or reversed collaboration weakens issuer support."
+      ],
+      "missing": [
+        "Updated guidance, customer orders/cancellations, independent capex durability, matched valuation and policy exposure."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "NVDA",
+      "thesis": "Near-term price weakness conflicts with issuer growth and infrastructure announcements over longer horizons; demand realization and valuation remain unresolved.",
+      "view": "MIXED"
+    }
+  ],
+  "golden_conclusions": {
+    "critical_findings": [
+      "ANET's IEX rebound makes its near-term bearish reading unresolved; a completed consolidated close is required.",
+      "META's constructive trend conflicts with near-term overextension; its higher experimental probabilities do not remove missing valuation and guidance.",
+      "MU and NVDA have bearish near-term technical readings but material longer-horizon counterweights; generic AI headlines do not establish asset-level transmission.",
+      "Exclude the rejected NVIDIA memory-shortage benefit inference and retain MU/QQQ sector-transmission claims as unresolved, non-directional context.",
+      "Reconstructed qualitative claim stances do not repair or rerun the immutable numerical forecast. All rows retain insufficient accepted-family coverage and critical evidence gates."
+    ],
+    "decision_rows": [
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Correction versus incomplete rebound; insufficient accepted context.",
+        "forecast_ref": "/symbols/ANET/horizons/5",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.5029728916452815,
+        "symbol": "ANET",
+        "trading_days": 5,
+        "what_changes_action": "Review on the specified completed-close reclaim plus issuer guidance/catalyst and verified exposure evidence; require at least three accepted specialist families.",
+        "what_could_go_wrong": "The limited-venue rebound fails at the close or policy repricing overwhelms it."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Short correction and structural strength conflict.",
+        "forecast_ref": "/symbols/ANET/horizons/21",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.4962628939676159,
+        "symbol": "ANET",
+        "trading_days": 21,
+        "what_changes_action": "Completed-close recovery plus forward estimates, comparable valuation, catalyst and exposure mapping; rerun coverage gates.",
+        "what_could_go_wrong": "A recovery fails without earnings support."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Constructive technical bias does not override the rejected original support mapping or missing forward evidence.",
+        "forecast_ref": "/symbols/ANET/horizons/63",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.5574943538274935,
+        "symbol": "ANET",
+        "trading_days": 63,
+        "what_changes_action": "Sustained structural support plus qualified earnings, valuation, catalyst and cycle sensitivity; revalidate accepted-family coverage.",
+        "what_could_go_wrong": "The structural trend breaks or reported profitability fails to persist."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Bearish technical bias differs from a nearly directionless experimental output; neither overrides policy gates.",
+        "forecast_ref": "/symbols/QQQ/horizons/5",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.5074542161230527,
+        "symbol": "QQQ",
+        "trading_days": 5,
+        "what_changes_action": "Post-FOMC completed-close recovery and broad constituent confirmation; resolve sector transmission and accepted-family coverage.",
+        "what_could_go_wrong": "Policy repricing or concentrated constituent weakness offsets favorable individual reports."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Weak momentum with unresolved constituent and macro evidence.",
+        "forecast_ref": "/symbols/QQQ/horizons/21",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.502223390578078,
+        "symbol": "QQQ",
+        "trading_days": 21,
+        "what_changes_action": "Specified reclaim plus forward earnings breadth, sector allocation, tracking and verified macro/policy transmission.",
+        "what_could_go_wrong": "A price recovery lacks broad earnings participation."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Long-trend support conflicts with intermediate weakness.",
+        "forecast_ref": "/symbols/QQQ/horizons/63",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.5056351747969237,
+        "symbol": "QQQ",
+        "trading_days": 63,
+        "what_changes_action": "Recovery plus forward constituent earnings, allocations, longer catalyst coverage and macro sensitivity; clear coverage gates.",
+        "what_could_go_wrong": "Long-trend support fails under valuation or concentrated earnings pressure."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Corrective momentum is bearish; the invalid original news row is not used as support.",
+        "forecast_ref": "/symbols/MU/horizons/5",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.47451624644706736,
+        "symbol": "MU",
+        "trading_days": 5,
+        "what_changes_action": "Specified completed-close reclaim plus issuer demand/pricing, inventory and verified transmission; sufficient accepted families.",
+        "what_could_go_wrong": "High volatility compounds a failed recovery or weaker pricing."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Historical profitability and shortage commentary do not resolve the correction.",
+        "forecast_ref": "/symbols/MU/horizons/21",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.5153452973632435,
+        "symbol": "MU",
+        "trading_days": 21,
+        "what_changes_action": "Issuer-verified orders, pricing, inventory, estimates and valuation alongside the recovery condition; resolve disputed sector transmission.",
+        "what_could_go_wrong": "The shortage narrative does not translate into sustainable earnings."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Two-sided cycle evidence and broad experimental uncertainty.",
+        "forecast_ref": "/symbols/MU/horizons/63",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.5088639805628355,
+        "symbol": "MU",
+        "trading_days": 63,
+        "what_changes_action": "Verified memory-cycle guidance, comparable valuation and geographic/policy exposure plus price repair and accepted-family coverage.",
+        "what_could_go_wrong": "Cycle deterioration defeats historical margin strength and structural support."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Strong model momentum coexists with overextension and missing catalyst evidence.",
+        "forecast_ref": "/symbols/META/horizons/5",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.6181424361393664,
+        "symbol": "META",
+        "trading_days": 5,
+        "what_changes_action": "Trend persistence with cooling extension, issuer guidance and official regulatory scope; an already-satisfied average level is insufficient.",
+        "what_could_go_wrong": "Momentum reverses or reported regulatory plans acquire material economic scope."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Elevated experimental probability is not calibrated buy attractiveness.",
+        "forecast_ref": "/symbols/META/horizons/21",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.6140404414551477,
+        "symbol": "META",
+        "trading_days": 21,
+        "what_changes_action": "Matched valuation, forward ad/earnings and capex outlook, official regulatory outcome and sufficient accepted context.",
+        "what_could_go_wrong": "Forward earnings or capex economics fail to justify the price trend."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Bullish technical alignment, but only limited accepted directional coverage.",
+        "forecast_ref": "/symbols/META/horizons/63",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.5970996385169944,
+        "symbol": "META",
+        "trading_days": 63,
+        "what_changes_action": "Maintain trend while obtaining forward earnings, valuation, advertising/capex sensitivity and verified regulatory impact; rerun coverage gates.",
+        "what_could_go_wrong": "Trend failure or weaker operating durability invalidates the technical extrapolation."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Bearish technical momentum; the invalid original news row adds no directional coverage.",
+        "forecast_ref": "/symbols/NVDA/horizons/5",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.4438010555934363,
+        "symbol": "NVDA",
+        "trading_days": 5,
+        "what_changes_action": "Specified completed-close reclaim after FOMC plus issuer demand/orders and policy exposure; sufficient accepted families.",
+        "what_could_go_wrong": "Policy repricing or continued correction dominates issuer growth context."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Price weakness conflicts with issuer growth and collaboration announcements.",
+        "forecast_ref": "/symbols/NVDA/horizons/21",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.4820423951615195,
+        "symbol": "NVDA",
+        "trading_days": 21,
+        "what_changes_action": "Updated guidance, customer orders and matched valuation alongside recovery; verify policy transmission and coverage.",
+        "what_could_go_wrong": "Announced infrastructure does not become realized revenue."
+      },
+      {
+        "action_now": "WAIT",
+        "existing_position_action": "REVIEW_RISK",
+        "explanation": "Structural and issuer counterweights leave a mixed outlook.",
+        "forecast_ref": "/symbols/NVDA/horizons/63",
+        "new_position_action": "WAIT",
+        "probability_price_up": 0.5186560320527666,
+        "symbol": "NVDA",
+        "trading_days": 63,
+        "what_changes_action": "Independent customer-capex/demand validation, current valuation and policy sensitivity plus price confirmation and coverage repair.",
+        "what_could_go_wrong": "Capex durability or customer demand disappoints; a memory shortage could constrain rather than benefit NVIDIA."
+      }
+    ],
+    "evidence_limitations": [
+      "All numerical probabilities are immutable experimental outputs with insufficient prospective qualification; no probability or action was recomputed.",
+      "Confirmation objects reproduce forecast reassessment conditions. Forecast policy invalidation triggers are null; qualitative trend failure conditions are not new policy stops.",
+      "Current intraday observations are IEX-only and cannot substitute for consolidated completed closes. Intraday volatility snapshots are missing; completed daily volatility remains separate.",
+      "Historical SEC periods differ; sponsor aggregates and partial/missing company valuation do not establish comparable forward value. Role-specific omitted evidence is not necessarily globally absent.",
+      "Correlated technical measures and repeated commentary do not create independent coverage. Unresolved sector transmission remains excluded from directional scoring; at least three accepted specialist families and critical-gap resolution are required for policy reassessment."
+    ],
+    "immediate_review_triggers": [
+      "Scheduled FOMC outcome and the first subsequent completed consolidated session.",
+      "Any specified confirmation-level crossing, structural trend failure or new issuer guidance; review at the first such event rather than waiting for horizon expiry.",
+      "Official regulatory text or customer order/capex evidence that resolves an exposure or transmission gap."
+    ],
+    "market_regime": "Mixed: accommodative financial-condition indicators coexist with real-yield, oil and scheduled policy-event risks. Recent price weakness contrasts with surviving longer trends; this is not evidence of a uniform risk-on regime.",
+    "new_material_contradiction": null,
+    "overall_conclusion": "Preserve WAIT for every new-position horizon and REVIEW_RISK for existing holdings. Qualitative technical support is not a qualified forecast. Probabilities below are copied experimental, uncalibrated terminal-close outputs—not confidence, intraday-entry profitability or target/stop-touch probabilities.",
+    "research_priorities": [
+      {
+        "buy_attractiveness": "NO_SETUP",
+        "priority": 1,
+        "rationale": "Review scheduled macro-event transmission and constituent breadth first; priority reflects common risk relevance, not a buy ranking.",
+        "symbol": "QQQ"
+      },
+      {
+        "buy_attractiveness": "CONDITIONAL",
+        "priority": 2,
+        "rationale": "Resolve the conflict between direct issuer expansion evidence and weak pricing; verify realization and valuation.",
+        "symbol": "NVDA"
+      },
+      {
+        "buy_attractiveness": "NO_SETUP",
+        "priority": 3,
+        "rationale": "High volatility and an unverified cycle narrative make issuer pricing and inventory evidence urgent.",
+        "symbol": "MU"
+      },
+      {
+        "buy_attractiveness": "CONDITIONAL",
+        "priority": 4,
+        "rationale": "Verify the incomplete rebound and forward outlook before treating structural strength as an opportunity.",
+        "symbol": "ANET"
+      },
+      {
+        "buy_attractiveness": "CONDITIONAL",
+        "priority": 5,
+        "rationale": "Constructive trend warrants follow-up, but overextension and missing valuation prevent an unconditional attractiveness judgment.",
+        "symbol": "META"
+      }
+    ]
+  },
+  "input_hash": "673718ad1114d8751a55e1326c4fceee85493b82e67694cf71954a5ea7e79559",
+  "role": "synthesis"
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+candidates=()
+if [[ -n "${PI_NODE_BIN:-}" ]]; then
+  candidates+=("${PI_NODE_BIN}")
+fi
+if [[ -n "${NVM_BIN:-}" ]]; then
+  candidates+=("${NVM_BIN}/node")
+fi
+shopt -s nullglob
+nvm_root="${NVM_DIR:-${HOME}/.nvm}"
+for node_path in "${nvm_root}"/versions/node/v*/bin/node; do
+  candidates+=("${node_path}")
+done
+if command -v node >/dev/null 2>&1; then
+  candidates+=("$(command -v node)")
+fi
+
+for node_path in "${candidates[@]}"; do
+  [[ -x "${node_path}" ]] || continue
+  version="$("${node_path}" -p 'process.versions.node' 2>/dev/null || true)"
+  major="${version%%.*}"
+  remainder="${version#*.}"
+  minor="${remainder%%.*}"
+  if [[ "${major}" =~ ^[0-9]+$ && "${minor}" =~ ^[0-9]+$ ]] \
+      && (( major > 22 || (major == 22 && minor >= 19) )); then
+    exec "${node_path}" --import tsx "${script_dir}/../src/pi-research-worker.ts" "$@"
+  fi
+done
+
+echo "pi-research-worker: Node >=22.19 was not found; set PI_NODE_BIN to a compatible node executable" >&2
+exit 1

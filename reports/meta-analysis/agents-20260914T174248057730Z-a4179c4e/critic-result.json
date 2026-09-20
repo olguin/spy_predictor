@@ -1,0 +1,802 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "ANET_cross_role_facts",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-ANET",
+            "intraday-latest-ANET",
+            "intraday-bars-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate when later completed or consolidated intraday data change these relationships.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/latest_close",
+              "value": 199.59
+            },
+            {
+              "packet_path": "/instruments/ANET/price_to_sma20",
+              "value": 1.0332884655208117
+            },
+            {
+              "packet_path": "/instruments/ANET/price_to_sma50",
+              "value": 1.0771367881150673
+            },
+            {
+              "packet_path": "/instruments/ANET/price_to_sma200",
+              "value": 1.3011379007995618
+            },
+            {
+              "packet_path": "/instruments/ANET/return21_pct",
+              "value": -5.182897862232783
+            },
+            {
+              "packet_path": "/instruments/ANET/return63_pct",
+              "value": 27.615089514066504
+            },
+            {
+              "packet_path": "/intraday/ANET/latest_trade/p",
+              "value": 189.23
+            },
+            {
+              "packet_path": "/intraday/ANET/minute_gaps",
+              "value": 42
+            }
+          ],
+          "statement": "ANET's completed close was above its 20-, 50-, and 200-session averages and its 63-session return was positive, but its 21-session return was negative and its IEX latest trade was below the prior completed close. The intraday series had partial gaps."
+        },
+        {
+          "claim_id": "ANET_quality_valuation_tension",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "fundamentals-ANET",
+            "price-ANET"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if later filings materially weaken operating quality or qualified forward valuation evidence shows the current valuation concern is misplaced.",
+          "numeric_values": [
+            {
+              "packet_path": "/company_fundamentals/ANET/derived/operating_margin_pct",
+              "value": 44.14155656518182
+            },
+            {
+              "packet_path": "/company_fundamentals/ANET/derived/net_margin_pct",
+              "value": 38.919351750308984
+            },
+            {
+              "packet_path": "/company_fundamentals/ANET/metrics/operating_cash_flow/value",
+              "value": 2776500000
+            },
+            {
+              "packet_path": "/instrument_evidence_profiles/ANET/valuation/metrics/price_to_book_proxy",
+              "value": 17.010948187894066
+            },
+            {
+              "packet_path": "/instruments/ANET/realized_vol63_pct",
+              "value": 56.655212705591126
+            }
+          ],
+          "statement": "High reported margins and operating cash flow support an operating-quality thesis, but the supplied price-to-book proxy and high realized volatility make that evidence insufficient for a bullish return conclusion."
+        },
+        {
+          "claim_id": "ANET_macro_tension",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "NFCI",
+            "VIXCLS",
+            "DGS10",
+            "DFII10",
+            "CPIAUCSL",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if subsequent macro observations align persistently in a clearly easier or tighter direction.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/VIXCLS/value",
+              "value": 15.84
+            },
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.95
+            },
+            {
+              "packet_path": "/market/DFII10/value",
+              "value": 2.55
+            },
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/value",
+              "value": 97.26
+            }
+          ],
+          "statement": "Loose financial conditions and contained completed-day volatility offset elevated nominal and real yields, above-target inflation, and high oil; these correlated macro inputs support a mixed backdrop rather than an independent directional forecast."
+        }
+      ],
+      "counterevidence": [
+        "ANET remained well above its 50- and 200-session averages, and its 63-session return was strongly positive.",
+        "Reported operating and net margins and operating cash flow support operating quality.",
+        "The intraday evidence is IEX-only, has many minute gaps, and shows an unusually wide quoted spread, limiting confidence in the observed selloff.",
+        "No ANET-specific article in the truncated news set establishes a reason for the intraday decline."
+      ],
+      "invalidation": [
+        "A sustained completed-close recovery above the supplied 20-session resistance, together with lower yields or verified favorable issuer guidance, would resolve the synthesis more constructively.",
+        "A sustained completed-close break below the supplied 20-session support, especially with weaker reported margins or cash flow, would resolve it more negatively."
+      ],
+      "missing": [
+        "ANET-specific current news, guidance, earnings revisions, and catalyst evidence.",
+        "Qualified forward valuation, comparable-period growth, customer concentration, geographic revenue, and supply-chain exposure.",
+        "Consolidated intraday quotes and bars, options-implied volatility, and a qualified halt feed."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "The synthesis is mixed. ANET combines strong reported profitability and a constructive longer-term price structure with a high price-to-book proxy, a negative 21-session return, a sharp intraday move below the prior close, high realized volatility, and a macro backdrop split between easy financial conditions and elevated yields, inflation, and oil. The technical and macro specialists are directionally cautious enough, but the absence of ANET-specific news and geographic or supply-chain evidence prevents attributing the move to a catalyst.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "QQQ_price_range_fact",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-QQQ",
+            "intraday-latest-QQQ",
+            "intraday-bars-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate when later completed or consolidated intraday prices change these relationships.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/latest_close",
+              "value": 714.88
+            },
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma20",
+              "value": 0.9988989307891368
+            },
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma50",
+              "value": 1.0062972405654003
+            },
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma200",
+              "value": 1.0829236089556302
+            },
+            {
+              "packet_path": "/instruments/QQQ/return21_pct",
+              "value": -1.2187370457371949
+            },
+            {
+              "packet_path": "/instruments/QQQ/return63_pct",
+              "value": -0.31236055332440893
+            },
+            {
+              "packet_path": "/intraday/QQQ/latest_trade/p",
+              "value": 711.745
+            },
+            {
+              "packet_path": "/intraday/QQQ/session_low",
+              "value": 702.81
+            }
+          ],
+          "statement": "QQQ was slightly below its 20-session average, above its 50- and 200-session averages, and had modestly negative 21- and 63-session returns. Its IEX latest trade was below the prior completed close but above the session low."
+        },
+        {
+          "claim_id": "QQQ_lookthrough_fact",
+          "classification": "FACT",
+          "evidence_ids": [
+            "holdings-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if newer sponsor holdings materially change these weights or composition.",
+          "numeric_values": [
+            {
+              "packet_path": "/etf_holdings/QQQ/holdings/0/weight_pct",
+              "value": 8.45
+            },
+            {
+              "packet_path": "/etf_holdings/QQQ/holdings/3/weight_pct",
+              "value": 4.85
+            },
+            {
+              "packet_path": "/etf_holdings/QQQ/holdings/7/weight_pct",
+              "value": 3.07
+            },
+            {
+              "packet_path": "/etf_holdings/QQQ/top10_weight_pct",
+              "value": 47.17
+            },
+            {
+              "packet_path": "/etf_holdings/QQQ/holdings_count",
+              "value": 103
+            }
+          ],
+          "statement": "The current holdings table identifies NVDA, MU, and META among QQQ's holdings, while the top ten account for a substantial portion of reported weight. This establishes exposure, not the sign or size of fund-level return transmission."
+        },
+        {
+          "claim_id": "QQQ_news_correlation_audit",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "news-61758310",
+            "news-61761552",
+            "news-61765308",
+            "news-61770221",
+            "news-61762523",
+            "news-61769496"
+          ],
+          "horizons": [
+            5,
+            21
+          ],
+          "invalidation": "Invalidate if distinct primary disclosures independently confirm a durable spending slowdown or, conversely, verified spending and earnings evidence decisively refute it.",
+          "numeric_values": [],
+          "statement": "The cluster of bearish AI-safety, AI-spending, and chip-selloff articles is a plausible near-term headwind, but the reports describe a common event and should not be counted as multiple independent signals; opposing analyst and Apple reports reduce directional conviction."
+        },
+        {
+          "claim_id": "QQQ_valuation_macro_fact",
+          "classification": "FACT",
+          "evidence_ids": [
+            "etf-profile-QQQ",
+            "DGS10",
+            "DFII10",
+            "primary-fomc-meeting-calendar-2026-09-16"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate when updated sponsor metrics, yields, or the completed policy event supersede these observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/etf_sponsor_profiles/QQQ/metrics/pe_ratio",
+              "value": 30.08
+            },
+            {
+              "packet_path": "/etf_sponsor_profiles/QQQ/metrics/price_to_book_ratio",
+              "value": 9.6
+            },
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.95
+            },
+            {
+              "packet_path": "/market/DFII10/value",
+              "value": 2.55
+            }
+          ],
+          "statement": "The sponsor reported elevated aggregate valuation ratios, while the macro panel showed high nominal and real Treasury yields; an FOMC meeting was scheduled to end shortly after the cutoff."
+        }
+      ],
+      "counterevidence": [
+        "QQQ remained above its 50- and 200-session averages and near its 20-session average.",
+        "The fund holds 103 names, so weakness in selected AI holdings can be offset elsewhere; positive Apple coverage and a bullish semiconductor analyst view were supplied.",
+        "Negative AI headlines are substantially duplicative and secondary, while no constituent-level performance attribution quantifies their net effect on QQQ.",
+        "Completed-day VIX and financial-condition readings were not stressed, although intraday VIX was unavailable."
+      ],
+      "invalidation": [
+        "A sustained completed-close break above the supplied 20-session resistance with broad constituent participation and durable AI-spending evidence would make the view more constructive.",
+        "A sustained break below the supplied 20-session support, widening credit stress, or verified constituent earnings cuts would make the view more bearish."
+      ],
+      "missing": [
+        "Constituent-level return attribution, flows, breadth beyond the selected watchlist, and historical holdings.",
+        "Sector and country allocations, constituent forward earnings, and an independently aggregated look-through valuation.",
+        "Current intraday VIX/VIX3M, consolidated intraday coverage, and the outcome of the scheduled FOMC meeting."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "QQQ's evidence is mixed and largely range-like. It remains above its 50- and 200-session averages and recovered substantially from the IEX session low, but medium-horizon returns were modestly negative and the latest trade remained below the prior close. The bearish news specialist correctly identifies exposure to the AI-hardware shock, yet many cited headlines repeat the same AI-safety and spending narrative and therefore are correlated rather than independent confirmations. Look-through matters because NVDA, MU, and META are meaningful holdings, while elevated sponsor valuation, top-ten concentration, rising yields, oil, and the imminent FOMC event temper a bullish interpretation.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "MU_price_volatility_fact",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-MU",
+            "intraday-latest-MU",
+            "intraday-bars-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate when later completed or consolidated intraday data change these relationships.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/latest_close",
+              "value": 975.26
+            },
+            {
+              "packet_path": "/instruments/MU/price_to_sma20",
+              "value": 1.0129343193740592
+            },
+            {
+              "packet_path": "/instruments/MU/price_to_sma50",
+              "value": 1.0502364878944324
+            },
+            {
+              "packet_path": "/instruments/MU/price_to_sma200",
+              "value": 1.5677726792309303
+            },
+            {
+              "packet_path": "/instruments/MU/return21_pct",
+              "value": 7.019719299015681
+            },
+            {
+              "packet_path": "/instruments/MU/return63_pct",
+              "value": -2.0695472300601536
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol63_pct",
+              "value": 92.94729146500642
+            },
+            {
+              "packet_path": "/intraday/MU/latest_trade/p",
+              "value": 926.21
+            },
+            {
+              "packet_path": "/intraday/MU/session_low",
+              "value": 902.76
+            }
+          ],
+          "statement": "MU was above its supplied moving averages and had a positive 21-session return, but its 63-session return was negative, realized volatility was extremely high, and its IEX latest trade was below the prior close while above the session low."
+        },
+        {
+          "claim_id": "MU_fundamental_tension",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "fundamentals-MU",
+            "price-MU"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if later filings weaken operating strength or qualified forward demand and valuation evidence resolves the tension.",
+          "numeric_values": [
+            {
+              "packet_path": "/company_fundamentals/MU/derived/operating_margin_pct",
+              "value": 70.40236071885408
+            },
+            {
+              "packet_path": "/company_fundamentals/MU/derived/net_margin_pct",
+              "value": 59.863980040274065
+            },
+            {
+              "packet_path": "/company_fundamentals/MU/metrics/operating_cash_flow/value",
+              "value": 45702000000
+            },
+            {
+              "packet_path": "/company_fundamentals/MU/metrics/equity/value",
+              "value": 100724000000
+            },
+            {
+              "packet_path": "/company_fundamentals/MU/metrics/liabilities/value",
+              "value": 33388000000
+            },
+            {
+              "packet_path": "/instrument_evidence_profiles/MU/valuation/metrics/price_to_book_proxy",
+              "value": 10.931541042849767
+            }
+          ],
+          "statement": "Reported profitability, cash flow, and balance-sheet figures support operating strength, but the high price-to-book proxy and absent forward cycle evidence prevent translating those facts into a bullish return thesis."
+        },
+        {
+          "claim_id": "MU_news_catalyst_audit",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "news-61760346",
+            "news-61755503",
+            "news-61765308",
+            "news-61770221"
+          ],
+          "horizons": [
+            5,
+            21
+          ],
+          "invalidation": "Invalidate if primary Micron results or guidance verify either a durable demand slowdown or a clear positive reacceleration.",
+          "numeric_values": [],
+          "statement": "Secondary reports support a bearish immediate sentiment reading from AI-spending concerns, but they repeat a common sector shock; the reported upcoming earnings catalyst and opposing bullish analyst view leave the 21-session conclusion unresolved."
+        },
+        {
+          "claim_id": "MU_DFF_audit",
+          "classification": "FACT",
+          "evidence_ids": [
+            "DFF",
+            "SOFR"
+          ],
+          "horizons": [
+            5,
+            21
+          ],
+          "invalidation": "Invalidate when updated or corrected rate observations supersede the supplied values.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DFF/value",
+              "value": 3.63
+            },
+            {
+              "packet_path": "/market/DFF/change_90_calendar_days",
+              "value": 0.009999999999999787
+            },
+            {
+              "packet_path": "/market/SOFR/value",
+              "value": 3.62
+            },
+            {
+              "packet_path": "/market/SOFR/change_90_calendar_days",
+              "value": -0.029999999999999805
+            }
+          ],
+          "statement": "The effective federal funds rate's reported 90-calendar-day change was positive, so the macro specialist's wording that DFF was lower over that interval is unsupported; SOFR's reported change was negative."
+        }
+      ],
+      "counterevidence": [
+        "MU's 21-session return was positive and price remained above all supplied moving averages.",
+        "The latest IEX trade recovered well above the session low.",
+        "Reported equity exceeded liabilities and reported profitability was high.",
+        "A supplied bank analyst called AI-slowdown fears noise, and upcoming earnings could reverse sentiment."
+      ],
+      "invalidation": [
+        "Verified favorable earnings, guidance, or memory-demand evidence followed by a completed-close recovery above supplied resistance would make the synthesis more constructive.",
+        "A sustained close below supplied support, confirmed demand cuts, or material deterioration in margins and cash flow would make it more bearish."
+      ],
+      "missing": [
+        "Primary Micron earnings date, guidance, inventory, pricing, and demand evidence.",
+        "Comparable-period growth, geographic revenue, customer and supply-chain exposure, and normalized forward valuation.",
+        "Consolidated intraday coverage and options-implied volatility."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "MU",
+      "thesis": "MU has a negative near-term tilt but remains mixed across horizons. Strong reported margins, cash generation, and moving-average positioning conflict with an IEX trade below the prior close, negative 63-session return, extremely high realized volatility, and repeated AI-spending concern headlines. The earnings catalyst is only a secondary report with no verified date or issuer guidance. The macro specialist also made a factual wording error: DFF's reported 90-day change was positive, not lower, so that item cannot support its proposed counterweight to tightening.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "META_momentum_fact",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-META"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate when later completed prices change these measures.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/latest_close",
+              "value": 648.03
+            },
+            {
+              "packet_path": "/instruments/META/price_to_sma20",
+              "value": 1.10497265830814
+            },
+            {
+              "packet_path": "/instruments/META/price_to_sma50",
+              "value": 1.078428403157785
+            },
+            {
+              "packet_path": "/instruments/META/price_to_sma200",
+              "value": 1.0397911913546005
+            },
+            {
+              "packet_path": "/instruments/META/return21_pct",
+              "value": 11.95128271572945
+            },
+            {
+              "packet_path": "/instruments/META/return63_pct",
+              "value": 14.003483278503959
+            },
+            {
+              "packet_path": "/instruments/META/rsi14_simple",
+              "value": 83.89169026732061
+            }
+          ],
+          "statement": "META was above its 20-, 50-, and 200-session averages with positive 21- and 63-session returns, while RSI14 was elevated."
+        },
+        {
+          "claim_id": "META_intraday_audit",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-META",
+            "intraday-latest-META",
+            "intraday-bars-META"
+          ],
+          "horizons": [
+            5
+          ],
+          "invalidation": "Invalidate if corrected timestamp alignment or consolidated data show the comparison was not valid.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/latest_close",
+              "value": 648.03
+            },
+            {
+              "packet_path": "/intraday/META/latest_trade/p",
+              "value": 664.13
+            },
+            {
+              "packet_path": "/intraday/META/session_vwap",
+              "value": 658.4702841033832
+            }
+          ],
+          "statement": "META's latest IEX trade was above the prior completed close and session VWAP. Therefore the technical specialist's claim that the timestamped trade was below the completed close is factually incorrect, although limited-venue coverage still constrains interpretation."
+        },
+        {
+          "claim_id": "META_fundamental_balance",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "fundamentals-META"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if later filings materially alter profitability, cash flow, investment intensity, debt, or qualified valuation evidence.",
+          "numeric_values": [
+            {
+              "packet_path": "/company_fundamentals/META/derived/operating_margin_pct",
+              "value": 35.56198819922979
+            },
+            {
+              "packet_path": "/company_fundamentals/META/derived/net_margin_pct",
+              "value": 36.39367779286318
+            },
+            {
+              "packet_path": "/company_fundamentals/META/metrics/operating_cash_flow/value",
+              "value": 64088000000
+            },
+            {
+              "packet_path": "/company_fundamentals/META/metrics/capital_expenditure/value",
+              "value": 49113000000
+            },
+            {
+              "packet_path": "/company_fundamentals/META/metrics/long_term_debt/value",
+              "value": 83664000000
+            }
+          ],
+          "statement": "Strong reported margins and operating cash flow support operating quality, while substantial capital expenditure and long-term debt plus missing current valuation evidence keep the fundamental conclusion mixed."
+        },
+        {
+          "claim_id": "META_news_opposition",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "news-61763929",
+            "news-61763133",
+            "news-61768744"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if primary company disclosures verify either durable monetization traction or material earnings pressure.",
+          "numeric_values": [],
+          "statement": "The supplied news contains genuinely opposing hypotheses—AI-slowdown pressure on earnings versus analyst-recognized AI progress and higher targets—while limited near-term Muse monetization tempers the positive case; no primary financial revision resolves the conflict."
+        }
+      ],
+      "counterevidence": [
+        "META was above all supplied moving averages with positive 21- and 63-session returns.",
+        "Its latest IEX trade was above, not below, the prior completed close and above session VWAP.",
+        "Analyst reports raised price targets and cited AI progress.",
+        "Reported operating cash flow exceeded reported net income for the supplied period."
+      ],
+      "invalidation": [
+        "Verified durable AI monetization and earnings resilience, accompanied by sustained completed closes above resistance, would make the synthesis more bullish.",
+        "A reversal below short-term support, verified earnings pressure from AI slowdown, or deterioration in profitability and cash flow would make it more bearish."
+      ],
+      "missing": [
+        "Current shares outstanding and qualified market valuation multiples.",
+        "Primary guidance and verified evidence connecting AI policy debate to Meta revenue or costs.",
+        "Forward return evidence for capital expenditure, geographic revenue, and consolidated intraday coverage."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "META",
+      "thesis": "META has the strongest positive price momentum in the set, strong reported profitability and cash flow, and an intraday trade above the prior close. That last fact contradicts the technical specialist's statement that the intraday trade showed weakness below the completed close. Near-term extension risk is nevertheless substantial given the elevated RSI, while AI-slowdown earnings concerns, limited near-term Muse monetization, heavy capital expenditure, debt, and missing valuation evidence offset the constructive trend.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "NVDA_price_divergence_fact",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-NVDA",
+            "intraday-latest-NVDA",
+            "intraday-bars-NVDA"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate when later completed or consolidated intraday data change these relationships.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/latest_close",
+              "value": 218.29
+            },
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma20",
+              "value": 0.9914949185260886
+            },
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma50",
+              "value": 1.0268411545553757
+            },
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma200",
+              "value": 1.1054186224222387
+            },
+            {
+              "packet_path": "/instruments/NVDA/return21_pct",
+              "value": -2.5882457941005854
+            },
+            {
+              "packet_path": "/instruments/NVDA/return63_pct",
+              "value": 6.5504954361302214
+            },
+            {
+              "packet_path": "/intraday/NVDA/latest_trade/p",
+              "value": 212.18
+            },
+            {
+              "packet_path": "/intraday/NVDA/session_vwap",
+              "value": 210.78964377523678
+            }
+          ],
+          "statement": "NVDA was slightly below its 20-session average but above its 50- and 200-session averages; its 21-session return was negative and 63-session return positive. The latest IEX trade was below the prior close but above session VWAP."
+        },
+        {
+          "claim_id": "NVDA_operating_quality_fact",
+          "classification": "FACT",
+          "evidence_ids": [
+            "fundamentals-NVDA",
+            "sec-facts-NVDA"
+          ],
+          "horizons": [
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if corrected or later filings supersede the figures or matched-date shares permit a materially different valuation assessment.",
+          "numeric_values": [
+            {
+              "packet_path": "/company_fundamentals/NVDA/derived/operating_margin_pct",
+              "value": 65.94240793535653
+            },
+            {
+              "packet_path": "/company_fundamentals/NVDA/derived/net_margin_pct",
+              "value": 66.3585193182521
+            },
+            {
+              "packet_path": "/company_fundamentals/NVDA/metrics/operating_cash_flow/value",
+              "value": 74421000000
+            },
+            {
+              "packet_path": "/instrument_evidence_profiles/NVDA/valuation/metrics/market_cap_proxy_usd",
+              "value": 5305320160000
+            },
+            {
+              "packet_path": "/company_fundamentals/NVDA/metrics/shares_outstanding/value",
+              "value": 24304000000
+            }
+          ],
+          "statement": "The latest SEC-derived period showed high operating and net margins and large operating cash flow, while the supplied market-cap proxy used an older shares-outstanding fact and therefore was only partial valuation evidence."
+        },
+        {
+          "claim_id": "NVDA_news_independence_audit",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "news-61761552",
+            "news-61765308",
+            "news-61770221",
+            "primary-nvidia-press-releases-77a71c9ef7da3f1e2093",
+            "primary-nvidia-press-releases-b20d78c5f74389c98858",
+            "primary-nvidia-press-releases-2a99e6520e42c0d078e6",
+            "primary-nvidia-press-releases-2098a4d8f4157fac4e63"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if subsequent primary disclosures confirm a durable spending slowdown or demonstrate sustained execution that decisively outweighs the sentiment shock.",
+          "numeric_values": [],
+          "statement": "Bearish reports about AI safety, delayed models, spending scrutiny, and chip weakness are plausible near-term sentiment evidence but largely repeat one shock. Primary releases on revenue, AWS expansion, infrastructure, and production provide an opposing demand hypothesis, so headline count does not establish durable direction."
+        },
+        {
+          "claim_id": "NVDA_macro_event_risk",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "DGS10",
+            "DFII10",
+            "NFCI",
+            "VIXCLS",
+            "primary-fomc-meeting-calendar-2026-09-16"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate after the policy event and subsequent macro observations establish a materially different regime.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.95
+            },
+            {
+              "packet_path": "/market/DFII10/value",
+              "value": 2.55
+            },
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/VIXCLS/value",
+              "value": 15.84
+            }
+          ],
+          "statement": "Elevated nominal and real yields and the scheduled near-term FOMC meeting create discount-rate and event risk, while easy financial conditions and contained completed-day VIX counter a uniformly bearish macro reading."
+        }
+      ],
+      "counterevidence": [
+        "NVIDIA's primary release reported strong quarter-over-quarter and year-over-year revenue growth.",
+        "Primary releases described expanded AWS collaboration, infrastructure capacity, production, and platform initiatives.",
+        "The latest IEX trade was above session VWAP despite remaining below the prior completed close.",
+        "A bank analyst report characterized AI-slowdown fears as noise."
+      ],
+      "invalidation": [
+        "Sustained completed closes above resistance plus verified continued AI-capex execution and updated guidance would make the synthesis more constructive.",
+        "A sustained break below support, primary evidence of AI-capex cuts, partnership delays, customer losses, or margin deterioration would make it more bearish."
+      ],
+      "missing": [
+        "Updated company guidance and primary evidence addressing the current AI-slowdown debate.",
+        "Matched-date shares, normalized valuation multiples, capital expenditure, customer concentration, geographic revenue, and supply-chain exposure.",
+        "Consolidated intraday coverage, options-implied volatility, and the completed FOMC outcome."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "NVDA",
+      "thesis": "NVDA's synthesis is mixed with a bearish near-term sentiment component and constructive operating evidence. The stock was below its 20-session average and prior close intraday, but remained above its 50- and 200-session averages with a positive 63-session return. Repeated AI-safety and spending headlines are correlated manifestations of one shock, while primary NVIDIA releases report strong recent revenue growth and multiple infrastructure and product initiatives. High rates, an imminent FOMC event, incomplete valuation matching, customer-concentration concerns, and missing geographic and supply-chain evidence prevent a bullish conclusion.",
+      "view": "MIXED"
+    }
+  ],
+  "input_hash": "3cd09ca46325f97a581c9d5e374ab09a1792b59ef20cd232d4e5c3dd2b389df0",
+  "role": "critic"
+}

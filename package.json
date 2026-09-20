@@ -47,7 +47,20 @@
     "prospective:status": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.prospective_observation status",
     "prospective:issue": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.prospective_observation issue",
     "meta:postclose": "node --env-file=.env scripts/meta-analysis.mjs postclose",
-    "meta:outcomes": "node --env-file=.env scripts/meta-outcomes.mjs"
+    "meta:analyze": "node --env-file=.env scripts/meta-analysis.mjs analyze",
+    "meta:forecast": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.meta_forecast",
+    "meta:outcomes": "node --env-file=.env scripts/meta-outcomes.mjs",
+    "meta:product": "node --env-file=.env scripts/meta-product.mjs",
+    "meta:ops": "node --env-file=.env scripts/meta-operations.mjs",
+    "meta:schedule": "node --env-file=.env scripts/meta-scheduler.mjs",
+    "golden": "node --env-file=.env scripts/golden-goal-daily.mjs daily",
+    "golden:check": "node --env-file=.env scripts/golden-goal-daily.mjs check",
+    "golden:intraday": "node --env-file=.env scripts/golden-goal-daily.mjs intraday",
+    "golden:close": "node --env-file=.env scripts/golden-goal-daily.mjs prospective",
+    "golden:outcomes": "node --env-file=.env scripts/golden-goal-daily.mjs outcomes",
+    "meta:research:data": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.meta_research_data",
+    "meta:research:experiment": "UV_CACHE_DIR=.uv-cache uv run --project python python -m spy_predictor_quant.meta_experiments",
+    "meta:research": "node --env-file=.env scripts/meta-research.mjs"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

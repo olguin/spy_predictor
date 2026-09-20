@@ -1,0 +1,92 @@
+{
+  "schema_version": "investment-research-mandate-v2",
+  "watchlist": [
+    {
+      "symbol": "NVDA",
+      "kind": "company",
+      "benchmark": "SPY",
+      "sector_benchmark": "XLK"
+    }
+  ],
+  "objective": "Assess NVIDIA over 21 and 63 sessions using current issuer/SEC evidence and monetary policy. Identify a material company\u2013macro transmission question, investigate it if resolvable, and explain its effect on the draft. A lack of measured exposure or current valuation may justify insufficient evidence; never infer a numeric haircut from headlines.",
+  "horizon_sessions": [
+    21,
+    63
+  ],
+  "currency": "USD",
+  "perspective": "long_only_research",
+  "mode": "live",
+  "sources": [
+    {
+      "source_id": "nvidia-releases",
+      "title": "NVIDIA issuer press release index",
+      "publisher": "NVIDIA",
+      "url": "https://nvidianews.nvidia.com/cats/press_release.xml",
+      "fixture_text": null,
+      "published_at": null,
+      "available_at": null,
+      "kind": "company",
+      "critical": false
+    },
+    {
+      "source_id": "fed-monetary",
+      "title": "Federal Reserve monetary releases",
+      "publisher": "Federal Reserve",
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "fixture_text": null,
+      "published_at": null,
+      "available_at": null,
+      "kind": "macro",
+      "critical": false
+    },
+    {
+      "source_id": "sec-submissions",
+      "title": "NVIDIA SEC filing index",
+      "publisher": "US Securities and Exchange Commission",
+      "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+      "fixture_text": null,
+      "published_at": null,
+      "available_at": null,
+      "kind": "company",
+      "critical": false
+    },
+    {
+      "source_id": "sec-companyfacts",
+      "title": "NVIDIA SEC financial facts",
+      "publisher": "US Securities and Exchange Commission",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+      "fixture_text": null,
+      "published_at": null,
+      "available_at": null,
+      "kind": "company",
+      "critical": true
+    }
+  ],
+  "runtime": {
+    "argv": [
+      "packages/agent-runtime/bin/pi-research-worker"
+    ],
+    "model": "openai-codex/gpt-5.6-terra",
+    "reasoning_effort": "medium",
+    "max_output_tokens": 3000,
+    "timeout_seconds": 180
+  },
+  "budgets": {
+    "task_attempts": 16,
+    "model_calls": 40,
+    "source_requests": 250,
+    "tool_calls": 100,
+    "input_tokens": 1000000,
+    "output_tokens": 100000,
+    "catalog_cost_usd": 25,
+    "wall_seconds": 1200,
+    "followup_rounds": 2,
+    "reserved_final_calls": 8,
+    "document_bytes": 10000000
+  },
+  "network": {
+    "enabled": true,
+    "user_agent": "spy-predictor-investment-research/1.0",
+    "minimum_spacing_seconds": 0.25
+  }
+}

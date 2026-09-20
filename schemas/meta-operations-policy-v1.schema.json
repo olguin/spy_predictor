@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/meta-operations-policy-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "dashboard", "budgets", "cache_policies", "scheduler", "alerts"],
+  "properties": {
+    "schema_version": {"const": "meta-operations-policy-v1"},
+    "status": {"enum": ["experimental", "qualified"]},
+    "dashboard": {
+      "type": "object", "additionalProperties": false,
+      "required": ["bind_host", "port", "read_only", "auto_refresh_seconds"],
+      "properties": {
+        "bind_host": {"const": "127.0.0.1"},
+        "port": {"type": "integer", "minimum": 1024, "maximum": 65535},
+        "read_only": {"const": true},
+        "auto_refresh_seconds": {"type": "integer", "minimum": 5, "maximum": 3600}
+      }
+    },
+    "budgets": {
+      "type": "object", "additionalProperties": false,
+      "required": ["maximum_source_requests", "maximum_download_bytes", "maximum_agent_calls", "maximum_input_tokens", "maximum_output_tokens", "maximum_catalog_cost_estimate_usd", "maximum_wall_seconds", "warning_fraction", "maximum_parallel_agents", "prospective_attempts_per_role"],
+      "properties": {
+        "maximum_source_requests": {"type": "integer", "minimum": 1},
+        "maximum_download_bytes": {"type": "integer", "minimum": 1},
+        "maximum_agent_calls": {"const": 7},
+        "maximum_input_tokens": {"type": "integer", "minimum": 1},
+        "maximum_output_tokens": {"type": "integer", "minimum": 1},
+        "maximum_catalog_cost_estimate_usd": {"type": "number", "exclusiveMinimum": 0},
+        "maximum_wall_seconds": {"type": "integer", "minimum": 60},
+        "warning_fraction": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "maximum_parallel_agents": {"type": "integer", "minimum": 1, "maximum": 2},
+        "prospective_attempts_per_role": {"const": 1}
+      }
+    },
+    "cache_policies": {
+      "type": "object", "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/cachePolicy"}
+    },
+    "scheduler": {
+      "type": "object", "additionalProperties": false,
+      "required": ["timezone", "prospective_start_minutes_after_close", "outcome_start_minutes_after_close", "catch_up_until_next_open", "allow_model_retry", "require_dry_run_support"],
+      "properties": {
+        "timezone": {"const": "America/New_York"},
+        "prospective_start_minutes_after_close": {"type": "integer", "minimum": 20, "maximum": 120},
+        "outcome_start_minutes_after_close": {"type": "integer", "minimum": 20, "maximum": 120},
+        "catch_up_until_next_open": {"const": true},
+        "allow_model_retry": {"const": false},
+        "require_dry_run_support": {"const": true}
+      }
+    },
+    "alerts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["severities", "deduplicate_open_conditions", "local_jsonl", "external_delivery"],
+      "properties": {
+        "severities": {"const": ["INFO", "WARNING", "ERROR", "CRITICAL"]},
+        "deduplicate_open_conditions": {"const": true},
+        "local_jsonl": {"const": true},
+        "external_delivery": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "cachePolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "minimum_request_spacing_seconds", "maximum_requests_per_window", "window_seconds"],
+      "properties": {
+        "mode": {"enum": ["ttl", "release_identity", "manual_as_of"]},
+        "ttl_seconds": {"type": "integer", "minimum": 1},
+        "maximum_age_seconds": {"type": "integer", "minimum": 1},
+        "minimum_request_spacing_seconds": {"type": "number", "minimum": 0},
+        "maximum_requests_per_window": {"type": "integer", "minimum": 1},
+        "window_seconds": {"type": "number", "exclusiveMinimum": 0}
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+Synthetic development sources and a deterministic test model. Verifies controller plumbing only, not live cooperation or release quality. No real model costs were incurred; fixture receipts are simulated.

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/meta-forecast-policy-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "direction_scores", "role_weights", "combination", "recommendation_policy", "freshness_policy", "prospective_qualification"],
+  "properties": {
+    "schema_version": {"const": "meta-forecast-policy-v2"},
+    "status": {"const": "experimental-uncalibrated"},
+    "direction_scores": {
+      "type": "object", "additionalProperties": false,
+      "required": ["BULLISH", "BEARISH", "NEUTRAL"],
+      "properties": {"BULLISH": {"const": 1.0}, "BEARISH": {"const": -1.0}, "NEUTRAL": {"const": 0.0}}
+    },
+    "role_weights": {
+      "type": "object", "additionalProperties": false,
+      "required": ["macro_cycle", "technical", "fundamental", "news", "geopolitical"],
+      "properties": {
+        "macro_cycle": {"type": "number", "minimum": 0, "maximum": 1},
+        "technical": {"type": "number", "minimum": 0, "maximum": 1},
+        "fundamental": {"type": "number", "minimum": 0, "maximum": 1},
+        "news": {"type": "number", "minimum": 0, "maximum": 1},
+        "geopolitical": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "combination": {
+      "type": "object", "additionalProperties": false,
+      "required": ["quant_weight", "context_weight", "minimum_accepted_context_roles", "maximum_mean_shift_volatility_units"],
+      "properties": {
+        "quant_weight": {"type": "number", "minimum": 0, "maximum": 1},
+        "context_weight": {"type": "number", "minimum": 0, "maximum": 1},
+        "minimum_accepted_context_roles": {"type": "integer", "minimum": 1, "maximum": 5},
+        "maximum_mean_shift_volatility_units": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+      }
+    },
+    "recommendation_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["maximum_directional_disagreement_range", "bullish_research_probability", "conditional_entry_probability", "reduce_risk_probability", "bearish_research_probability", "conditional_actions_require_measurable_trigger", "critical_gaps_force_wait", "unresolved_material_claims_force_wait"],
+      "properties": {
+        "maximum_directional_disagreement_range": {"type": "number", "minimum": 0, "maximum": 2},
+        "bullish_research_probability": {"type": "number", "exclusiveMinimum": 0.5, "maximum": 1},
+        "conditional_entry_probability": {"type": "number", "exclusiveMinimum": 0.5, "maximum": 1},
+        "reduce_risk_probability": {"type": "number", "minimum": 0, "exclusiveMaximum": 0.5},
+        "bearish_research_probability": {"type": "number", "minimum": 0, "exclusiveMaximum": 0.5},
+        "conditional_actions_require_measurable_trigger": {"const": true},
+        "critical_gaps_force_wait": {"const": true},
+        "unresolved_material_claims_force_wait": {"const": true}
+      }
+    },
+    "freshness_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["intraday_max_age_seconds_at_publication", "critical_families", "advisory_families"],
+      "properties": {
+        "intraday_max_age_seconds_at_publication": {"type": "integer", "minimum": 1},
+        "critical_families": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "advisory_families": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "prospective_qualification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["minimum_scored_records", "minimum_distinct_origins", "minimum_records_per_horizon"],
+      "properties": {
+        "minimum_scored_records": {"type": "integer", "minimum": 30},
+        "minimum_distinct_origins": {"type": "integer", "minimum": 10},
+        "minimum_records_per_horizon": {"type": "integer", "minimum": 10}
+      }
+    }
+  }
+}

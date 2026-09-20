@@ -1,0 +1,110 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "Triage complete. All proposed follow-up questions were prioritized: question-5 was approved using the completed macro task (task-4), and question-6 was approved for new company research (task-8) because documented issuer-level cross-border exposure could materially change the trade-policy analysis. No further proposed questions remain; task-8 is pending and is not treated as resolved.",
+      "assessment": "insufficient_evidence",
+      "claims": [
+        {
+          "claim_id": "task-7-c1",
+          "classification": "fact",
+          "text": "Question-5 is answered through task-4, which provides dated fixed-market and FOMC context; it need not consume a duplicate macro assignment.",
+          "evidence_ids": [
+            "e14",
+            "e17",
+            "e18",
+            "e26"
+          ],
+          "symbols": [
+            "ANET",
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-7-c2",
+          "classification": "inference",
+          "text": "Question-6 is material because issuer-specific cross-border revenue, restricted-product, or manufacturing-dependency disclosures could distinguish direct trade-policy transmission from the generic sector scenario currently supported.",
+          "evidence_ids": [
+            "e1",
+            "e3",
+            "e5",
+            "e7",
+            "e20"
+          ],
+          "symbols": [
+            "ANET",
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "The approved company follow-up for documented cross-border and trade-policy exposure (question-6/task-8) is pending; no result should be assumed during subsequent synthesis.",
+          "critical": true,
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        }
+      ],
+      "assumptions": [
+        "Triage reuses a completed task only where its scoped evidence directly answers the question.",
+        "Pending research is not evidence and does not resolve an existing critical gap."
+      ],
+      "counter_thesis": "The pending filing review may find that geographic and supply-chain disclosures are immaterial or insufficiently quantified, leaving the geopolitical channel a conditional scenario rather than a documented issuer-specific risk.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review the final trade-policy characterization after task-8 completes or, if it cannot resolve the question, retain the direct-exposure limitation explicitly.",
+          "symbol": null,
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e1",
+            "e3",
+            "e5",
+            "e7"
+          ]
+        }
+      ],
+      "dispositions": [],
+      "question_effects": [
+        {
+          "question_id": "question-5",
+          "effect": "changed",
+          "reason": "Approved with completed task-4 as a direct answer, avoiding duplicate macro research."
+        },
+        {
+          "question_id": "question-6",
+          "effect": "unresolved",
+          "reason": "Approved for task-8; its answer is pending and no direct-exposure conclusion is yet supported."
+        }
+      ],
+      "shared_exposures": []
+    }
+  },
+  "receipt": {
+    "input_tokens": 33762,
+    "output_tokens": 686,
+    "catalog_cost_usd": 0.0709176,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 26882,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

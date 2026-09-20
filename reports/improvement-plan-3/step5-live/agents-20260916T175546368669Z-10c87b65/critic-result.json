@@ -1,0 +1,1737 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "ANET-critic-price",
+          "classification": "FACT",
+          "evidence_family": "daily-price",
+          "evidence_ids": [
+            "price-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Superseded by the next completed-session daily observation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/latest_close",
+              "value": 192.84
+            },
+            {
+              "packet_path": "/instruments/ANET/sma20",
+              "value": 192.1615
+            },
+            {
+              "packet_path": "/instruments/ANET/sma50",
+              "value": 186.24439999999998
+            },
+            {
+              "packet_path": "/instruments/ANET/sma200",
+              "value": 154.0637
+            },
+            {
+              "packet_path": "/instruments/ANET/return5_pct",
+              "value": -1.0874025441116153
+            },
+            {
+              "packet_path": "/instruments/ANET/return21_pct",
+              "value": -3.007745699627795
+            },
+            {
+              "packet_path": "/instruments/ANET/return63_pct",
+              "value": 14.045774439647518
+            },
+            {
+              "packet_path": "/instruments/ANET/realized_vol5_pct",
+              "value": 70.49769774290269
+            },
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/20_session/resistance_close",
+              "value": 202.25
+            },
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/20_session/support_close",
+              "value": 183.75
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "ANET closed at 192.84, above its 20-, 50-, and 200-session averages; its 5- and 21-session returns were negative, its 63-session return was positive, and five-session realized volatility was 70.50%."
+        },
+        {
+          "claim_id": "ANET-critic-fundamental",
+          "classification": "FACT",
+          "evidence_family": "SEC-fundamentals",
+          "evidence_ids": [
+            "fundamentals-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a correction or superseding filing for the cited period.",
+          "numeric_values": [
+            {
+              "packet_path": "/company_fundamentals/ANET/metrics/operating_income/value",
+              "value": 2535800000
+            },
+            {
+              "packet_path": "/company_fundamentals/ANET/metrics/revenue/value",
+              "value": 5744700000
+            },
+            {
+              "packet_path": "/company_fundamentals/ANET/metrics/operating_cash_flow/value",
+              "value": 2776500000
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "The supplied filing reports operating income of USD 2.5358bn on revenue of USD 5.7447bn and operating cash flow of USD 2.7765bn for the stated year-to-date period, but it supplies no comparable trend or forward expectation."
+        },
+        {
+          "claim_id": "ANET-critic-macro",
+          "classification": "INFERENCE",
+          "evidence_family": "rates-and-financial-conditions",
+          "evidence_ids": [
+            "NFCI",
+            "DGS10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Reassess when either cited macro observation is superseded.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.56
+            },
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "NFCI was accommodative at -0.56, but a 4.97% 10-year Treasury yield is a material opposing discount-rate condition; the net return effect is untested."
+        }
+      ],
+      "counterevidence": [
+        "ANET remained above its 20-, 50-, and 200-session averages and reported strong operating profitability.",
+        "Five- and 21-session returns were negative, while five-session realized volatility was 70.50%."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Use a conditional stance because high volatility and opposing macro evidence dominate short-horizon certainty.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "ANET completed-session close",
+            "level": 202.25,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "ANET completed-session close",
+            "level": 183.75,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Qualified earnings expectations and consolidated intraday confirmation"
+            }
+          ],
+          "review": {
+            "event": "Review completed closes and new issuer evidence.",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-critic-price",
+            "ANET-critic-macro"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-critic-fundamental"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Trend and profitability support are offset by negative intermediate return and rate risk.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "ANET completed-session close",
+            "level": 202.25,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "ANET completed-session close",
+            "level": 183.75,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Comparable growth and qualified valuation evidence"
+            }
+          ],
+          "review": {
+            "event": "Review 21-session trend and filing updates.",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-critic-macro"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-critic-price",
+            "ANET-critic-fundamental"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "The long-term trend is constructive, but evidence does not establish predictive strength or fair value.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "ANET completed-session close",
+            "level": 202.25,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-ANET"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "ANET completed-session close",
+            "level": 183.75,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward outlook and fitted ANET return model"
+            }
+          ],
+          "review": {
+            "event": "Review 63-session trend and next filing.",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-critic-macro"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-critic-price",
+            "ANET-critic-fundamental"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "The mixed assessment would become technically more constructive after a completed close above 202.25 and materially weaker below 183.75."
+      ],
+      "missing": [
+        "Comparable-period growth, qualified forward valuation, earnings expectations, and a fitted return model."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "ANET’s long-term price structure and reported profitability are constructive, but recent returns, very high volatility, elevated long yields, and absent expectation/valuation evidence prevent a directional conclusion.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "QQQ-critic-price",
+          "classification": "FACT",
+          "evidence_family": "daily-price",
+          "evidence_ids": [
+            "price-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Superseded by the next completed-session daily observation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/latest_close",
+              "value": 704.54
+            },
+            {
+              "packet_path": "/instruments/QQQ/sma20",
+              "value": 713.307
+            },
+            {
+              "packet_path": "/instruments/QQQ/sma50",
+              "value": 709.9724000000001
+            },
+            {
+              "packet_path": "/instruments/QQQ/sma200",
+              "value": 661.1372500000001
+            },
+            {
+              "packet_path": "/instruments/QQQ/return5_pct",
+              "value": -1.9238264936800586
+            },
+            {
+              "packet_path": "/instruments/QQQ/return21_pct",
+              "value": -3.6289274624865087
+            },
+            {
+              "packet_path": "/instruments/QQQ/return63_pct",
+              "value": -5.303763440860221
+            },
+            {
+              "packet_path": "/instruments/QQQ/support_resistance_candidates/63_session/support_close",
+              "value": 661.73
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "QQQ closed at 704.54 below its 20- and 50-session averages but above its 200-session average, with negative 5-, 21-, and 63-session returns."
+        },
+        {
+          "claim_id": "QQQ-critic-holdings",
+          "classification": "FACT",
+          "evidence_family": "ETF-holdings-and-profile",
+          "evidence_ids": [
+            "holdings-QQQ",
+            "etf-profile-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by corrected or updated sponsor inputs.",
+          "numeric_values": [
+            {
+              "packet_path": "/etf_holdings/QQQ/top10_weight_pct",
+              "value": 47.17
+            },
+            {
+              "packet_path": "/etf_holdings/QQQ/holdings/0/weight_pct",
+              "value": 8.45
+            },
+            {
+              "packet_path": "/etf_holdings/QQQ/holdings/3/weight_pct",
+              "value": 4.85
+            },
+            {
+              "packet_path": "/etf_holdings/QQQ/holdings/7/weight_pct",
+              "value": 3.07
+            },
+            {
+              "packet_path": "/etf_sponsor_profiles/QQQ/metrics/pe_ratio",
+              "value": 30.08
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "The current sponsor inputs report 47.17% top-ten weight, NVDA at 8.45%, MU at 4.85%, META at 3.07%, and a sponsor P/E of 30.08; these are exposure and valuation descriptors, not calibrated signals."
+        },
+        {
+          "claim_id": "QQQ-critic-macro",
+          "classification": "INFERENCE",
+          "evidence_family": "rates-inflation",
+          "evidence_ids": [
+            "DGS10",
+            "CPIAUCSL",
+            "NFCI"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Reassess when cited macro observations are superseded.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            },
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.56
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "A 4.97% 10-year yield and 3.35% year-over-year CPI are adverse valuation context for growth assets, while negative NFCI is opposing support; the net QQQ effect is unmodeled."
+        }
+      ],
+      "counterevidence": [
+        "QQQ was above its 200-session average and rebounded intraday.",
+        "All requested trailing returns were negative and the fund was below its 20- and 50-session averages."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Await a completed close above the 20-session average and the verified policy outcome.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "QQQ completed-session close",
+            "level": 713.307,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "QQQ completed-session close",
+            "level": 661.73,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Verified FOMC decision and completed-close reaction"
+            }
+          ],
+          "review": {
+            "event": "Review policy outcome and completed closes.",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-critic-price",
+            "QQQ-critic-macro"
+          ],
+          "strongest_support_claim_ids": [],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Constituent exposure establishes relevance but not direction; intermediate momentum remains weak.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "QQQ completed-session close",
+            "level": 713.307,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "QQQ completed-session close",
+            "level": 661.73,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Constituent earnings attribution and sector/country allocation"
+            }
+          ],
+          "review": {
+            "event": "Review 21-session trend and constituent results.",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-critic-price",
+            "QQQ-critic-macro"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-critic-holdings"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Long-term moving-average support conflicts with negative 63-session momentum and valuation sensitivity.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "QQQ completed-session close",
+            "level": 713.307,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "QQQ completed-session close",
+            "level": 661.73,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Calibrated constituent-level forecast aggregation"
+            }
+          ],
+          "review": {
+            "event": "Review 63-session trend and sponsor updates.",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-critic-holdings",
+            "QQQ-critic-macro"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-critic-price"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close above 713.307 would improve the short/intermediate structure; a close below 661.73 would break cited long-term support."
+      ],
+      "missing": [
+        "Actual FOMC outcome, constituent earnings aggregation, country/sector allocation, and a calibrated ETF return model."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "QQQ retains long-term support above its 200-session average, but negative trailing returns, short-average weakness, high valuation aggregates, concentration, and rate/inflation risk leave all horizons mixed.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "MU-critic-price",
+          "classification": "FACT",
+          "evidence_family": "daily-price",
+          "evidence_ids": [
+            "price-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Superseded by the next completed-session daily observation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/latest_close",
+              "value": 927.6
+            },
+            {
+              "packet_path": "/instruments/MU/sma20",
+              "value": 956.2177499999998
+            },
+            {
+              "packet_path": "/instruments/MU/sma50",
+              "value": 926.4362999999998
+            },
+            {
+              "packet_path": "/instruments/MU/sma200",
+              "value": 629.083075
+            },
+            {
+              "packet_path": "/instruments/MU/return5_pct",
+              "value": -7.264111331053924
+            },
+            {
+              "packet_path": "/instruments/MU/return21_pct",
+              "value": -4.534507955457667
+            },
+            {
+              "packet_path": "/instruments/MU/return63_pct",
+              "value": -14.741863436244817
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol63_pct",
+              "value": 91.12219244616473
+            },
+            {
+              "packet_path": "/instruments/MU/support_resistance_candidates/20_session/support_close",
+              "value": 910.43
+            },
+            {
+              "packet_path": "/instruments/MU/support_resistance_candidates/20_session/resistance_close",
+              "value": 1027.77
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "MU closed at 927.60 below its 20-session average but above its 50- and 200-session averages, with negative returns at all requested horizons and 91.12% realized volatility over 63 sessions."
+        },
+        {
+          "claim_id": "MU-critic-fundamental",
+          "classification": "FACT",
+          "evidence_family": "SEC-fundamentals",
+          "evidence_ids": [
+            "fundamentals-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a correction or superseding filing.",
+          "numeric_values": [
+            {
+              "packet_path": "/company_fundamentals/MU/metrics/operating_income/value",
+              "value": 55589000000
+            },
+            {
+              "packet_path": "/company_fundamentals/MU/metrics/operating_cash_flow/value",
+              "value": 45702000000
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "The supplied filing reports USD 55.589bn operating income and USD 45.702bn operating cash flow for the stated nine-month period, but no comparable pricing, inventory, or expectation data are supplied."
+        },
+        {
+          "claim_id": "MU-critic-competition",
+          "classification": "FACT",
+          "evidence_family": "reported-competitive-news",
+          "evidence_ids": [
+            "news-61800956"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a corrected report or a supplied issuer-confirmed production update.",
+          "numeric_values": [],
+          "stance": "OPPOSE",
+          "statement": "A supplied report stated SK Hynix was at volume on 16-layer HBM4 for Rubin while Micron was at samples; the report does not quantify Micron’s financial exposure."
+        }
+      ],
+      "counterevidence": [
+        "MU remained above its 50- and 200-session averages and reported substantial operating cash flow.",
+        "All requested returns were negative and 63-session realized volatility was 91.12%."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Downside momentum is material, but high volatility and strong reported financials prevent a one-sided conclusion.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "MU completed-session close",
+            "level": 910.43,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "MU completed-session close",
+            "level": 1027.77,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Verified HBM production status and completed-close confirmation"
+            }
+          ],
+          "review": {
+            "event": "Review price break and issuer production evidence.",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-critic-price",
+            "MU-critic-competition"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-critic-fundamental"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Negative momentum and competitive execution risk oppose strong historical profitability.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "MU completed-session close",
+            "level": 910.43,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "MU completed-session close",
+            "level": 1027.77,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Memory pricing, inventory, and customer qualification data"
+            }
+          ],
+          "review": {
+            "event": "Review 21-session trend and memory-cycle evidence.",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-critic-price",
+            "MU-critic-competition"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-critic-fundamental"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Do not extrapolate either historical margins or the reported HBM gap without forward evidence.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "MU completed-session close",
+            "level": 910.43,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-MU"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "MU completed-session close",
+            "level": 1027.77,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward memory-cycle outlook and qualified valuation"
+            }
+          ],
+          "review": {
+            "event": "Review 63-session trend and next filing.",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-critic-price",
+            "MU-critic-competition"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-critic-fundamental"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close below 910.43 would confirm further technical weakness; a close above 1027.77 would invalidate that downside setup."
+      ],
+      "missing": [
+        "Verified HBM production/qualification, memory pricing and inventory trends, expectations, and qualified valuation."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "MU",
+      "thesis": "MU’s very strong reported profitability and position above the 200-session average oppose uniformly negative trailing returns, competitive HBM reporting, and exceptional volatility; the evidence supports caution rather than a clean bearish forecast.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "META-critic-price",
+          "classification": "FACT",
+          "evidence_family": "daily-price",
+          "evidence_ids": [
+            "price-META"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Superseded by the next completed-session daily observation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/latest_close",
+              "value": 670.24
+            },
+            {
+              "packet_path": "/instruments/META/sma20",
+              "value": 595.318
+            },
+            {
+              "packet_path": "/instruments/META/sma50",
+              "value": 603.9552
+            },
+            {
+              "packet_path": "/instruments/META/sma200",
+              "value": 623.66375
+            },
+            {
+              "packet_path": "/instruments/META/return5_pct",
+              "value": 9.252135358935899
+            },
+            {
+              "packet_path": "/instruments/META/return21_pct",
+              "value": 13.628888700517084
+            },
+            {
+              "packet_path": "/instruments/META/return63_pct",
+              "value": 12.93388151243513
+            },
+            {
+              "packet_path": "/instruments/META/rsi14_simple",
+              "value": 84.11768712116056
+            },
+            {
+              "packet_path": "/instruments/META/realized_vol21_pct",
+              "value": 36.37274141224706
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/63_session/resistance_close",
+              "value": 681.31
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/20_session/support_close",
+              "value": 543.67
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "META closed at 670.24 above its 20-, 50-, and 200-session averages with positive returns at all requested horizons; RSI14 was 84.12 and 21-session realized volatility was 36.37%."
+        },
+        {
+          "claim_id": "META-critic-fundamental",
+          "classification": "FACT",
+          "evidence_family": "SEC-fundamentals",
+          "evidence_ids": [
+            "fundamentals-META"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a correction or superseding filing.",
+          "numeric_values": [
+            {
+              "packet_path": "/company_fundamentals/META/metrics/operating_income/value",
+              "value": 41647000000
+            },
+            {
+              "packet_path": "/company_fundamentals/META/metrics/operating_cash_flow/value",
+              "value": 64088000000
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "The supplied filing reports USD 41.647bn operating income and USD 64.088bn operating cash flow for the stated year-to-date period, while market valuation is not established by the filing evidence."
+        },
+        {
+          "claim_id": "META-critic-risk",
+          "classification": "INFERENCE",
+          "evidence_family": "rates-and-product-news",
+          "evidence_ids": [
+            "DGS10",
+            "news-61807324"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Reassess after a new yield observation or supplied Meta product/financial update.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "The 4.97% 10-year yield and reported Muse delay are opposing risk context, but neither has a measured META return or financial-impact coefficient."
+        }
+      ],
+      "counterevidence": [
+        "META traded above all three moving averages with positive returns at all requested horizons.",
+        "RSI14 was 84.12, and the packet provides no qualified market valuation or product-delay financial impact."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Strong momentum is offset by extension and unquantified event/rate risk.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "META completed-session close",
+            "level": 681.31,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "META completed-session close",
+            "level": 543.67,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Muse launch impact and qualified valuation"
+            }
+          ],
+          "review": {
+            "event": "Review breakout and product disclosure.",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-critic-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "META-critic-price",
+            "META-critic-fundamental"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Intermediate trend is constructive, but the packet cannot price extension or product-delay risk.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "META completed-session close",
+            "level": 681.31,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "META completed-session close",
+            "level": 543.67,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Comparable growth and market valuation"
+            }
+          ],
+          "review": {
+            "event": "Review 21-session trend and issuer updates.",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-critic-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "META-critic-price",
+            "META-critic-fundamental"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "The bullish price trend is not a calibrated fundamental forecast.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "META completed-session close",
+            "level": 681.31,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-META"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "META completed-session close",
+            "level": 543.67,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Forward outlook and fitted return model"
+            }
+          ],
+          "review": {
+            "event": "Review 63-session trend and next filing.",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-critic-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "META-critic-price",
+            "META-critic-fundamental"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close above 681.31 would confirm a breakout; a close below 543.67 would invalidate cited support."
+      ],
+      "missing": [
+        "Market valuation, comparable growth, Muse monetization impact, and a fitted META return model."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "META",
+      "thesis": "META has strong price momentum and profitable operations, but its extended RSI, high volatility, rates risk, missing valuation, and unquantified Muse delay make the near-term and longer-horizon balance mixed.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "NVDA-critic-price",
+          "classification": "FACT",
+          "evidence_family": "daily-price",
+          "evidence_ids": [
+            "price-NVDA"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Superseded by the next completed-session daily observation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/latest_close",
+              "value": 212.17
+            },
+            {
+              "packet_path": "/instruments/NVDA/sma20",
+              "value": 218.8105
+            },
+            {
+              "packet_path": "/instruments/NVDA/sma50",
+              "value": 213.23899999999998
+            },
+            {
+              "packet_path": "/instruments/NVDA/sma200",
+              "value": 197.7865
+            },
+            {
+              "packet_path": "/instruments/NVDA/return5_pct",
+              "value": -6.0071767155451266
+            },
+            {
+              "packet_path": "/instruments/NVDA/return21_pct",
+              "value": -5.769230769230771
+            },
+            {
+              "packet_path": "/instruments/NVDA/return63_pct",
+              "value": -0.13179571663920475
+            },
+            {
+              "packet_path": "/instruments/NVDA/support_resistance_candidates/20_session/resistance_close",
+              "value": 230.36
+            },
+            {
+              "packet_path": "/instruments/NVDA/support_resistance_candidates/20_session/support_close",
+              "value": 208.48
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "NVDA closed at 212.17 below its 20- and 50-session averages but above its 200-session average; 5- and 21-session returns were negative and the 63-session return was near flat."
+        },
+        {
+          "claim_id": "NVDA-critic-results",
+          "classification": "FACT",
+          "evidence_family": "issuer-results-and-filings",
+          "evidence_ids": [
+            "primary-nvidia-press-releases-77a71c9ef7da3f1e2093",
+            "fundamentals-NVDA"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a correction or restatement of the cited results.",
+          "numeric_values": [
+            {
+              "packet_path": "/company_fundamentals/NVDA/metrics/operating_income/value",
+              "value": 117270000000
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "NVIDIA reported fiscal Q2 revenue of USD 96.2bn, up 18% sequentially and 106% year over year; the filing also reports high year-to-date operating income, but the packet lacks an expectations benchmark."
+        },
+        {
+          "claim_id": "NVDA-critic-risk",
+          "classification": "INFERENCE",
+          "evidence_family": "rates-geopolitics-positioning",
+          "evidence_ids": [
+            "DGS10",
+            "news-61807396",
+            "news-61814464"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Reassess after superseding yield data or a verified policy/exposure disclosure.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "A 4.97% 10-year yield plus reported chip-war and crowded-AI concerns create material opposing context, but NVDA-specific exposure and return effects are not quantified."
+        }
+      ],
+      "counterevidence": [
+        "NVIDIA reported very strong fiscal Q2 revenue growth and remained above its 200-session average.",
+        "The stock was below its 20- and 50-session averages with negative 5- and 21-session returns."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "The intraday rebound does not yet overcome adverse completed-session momentum and unresolved policy risk.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "NVDA completed-session close",
+            "level": 230.36,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "NVDA completed-session close",
+            "level": 208.48,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Verified policy outcome, exposure, and expectations benchmark"
+            }
+          ],
+          "review": {
+            "event": "Review completed closes and policy developments.",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-critic-price",
+            "NVDA-critic-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-critic-results"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Reported demand strength is offset by weak intermediate momentum and unmeasured geopolitical exposure.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "NVDA completed-session close",
+            "level": 230.36,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "NVDA completed-session close",
+            "level": 208.48,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Realized order revenue and country/supply-chain exposure"
+            }
+          ],
+          "review": {
+            "event": "Review 21-session trend and issuer updates.",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-critic-price",
+            "NVDA-critic-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-critic-results"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Long-term support and reported growth do not establish medium-term return predictiveness.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "NVDA completed-session close",
+            "level": 230.36,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "price-NVDA"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "NVDA completed-session close",
+            "level": 208.48,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Current valuation, realized partnership economics, and fitted return model"
+            }
+          ],
+          "review": {
+            "event": "Review 63-session trend and subsequent financial disclosures.",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-critic-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-critic-results",
+            "NVDA-critic-price"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close above 230.36 would confirm recovery; a close below 208.48 would invalidate near-term support."
+      ],
+      "missing": [
+        "Consensus expectations, current valuation, country/supply-chain exposure, policy transmission, and realized partnership revenue."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "NVDA",
+      "thesis": "NVIDIA’s reported growth and infrastructure announcements are strong, while daily momentum, rates, geopolitical uncertainty, crowding concerns, and incomplete valuation/exposure evidence oppose a directional forecast.",
+      "view": "MIXED"
+    }
+  ],
+  "audit_summary": {
+    "accepted_claims": 43,
+    "material_restrictions": [
+      "No qualified calibrated meta-forecast is available.",
+      "Reject four symbol-specific macro trend claims that cite QQQ context instead of the relevant symbol price evidence.",
+      "Reject four valuation/profile claims whose sole filing citations do not support the separate calculated profile metrics.",
+      "Reject MU intraday downside claim because its comparison with the prior close is reversed.",
+      "Secondary-news and issuer-announcement claims establish reported facts or attribution only, not return predictiveness."
+    ],
+    "needs_verification_claims": 0,
+    "rejected_claims": 9,
+    "summary": "Most filing, price, macro, holdings, and carefully attributed news claims are factually supported. Nine claims cannot enter scoring because of citation mismatch, non-atomic valuation assertions, or one reversed price comparison. Across all five symbols, opposing technical, macro, fundamental, and event evidence supports qualitative mixed assessments rather than calibrated directional forecasts."
+  },
+  "claim_decisions": [
+    {
+      "claim_ref": "fundamental:ANET-financials-q2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited filing supports the period, values, and derived margin."
+    },
+    {
+      "claim_ref": "fundamental:ANET-valuation-gap",
+      "correction": "Cite price-ANET together with filing equity and shares, or state only that the filing lacks a qualified earnings multiple.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "The cited fundamentals evidence does not contain the separate price/book proxy; the citation does not support the full claim."
+    },
+    {
+      "claim_ref": "fundamental:META-financials-q2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited filing supports the reported year-to-date values and margin."
+    },
+    {
+      "claim_ref": "fundamental:META-valuation-debt-gap",
+      "correction": "Retain the debt fact alone, or separately cite qualified valuation-profile evidence.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "Debt is supported, but the combined assertion about the separate instrument-profile valuation status is not supported by the sole cited evidence and is not atomic."
+    },
+    {
+      "claim_ref": "fundamental:MU-financials-q3",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The filing supports the stated nine-month figures and derived margin."
+    },
+    {
+      "claim_ref": "fundamental:MU-valuation-gap",
+      "correction": "Derive the proxy with price, shares, and equity citations, or limit the claim to the absence of a qualified forward multiple.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "The cited filing evidence does not contain the separately calculated price/book proxy."
+    },
+    {
+      "claim_ref": "fundamental:NVDA-financials-q2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited filing supports the stated year-to-date financial facts and margin."
+    },
+    {
+      "claim_ref": "fundamental:NVDA-valuation-partial",
+      "correction": "Cite price-NVDA plus the relevant filing facts, and separate the date-mismatch limitation from the calculated proxy.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "The market-cap proxy and profile status are outside the sole cited fundamentals evidence, despite the underlying shares-date limitation being visible elsewhere in the packet."
+    },
+    {
+      "claim_ref": "fundamental:QQQ-holdings-concentration",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The current holdings evidence supports all stated weights and count."
+    },
+    {
+      "claim_ref": "fundamental:QQQ-sponsor-metrics",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The sponsor profile supports the metrics and explicitly states their descriptive limitation."
+    },
+    {
+      "claim_ref": "geopolitical:ANET-gap",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The filing evidence explicitly notes that geographic revenue and supply-chain exposure are not established."
+    },
+    {
+      "claim_ref": "geopolitical:META-gap",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited filing evidence supports the stated exposure-coverage gap."
+    },
+    {
+      "claim_ref": "geopolitical:MU-gap",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited filing evidence supports the stated exposure-coverage gap."
+    },
+    {
+      "claim_ref": "geopolitical:NVDA-gap",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited filing lacks geographic/supply-chain exposure, and the cited article is only a reported chip-war discussion."
+    },
+    {
+      "claim_ref": "geopolitical:NVDA-release",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The issuer release supports the collaboration description and does not establish an enacted policy or price effect."
+    },
+    {
+      "claim_ref": "geopolitical:QQQ-gap",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The holdings input has no sector or country allocation, so the stated mapping limitation is supported."
+    },
+    {
+      "claim_ref": "macro_cycle:ANET-cycle-risk",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited macro series support the values and 90-day changes."
+    },
+    {
+      "claim_ref": "macro_cycle:ANET-cycle-support",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The NFCI value is correct and the claim clearly labels the risk-asset implication as untested inference."
+    },
+    {
+      "claim_ref": "macro_cycle:ANET-trend",
+      "correction": "Cite price-ANET.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "The claim cites market-context-QQQ, which contains QQQ rather than ANET trend and volatility facts."
+    },
+    {
+      "claim_ref": "macro_cycle:META-cycle-risk",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited macro observations support the factual statement."
+    },
+    {
+      "claim_ref": "macro_cycle:META-cycle-support",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The NFCI premise is correct and predictive meaning is properly qualified."
+    },
+    {
+      "claim_ref": "macro_cycle:META-trend",
+      "correction": "Cite price-META.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "market-context-QQQ does not substantiate META-specific price, return, RSI, or support values."
+    },
+    {
+      "claim_ref": "macro_cycle:MU-cycle-risk",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited yield and oil observations support the claim."
+    },
+    {
+      "claim_ref": "macro_cycle:MU-cycle-support",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The claim correctly treats negative NFCI as an untested supportive inference."
+    },
+    {
+      "claim_ref": "macro_cycle:MU-trend",
+      "correction": "Cite price-MU.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "The sole citation is QQQ context and does not support MU-specific values."
+    },
+    {
+      "claim_ref": "macro_cycle:NVDA-cycle-risk",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited macro series support the stated observations."
+    },
+    {
+      "claim_ref": "macro_cycle:NVDA-cycle-support",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The negative NFCI fact and qualified inference are supported."
+    },
+    {
+      "claim_ref": "macro_cycle:NVDA-trend",
+      "correction": "Cite price-NVDA.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "The QQQ context citation does not support NVDA-specific price and return facts."
+    },
+    {
+      "claim_ref": "macro_cycle:QQQ-cycle-risk",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The yield and oil facts are supported by the cited series."
+    },
+    {
+      "claim_ref": "macro_cycle:QQQ-cycle-support",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The NFCI observation is correct and the implication is explicitly untested."
+    },
+    {
+      "claim_ref": "macro_cycle:QQQ-trend",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "market-context-QQQ supports the cited QQQ close and moving-average ratios."
+    },
+    {
+      "claim_ref": "news:ANET-c1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The article names ANET and attributes the demand view; the claim correctly notes the absence of an ANET-specific development."
+    },
+    {
+      "claim_ref": "news:META-c1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited article supports the reported Muse delay and lack of quantified commercial impact."
+    },
+    {
+      "claim_ref": "news:META-c2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The claim accurately characterizes the survey report and its missing META-specific exposure."
+    },
+    {
+      "claim_ref": "news:MU-c1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The cited report supports the attributed HBM4 volume-versus-samples comparison."
+    },
+    {
+      "claim_ref": "news:MU-c2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The article supports the reported premarket gain and research-lab leadership reference, with an appropriate completed-close caveat."
+    },
+    {
+      "claim_ref": "news:NVDA-c1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The primary issuer release supports the revenue and growth figures."
+    },
+    {
+      "claim_ref": "news:NVDA-c2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The two primary releases support the announced GPU and financing-platform amounts; realization caveats are explicit."
+    },
+    {
+      "claim_ref": "news:NVDA-c3",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The cited articles support the reported policy and crowding narratives, and the claim avoids asserting quantified impact."
+    },
+    {
+      "claim_ref": "news:QQQ-c1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "The holdings table supports the constituent weights and exposure channel."
+    },
+    {
+      "claim_ref": "news:QQQ-c2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The article supports the pre-decision futures report, and the claim correctly distinguishes it from a completed close."
+    },
+    {
+      "claim_ref": "news:QQQ-c3",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The cited reports support the attributed warning narratives; the claim properly says they are not validated forecasts."
+    },
+    {
+      "claim_ref": "technical:ANET-C1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "price-ANET supports the close, averages, indicators, returns, volatility, and levels."
+    },
+    {
+      "claim_ref": "technical:ANET-C2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The intraday evidence supports the session-last, VWAP, prior-close comparison, and partial-gap status."
+    },
+    {
+      "claim_ref": "technical:META-C1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "price-META supports all stated daily technical facts."
+    },
+    {
+      "claim_ref": "technical:META-C2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The IEX intraday evidence supports the comparisons and values."
+    },
+    {
+      "claim_ref": "technical:MU-C1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "price-MU supports the stated moving-average structure, returns, volatility, and levels."
+    },
+    {
+      "claim_ref": "technical:MU-C2",
+      "correction": "State that the IEX session last was above the prior close but near the session VWAP.",
+      "decision": "REJECT",
+      "materiality": "MATERIAL",
+      "reason": "The session last of 928.285 was above, not below, the prior completed close of 927.60."
+    },
+    {
+      "claim_ref": "technical:NVDA-C1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "price-NVDA supports the stated moving-average, indicator, return, and level facts."
+    },
+    {
+      "claim_ref": "technical:NVDA-C2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The IEX evidence supports the session-last comparison with prior close and VWAP."
+    },
+    {
+      "claim_ref": "technical:QQQ-C1",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "MATERIAL",
+      "reason": "price-QQQ supports all stated daily technical facts and levels."
+    },
+    {
+      "claim_ref": "technical:QQQ-C2",
+      "correction": null,
+      "decision": "ACCEPT",
+      "materiality": "ADVISORY",
+      "reason": "The IEX evidence supports the session-last, prior-close, and VWAP comparisons."
+    }
+  ],
+  "input_hash": "4ac47eb4351ea019ff04fde7809c546438745be495c92645aa920f97234b1d58",
+  "role": "critic"
+}

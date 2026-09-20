@@ -1,0 +1,1236 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "ANET-cycle-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions",
+          "evidence_ids": [
+            "NFCI"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate this backdrop inference if a subsequent NFCI observation is no longer negative.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.56
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "The negative NFCI reading as of 2026-09-11 is consistent with comparatively accommodative financial conditions, a supportive but untested backdrop for risk assets over all horizons."
+        },
+        {
+          "claim_id": "ANET-cycle-risk",
+          "classification": "FACT",
+          "evidence_family": "rates_inflation",
+          "evidence_ids": [
+            "DGS10",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated if revised source observations no longer show these stated values.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.54
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/value",
+              "value": 97.26
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "As of 2026-09-14, the 10-year Treasury yield was 4.97% and had risen 0.54 percentage points over 90 calendar days; WTI was $97.26 on 2026-09-09 after a $5.68 increase over 90 days. These are countervailing rate/inflation conditions."
+        },
+        {
+          "claim_id": "ANET-trend",
+          "classification": "FACT",
+          "evidence_family": "instrument_price",
+          "evidence_ids": [
+            "market-context-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate on a completed ANET close below its cited 63-session support.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/price_to_sma200",
+              "value": 1.2516900476880666
+            },
+            {
+              "packet_path": "/instruments/ANET/realized_vol5_pct",
+              "value": 70.49769774290269
+            },
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/63_session/support_close",
+              "value": 157.6
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "At the 2026-09-15 close, ANET was 1.25169 times its 200-session average, but realized 5-session volatility was 70.50%. This describes trend and risk, not a fundamental valuation signal."
+        }
+      ],
+      "counterevidence": [
+        "Oil and Treasury yields rose over 90 calendar days.",
+        "ANET 21-session return was negative despite its longer-term trend."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Treat the near-term cycle read as mixed; high realized volatility limits directional inference.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "ANET completed close",
+            "level": 192.1615,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "ANET completed close",
+            "level": 183.75,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "ANET issuer exposure and qualified expectations"
+            }
+          ],
+          "review": {
+            "event": "one-week price and financial-conditions review",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-cycle-support",
+            "ANET-trend"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Maintain a mixed cycle stance pending confirmation of trend versus rates/oil pressure.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "ANET completed close",
+            "level": 192.1615,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "ANET completed close",
+            "level": 183.75,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "ANET earnings and exposure data"
+            }
+          ],
+          "review": {
+            "event": "21-session review",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-cycle-support",
+            "ANET-trend"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Longer-horizon trend is constructive but macro inflation/rate risk remains material.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "ANET completed close",
+            "level": 154.0637,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "ANET completed close",
+            "level": 157.6,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted ANET macro-return relationship"
+            }
+          ],
+          "review": {
+            "event": "63-session review",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-cycle-support",
+            "ANET-trend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close below 183.75 would invalidate the near-term technical resilience observation."
+      ],
+      "missing": [
+        "No qualified issuer exposure, earnings-expectation, or event-surprise evidence is supplied to this role.",
+        "No fitted model links these cycle proxies to ANET returns."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "Cycle conditions are mixed: financial conditions were accommodative, but higher long yields and an oil shock create discount-rate and inflation risks. ANET remained well above its 200-session average, while its short-horizon volatility is high.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "QQQ-cycle-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions",
+          "evidence_ids": [
+            "NFCI"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if subsequent NFCI is non-negative.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.56
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "NFCI at -0.56 on 2026-09-11 is consistent with accommodative financial conditions, an untested support for QQQ."
+        },
+        {
+          "claim_id": "QQQ-cycle-risk",
+          "classification": "FACT",
+          "evidence_family": "rates_inflation",
+          "evidence_ids": [
+            "DGS10",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by revisions to these observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/value",
+              "value": 97.26
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "The 10-year yield was 4.97% on 2026-09-14 and WTI was $97.26 on 2026-09-09, with 90-day increases of 0.54 percentage points and $5.68 respectively."
+        },
+        {
+          "claim_id": "QQQ-trend",
+          "classification": "FACT",
+          "evidence_family": "market_price",
+          "evidence_ids": [
+            "market-context-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if revised daily data change these observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/latest_close",
+              "value": 704.54
+            },
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma200",
+              "value": 1.0656486228842799
+            },
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma20",
+              "value": 0.9877093593642008
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "QQQ closed at 704.54 on 2026-09-15, 1.06565 times its 200-session average but 0.98771 times its 20-session average."
+        }
+      ],
+      "counterevidence": [
+        "The 10-year yield and oil rose over 90 calendar days.",
+        "QQQ was below its 20- and 50-session averages."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Mixed: require a short-term trend recovery before treating financial conditions as dominant.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "QQQ completed close",
+            "level": 713.307,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "QQQ completed close",
+            "level": 704.54,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Qualified FOMC outcome and market expectation"
+            }
+          ],
+          "review": {
+            "event": "one-week review",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-cycle-risk",
+            "QQQ-trend"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-cycle-support"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Mixed macro and trend evidence offers no clean directional cycle signal.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "QQQ completed close",
+            "level": 713.307,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "QQQ completed close",
+            "level": 704.54,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted QQQ macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "21-session review",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-cycle-risk",
+            "QQQ-trend"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-cycle-support"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Longer-term technical position is positive versus the 200-session average, offset by inflation/rate risk.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "QQQ completed close",
+            "level": 661.1372500000001,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "QQQ completed close",
+            "level": 661.73,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted QQQ macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "63-session review",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-cycle-support",
+            "QQQ-trend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close below 661.73 invalidates the cited longer-term technical support."
+      ],
+      "missing": [
+        "No fitted macro-return model or qualified policy expectation is supplied."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "Accommodative financial conditions support risk appetite, but rising yields and oil counter it. QQQ was above its 200-session average but below shorter moving averages after negative 5/21/63-session returns.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "MU-cycle-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions",
+          "evidence_ids": [
+            "NFCI"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if subsequent NFCI is non-negative.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.56
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "NFCI of -0.56 on 2026-09-11 is consistent with accommodative conditions, an untested support for cyclical risk assets including MU."
+        },
+        {
+          "claim_id": "MU-cycle-risk",
+          "classification": "FACT",
+          "evidence_family": "rates_inflation",
+          "evidence_ids": [
+            "DGS10",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by revisions to source observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/value",
+              "value": 97.26
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "The 10-year yield was 4.97% and WTI was $97.26 on their latest stated observations, following 90-day increases."
+        },
+        {
+          "claim_id": "MU-trend",
+          "classification": "FACT",
+          "evidence_family": "instrument_price",
+          "evidence_ids": [
+            "market-context-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if revised daily data change these observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/latest_close",
+              "value": 927.6
+            },
+            {
+              "packet_path": "/instruments/MU/price_to_sma200",
+              "value": 1.474527032856511
+            },
+            {
+              "packet_path": "/instruments/MU/return63_pct",
+              "value": -14.741863436244817
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol63_pct",
+              "value": 91.12219244616473
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "MU closed at 927.6, 1.47453 times its 200-session average, but its 63-session return was -14.74% and realized 63-session volatility was 91.12%."
+        }
+      ],
+      "counterevidence": [
+        "Rising yields and oil are adverse macro inputs.",
+        "MU lagged SPY over 5, 21 and 63 sessions."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Mixed backdrop with unusually high volatility; no directional macro conclusion.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "MU completed close",
+            "level": 956.2177499999998,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "MU completed close",
+            "level": 910.43,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Qualified MU demand and earnings expectations"
+            }
+          ],
+          "review": {
+            "event": "one-week review",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-cycle-risk",
+            "MU-trend"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-cycle-support"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Maintain mixed view; price trend and macro risks oppose accommodative-conditions support.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "MU completed close",
+            "level": 926.4362999999998,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "MU completed close",
+            "level": 910.43,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted MU macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "21-session review",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-cycle-risk",
+            "MU-trend"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-cycle-support"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Longer-term level versus SMA is constructive, but negative 63-session return and macro risk remain material.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "MU completed close",
+            "level": 629.083075,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "MU completed close",
+            "level": 739,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted MU macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "63-session review",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-cycle-support",
+            "MU-trend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close below 739 invalidates the cited 63-session support."
+      ],
+      "missing": [
+        "No qualified semiconductor demand, issuer exposure, or event-surprise evidence is supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "MU",
+      "thesis": "The cycle backdrop is mixed. MU remained far above its 200-session average but had negative returns across 5/21/63 sessions and exceptionally high realized volatility.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "META-cycle-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions",
+          "evidence_ids": [
+            "NFCI"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if subsequent NFCI is non-negative.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.56
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "NFCI at -0.56 on 2026-09-11 is consistent with accommodative financial conditions, an untested support for META."
+        },
+        {
+          "claim_id": "META-cycle-risk",
+          "classification": "FACT",
+          "evidence_family": "rates_inflation",
+          "evidence_ids": [
+            "DGS10",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by revisions to source observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/value",
+              "value": 97.26
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "The 10-year yield was 4.97% on 2026-09-14 and WTI was $97.26 on 2026-09-09, each higher over 90 days."
+        },
+        {
+          "claim_id": "META-trend",
+          "classification": "FACT",
+          "evidence_family": "instrument_price",
+          "evidence_ids": [
+            "market-context-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate on a completed close below cited 20-session support.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/latest_close",
+              "value": 670.24
+            },
+            {
+              "packet_path": "/instruments/META/price_to_sma20",
+              "value": 1.1258520656187114
+            },
+            {
+              "packet_path": "/instruments/META/return5_pct",
+              "value": 9.252135358935899
+            },
+            {
+              "packet_path": "/instruments/META/rsi14_simple",
+              "value": 84.11768712116056
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/20_session/support_close",
+              "value": 543.67
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "META closed at 670.24, 1.12585 times its 20-session average, with a 9.25% five-session return and RSI14 of 84.12; RSI is momentum, not fundamental value."
+        }
+      ],
+      "counterevidence": [
+        "META RSI was 84.12, a momentum measure rather than fundamental value.",
+        "Rates and oil rose over 90 days."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Momentum is strong but cycle risk prevents a one-sided interpretation.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "META completed close",
+            "level": 670.24,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "META completed close",
+            "level": 543.67,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Qualified META event expectations and exposure"
+            }
+          ],
+          "review": {
+            "event": "one-week review",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "META-cycle-support",
+            "META-trend"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Mixed: momentum supports, while rate/inflation conditions oppose.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "META completed close",
+            "level": 595.318,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "META completed close",
+            "level": 543.67,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted META macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "21-session review",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "META-cycle-support",
+            "META-trend"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Keep a mixed cycle view; momentum does not establish fundamental value or predictive strength.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "META completed close",
+            "level": 623.66375,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "META completed close",
+            "level": 539.03,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted META macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "63-session review",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "META-cycle-support",
+            "META-trend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close below 543.67 invalidates the cited short-term support."
+      ],
+      "missing": [
+        "No qualified META issuer-event exposure, earnings expectations, or fitted macro-return relationship is supplied."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "META",
+      "thesis": "META's strong momentum conflicts with a mixed cycle backdrop: accommodative financial conditions support risk assets, while rising long rates and oil represent valuation and inflation risks.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "NVDA-cycle-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions",
+          "evidence_ids": [
+            "NFCI"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if subsequent NFCI is non-negative.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.56
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "NFCI at -0.56 on 2026-09-11 is consistent with accommodative financial conditions, an untested support for NVDA risk appetite."
+        },
+        {
+          "claim_id": "NVDA-cycle-risk",
+          "classification": "FACT",
+          "evidence_family": "rates_inflation",
+          "evidence_ids": [
+            "DGS10",
+            "DCOILWTICO"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by revisions to source observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DGS10/value",
+              "value": 4.97
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.54
+            },
+            {
+              "packet_path": "/market/DCOILWTICO/value",
+              "value": 97.26
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "The 10-year yield was 4.97% on 2026-09-14 and had increased 0.54 percentage points over 90 days; WTI was $97.26 on 2026-09-09."
+        },
+        {
+          "claim_id": "NVDA-trend",
+          "classification": "FACT",
+          "evidence_family": "instrument_price",
+          "evidence_ids": [
+            "market-context-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if revised daily data change these observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/latest_close",
+              "value": 212.17
+            },
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma200",
+              "value": 1.0727223546602018
+            },
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma20",
+              "value": 0.9696518220103697
+            },
+            {
+              "packet_path": "/instruments/NVDA/return21_pct",
+              "value": -5.769230769230771
+            }
+          ],
+          "stance": "CONTEXT",
+          "statement": "NVDA closed at 212.17, 1.07272 times its 200-session average but 0.96965 times its 20-session average; its 21-session return was -5.77%."
+        }
+      ],
+      "counterevidence": [
+        "NVDA's 5- and 21-session returns were negative.",
+        "Rising yields and oil create countervailing cycle conditions."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Mixed: near-term technical weakness and rate/oil risk offset accommodative conditions.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "NVDA completed close",
+            "level": 218.8105,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-09-23T21:00:00Z",
+            "field": "NVDA completed close",
+            "level": 208.48,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Qualified NVDA issuer-event surprise and exposure"
+            }
+          ],
+          "review": {
+            "event": "one-week review",
+            "when": "2026-09-23T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-cycle-risk",
+            "NVDA-trend"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-cycle-support"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "No clean directional conclusion from the mixed cycle and price evidence.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "NVDA completed close",
+            "level": 218.8105,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-10-16T21:00:00Z",
+            "field": "NVDA completed close",
+            "level": 208.48,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted NVDA macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "21-session review",
+            "when": "2026-10-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-cycle-risk",
+            "NVDA-trend"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-cycle-support"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Longer-term position above SMA200 offsets, but does not eliminate, rate/inflation risk.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "NVDA completed close",
+            "level": 197.7865,
+            "units": "USD"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "BELOW",
+            "confirmation_interval": "one completed session",
+            "evidence_ids": [
+              "market-context-QQQ"
+            ],
+            "expiry": "2026-12-16T21:00:00Z",
+            "field": "NVDA completed close",
+            "level": 190.01,
+            "units": "USD"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "Fitted NVDA macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "63-session review",
+            "when": "2026-12-16T21:00:00Z"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-cycle-risk"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-cycle-support",
+            "NVDA-trend"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed close below 208.48 invalidates the cited near-term support."
+      ],
+      "missing": [
+        "The supplied NVDA releases require factual review; no qualified surprise, exposure mechanism, or expectations are supplied.",
+        "No fitted macro-return model is supplied."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "NVDA",
+      "thesis": "Financial conditions are supportive but higher yields and oil counterbalance them. NVDA was above its 200-session average while below its 20-session average after negative 5/21-session returns.",
+      "view": "MIXED"
+    }
+  ],
+  "input_hash": "cf72db13d0ef6ffb0a06a735031e23cbd94ceab04406e8681877ad6590a3ba77",
+  "role": "macro_cycle"
+}

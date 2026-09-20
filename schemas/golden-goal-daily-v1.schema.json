@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/golden-goal-daily-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "symbols", "etfs", "runner_config", "operations_policy", "forecast_policy", "primary_sources", "intraday_feed", "holdings_files", "profile_files"],
+  "properties": {
+    "schema_version": {"const": "golden-goal-daily-v1"},
+    "symbols": {
+      "type": "array", "minItems": 1, "maxItems": 10, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9.-]{0,11}$"}
+    },
+    "etfs": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9.-]{0,11}$"}
+    },
+    "runner_config": {"type": "string", "minLength": 1},
+    "operations_policy": {"type": "string", "minLength": 1},
+    "forecast_policy": {"type": "string", "minLength": 1},
+    "primary_sources": {"type": "string", "minLength": 1},
+    "intraday_feed": {"enum": ["iex", "sip-delayed"]},
+    "holdings_files": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[A-Z][A-Z0-9.-]{0,11}$"},
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "profile_files": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[A-Z][A-Z0-9.-]{0,11}$"},
+      "additionalProperties": {"type": "string", "minLength": 1}
+    }
+  }
+}

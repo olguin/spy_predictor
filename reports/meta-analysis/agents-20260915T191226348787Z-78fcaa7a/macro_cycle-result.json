@@ -1,0 +1,1136 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "ANET-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions_curve",
+          "evidence_ids": [
+            "NFCI",
+            "NFCICREDIT",
+            "T10Y3M"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate this supportive interpretation if a subsequent NFCI reading is above -0.564.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/NFCICREDIT/value",
+              "value": -0.06
+            },
+            {
+              "packet_path": "/market/T10Y3M/value",
+              "value": 0.86
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "The negative NFCI and NFCI credit readings and positive 10y–3m slope are consistent with comparatively accommodative financial conditions and a non-inverted curve, a conditional support for equity risk appetite across all horizons."
+        },
+        {
+          "claim_id": "ANET-oppose",
+          "classification": "INFERENCE",
+          "evidence_family": "inflation_rates_energy",
+          "evidence_ids": [
+            "DCOILWTICO",
+            "CPIAUCSL",
+            "DGS10",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate this opposing interpretation if the listed 90-calendar-day changes reverse materially in subsequent observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            },
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Higher oil, inflation, nominal yields and real yields constitute an opposing valuation and margin-risk channel for equities, including rate-sensitive growth exposures."
+        }
+      ],
+      "counterevidence": [
+        "Inflation, oil, real yields and nominal yields have risen over 90 calendar days."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Use a mixed macro stance; review after the scheduled FOMC meeting.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "next weekly NFCI observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "next weekly NFCI observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "ANET-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-support"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Keep the macro signal balanced pending conditions and inflation updates.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "ANET-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-10-28"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-support"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Treat the macro backdrop as contested rather than directional.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "ANET-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "ANET-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "ANET-support"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A completed observation of NFCI above -0.564 would remove the cited easy-financial-conditions support."
+      ],
+      "missing": [
+        "Issuer fundamentals and a demonstrated ANET sensitivity to these macro variables were not supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "Macro conditions provide a limited risk-asset tailwind, but rising yields, inflation and oil leave the cycle signal mixed. No issuer-specific macro transmission evidence is supplied to this role.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "QQQ-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions_curve",
+          "evidence_ids": [
+            "NFCI",
+            "NFCICREDIT",
+            "T10Y3M"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if a subsequent NFCI observation is above -0.564.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/NFCICREDIT/value",
+              "value": -0.06
+            },
+            {
+              "packet_path": "/market/T10Y3M/value",
+              "value": 0.86
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Negative NFCI and credit readings together with a positive 10y–3m slope conditionally support risk appetite and growth-equity financing conditions."
+        },
+        {
+          "claim_id": "QQQ-oppose",
+          "classification": "INFERENCE",
+          "evidence_family": "inflation_rates_energy",
+          "evidence_ids": [
+            "DCOILWTICO",
+            "CPIAUCSL",
+            "DGS10",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if the cited oil and yield increases reverse materially in later observations.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            },
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Rising oil, above-3% CPI inflation, and higher nominal and real yields oppose growth-equity valuations, creating a material counterweight."
+        }
+      ],
+      "counterevidence": [
+        "The 10-year nominal and real yields rose over 90 calendar days while oil increased."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Maintain a mixed macro interpretation through the FOMC event.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "QQQ constituent earnings and valuation sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-support"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Do not resolve the macro signal without updated yields and conditions.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "QQQ constituent earnings and valuation sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-10-28"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-support"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Keep the medium-cycle view balanced.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "QQQ constituent earnings and valuation sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "QQQ-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "QQQ-support"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "NFCI above -0.564 on a subsequent weekly observation would negate the cited conditions support."
+      ],
+      "missing": [
+        "Company earnings, valuation, and a causal QQQ macro-beta estimate were not supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "Financial conditions and the curve are supportive, while inflation, oil and rising real/nominal yields oppose growth-equity valuations; the macro-cycle view is mixed.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "MU-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions_curve",
+          "evidence_ids": [
+            "NFCI",
+            "NFCICREDIT",
+            "T10Y3M"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if NFCI subsequently exceeds -0.564.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/NFCICREDIT/value",
+              "value": -0.06
+            },
+            {
+              "packet_path": "/market/T10Y3M/value",
+              "value": 0.86
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Negative NFCI and credit readings with a positive 10y–3m slope conditionally support cyclical risk appetite."
+        },
+        {
+          "claim_id": "MU-oppose",
+          "classification": "INFERENCE",
+          "evidence_family": "inflation_rates_energy",
+          "evidence_ids": [
+            "DCOILWTICO",
+            "CPIAUCSL",
+            "DGS10",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if later observations materially reverse the cited 90-day changes.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            },
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Rising oil, CPI inflation and higher nominal and real yields provide an opposing macro channel through cost pressure and tighter discounting."
+        }
+      ],
+      "counterevidence": [
+        "Oil rose over 90 days and real yields increased."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Keep a mixed macro stance into the FOMC meeting.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "MU-specific cyclical-demand sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-support"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Require a clearer conditions-versus-yields resolution.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "MU-specific cyclical-demand sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-10-28"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-support"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Retain a balanced macro-cycle view.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "MU-specific cyclical-demand sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "MU-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "MU-support"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A subsequent NFCI reading above -0.564 would invalidate the financial-conditions tailwind."
+      ],
+      "missing": [
+        "MU-specific demand, inventory, earnings and macro sensitivity evidence were not supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "MU",
+      "thesis": "Easy financial conditions offer a conditional cyclical tailwind, but the concurrent inflation, energy and yield impulse leaves the macro signal mixed. Issuer transmission is not established in the supplied role projection.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "META-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions_curve",
+          "evidence_ids": [
+            "NFCI",
+            "NFCICREDIT",
+            "T10Y3M"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if NFCI is subsequently above -0.564.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/NFCICREDIT/value",
+              "value": -0.06
+            },
+            {
+              "packet_path": "/market/T10Y3M/value",
+              "value": 0.86
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Negative NFCI and credit readings, alongside a positive 10y–3m slope, conditionally support broad equity risk appetite."
+        },
+        {
+          "claim_id": "META-oppose",
+          "classification": "INFERENCE",
+          "evidence_family": "inflation_rates_energy",
+          "evidence_ids": [
+            "DCOILWTICO",
+            "CPIAUCSL",
+            "DGS10",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if subsequent data materially reverse the cited inflation, oil and yield impulse.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            },
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Higher oil, CPI inflation, nominal yields and real yields create an opposing macro valuation channel for equities."
+        }
+      ],
+      "counterevidence": [
+        "Nominal and real yields increased over 90 calendar days."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Maintain a balanced macro interpretation through the policy event.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "META-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "META-support"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Await updated financial conditions and rates before assigning a directional macro tilt.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "META-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-10-28"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "META-support"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Keep the cycle conclusion mixed.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "META-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "META-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "META-support"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "NFCI above -0.564 would invalidate the cited supportive financial-conditions interpretation."
+      ],
+      "missing": [
+        "META-specific earnings, valuation and macro sensitivity inputs were not supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "META",
+      "thesis": "The macro evidence balances accommodative financial conditions against adverse inflation, energy and yield impulses. It does not establish an issuer-specific META outcome.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "NVDA-support",
+          "classification": "INFERENCE",
+          "evidence_family": "financial_conditions_curve",
+          "evidence_ids": [
+            "NFCI",
+            "NFCICREDIT",
+            "T10Y3M"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if NFCI subsequently exceeds -0.564.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/NFCI/value",
+              "value": -0.564
+            },
+            {
+              "packet_path": "/market/NFCICREDIT/value",
+              "value": -0.06
+            },
+            {
+              "packet_path": "/market/T10Y3M/value",
+              "value": 0.86
+            }
+          ],
+          "stance": "SUPPORT",
+          "statement": "Negative NFCI and credit readings and a positive 10y–3m slope conditionally support broad risk appetite and financing conditions."
+        },
+        {
+          "claim_id": "NVDA-oppose",
+          "classification": "INFERENCE",
+          "evidence_family": "inflation_rates_energy",
+          "evidence_ids": [
+            "DCOILWTICO",
+            "CPIAUCSL",
+            "DGS10",
+            "DFII10"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidate if later observations materially reverse these oil and yield changes.",
+          "numeric_values": [
+            {
+              "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+              "value": 5.680000000000007
+            },
+            {
+              "packet_path": "/market/CPIAUCSL/yoy_pct",
+              "value": 3.353016322755642
+            },
+            {
+              "packet_path": "/market/DGS10/change_90_calendar_days",
+              "value": 0.47999999999999954
+            },
+            {
+              "packet_path": "/market/DFII10/change_90_calendar_days",
+              "value": 0.43000000000000016
+            }
+          ],
+          "stance": "OPPOSE",
+          "statement": "Higher oil, CPI inflation and rising nominal and real yields form a countervailing macro discount-rate and cost-risk channel."
+        }
+      ],
+      "counterevidence": [
+        "Oil, nominal yields and real yields increased over 90 calendar days."
+      ],
+      "horizon_assessments": [
+        {
+          "action_implication": "Hold a mixed macro assessment through the scheduled FOMC decision.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "ABOVE",
+            "confirmation_interval": "next weekly observation",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-09-22",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "NVDA-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-09-16"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-support"
+          ],
+          "trading_days": 5
+        },
+        {
+          "action_implication": "Require conditions and rates to resolve before a directional cycle conclusion.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-10-14",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "NVDA-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-10-28"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-support"
+          ],
+          "trading_days": 21
+        },
+        {
+          "action_implication": "Retain a balanced macro-cycle interpretation.",
+          "confirmation": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_BELOW",
+            "confirmation_interval": "weekly",
+            "evidence_ids": [
+              "NFCI"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/NFCI/value",
+            "level": -0.564,
+            "units": "standard_deviations"
+          },
+          "direction": "MIXED",
+          "invalidation_trigger": {
+            "availability": "AVAILABLE",
+            "comparison": "AT_OR_ABOVE",
+            "confirmation_interval": "one completed daily observation",
+            "evidence_ids": [
+              "DGS10"
+            ],
+            "expiry": "2026-12-15",
+            "field": "/market/DGS10/value",
+            "level": 5,
+            "units": "percent"
+          },
+          "missing_evidence": [
+            {
+              "criticality": "CRITICAL",
+              "item": "NVDA-specific macro sensitivity"
+            }
+          ],
+          "review": {
+            "event": "Scheduled FOMC meeting ending date.",
+            "when": "2026-12-09"
+          },
+          "status": "SUPPORTED",
+          "strongest_opposition_claim_ids": [
+            "NVDA-oppose"
+          ],
+          "strongest_support_claim_ids": [
+            "NVDA-support"
+          ],
+          "trading_days": 63
+        }
+      ],
+      "invalidation": [
+        "A subsequent NFCI reading above -0.564 would negate the easy-conditions support."
+      ],
+      "missing": [
+        "NVDA-specific demand, earnings, valuation and macro sensitivity information were not supplied to this role."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "NVDA",
+      "thesis": "Macro conditions are supportive at the financial-conditions margin but opposed by rising inflation, energy and yields. The supplied macro evidence does not determine NVDA-specific performance.",
+      "view": "MIXED"
+    }
+  ],
+  "input_hash": "483a6f3a35faccb785b94d5743761d8cbc6e9812726cc4e310e3365c8363b272",
+  "role": "macro_cycle"
+}

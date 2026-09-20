@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/meta-product-view-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "mode", "run_status", "probability_status", "as_of", "market_period", "golden_conclusions", "market_summary", "symbols", "freshness", "failures", "alerts", "provenance", "evaluation", "notice", "view_hash"],
+  "properties": {
+    "schema_version": {"const": "meta-product-view-v1"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "mode": {"enum": ["ON_DEMAND", "PROSPECTIVE"]},
+    "run_status": {"enum": ["COMPLETE", "DEGRADED", "BLOCKED"]},
+    "probability_status": {"enum": ["UNAVAILABLE", "EXPERIMENTAL_UNCALIBRATED", "PROSPECTIVELY_CALIBRATED"]},
+    "as_of": {"type": "string", "format": "date-time"},
+    "market_period": {"enum": ["PREMARKET", "REGULAR", "POSTMARKET", "CLOSED"]},
+    "golden_conclusions": {"type": "object"},
+    "market_summary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "label", "value", "display", "status", "observed_at", "meaning"],
+        "properties": {
+          "key": {"type": "string"},
+          "label": {"type": "string"},
+          "value": {"type": ["number", "null"]},
+          "display": {"type": "string"},
+          "status": {"type": "string"},
+          "observed_at": {"type": ["string", "null"]},
+          "meaning": {"type": "string"}
+        }
+      }
+    },
+    "symbols": {"type": "array", "items": {"type": "object"}, "minItems": 1},
+    "freshness": {"type": "array", "items": {"type": "object"}},
+    "failures": {"type": "array", "items": {"type": "object"}},
+    "alerts": {"type": "array", "items": {"type": "object"}},
+    "provenance": {"type": "object"},
+    "evaluation": {"type": ["object", "null"]},
+    "notice": {"type": "string"},
+    "view_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

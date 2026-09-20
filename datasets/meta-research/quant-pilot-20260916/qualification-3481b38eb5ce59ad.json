@@ -1,0 +1,152 @@
+{
+  "end": "2026-09-15",
+  "license_status": "LOCAL_RESEARCH_ACCESS_ONLY_REDISTRIBUTION_NOT_QUALIFIED",
+  "price_availability": "REVISED_HISTORY_NOT_CERTIFIED_POINT_IN_TIME",
+  "schema_version": "meta-source-qualification-v1",
+  "sources": {
+    "CPIAUCSL": {
+      "receipt": {
+        "captured_at": "2026-09-16T14:12:12.417010+00:00",
+        "raw_file": "alfred-CPIAUCSL.json",
+        "request": {
+          "endpoint": "https://api.stlouisfed.org/fred/series/observations",
+          "params": {
+            "file_type": "json",
+            "limit": 100000,
+            "observation_end": "2026-09-15",
+            "observation_start": "2025-08-01",
+            "output_type": 1,
+            "realtime_end": "2026-09-15",
+            "realtime_start": "2025-08-01",
+            "series_id": "CPIAUCSL",
+            "units": "lin"
+          }
+        },
+        "sha256": "e9d3342ae23f330c6eb4f8fc25c139d9c80b4116ae77ff96386e075ae571aeca"
+      },
+      "records": 16,
+      "status": "RECONSTRUCTED_WITH_VINTAGE_DATES"
+    },
+    "SEC-AAPL": {
+      "captured_at": "2026-09-16T14:12:16.677668+00:00",
+      "conflicting_facts": 0,
+      "records": 82,
+      "source_hash": "c256ddc3ab169f2fb736528b2be34b65b8c7851bc239eae2980dcca712732940",
+      "status": "RECONSTRUCTED_WITH_ACCESSION_ACCEPTANCE",
+      "unmatched_accession_facts": 0
+    },
+    "UNRATE": {
+      "receipt": {
+        "captured_at": "2026-09-16T14:12:13.038516+00:00",
+        "raw_file": "alfred-UNRATE.json",
+        "request": {
+          "endpoint": "https://api.stlouisfed.org/fred/series/observations",
+          "params": {
+            "file_type": "json",
+            "limit": 100000,
+            "observation_end": "2026-09-15",
+            "observation_start": "2025-08-01",
+            "output_type": 1,
+            "realtime_end": "2026-09-15",
+            "realtime_start": "2025-08-01",
+            "series_id": "UNRATE",
+            "units": "lin"
+          }
+        },
+        "sha256": "27bdee3ec0c917452a891f1c46e15ec9e3c7fa731215dad217b32b013a4c2a26"
+      },
+      "records": 13,
+      "status": "RECONSTRUCTED_WITH_VINTAGE_DATES"
+    },
+    "bars-raw": {
+      "receipts": [
+        {
+          "captured_at": "2026-09-16T14:12:09.933204+00:00",
+          "raw_file": "bars-raw-0.json",
+          "request": {
+            "endpoint": "https://data.alpaca.markets/v2/stocks/bars",
+            "params": {
+              "adjustment": "raw",
+              "end": "2026-09-15T23:59:59Z",
+              "feed": "sip",
+              "limit": 10000,
+              "sort": "asc",
+              "start": "2025-08-01T00:00:00Z",
+              "symbols": "SPY,QQQ,XLK",
+              "timeframe": "1Day"
+            }
+          },
+          "sha256": "2a5a306eae2cfb667e2e665f08ca5cc8a7e95d55a3a2efcb2b19da5b0a920016"
+        }
+      ],
+      "status": "CAPTURED_REVISED_HISTORY"
+    },
+    "bars-split": {
+      "receipts": [
+        {
+          "captured_at": "2026-09-16T14:12:11.198928+00:00",
+          "raw_file": "bars-split-0.json",
+          "request": {
+            "endpoint": "https://data.alpaca.markets/v2/stocks/bars",
+            "params": {
+              "adjustment": "split",
+              "end": "2026-09-15T23:59:59Z",
+              "feed": "sip",
+              "limit": 10000,
+              "sort": "asc",
+              "start": "2025-08-01T00:00:00Z",
+              "symbols": "SPY,QQQ,XLK",
+              "timeframe": "1Day"
+            }
+          },
+          "sha256": "d49d7d53aabf277af36d5b90e3c261046aa3a837abf8aadf98506518c34d14ed"
+        }
+      ],
+      "status": "CAPTURED_REVISED_HISTORY"
+    },
+    "corporate_actions": {
+      "receipts": [
+        {
+          "captured_at": "2026-09-16T14:12:11.801658+00:00",
+          "raw_file": "actions-0.json",
+          "request": {
+            "endpoint": "https://data.alpaca.markets/v1/corporate-actions",
+            "params": {
+              "data_quality": "all",
+              "end": "2026-09-15",
+              "limit": 1000,
+              "sort": "asc",
+              "start": "2025-08-01",
+              "symbols": "SPY,QQQ,XLK"
+            }
+          },
+          "sha256": "2729e20663e778941a21ca2ddeac929a79567e5d4f7cd58dcc7225022a58c61e"
+        }
+      ],
+      "status": "CAPTURED_AVAILABILITY_NOT_GUARANTEED"
+    },
+    "optional_sources": {
+      "broad_stock_universe": {
+        "history_qualification": "MISSING",
+        "reason": "Fixed ETF case study cannot qualify historically defined stocks and delistings.",
+        "status": "NOT_REQUIRED_BY_QUANT_PILOT"
+      },
+      "consensus": {
+        "history_qualification": "MISSING",
+        "reason": "No timestamped historical expectation dataset configured; surprise features remain missing.",
+        "status": "NOT_REQUIRED_BY_QUANT_PILOT"
+      },
+      "etf_holdings": {
+        "history_qualification": "MISSING",
+        "reason": "Current manual holdings cannot reconstruct historical index membership or exposures.",
+        "status": "NOT_REQUIRED_BY_QUANT_PILOT"
+      },
+      "news": {
+        "history_qualification": "MISSING",
+        "reason": "Current news is available to live capture; historical first-seen and correction histories are not certified.",
+        "status": "NOT_REQUIRED_BY_QUANT_PILOT"
+      }
+    }
+  },
+  "start": "2025-08-01"
+}

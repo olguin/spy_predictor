@@ -1,0 +1,156 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "Latest filed data show strong reported profitability and operating cash generation for all four companies, but forward demand, supply, regulatory-risk detail and earnings-date evidence are not established in the seeded normalized facts. QQQ\u2019s dated holdings show material, but stale, overlap with NVDA, MU and META; ANET is absent from the supplied table.",
+      "assessment": "insufficient_evidence",
+      "claims": [
+        {
+          "claim_id": "task-3-ANET-financials",
+          "classification": "fact",
+          "text": "ANET\u2019s June 2026 10-Q reports six-month revenue of $5.745bn versus $4.210bn a year earlier, operating income of $2.536bn versus $1.845bn, net income of $2.236bn versus $1.703bn, and operating cash flow of $2.777bn versus $1.842bn. The filing reports $2.290bn cash plus $11.053bn marketable securities, against $8.922bn total liabilities at June 30.",
+          "evidence_ids": [
+            "10ec078ce84cbf6e654e67119dc563bcdf345447e70012fc34708ac86920db21"
+          ],
+          "symbols": [
+            "ANET"
+          ]
+        },
+        {
+          "claim_id": "task-3-MU-financials",
+          "classification": "fact",
+          "text": "MU\u2019s May 2026 10-Q reports nine-month revenue of $78.959bn versus $26.063bn a year earlier, operating income of $55.589bn versus $6.116bn, and net income of $47.268bn versus $5.338bn. Its balance sheet reports $24.995bn cash, $5.722bn total debt (current plus long-term), and $100.724bn equity. The filing identifies AI-related demand, production ramps, new fabs, tariffs/trade regulations and government-incentive conditions as forward-looking risk channels.",
+          "evidence_ids": [
+            "9832426325e9e3ee07d96f84d2f16172e639d17accd4c08a4e9358aed9a0ae61"
+          ],
+          "symbols": [
+            "MU"
+          ]
+        },
+        {
+          "claim_id": "task-3-META-financials",
+          "classification": "fact",
+          "text": "META\u2019s latest seeded filing facts, for the six months ended June 30, 2026, report $117.111bn revenue, $41.647bn operating income, $42.621bn net income, $64.088bn operating cash flow and $49.113bn capex. At period-end it reported $449.956bn assets, $188.735bn liabilities, $261.221bn equity, $15.462bn cash and $83.664bn long-term debt.",
+          "evidence_ids": [
+            "2789ce18205cbfa57834d9d468f34a5f773fc5998a4d81bc22c339ccc006e900"
+          ],
+          "symbols": [
+            "META"
+          ]
+        },
+        {
+          "claim_id": "task-3-NVDA-financials",
+          "classification": "fact",
+          "text": "NVDA\u2019s July 2026 10-Q reports six-month revenue of $177.837bn versus $90.805bn a year earlier, operating income of $117.270bn versus $50.078bn, net income of $118.010bn versus $45.197bn, and operating cash flow of $74.421bn versus $42.779bn. At July 26 it reported $22.443bn cash, $34.143bn marketable debt securities, $32.366bn long-term debt and $228.984bn equity; accounts receivable and inventories rose from $38.466bn and $21.403bn at January 25 to $63.059bn and $31.575bn, respectively.",
+          "evidence_ids": [
+            "0f9aa1da0baf1a0770c8488cef27b9b111988caea1b4e139e5a0e23516c7370b"
+          ],
+          "symbols": [
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-3-QQQ-lookthrough",
+          "classification": "fact",
+          "text": "QQQ\u2019s sponsor holdings table dated September 12, 2026 lists NVDA at 8.45%, MU at 4.85% and META at 3.07%; the reported table coverage is 100.05% and top-10 weight is 47.17%. The table is marked stale (8 days old versus a 7-day maximum), and ANET is not listed in the supplied holdings table.",
+          "evidence_ids": [
+            "a7369f9e03b123d751f67f24477cd5b3991a49efebe9b2327e1f986f34764bd1"
+          ],
+          "symbols": [
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-3-scenario-driver",
+          "classification": "inference",
+          "text": "For 21/63-session scenario monitoring, reported earnings/cash strength provides capacity to absorb investment or working-capital needs, while MU\u2019s explicitly disclosed supply, production-ramp, trade and incentive channels and NVDA\u2019s higher receivables/inventory balances make demand realization and supply execution material variables. This is not a forecast.",
+          "evidence_ids": [
+            "9832426325e9e3ee07d96f84d2f16172e639d17accd4c08a4e9358aed9a0ae61",
+            "0f9aa1da0baf1a0770c8488cef27b9b111988caea1b4e139e5a0e23516c7370b",
+            "10ec078ce84cbf6e654e67119dc563bcdf345447e70012fc34708ac86920db21"
+          ],
+          "symbols": [
+            "ANET",
+            "MU",
+            "NVDA"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "No sourced forward guidance, consensus, next earnings dates, or detailed current demand/supply and regulatory-risk disclosures for ANET, META and NVDA were available in the seeded normalized facts/read excerpts; no valuation conclusion is supported.",
+          "critical": true,
+          "symbols": [
+            "ANET",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "description": "QQQ holdings are stale and do not establish prospective weights; absence of ANET from the supplied table does not prove zero fund exposure.",
+          "critical": false,
+          "symbols": [
+            "QQQ",
+            "ANET"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "counter_thesis": "Historical profit and cash-flow growth may not persist if demand, supply execution, working-capital conversion, trade restrictions or regulation deteriorates; the available evidence does not quantify those forward changes.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review next company filings/earnings releases for guidance, demand/supply, working-capital, capex and regulatory disclosures before relying on 21/63-session scenarios.",
+          "symbol": null,
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "10ec078ce84cbf6e654e67119dc563bcdf345447e70012fc34708ac86920db21",
+            "9832426325e9e3ee07d96f84d2f16172e639d17accd4c08a4e9358aed9a0ae61",
+            "2789ce18205cbfa57834d9d468f34a5f773fc5998a4d81bc22c339ccc006e900",
+            "0f9aa1da0baf1a0770c8488cef27b9b111988caea1b4e139e5a0e23516c7370b"
+          ]
+        }
+      ],
+      "objections": [],
+      "dispositions": [],
+      "question_effects": [],
+      "instruments": [],
+      "role_coverage": [],
+      "shared_exposures": [
+        {
+          "symbols": [
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ],
+          "mechanism": "Dated QQQ look-through includes direct reported weights in NVDA, MU and META, so company-specific moves can transmit to QQQ; weights are stale and are not portfolio exposures.",
+          "evidence_ids": [
+            "a7369f9e03b123d751f67f24477cd5b3991a49efebe9b2327e1f986f34764bd1"
+          ],
+          "qualification": "September 12 sponsor table is marked stale; ANET is not listed but missing-table inference is not permitted."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 45942,
+    "output_tokens": 1795,
+    "catalog_cost_usd": 0.113424,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 68956,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

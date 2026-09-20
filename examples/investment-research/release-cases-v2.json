@@ -1,0 +1,496 @@
+{
+  "version": "investment-research-cases-v2",
+  "split": "release",
+  "frozen_at": "2026-09-20T05:24:32.417972+00:00",
+  "status": "INPUTS_FROZEN_NOT_EVALUATED",
+  "repetitions": 2,
+  "source_kind": "SYNTHETIC_CURRENT_RESEARCH",
+  "cases": [
+    {
+      "case_id": "release-v2-01-valuation",
+      "kind": "valuation",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "CEDAR",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Distinguish GAAP diluted earnings from adjusted assumptions; do not mix periods or infer calibrated returns.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "cedar-issuer",
+            "title": "Synthetic CEDAR issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. Synthetic issuer has GAAP income 240 USD million and weighted diluted shares 120 million for fiscal 2025; forward EPS excludes 60 million of recurring costs.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "cedar-macro",
+            "title": "Synthetic CEDAR macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Distinguish GAAP diluted earnings from adjusted assumptions; do not mix periods or infer calibrated returns.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "release-v2-02-macro-conflict",
+      "kind": "macro-conflict",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "HARBOR",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Explain competing FX, discount-rate and operating channels; no universal sign or precise unhedged exposure.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "harbor-issuer",
+            "title": "Synthetic HARBOR issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. Synthetic inflation accelerates, nominal yields rise, and a commodity exporter reports USD revenue but local-currency operating costs. No hedge maturity disclosure is provided.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "harbor-macro",
+            "title": "Synthetic HARBOR macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Explain competing FX, discount-rate and operating channels; no universal sign or precise unhedged exposure.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "release-v2-03-policy-exposure",
+      "kind": "policy-exposure",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "FORGE",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Separate enactment and enforcement; decision horizon and inventory delay may weaken immediate margin impact.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "forge-issuer",
+            "title": "Synthetic FORGE issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. A synthetic import tariff is enacted on 2026-09-01 with enforcement from 2026-11-15. Issuer inventory acquired before enforcement covers six months.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "forge-macro",
+            "title": "Synthetic FORGE macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Separate enactment and enforcement; decision horizon and inventory delay may weaken immediate margin impact.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "release-v2-04-etf",
+      "kind": "etf",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "GLOBAL",
+            "kind": "etf",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "M1 rejects unsupported ETF workflow; M2 must identify holdings age/currency mismatch and decline unsupported look-through precision.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "global-issuer",
+            "title": "Synthetic GLOBAL issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. Synthetic international ETF holds 45 percent foreign-currency assets. Holdings aged 40 days; benchmark is an unhedged USD price-return index.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "global-macro",
+            "title": "Synthetic GLOBAL macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "M1 rejects unsupported ETF workflow; M2 must identify holdings age/currency mismatch and decline unsupported look-through precision.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "release-v2-05-missing",
+      "kind": "missing",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "LARCH",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Missing optional sell-side consensus need not collapse supported business findings; unresolved critical exposure remains explicit.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "larch-issuer",
+            "title": "Synthetic LARCH issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. Synthetic issuer filing is available but its claim about customer concentration cites an unavailable supplemental note.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "larch-macro",
+            "title": "Synthetic LARCH macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Missing optional sell-side consensus need not collapse supported business findings; unresolved critical exposure remains explicit.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "release-v2-06-fast-event",
+      "kind": "fast-event",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "ORBIT",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Do not call the old close executable, publish backward, score research-period gains, or assign a future opening price.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "orbit-issuer",
+            "title": "Synthetic ORBIT issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. Synthetic price observation is Friday completed close. A material policy reversal arrives Sunday; Monday market opening has not occurred.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "orbit-macro",
+            "title": "Synthetic ORBIT macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Do not call the old close executable, publish backward, score research-period gains, or assign a future opening price.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    }
+  ]
+}

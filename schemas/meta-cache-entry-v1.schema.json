@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "key", "category", "source", "release_identity", "stored_at", "bytes", "sha256"],
+  "properties": {
+    "schema_version": {"const": "meta-cache-entry-v1"},
+    "key": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "category": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "release_identity": {"type": "string", "minLength": 1},
+    "stored_at": {"type": "string", "format": "date-time"},
+    "bytes": {"type": "integer", "minimum": 0},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

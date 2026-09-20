@@ -1,0 +1,496 @@
+{
+  "version": "investment-research-cases-v2",
+  "split": "development",
+  "frozen_at": "2026-09-20T05:24:32.410228+00:00",
+  "status": "INPUTS_FROZEN_NOT_EVALUATED",
+  "repetitions": 2,
+  "source_kind": "SYNTHETIC_CURRENT_RESEARCH",
+  "cases": [
+    {
+      "case_id": "development-v2-01-valuation",
+      "kind": "valuation",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "RIVET",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Do not infer a current multiple. Any operating margin calculation must use matching periods.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "rivet-issuer",
+            "title": "Synthetic RIVET issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. Fiscal 2026 revenue 1000 USD million, operating income 150 USD million. Period 2026-01-01 to 2026-06-30. Consensus and current price unavailable.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "rivet-macro",
+            "title": "Synthetic RIVET macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Do not infer a current multiple. Any operating margin calculation must use matching periods.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "development-v2-02-macro-conflict",
+      "kind": "macro-conflict",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "VISTA",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Explain discount-rate and sales channels; do not invent near-term refinancing savings.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "vista-issuer",
+            "title": "Synthetic VISTA issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. A synthetic central bank cuts rates while sales volumes fall. Issuer debt is fixed-rate through 2029. Revenue falls if customer activity weakens.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "vista-macro",
+            "title": "Synthetic VISTA macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Explain discount-rate and sales channels; do not invent near-term refinancing savings.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "development-v2-03-policy-exposure",
+      "kind": "policy-exposure",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "TEMPO",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Do not equate regional revenue with prohibited-product exposure or a realized loss.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "tempo-issuer",
+            "title": "Synthetic TEMPO issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. A proposed export rule is open for consultation, not enacted. Issuer discloses 12 percent regional revenue but no controlled-product split.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "tempo-macro",
+            "title": "Synthetic TEMPO macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Do not equate regional revenue with prohibited-product exposure or a realized loss.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "development-v2-04-etf",
+      "kind": "etf",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "BASKET",
+            "kind": "etf",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Reject ETF mandate in M1; M2 must use dated holdings/cost/concentration analysis.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "basket-issuer",
+            "title": "Synthetic BASKET issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. Synthetic ETF expense ratio 0.20 percent; top two holdings 18 and 16 percent. Holdings date 2026-08-31.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "basket-macro",
+            "title": "Synthetic BASKET macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Reject ETF mandate in M1; M2 must use dated holdings/cost/concentration analysis.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "development-v2-05-missing",
+      "kind": "missing",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "STONE",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "Retain the missing critical company source and return insufficient evidence or incomplete; preserve optional macro findings.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "stone-issuer",
+            "title": "Synthetic STONE issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": null,
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "stone-macro",
+            "title": "Synthetic STONE macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "Retain the missing critical company source and return insufficient evidence or incomplete; preserve optional macro findings.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    },
+    {
+      "case_id": "development-v2-06-fast-event",
+      "kind": "fast-event",
+      "mandate": {
+        "schema_version": "investment-research-mandate-v1",
+        "watchlist": [
+          {
+            "symbol": "SWIFT",
+            "kind": "company",
+            "benchmark": "SPY",
+            "sector_benchmark": "XLK"
+          }
+        ],
+        "objective": "M1 must remain unpublished; M3 must refresh, invalidate affected guidance and use post-publication origins.",
+        "horizon_sessions": [
+          21,
+          63
+        ],
+        "currency": "USD",
+        "perspective": "long_only_research",
+        "mode": "fixture",
+        "sources": [
+          {
+            "source_id": "swift-issuer",
+            "title": "Synthetic SWIFT issuer document",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT, NOT MARKET DATA. At 12:00 UTC research observes a company earnings schedule. At 12:05 UTC an unscheduled guidance withdrawal occurs.",
+            "published_at": "2026-09-01T12:00:00Z",
+            "available_at": null,
+            "kind": "company",
+            "critical": true
+          },
+          {
+            "source_id": "swift-macro",
+            "title": "Synthetic SWIFT macro context",
+            "publisher": "Synthetic development fixture",
+            "url": null,
+            "fixture_text": "SYNTHETIC ACCEPTANCE INPUT. Official policy and issuer transmission are separate. The effect on this issuer is unmeasured unless the company document establishes it.",
+            "published_at": "2026-09-01T13:00:00Z",
+            "available_at": null,
+            "kind": "macro",
+            "critical": false
+          }
+        ],
+        "runtime": {
+          "argv": [
+            "packages/agent-runtime/bin/pi-research-worker"
+          ],
+          "model": "openai-codex/gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "max_output_tokens": 3000,
+          "timeout_seconds": 180
+        },
+        "budgets": {
+          "task_attempts": 16,
+          "model_calls": 40,
+          "source_requests": 250,
+          "tool_calls": 100,
+          "input_tokens": 1000000,
+          "output_tokens": 100000,
+          "catalog_cost_usd": 25,
+          "wall_seconds": 1200,
+          "followup_rounds": 2,
+          "reserved_final_calls": 8,
+          "document_bytes": 100000
+        },
+        "network": {
+          "enabled": false,
+          "user_agent": "spy-predictor-investment-research/1.0",
+          "minimum_spacing_seconds": 0.25
+        }
+      },
+      "expected_behavior": "M1 must remain unpublished; M3 must refresh, invalidate affected guidance and use post-publication origins.",
+      "critical_checks": [
+        "Source and claim identity preserved",
+        "No invented numbers or timing",
+        "No published_at or observation before M3 gate"
+      ],
+      "candidate_evaluations": []
+    }
+  ]
+}

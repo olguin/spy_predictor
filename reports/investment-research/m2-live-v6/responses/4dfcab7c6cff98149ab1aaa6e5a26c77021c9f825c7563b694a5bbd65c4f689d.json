@@ -1,0 +1,203 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "Company-data pass: latest normalized SEC facts show positive reported operating income and operating cash flow for ANET, MU, META and NVDA, but fiscal-period lengths differ and no prior-period comparatives/guidance were retrieved here, limiting a directional operating-trajectory conclusion. QQQ's dated sponsor holdings show material overlap with NVDA, MU and META, while ANET is absent from the supplied table.",
+      "assessment": "conditional_opportunity",
+      "claims": [
+        {
+          "claim_id": "task-3-ANET-financials",
+          "classification": "fact",
+          "text": "ANET's latest normalized 10-Q facts for the six months ended 2026-06-30 report revenue of $5.7447bn, operating income of $2.5358bn, net income of $2.2358bn, operating cash flow of $2.7765bn and capex of $84.2m; the supplied derived operating margin is 44.14%.",
+          "evidence_ids": [
+            "e2"
+          ],
+          "symbols": [
+            "ANET"
+          ]
+        },
+        {
+          "claim_id": "task-3-MU-financials",
+          "classification": "fact",
+          "text": "MU's latest normalized 10-Q facts for the nine months ended 2026-05-28 report revenue of $78.959bn, operating income of $55.589bn, net income of $47.268bn, operating cash flow of $45.702bn and capex of $19.602bn; the supplied derived operating margin is 70.40%.",
+          "evidence_ids": [
+            "e4"
+          ],
+          "symbols": [
+            "MU"
+          ]
+        },
+        {
+          "claim_id": "task-3-META-financials",
+          "classification": "fact",
+          "text": "META's latest normalized 10-Q facts for the six months ended 2026-06-30 report revenue of $117.111bn, operating income of $41.647bn, net income of $42.621bn, operating cash flow of $64.088bn and capex of $49.113bn; reported long-term debt was $83.664bn at period end.",
+          "evidence_ids": [
+            "e6"
+          ],
+          "symbols": [
+            "META"
+          ]
+        },
+        {
+          "claim_id": "task-3-NVDA-financials",
+          "classification": "fact",
+          "text": "NVDA's latest normalized 10-Q facts for the six months ended 2026-07-26 report revenue of $177.837bn, operating income of $117.270bn, net income of $118.010bn and operating cash flow of $74.421bn; supplied derived operating margin is 65.94%. The August 26 8-K identifies the period as fiscal-2027 second-quarter results.",
+          "evidence_ids": [
+            "e8",
+            "e24"
+          ],
+          "symbols": [
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-3-cash-conversion-inference",
+          "classification": "inference",
+          "text": "The reported positive operating cash flows across all four issuers support near-term operating liquidity, but META's large reported capex and MU's material capex mean cash-generation interpretation should account for reinvestment rather than income alone.",
+          "evidence_ids": [
+            "e2",
+            "e4",
+            "e6",
+            "e8"
+          ],
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-3-QQQ-lookthrough",
+          "classification": "fact",
+          "text": "QQQ's sponsor profile (fund characteristics as of 2026-08-31) reported 103 holdings, 0.18% expense ratio and aggregate P/E of 30.08. The supplied holdings table dated 2026-09-12 is flagged stale and assigns NVDA 8.45%, MU 4.85% and META 3.07%; its top 10 represented 47.17% and reported holdings weight was 100.05%. ANET is not listed in that supplied holdings table.",
+          "evidence_ids": [
+            "e19",
+            "e20",
+            "e23"
+          ],
+          "symbols": [
+            "QQQ",
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "claim_id": "task-3-QQQ-overlap-inference",
+          "classification": "inference",
+          "text": "QQQ therefore has dated direct look-through overlap with NVDA, MU and META; performance or company-specific news in those names can affect QQQ, subject to the stale composition and unknown current weights. The provided table does not support treating ANET as a QQQ holding.",
+          "evidence_ids": [
+            "e20",
+            "e23"
+          ],
+          "symbols": [
+            "QQQ",
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "No prior-period comparatives, segment/customer concentration, inventories, guidance, or earnings-release exhibits were reviewed in this pass; this prevents a source-supported conclusion on acceleration/deceleration and specific 21/63-session company catalysts for each issuer.",
+          "critical": true,
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "description": "No observed market multiples or supported earnings estimates were supplied; company valuation scenarios cannot be grounded in current valuation inputs.",
+          "critical": true,
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "description": "QQQ holdings are dated 2026-09-12 and flagged stale; current composition/weights and historical composition are unknown.",
+          "critical": true,
+          "symbols": [
+            "QQQ"
+          ]
+        }
+      ],
+      "assumptions": [
+        "Reported SEC normalized fields are used as issuer-specific historical facts, not forecasts; ANET/META/NVDA figures cover six months while MU figures cover nine months.",
+        "QQQ sponsor aggregate P/E is an ETF characteristic and is not applied as corporate EPS or a company valuation multiple.",
+        "The 21/63-session relevance is conditional on subsequent earnings, guidance, spending and demand information not retrieved in this pass."
+      ],
+      "counter_thesis": "High reported margins and operating cash generation alone do not establish forward growth, durability, or valuation support. Capex intensity (notably META and MU) and missing guidance/comparative data could make currently favorable historical financials uninformative for the stated horizon.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review the next issuer earnings releases/10-Qs for period-over-period revenue, margin, operating-cash-flow, capex, customer/segment concentration and formal outlook before adopting a 21/63-session catalyst thesis.",
+          "symbol": null,
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e1",
+            "e3",
+            "e5",
+            "e7"
+          ]
+        },
+        {
+          "kind": "human_review",
+          "description": "Refresh QQQ sponsor holdings before relying on overlap or concentration, because the supplied 2026-09-12 holdings table is flagged stale.",
+          "symbol": "QQQ",
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e20"
+          ]
+        }
+      ],
+      "objections": [],
+      "dispositions": [],
+      "question_effects": [],
+      "shared_exposures": [
+        {
+          "symbols": [
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ],
+          "mechanism": "Dated QQQ look-through includes NVDA, MU and META; issuer-specific earnings or valuation changes may transmit into the fund through those weights.",
+          "evidence_ids": [
+            "e20",
+            "e23"
+          ],
+          "qualification": "Composition is dated 2026-09-12 and flagged stale; the holding table reports no ANET position and current weights are unknown."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 27141,
+    "output_tokens": 1597,
+    "catalog_cost_usd": 0.073446,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 59523,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

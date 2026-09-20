@@ -1,0 +1,77 @@
+{
+  "schema_version": "meta-operations-policy-v1",
+  "status": "experimental",
+  "dashboard": {
+    "bind_host": "127.0.0.1",
+    "port": 8765,
+    "read_only": true,
+    "auto_refresh_seconds": 30
+  },
+  "budgets": {
+    "maximum_source_requests": 250,
+    "maximum_download_bytes": 50000000,
+    "maximum_agent_calls": 7,
+    "maximum_input_tokens": 1000000,
+    "maximum_output_tokens": 100000,
+    "maximum_catalog_cost_estimate_usd": 25,
+    "maximum_wall_seconds": 3600,
+    "warning_fraction": 0.7,
+    "maximum_parallel_agents": 2,
+    "prospective_attempts_per_role": 1
+  },
+  "cache_policies": {
+    "intraday_market": {
+      "mode": "ttl",
+      "ttl_seconds": 60,
+      "minimum_request_spacing_seconds": 0.2,
+      "maximum_requests_per_window": 200,
+      "window_seconds": 60
+    },
+    "completed_close": {
+      "mode": "release_identity",
+      "minimum_request_spacing_seconds": 0.2,
+      "maximum_requests_per_window": 200,
+      "window_seconds": 60
+    },
+    "macro_release": {
+      "mode": "release_identity",
+      "minimum_request_spacing_seconds": 0.1,
+      "maximum_requests_per_window": 100,
+      "window_seconds": 60
+    },
+    "sec_filing": {
+      "mode": "release_identity",
+      "minimum_request_spacing_seconds": 0.11,
+      "maximum_requests_per_window": 8,
+      "window_seconds": 1
+    },
+    "publisher_feed": {
+      "mode": "ttl",
+      "ttl_seconds": 900,
+      "minimum_request_spacing_seconds": 0.25,
+      "maximum_requests_per_window": 60,
+      "window_seconds": 60
+    },
+    "manual_etf": {
+      "mode": "manual_as_of",
+      "maximum_age_seconds": 604800,
+      "minimum_request_spacing_seconds": 0,
+      "maximum_requests_per_window": 1,
+      "window_seconds": 1
+    }
+  },
+  "scheduler": {
+    "timezone": "America/New_York",
+    "prospective_start_minutes_after_close": 25,
+    "outcome_start_minutes_after_close": 25,
+    "catch_up_until_next_open": true,
+    "allow_model_retry": false,
+    "require_dry_run_support": true
+  },
+  "alerts": {
+    "severities": ["INFO", "WARNING", "ERROR", "CRITICAL"],
+    "deduplicate_open_conditions": true,
+    "local_jsonl": true,
+    "external_delivery": false
+  }
+}

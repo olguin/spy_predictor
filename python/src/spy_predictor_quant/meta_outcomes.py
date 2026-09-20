@@ -245,14 +245,7 @@ def _lognormal_crps(actual: float, median: float, q90: float) -> float | None:
     )
 
 
-def score_record(forecast: dict, outcome: dict, scored_at: datetime) -> dict:
-    symbol, horizon = outcome["symbol"], int(outcome["horizon_sessions"])
-    issued = forecast["symbols"][symbol]
-    matches = [row for row in issued["quantitative_reference"]
-               if int(row["trading_days"]) == horizon]
-    if len(matches) != 1:
-        raise ValueError("Expected one quantitative scenario for outcome")
-    scenario = matches[0]
+def _score_scenario(scenario: dict, outcome: dict) -> dict:
     threshold = float(scenario["return_threshold_pct"]) / 100
     realized = float(outcome["simple_return"])
     actual_class = "bear" if realized <= -threshold else "bull" if realized >= threshold else "neutral"
@@ -271,15 +264,7 @@ def score_record(forecast: dict, outcome: dict, scored_at: datetime) -> dict:
     pinball = {str(q): _pinball(target_close, value, q) for q, value in quantiles.items()}
     median = quantiles[.5]
     direction_call = "UP" if probability_up > .5 else "DOWN" if probability_up < .5 else "NO_CALL"
-    core = {
-        "schemaVersion": SCORE_VERSION,
-        "forecast_hash": forecast["forecast_hash"],
-        "outcome_hash": outcome["outcome_hash"],
-        "symbol": symbol,
-        "horizon_sessions": horizon,
-        "origin_session": outcome["origin_session"],
-        "target_session": outcome["target_session"],
-        "scored_at": scored_at.isoformat(),
+    return {
         "actual": {"target_close": target_close, "simple_return": realized,
                    "log_return": float(outcome["log_return"]), "event_class": actual_class,
                    "price_up": actual_up},
@@ -300,9 +285,86 @@ def score_record(forecast: dict, outcome: dict, scored_at: datetime) -> dict:
             "central_80_range_miss": max(quantiles[.1] - target_close, 0,
                                          target_close - quantiles[.9]),
             "lognormal_crps": _lognormal_crps(target_close, median, quantiles[.9])
-                if scenario.get("formula", "").startswith("log(P_h/P_0) ~ Normal") else None,
+                if (scenario.get("distribution_family") == "LOG_RETURN_NORMAL"
+                    or scenario.get("formula", "").startswith("log(P_h/P_0) ~ Normal")) else None,
         },
-        "qualification_notice": "Descriptive prospective score; overlapping horizons require time-block uncertainty and do not establish skill.",
+    }
+
+
+def score_record(forecast: dict, outcome: dict, scored_at: datetime) -> dict:
+    symbol, horizon = outcome["symbol"], int(outcome["horizon_sessions"])
+    issued = forecast["symbols"][symbol]
+    matches = [row for row in issued["quantitative_reference"]
+               if int(row["trading_days"]) == horizon]
+    if len(matches) != 1:
+        raise ValueError("Expected one quantitative scenario for outcome")
+    if (outcome.get("forecast_hash") != forecast["forecast_hash"]
+            or outcome["origin_session"] != issued["origin_session"]
+            or outcome["target_session"] != issued["target_sessions"][str(horizon)]
+            or outcome.get("origin_close", issued["origin_close"]) != issued["origin_close"]):
+        raise ValueError("Outcome is incompatible with forecast origin/target")
+    baseline = _score_scenario(matches[0], outcome)
+    variants = {"quantitative_reference": baseline}
+    recommendations = {}
+    variant_metadata = {}
+    structured = [row for row in issued.get("structured_meta_forecast", [])
+                  if int(row.get("trading_days", -1)) == horizon
+                  and row.get("status") == "EXPERIMENTAL_UNCALIBRATED"]
+    if len(structured) > 1:
+        raise ValueError("Duplicate structured META horizon")
+    if structured:
+        row = structured[0]
+        reference = row.get("reference", {})
+        if reference and (reference.get("reference_price_basis") != "LATEST_COMPLETED_SESSION_CLOSE"
+                or reference.get("reference_price") != issued["origin_close"]
+                or reference.get("origin_session", issued["origin_session"]) != issued["origin_session"]
+                or reference.get("target_trading_session") != outcome["target_session"]
+                or reference.get("return_basis", "PRICE_RETURN") != "PRICE_RETURN"):
+            raise ValueError("Cannot pair incompatible forecast target/reference")
+        variant_name = row["distribution"].get("variant", "experimental_meta_v1")
+        variants[variant_name] = _score_scenario(row["distribution"], outcome)
+        recommendations[variant_name] = row["recommendation"]
+        variant_metadata[variant_name] = {
+            "origin_kind": reference.get("origin_kind", "LEGACY_COMPLETED_CLOSE"),
+            "target_contract": reference.get("contract_version", "LEGACY"),
+            "return_basis": reference.get("return_basis", "PRICE_RETURN"),
+            "model_usage": row.get("model_usage", "LEGACY_UNKNOWN"),
+        }
+        for label, scenario in sorted(row.get("ablations", {}).items()):
+            if label in variants:
+                raise ValueError("Ablation cannot replace a primary comparison variant")
+            variants[label] = _score_scenario(scenario, outcome)
+    recommendation_scores = {}
+    for label, recommendation in recommendations.items():
+        action = recommendation.get("action_now", recommendation.get("action"))
+        call = ("UP" if action in {"BULLISH_RESEARCH", "ACCUMULATE_CONDITIONALLY"} else
+                "DOWN" if action in {"BEARISH_RESEARCH", "REDUCE_RISK"} else "NO_CALL")
+        actual_up = float(outcome["simple_return"]) > 0
+        recommendation_scores[label] = {
+            "action": action, "call": call,
+            "correct": None if call == "NO_CALL" else call == ("UP" if actual_up else "DOWN"),
+            "realized_simple_return": float(outcome["simple_return"]),
+        }
+    core = {
+        "schemaVersion": SCORE_VERSION,
+        "forecast_hash": forecast["forecast_hash"],
+        "outcome_hash": outcome["outcome_hash"],
+        "symbol": symbol,
+        "horizon_sessions": horizon,
+        "origin_session": outcome["origin_session"],
+        "target_session": outcome["target_session"],
+        "scored_at": scored_at.isoformat(),
+        "actual": baseline["actual"],
+        "event_scores": baseline["event_scores"],
+        "direction_scores": baseline["direction_scores"],
+        "distribution_scores": baseline["distribution_scores"],
+        "variant_scores": variants,
+        "variant_metadata": variant_metadata,
+        "recommendations": recommendations,
+        "recommendation_scores": recommendation_scores,
+        "governance_cohort_id": (forecast.get("governance") or {}).get("cohort_id"),
+        "qualification_criteria": (forecast.get("governance") or {}).get("prospective_qualification"),
+        "qualification_notice": "Descriptive prospective score; overlapping horizons require origin-clustered/time-block uncertainty and do not establish skill.",
     }
     core["score_hash"] = digest(core)
     return core
@@ -331,7 +393,100 @@ def _aggregate(score_root: Path) -> dict:
                                      "observed_frequency": sum(r["actual"]["event_class"] == event for r in rows) / len(rows)}
                             for event in ("bear", "neutral", "bull")},
         }
+    variant_groups = {}
+    labels = sorted({label for score in scores for label in score.get("variant_scores", {})})
+    for label in labels:
+        rows = [(score, score["variant_scores"][label]) for score in scores
+                if label in score.get("variant_scores", {})]
+        called = [metrics for _, metrics in rows if metrics["direction_scores"]["correct"] is not None]
+        variant_groups[label] = {
+            "count": len(rows),
+            "mean_multiclass_brier": sum(metrics["event_scores"]["multiclass_brier"] for _, metrics in rows) / len(rows),
+            "mean_log_loss": sum(metrics["event_scores"]["log_loss"] for _, metrics in rows) / len(rows),
+            "mean_direction_brier": sum(metrics["direction_scores"]["brier"] for _, metrics in rows) / len(rows),
+            "direction_accuracy_when_called": (sum(metrics["direction_scores"]["correct"] for metrics in called) / len(called)
+                                                if called else None),
+            "central_80_coverage": sum(metrics["distribution_scores"]["covered_central_80"] for _, metrics in rows) / len(rows),
+            "mean_pinball": sum(metrics["distribution_scores"]["mean_pinball"] for _, metrics in rows) / len(rows),
+        }
+    paired_groups = {}
+    for score in scores:
+        variants = score.get("variant_scores", {})
+        if "quantitative_reference" not in variants:
+            continue
+        for variant in variants:
+            if not variant.startswith("experimental_meta_v") or "_without_" in variant:
+                continue
+            metadata = score.get("variant_metadata", {}).get(variant, {})
+            key = json.dumps([score.get("governance_cohort_id") or "LEGACY_UNSPECIFIED",
+                              score["horizon_sessions"], variant,
+                              metadata.get("origin_kind", "LEGACY_COMPLETED_CLOSE"),
+                              metadata.get("target_contract", "LEGACY"),
+                              metadata.get("return_basis", "PRICE_RETURN"),
+                              metadata.get("model_usage", "LEGACY_UNKNOWN")])
+            paired_groups.setdefault(key, []).append((score, variant))
+    comparisons = {}
+    for key, rows in paired_groups.items():
+        origins = {score["origin_session"] for score, _ in rows}
+        comparisons[key] = {
+            "identity": json.loads(key), "count": len(rows), "distinct_origins": len(origins),
+            "mean_meta_minus_reference_multiclass_brier": sum(
+                score["variant_scores"][variant]["event_scores"]["multiclass_brier"]
+                - score["variant_scores"]["quantitative_reference"]["event_scores"]["multiclass_brier"]
+                for score, variant in rows) / len(rows),
+            "mean_meta_minus_reference_direction_brier": sum(
+                score["variant_scores"][variant]["direction_scores"]["brier"]
+                - score["variant_scores"]["quantitative_reference"]["direction_scores"]["brier"]
+                for score, variant in rows) / len(rows),
+            "interpretation": "Descriptive paired deltas only; dependence-aware uncertainty is required.",
+        }
+    comparison = (next(iter(comparisons.values())) if len(comparisons) == 1 else {
+        "count": 0, "mean_meta_minus_reference_multiclass_brier": None,
+        "mean_meta_minus_reference_direction_brier": None,
+        "interpretation": "Select one cohort/horizon/variant/origin/model-usage group; incompatible groups are not pooled.",
+    })
+    recommendation_rows = [row for score in scores
+                           for row in score.get("recommendation_scores", {}).values()]
+    called_recommendations = [row for row in recommendation_rows if row["correct"] is not None]
+    recommendation_summary = {
+        "count": len(recommendation_rows), "called": len(called_recommendations),
+        "accuracy_when_called": (sum(row["correct"] for row in called_recommendations)
+                                 / len(called_recommendations) if called_recommendations else None),
+        "by_action": {action: {
+            "count": sum(row["action"] == action for row in recommendation_rows),
+            "mean_realized_return": (sum(row["realized_simple_return"] for row in recommendation_rows
+                                          if row["action"] == action)
+                                     / sum(row["action"] == action for row in recommendation_rows))}
+            for action in sorted({row["action"] for row in recommendation_rows})},
+        "notice": "Research-action outcomes are descriptive and exclude sizing, costs and path-dependent risk.",
+    }
+    cohorts = {}
+    for cohort in sorted({score.get("governance_cohort_id") for score in scores
+                          if score.get("governance_cohort_id")}):
+        rows = [score for score in scores if score.get("governance_cohort_id") == cohort]
+        criteria = next((score.get("qualification_criteria") for score in rows
+                         if score.get("qualification_criteria")), None)
+        origins = {score["origin_session"] for score in rows}
+        horizon_counts = {str(horizon): sum(score["horizon_sessions"] == horizon for score in rows)
+                          for horizon in (5, 21, 63)}
+        qualified = bool(criteria and len(rows) >= criteria["minimum_scored_records"]
+                         and len(origins) >= criteria["minimum_distinct_origins"]
+                         and all(count >= criteria["minimum_records_per_horizon"]
+                                 for count in horizon_counts.values()))
+        cohorts[cohort] = {
+            "scored_records": len(rows), "distinct_origins": len(origins),
+            "records_per_horizon": horizon_counts, "criteria": criteria,
+            "paired_comparisons": {key: value for key, value in comparisons.items()
+                                   if value["identity"][0] == cohort},
+            "qualification_status": ("SAMPLE_SIZE_GATE_PASSED_REQUIRES_STATISTICAL_REVIEW"
+                                     if qualified else "INSUFFICIENT_PROSPECTIVE_SAMPLE"),
+            "overlap_control": "Treat origin sessions as dependence clusters; use time-block inference before qualification.",
+        }
     return {"scoreCount": len(scores), "groups": groups,
+            "variantGroups": variant_groups, "pairedMetaVsReference": comparison,
+            "pairedComparisons": comparisons,
+            "recommendationOutcomes": recommendation_summary,
+            "governanceCohorts": cohorts,
             "notice": "Descriptive only; no minimum sample size or independence claim is implied."}
 
 

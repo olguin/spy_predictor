@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spy-predictor.local/schemas/meta-structured-forecast-v3.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "created_at",
+    "packet_hash",
+    "probability_status",
+    "calibration_status",
+    "probability_semantics",
+    "symbols",
+    "governance",
+    "notice"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "meta-structured-forecast-v3"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "packet_hash": {
+      "type": "string"
+    },
+    "agent_report_sha256": {
+      "type": "string"
+    },
+    "policy_identity": {
+      "type": "string"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "probability_status": {
+      "const": "EXPERIMENTAL_UNCALIBRATED"
+    },
+    "calibration_status": {
+      "type": "string"
+    },
+    "probability_semantics": {
+      "type": "string",
+      "minLength": 1
+    },
+    "symbols": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "horizons": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "trading_days",
+                    "status",
+                    "reference",
+                    "quant_signal",
+                    "context_signal",
+                    "combined_signal",
+                    "coverage",
+                    "distribution",
+                    "ablations",
+                    "recommendation",
+                    "model_usage"
+                  ],
+                  "properties": {
+                    "trading_days": {
+                      "enum": [
+                        5,
+                        21,
+                        63
+                      ]
+                    },
+                    "status": {
+                      "const": "EXPERIMENTAL_UNCALIBRATED"
+                    },
+                    "reference": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "reference_price",
+                        "reference_price_basis",
+                        "reference_price_observed_at",
+                        "forecast_origin",
+                        "target_trading_session",
+                        "entry_basis_warning",
+                        "contract_version",
+                        "origin_kind",
+                        "information_cutoff",
+                        "source_available_at",
+                        "availability_status",
+                        "reference_feed",
+                        "reference_evidence_ids",
+                        "origin_session",
+                        "target_timestamp",
+                        "session_calendar",
+                        "return_basis",
+                        "corporate_action_basis"
+                      ],
+                      "properties": {
+                        "reference_price": {
+                          "type": "number"
+                        },
+                        "reference_price_basis": {
+                          "enum": [
+                            "LATEST_COMPLETED_SESSION_CLOSE",
+                            "QUALIFIED_CURRENT_TRADE"
+                          ]
+                        },
+                        "reference_price_observed_at": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "forecast_origin": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "target_trading_session": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "entry_basis_warning": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "contract_version": {
+                          "const": "meta-target-v1"
+                        },
+                        "origin_kind": {
+                          "enum": [
+                            "PRIOR_COMPLETED_CLOSE",
+                            "QUALIFIED_CURRENT_TRADE"
+                          ]
+                        },
+                        "information_cutoff": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "source_available_at": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "availability_status": {
+                          "enum": [
+                            "KNOWN",
+                            "UNKNOWN_HISTORICAL_AVAILABILITY"
+                          ]
+                        },
+                        "reference_feed": {
+                          "type": "string"
+                        },
+                        "reference_evidence_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "origin_session": {
+                          "type": "string"
+                        },
+                        "target_timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "session_calendar": {
+                          "const": "XNYS"
+                        },
+                        "return_basis": {
+                          "const": "PRICE_RETURN"
+                        },
+                        "corporate_action_basis": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "quant_signal": {
+                      "type": "object"
+                    },
+                    "context_signal": {
+                      "type": "object"
+                    },
+                    "combined_signal": {
+                      "type": "number"
+                    },
+                    "coverage": {
+                      "type": "object"
+                    },
+                    "distribution": {
+                      "type": "object",
+                      "required": [
+                        "probability_price_up",
+                        "probabilities",
+                        "event_definitions",
+                        "median_simple_return_pct",
+                        "expected_simple_return_pct"
+                      ],
+                      "properties": {
+                        "probability_price_up": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "probabilities": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "bear",
+                            "neutral",
+                            "bull"
+                          ],
+                          "properties": {
+                            "bear": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1
+                            },
+                            "neutral": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1
+                            },
+                            "bull": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1
+                            }
+                          }
+                        },
+                        "event_definitions": {
+                          "type": "object"
+                        },
+                        "median_simple_return_pct": {
+                          "type": "number"
+                        },
+                        "expected_simple_return_pct": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "ablations": {
+                      "type": "object"
+                    },
+                    "recommendation": {
+                      "type": "object",
+                      "required": [
+                        "action_now",
+                        "new_position_action",
+                        "existing_position_action",
+                        "reason_codes",
+                        "conditional_trigger",
+                        "wait_for",
+                        "next_review",
+                        "critical_gaps",
+                        "advisory_gaps",
+                        "portfolio_sizing"
+                      ],
+                      "properties": {
+                        "action_now": {
+                          "enum": [
+                            "BULLISH_RESEARCH",
+                            "ENTER_IF_CONFIRMED",
+                            "HOLD_OR_WAIT",
+                            "WAIT",
+                            "REDUCE_RISK",
+                            "BEARISH_RESEARCH"
+                          ]
+                        },
+                        "new_position_action": {
+                          "type": "string"
+                        },
+                        "existing_position_action": {
+                          "type": "string"
+                        },
+                        "reason_codes": {
+                          "type": "array"
+                        },
+                        "conditional_trigger": {
+                          "type": [
+                            "object",
+                            "null"
+                          ]
+                        },
+                        "wait_for": {
+                          "type": "array"
+                        },
+                        "next_review": {
+                          "type": "string"
+                        },
+                        "critical_gaps": {
+                          "type": "array"
+                        },
+                        "advisory_gaps": {
+                          "type": "array"
+                        },
+                        "portfolio_sizing": {
+                          "const": "OUT_OF_SCOPE"
+                        }
+                      }
+                    },
+                    "model_usage": {
+                      "enum": [
+                        "QUANT_ONLY_FALLBACK",
+                        "QUANT_PLUS_AGENT_HEURISTIC"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "trading_days",
+                    "status",
+                    "reason"
+                  ],
+                  "properties": {
+                    "trading_days": {
+                      "enum": [
+                        5,
+                        21,
+                        63
+                      ]
+                    },
+                    "status": {
+                      "const": "NO_FORECAST"
+                    },
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "governance": {
+      "type": "object"
+    },
+    "notice": {
+      "type": "string"
+    }
+  }
+}

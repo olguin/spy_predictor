@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "event", "condition_key", "severity", "message", "occurred_at", "details", "event_hash"],
+  "properties": {
+    "schema_version": {"const": "meta-alert-event-v1"},
+    "event": {"enum": ["OPENED", "RESOLVED"]},
+    "condition_key": {"type": "string", "minLength": 1, "maxLength": 300},
+    "severity": {"enum": ["INFO", "WARNING", "ERROR", "CRITICAL"]},
+    "message": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "details": {"type": "object"},
+    "event_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

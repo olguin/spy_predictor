@@ -1,0 +1,136 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "No dated primary trade-policy/restriction document was available after the BIS-policy source failed. The only documented watchlist transmission channel is QQQ\u2019s dated look-through to NVDA, MU and META; direct company exposure and policy impact remain unquantified.",
+      "assessment": "insufficient_evidence",
+      "claims": [
+        {
+          "claim_id": "task-6-c1",
+          "classification": "fact",
+          "text": "QQQ\u2019s supplied holdings table dated 2026-09-12 includes NVDA (8.45%), MU (4.85%) and META (3.07%); therefore, any documented policy shock to those constituents could transmit indirectly to QQQ. The table is marked stale and does not establish current weights or company-specific policy impact.",
+          "evidence_ids": [
+            "e20"
+          ],
+          "symbols": [
+            "QQQ",
+            "NVDA",
+            "MU",
+            "META"
+          ]
+        },
+        {
+          "claim_id": "task-6-c2",
+          "classification": "fact",
+          "text": "Arista\u2019s latest available 10-Q describes wholly owned subsidiaries throughout North America, Europe, Asia and Australia, documenting cross-border operations but not a country revenue split, supplier concentration, or a restriction-specific exposure.",
+          "evidence_ids": [
+            "e27"
+          ],
+          "symbols": [
+            "ANET"
+          ]
+        },
+        {
+          "claim_id": "task-6-c3",
+          "classification": "scenario",
+          "text": "Over 21/63 sessions, a newly enacted or enforced trade restriction affecting advanced compute, memory, networking equipment, or cross-border technology supply could affect directly exposed issuers through shipments, sourcing, customer demand, or compliance costs, and QQQ indirectly through constituent holdings. This is a transmission scenario, not a quantified loss estimate or direction-of-price call.",
+          "evidence_ids": [
+            "e20",
+            "e27"
+          ],
+          "symbols": [
+            "ANET",
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "No retrievable dated primary BIS/trade-policy material establishes the current restriction, proposal/enactment/enforcement status, covered products/countries, or issuer-specific financial effect.",
+          "critical": true,
+          "symbols": [
+            "ANET",
+            "QQQ",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "description": "Latest company filing excerpts supplied here do not quantify China/other cross-border revenue, restricted-product exposure, Taiwan/Asian manufacturing reliance, or supplier/customer mitigation for MU, META, or NVDA; ANET evidence only documents international subsidiaries.",
+          "critical": true,
+          "symbols": [
+            "ANET",
+            "MU",
+            "META",
+            "NVDA"
+          ]
+        },
+        {
+          "description": "QQQ holdings are dated 2026-09-12 and marked stale; QQQ has no policy-exposure or sector-weight breakdown in supplied data.",
+          "critical": false,
+          "symbols": [
+            "QQQ"
+          ]
+        }
+      ],
+      "assumptions": [
+        "A future policy action would be material only if it covers products, countries, or counterparties relevant to a constituent; that mapping is not established by available evidence.",
+        "QQQ look-through is limited to the dated reported constituent weights and is not an allocation recommendation."
+      ],
+      "counter_thesis": "Absent a newly documented restriction or company disclosure, policy headlines may have no material operational effect within 21/63 sessions; the supplied record cannot establish that any issuer is directly exposed.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review upon a dated primary trade-policy release or issuer filing that identifies covered technology/country and quantifies revenue, supply-chain, shipment, or compliance exposure.",
+          "symbol": null,
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": []
+        }
+      ],
+      "dispositions": [],
+      "question_effects": [
+        {
+          "question_id": "question-6",
+          "effect": "unresolved",
+          "reason": "Company-exposure question was routed but no response is available in this task; supplied excerpts do not quantify direct exposure."
+        }
+      ],
+      "shared_exposures": [
+        {
+          "symbols": [
+            "QQQ",
+            "NVDA",
+            "MU",
+            "META"
+          ],
+          "mechanism": "QQQ has dated reported constituent holdings in NVDA, MU and META, so company-level trade-policy effects could transmit to the ETF.",
+          "evidence_ids": [
+            "e20"
+          ],
+          "qualification": "Weights are as of 2026-09-12 and the holdings feed is marked stale; this does not establish current fund exposure, policy sensitivity, or a portfolio recommendation."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 30430,
+    "output_tokens": 1023,
+    "catalog_cost_usd": 0.07313599999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 38207,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

@@ -1,0 +1,4564 @@
+{
+  "as_of": "2026-09-15T19:12:25.811297+00:00",
+  "calibrated_meta_forecast": null,
+  "completed_at": "2026-09-15T19:17:44.107326+00:00",
+  "configured_roles": [
+    "macro_cycle",
+    "technical",
+    "fundamental",
+    "news",
+    "geopolitical",
+    "critic",
+    "synthesis"
+  ],
+  "deterministic_claim_rejections": {
+    "geopolitical": [],
+    "macro_cycle": [],
+    "news": [
+      {
+        "claim_ref": "news:meta_ai_risk",
+        "reason": "EVIDENCE_NOT_RELEVANT_TO_ASSESSMENT_SYMBOL"
+      }
+    ],
+    "technical": [
+      {
+        "claim_ref": null,
+        "reason": "DIRECTIONAL_HORIZON_LACKS_SUPPORT_CLAIM",
+        "symbol": "MU",
+        "trading_days": 5
+      },
+      {
+        "claim_ref": null,
+        "reason": "DIRECTIONAL_HORIZON_LACKS_SUPPORT_CLAIM",
+        "symbol": "MU",
+        "trading_days": 21
+      },
+      {
+        "claim_ref": null,
+        "reason": "DIRECTIONAL_HORIZON_LACKS_SUPPORT_CLAIM",
+        "symbol": "NVDA",
+        "trading_days": 5
+      }
+    ]
+  },
+  "executed_roles": [
+    "macro_cycle",
+    "technical",
+    "fundamental",
+    "news",
+    "geopolitical"
+  ],
+  "failures": {
+    "fundamental": "ValidationError"
+  },
+  "harness_implementation_sha256": "203a0b98db754cc5542e9de5d7c2d1892389bd4ee5a68285c0005a936d360d58",
+  "newly_executed_roles": [
+    "macro_cycle",
+    "technical",
+    "fundamental",
+    "news",
+    "geopolitical"
+  ],
+  "on_stage_failure": "stop",
+  "operational_budget": {
+    "metrics": {
+      "agent_calls": {
+        "fraction": 0.7142857142857143,
+        "limit": 7.0,
+        "status": "WARNING",
+        "used": 5.0
+      },
+      "catalog_cost_estimate_usd": {
+        "fraction": 0.0324732,
+        "limit": 25.0,
+        "status": "OK",
+        "used": 0.81183
+      },
+      "download_bytes": {
+        "fraction": 0.0,
+        "limit": 50000000.0,
+        "status": "OK",
+        "used": 0.0
+      },
+      "input_tokens": {
+        "fraction": 0.227187,
+        "limit": 1000000.0,
+        "status": "OK",
+        "used": 227187.0
+      },
+      "output_tokens": {
+        "fraction": 0.29788,
+        "limit": 100000.0,
+        "status": "OK",
+        "used": 29788.0
+      },
+      "source_requests": {
+        "fraction": 0.0,
+        "limit": 250.0,
+        "status": "OK",
+        "used": 0.0
+      },
+      "wall_seconds": {
+        "fraction": 0.08826474486112905,
+        "limit": 3600.0,
+        "status": "OK",
+        "used": 317.7530815000646
+      }
+    },
+    "warning_fraction": 0.7
+  },
+  "packet_hash": "e5806001a059d4bc416070d76a3e5dfe2e7898fde4a09ac2ca27cda004e0a7d1",
+  "quantitative_reference": {
+    "ANET": [
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 164.36721847549074,
+          "0.1": 169.27953893124595,
+          "0.25": 177.81760763071594,
+          "0.5": 187.81,
+          "0.75": 198.36391103209888,
+          "0.9": 208.3689282396156,
+          "0.95": 214.59629497386422
+        },
+        "probabilities": {
+          "bear": 0.4015878961348127,
+          "bull": 0.4034979244483722,
+          "neutral": 0.1949141794168151
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 2.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 5
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 142.90645164682348,
+          "0.1": 151.7965925161482,
+          "0.25": 167.90286078084878,
+          "0.5": 187.81,
+          "0.75": 210.07739794284217,
+          "0.9": 232.36750914713505,
+          "0.95": 246.82297890351427
+        },
+        "probabilities": {
+          "bear": 0.37874620357283706,
+          "bull": 0.38449089266302505,
+          "neutral": 0.2367629037641379
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 5.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 21
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 116.99886612183838,
+          "0.1": 129.89099039562606,
+          "0.25": 154.6806726482982,
+          "0.5": 187.81,
+          "0.75": 228.03492832100807,
+          "0.9": 271.5553711043824,
+          "0.95": 301.47810204646254
+        },
+        "probabilities": {
+          "bear": 0.3571139054858672,
+          "bull": 0.3702264363976675,
+          "neutral": 0.2726596581164653
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 10.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 63
+      }
+    ],
+    "META": [
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 597.0963738259449,
+          "0.1": 611.5932971926172,
+          "0.25": 636.606709855802,
+          "0.5": 665.6,
+          "0.75": 695.9137457102037,
+          "0.9": 724.3757608750784,
+          "0.95": 741.9629048511731
+        },
+        "probabilities": {
+          "bear": 0.37981730198158065,
+          "bull": 0.38212609672109965,
+          "neutral": 0.23805660129731965
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 2.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 5
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 532.7775003933363,
+          "0.1": 559.6248658707033,
+          "0.25": 607.5384948917986,
+          "0.5": 665.6,
+          "0.75": 729.2103524714128,
+          "0.9": 791.643450851158,
+          "0.95": 831.5354152022691
+        },
+        "probabilities": {
+          "bear": 0.3523268402686375,
+          "bull": 0.35921851292373996,
+          "neutral": 0.28845464680762256
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 5.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 21
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 452.6686315926988,
+          "0.1": 492.9032001003609,
+          "0.25": 568.2712227218867,
+          "0.5": 665.6,
+          "0.75": 779.5984422333079,
+          "0.9": 898.803984047568,
+          "0.95": 978.6924232881739
+        },
+        "probabilities": {
+          "bear": 0.32652843985679203,
+          "bull": 0.34213623206676524,
+          "neutral": 0.3313353280764427
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 10.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 63
+      }
+    ],
+    "MU": [
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 744.0089334830557,
+          "0.1": 780.4839062197897,
+          "0.25": 845.4659389002333,
+          "0.5": 924.03,
+          "0.75": 1009.8945464445892,
+          "0.9": 1093.9769982387759,
+          "0.95": 1147.6091246684543
+        },
+        "probabilities": {
+          "bear": 0.43905957985363664,
+          "bull": 0.44025724673210165,
+          "neutral": 0.12068317341426171
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 2.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 5
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 592.6826641413771,
+          "0.1": 653.7631572088956,
+          "0.25": 770.1941163475625,
+          "0.5": 924.03,
+          "0.75": 1108.5925259323778,
+          "0.9": 1306.025632501614,
+          "0.95": 1440.6215881764492
+        },
+        "probabilities": {
+          "bear": 0.42466009568313273,
+          "bull": 0.4282958348791255,
+          "neutral": 0.14704406943774173
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 5.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 21
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 428.1895749407831,
+          "0.1": 507.47934085198654,
+          "0.25": 674.0704953651868,
+          "0.5": 924.03,
+          "0.75": 1266.6797416157863,
+          "0.9": 1682.4949750004344,
+          "0.95": 1994.0500443479532
+        },
+        "probabilities": {
+          "bear": 0.4108695577378252,
+          "bull": 0.4192484373127562,
+          "neutral": 0.16988200494941863
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 10.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 63
+      }
+    ],
+    "NVDA": [
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 192.01312474616486,
+          "0.1": 196.04590549017763,
+          "0.25": 202.9743995638166,
+          "0.5": 210.96,
+          "0.75": 219.25977707354957,
+          "0.9": 227.0086768133485,
+          "0.95": 231.77645621273552
+        },
+        "probabilities": {
+          "bear": 0.36199842577228813,
+          "bull": 0.36462281289806,
+          "neutral": 0.2733787613296519
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 2.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 5
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 173.9575079573427,
+          "0.1": 181.52763004923852,
+          "0.25": 194.91923206001954,
+          "0.5": 210.96,
+          "0.75": 228.32083386361944,
+          "0.9": 245.16445010563112,
+          "0.95": 255.83329010963502
+        },
+        "probabilities": {
+          "bear": 0.3308841368954487,
+          "bull": 0.3386595346854524,
+          "neutral": 0.3304563284190989
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 5.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 21
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 151.05282172896622,
+          "0.1": 162.61890060749542,
+          "0.25": 183.95521128201506,
+          "0.5": 210.96,
+          "0.75": 241.92911573335286,
+          "0.9": 273.6712733498133,
+          "0.95": 294.62621810437713
+        },
+        "probabilities": {
+          "bear": 0.30194675049988373,
+          "bull": 0.31942031829308704,
+          "neutral": 0.37863293120702923
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 10.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 63
+      }
+    ],
+    "QQQ": [
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 673.2858803029966,
+          "0.1": 681.0542537192996,
+          "0.25": 694.2353957054476,
+          "0.5": 709.18,
+          "0.75": 724.4463124628514,
+          "0.9": 738.4672654981874,
+          "0.95": 746.9877018268453
+        },
+        "probabilities": {
+          "bear": 0.2611531866347189,
+          "bull": 0.2652889068081208,
+          "neutral": 0.47355790655716024
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 2.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 5
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 637.5708343061427,
+          "0.1": 652.7380349454095,
+          "0.25": 678.8912015105093,
+          "0.5": 709.18,
+          "0.75": 740.8201362471398,
+          "0.9": 770.5024764522296,
+          "0.95": 788.8319937773451
+        },
+        "probabilities": {
+          "bear": 0.21399873295356148,
+          "bull": 0.2254417874032837,
+          "neutral": 0.5605594796431548
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 5.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 21
+      },
+      {
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "price_quantiles": {
+          "0.05": 589.776100980273,
+          "0.1": 614.288289355312,
+          "0.25": 657.5415577114186,
+          "0.5": 709.18,
+          "0.75": 764.873742962309,
+          "0.9": 818.7300346028496,
+          "0.95": 852.7579730071536
+        },
+        "probabilities": {
+          "bear": 0.17361126735649524,
+          "bull": 0.19757230464026154,
+          "neutral": 0.6288164280032432
+        },
+        "probability_price_up": 0.5,
+        "return_threshold_pct": 10.0,
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "trading_days": 63
+      }
+    ]
+  },
+  "results": {
+    "geopolitical": {
+      "assessments": [
+        {
+          "claims": [
+            {
+              "claim_id": "anet_gap",
+              "classification": "FACT",
+              "evidence_family": "issuer_fundamentals",
+              "evidence_ids": [
+                "fundamentals-ANET"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Superseded by supplied issuer geographic exposure or supply-chain evidence.",
+              "numeric_values": [],
+              "stance": "CONTEXT",
+              "statement": "The supplied ANET filing-derived evidence is limited to standardized SEC facts and does not establish geographic revenue or supply-chain exposure."
+            }
+          ],
+          "counterevidence": [],
+          "horizon_assessments": [
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A dated source establishing ANET revenue, supply-chain, or policy exposure and a plausible horizon-specific transmission mechanism."
+          ],
+          "missing": [
+            "Country revenue and supply-chain exposure; asset-specific policy transmission."
+          ],
+          "status": "INSUFFICIENT_EVIDENCE",
+          "symbol": "ANET",
+          "thesis": "No sourced ANET-specific geopolitical transmission mechanism is supplied.",
+          "view": "UNKNOWN"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "qqq_holdings_gap",
+              "classification": "FACT",
+              "evidence_family": "etf_holdings",
+              "evidence_ids": [
+                "holdings-QQQ"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Superseded by supplied country/sector exposure and policy transmission evidence.",
+              "numeric_values": [],
+              "stance": "CONTEXT",
+              "statement": "The supplied QQQ holdings table is current but provides no sector weights and does not establish country allocation or geopolitical transmission."
+            }
+          ],
+          "counterevidence": [],
+          "horizon_assessments": [
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "QQQ country/sector exposure linked to a geopolitical event"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied holdings exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "QQQ country/sector exposure linked to a geopolitical event"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied holdings exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "QQQ country/sector exposure linked to a geopolitical event"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied holdings exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A dated holdings exposure map tied to a specific enacted policy, country, or supply-chain channel."
+          ],
+          "missing": [
+            "Country allocation; sector allocation; policy-to-ETF transmission mechanism."
+          ],
+          "status": "INSUFFICIENT_EVIDENCE",
+          "symbol": "QQQ",
+          "thesis": "Current holdings are supplied, but no country allocation, sector allocation, or sourced geopolitical transmission is supplied.",
+          "view": "UNKNOWN"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "mu_gap",
+              "classification": "FACT",
+              "evidence_family": "issuer_fundamentals",
+              "evidence_ids": [
+                "fundamentals-MU"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Superseded by supplied issuer geographic exposure or supply-chain evidence.",
+              "numeric_values": [],
+              "stance": "CONTEXT",
+              "statement": "The supplied MU filing-derived evidence is limited to standardized SEC facts and does not establish geographic revenue or supply-chain exposure."
+            }
+          ],
+          "counterevidence": [],
+          "horizon_assessments": [
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "MU-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "MU-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "MU-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A dated source establishing MU exposure and a policy, sanctions, tariff, country, or supply-chain transmission mechanism."
+          ],
+          "missing": [
+            "Country revenue and supply-chain exposure; asset-specific policy transmission."
+          ],
+          "status": "INSUFFICIENT_EVIDENCE",
+          "symbol": "MU",
+          "thesis": "No sourced MU-specific geopolitical transmission mechanism is supplied.",
+          "view": "UNKNOWN"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "meta_gap",
+              "classification": "FACT",
+              "evidence_family": "issuer_fundamentals",
+              "evidence_ids": [
+                "fundamentals-META"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Superseded by supplied issuer geographic exposure or supply-chain evidence.",
+              "numeric_values": [],
+              "stance": "CONTEXT",
+              "statement": "The supplied META filing-derived evidence is limited to standardized SEC facts and does not establish geographic revenue or supply-chain exposure."
+            }
+          ],
+          "counterevidence": [],
+          "horizon_assessments": [
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "META-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "META-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "META-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A dated source establishing META country exposure, regulation, or policy transmission with a horizon."
+          ],
+          "missing": [
+            "Country revenue and supply-chain exposure; asset-specific policy transmission."
+          ],
+          "status": "INSUFFICIENT_EVIDENCE",
+          "symbol": "META",
+          "thesis": "No sourced META-specific geopolitical transmission mechanism is supplied.",
+          "view": "UNKNOWN"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "nvda_activity",
+              "classification": "FACT",
+              "evidence_family": "issuer_release",
+              "evidence_ids": [
+                "primary-nvidia-press-releases-2a99e6520e42c0d078e6"
+              ],
+              "horizons": [
+                21,
+                63
+              ],
+              "invalidation": "The issuer withdraws or materially revises the announced collaboration.",
+              "numeric_values": [],
+              "stance": "CONTEXT",
+              "statement": "NVIDIA announced collaboration to expand Australian AI infrastructure capacity, including a buildout designed for up to 2 gigawatts by 2027."
+            },
+            {
+              "claim_id": "nvda_gap",
+              "classification": "FACT",
+              "evidence_family": "issuer_fundamentals",
+              "evidence_ids": [
+                "fundamentals-NVDA"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Superseded by supplied issuer geographic exposure or supply-chain evidence.",
+              "numeric_values": [],
+              "stance": "CONTEXT",
+              "statement": "The supplied NVDA filing-derived evidence is limited to standardized SEC facts and does not establish geographic revenue or supply-chain exposure."
+            }
+          ],
+          "counterevidence": [
+            "NVIDIA reports international infrastructure and partnership activity, but these releases do not quantify exposure to a specific geopolitical event."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-09-22",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "NVDA-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-10-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "NVDA-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Abstain from a geopolitical directional view.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical transmission metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "N/A",
+                "evidence_ids": [],
+                "expiry": "2026-12-14",
+                "field": "No supplied geopolitical invalidation metric",
+                "level": null,
+                "units": "N/A"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "NVDA-specific geopolitical exposure and transmission mechanism"
+                }
+              ],
+              "review": {
+                "event": "Reassess transmission.",
+                "when": "Upon new supplied policy or issuer exposure evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A dated source establishing NVDA exposure to a specific policy, sanctions, tariff, country, currency, or supply-chain event and its horizon-specific transmission."
+          ],
+          "missing": [
+            "Country revenue and supply-chain exposure; enacted or proposed policy tied to NVDA economics."
+          ],
+          "status": "INSUFFICIENT_EVIDENCE",
+          "symbol": "NVDA",
+          "thesis": "NVIDIA releases describe partnerships and infrastructure activity, but supplied evidence does not establish an asset-specific geopolitical policy transmission with a horizon.",
+          "view": "UNKNOWN"
+        }
+      ],
+      "input_hash": "d12900423ffe74f64b3992f17ee81408ff615d95b347bbb9777778af2134bb80",
+      "role": "geopolitical"
+    },
+    "macro_cycle": {
+      "assessments": [
+        {
+          "claims": [
+            {
+              "claim_id": "ANET-support",
+              "classification": "INFERENCE",
+              "evidence_family": "financial_conditions_curve",
+              "evidence_ids": [
+                "NFCI",
+                "NFCICREDIT",
+                "T10Y3M"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate this supportive interpretation if a subsequent NFCI reading is above -0.564.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/NFCI/value",
+                  "value": -0.564
+                },
+                {
+                  "packet_path": "/market/NFCICREDIT/value",
+                  "value": -0.06
+                },
+                {
+                  "packet_path": "/market/T10Y3M/value",
+                  "value": 0.86
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "The negative NFCI and NFCI credit readings and positive 10y–3m slope are consistent with comparatively accommodative financial conditions and a non-inverted curve, a conditional support for equity risk appetite across all horizons."
+            },
+            {
+              "claim_id": "ANET-oppose",
+              "classification": "INFERENCE",
+              "evidence_family": "inflation_rates_energy",
+              "evidence_ids": [
+                "DCOILWTICO",
+                "CPIAUCSL",
+                "DGS10",
+                "DFII10"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate this opposing interpretation if the listed 90-calendar-day changes reverse materially in subsequent observations.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+                  "value": 5.680000000000007
+                },
+                {
+                  "packet_path": "/market/CPIAUCSL/yoy_pct",
+                  "value": 3.353016322755642
+                },
+                {
+                  "packet_path": "/market/DGS10/change_90_calendar_days",
+                  "value": 0.47999999999999954
+                },
+                {
+                  "packet_path": "/market/DFII10/change_90_calendar_days",
+                  "value": 0.43000000000000016
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "Higher oil, inflation, nominal yields and real yields constitute an opposing valuation and margin-risk channel for equities, including rate-sensitive growth exposures."
+            }
+          ],
+          "counterevidence": [
+            "Inflation, oil, real yields and nominal yields have risen over 90 calendar days."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Use a mixed macro stance; review after the scheduled FOMC meeting.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "next weekly NFCI observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "next weekly NFCI observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-09-16"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "ANET-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "ANET-support"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Keep the macro signal balanced pending conditions and inflation updates.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-10-28"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "ANET-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "ANET-support"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Treat the macro backdrop as contested rather than directional.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-12-09"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "ANET-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "ANET-support"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A completed observation of NFCI above -0.564 would remove the cited easy-financial-conditions support."
+          ],
+          "missing": [
+            "Issuer fundamentals and a demonstrated ANET sensitivity to these macro variables were not supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "ANET",
+          "thesis": "Macro conditions provide a limited risk-asset tailwind, but rising yields, inflation and oil leave the cycle signal mixed. No issuer-specific macro transmission evidence is supplied to this role.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "QQQ-support",
+              "classification": "INFERENCE",
+              "evidence_family": "financial_conditions_curve",
+              "evidence_ids": [
+                "NFCI",
+                "NFCICREDIT",
+                "T10Y3M"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate if a subsequent NFCI observation is above -0.564.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/NFCI/value",
+                  "value": -0.564
+                },
+                {
+                  "packet_path": "/market/NFCICREDIT/value",
+                  "value": -0.06
+                },
+                {
+                  "packet_path": "/market/T10Y3M/value",
+                  "value": 0.86
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "Negative NFCI and credit readings together with a positive 10y–3m slope conditionally support risk appetite and growth-equity financing conditions."
+            },
+            {
+              "claim_id": "QQQ-oppose",
+              "classification": "INFERENCE",
+              "evidence_family": "inflation_rates_energy",
+              "evidence_ids": [
+                "DCOILWTICO",
+                "CPIAUCSL",
+                "DGS10",
+                "DFII10"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate if the cited oil and yield increases reverse materially in later observations.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+                  "value": 5.680000000000007
+                },
+                {
+                  "packet_path": "/market/CPIAUCSL/yoy_pct",
+                  "value": 3.353016322755642
+                },
+                {
+                  "packet_path": "/market/DGS10/change_90_calendar_days",
+                  "value": 0.47999999999999954
+                },
+                {
+                  "packet_path": "/market/DFII10/change_90_calendar_days",
+                  "value": 0.43000000000000016
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "Rising oil, above-3% CPI inflation, and higher nominal and real yields oppose growth-equity valuations, creating a material counterweight."
+            }
+          ],
+          "counterevidence": [
+            "The 10-year nominal and real yields rose over 90 calendar days while oil increased."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Maintain a mixed macro interpretation through the FOMC event.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "next weekly observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "next weekly observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "QQQ constituent earnings and valuation sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-09-16"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "QQQ-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "QQQ-support"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Do not resolve the macro signal without updated yields and conditions.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "QQQ constituent earnings and valuation sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-10-28"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "QQQ-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "QQQ-support"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Keep the medium-cycle view balanced.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "QQQ constituent earnings and valuation sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-12-09"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "QQQ-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "QQQ-support"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "NFCI above -0.564 on a subsequent weekly observation would negate the cited conditions support."
+          ],
+          "missing": [
+            "Company earnings, valuation, and a causal QQQ macro-beta estimate were not supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "QQQ",
+          "thesis": "Financial conditions and the curve are supportive, while inflation, oil and rising real/nominal yields oppose growth-equity valuations; the macro-cycle view is mixed.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "MU-support",
+              "classification": "INFERENCE",
+              "evidence_family": "financial_conditions_curve",
+              "evidence_ids": [
+                "NFCI",
+                "NFCICREDIT",
+                "T10Y3M"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate if NFCI subsequently exceeds -0.564.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/NFCI/value",
+                  "value": -0.564
+                },
+                {
+                  "packet_path": "/market/NFCICREDIT/value",
+                  "value": -0.06
+                },
+                {
+                  "packet_path": "/market/T10Y3M/value",
+                  "value": 0.86
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "Negative NFCI and credit readings with a positive 10y–3m slope conditionally support cyclical risk appetite."
+            },
+            {
+              "claim_id": "MU-oppose",
+              "classification": "INFERENCE",
+              "evidence_family": "inflation_rates_energy",
+              "evidence_ids": [
+                "DCOILWTICO",
+                "CPIAUCSL",
+                "DGS10",
+                "DFII10"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate if later observations materially reverse the cited 90-day changes.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+                  "value": 5.680000000000007
+                },
+                {
+                  "packet_path": "/market/CPIAUCSL/yoy_pct",
+                  "value": 3.353016322755642
+                },
+                {
+                  "packet_path": "/market/DGS10/change_90_calendar_days",
+                  "value": 0.47999999999999954
+                },
+                {
+                  "packet_path": "/market/DFII10/change_90_calendar_days",
+                  "value": 0.43000000000000016
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "Rising oil, CPI inflation and higher nominal and real yields provide an opposing macro channel through cost pressure and tighter discounting."
+            }
+          ],
+          "counterevidence": [
+            "Oil rose over 90 days and real yields increased."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Keep a mixed macro stance into the FOMC meeting.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "next weekly observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "next weekly observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "MU-specific cyclical-demand sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-09-16"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "MU-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "MU-support"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Require a clearer conditions-versus-yields resolution.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "MU-specific cyclical-demand sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-10-28"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "MU-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "MU-support"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Retain a balanced macro-cycle view.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "MU-specific cyclical-demand sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-12-09"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "MU-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "MU-support"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A subsequent NFCI reading above -0.564 would invalidate the financial-conditions tailwind."
+          ],
+          "missing": [
+            "MU-specific demand, inventory, earnings and macro sensitivity evidence were not supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "MU",
+          "thesis": "Easy financial conditions offer a conditional cyclical tailwind, but the concurrent inflation, energy and yield impulse leaves the macro signal mixed. Issuer transmission is not established in the supplied role projection.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "META-support",
+              "classification": "INFERENCE",
+              "evidence_family": "financial_conditions_curve",
+              "evidence_ids": [
+                "NFCI",
+                "NFCICREDIT",
+                "T10Y3M"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate if NFCI is subsequently above -0.564.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/NFCI/value",
+                  "value": -0.564
+                },
+                {
+                  "packet_path": "/market/NFCICREDIT/value",
+                  "value": -0.06
+                },
+                {
+                  "packet_path": "/market/T10Y3M/value",
+                  "value": 0.86
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "Negative NFCI and credit readings, alongside a positive 10y–3m slope, conditionally support broad equity risk appetite."
+            },
+            {
+              "claim_id": "META-oppose",
+              "classification": "INFERENCE",
+              "evidence_family": "inflation_rates_energy",
+              "evidence_ids": [
+                "DCOILWTICO",
+                "CPIAUCSL",
+                "DGS10",
+                "DFII10"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate if subsequent data materially reverse the cited inflation, oil and yield impulse.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+                  "value": 5.680000000000007
+                },
+                {
+                  "packet_path": "/market/CPIAUCSL/yoy_pct",
+                  "value": 3.353016322755642
+                },
+                {
+                  "packet_path": "/market/DGS10/change_90_calendar_days",
+                  "value": 0.47999999999999954
+                },
+                {
+                  "packet_path": "/market/DFII10/change_90_calendar_days",
+                  "value": 0.43000000000000016
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "Higher oil, CPI inflation, nominal yields and real yields create an opposing macro valuation channel for equities."
+            }
+          ],
+          "counterevidence": [
+            "Nominal and real yields increased over 90 calendar days."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Maintain a balanced macro interpretation through the policy event.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "next weekly observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "next weekly observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "META-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-09-16"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "META-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "META-support"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Await updated financial conditions and rates before assigning a directional macro tilt.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "META-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-10-28"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "META-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "META-support"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Keep the cycle conclusion mixed.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "META-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-12-09"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "META-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "META-support"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "NFCI above -0.564 would invalidate the cited supportive financial-conditions interpretation."
+          ],
+          "missing": [
+            "META-specific earnings, valuation and macro sensitivity inputs were not supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "META",
+          "thesis": "The macro evidence balances accommodative financial conditions against adverse inflation, energy and yield impulses. It does not establish an issuer-specific META outcome.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "NVDA-support",
+              "classification": "INFERENCE",
+              "evidence_family": "financial_conditions_curve",
+              "evidence_ids": [
+                "NFCI",
+                "NFCICREDIT",
+                "T10Y3M"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate if NFCI subsequently exceeds -0.564.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/NFCI/value",
+                  "value": -0.564
+                },
+                {
+                  "packet_path": "/market/NFCICREDIT/value",
+                  "value": -0.06
+                },
+                {
+                  "packet_path": "/market/T10Y3M/value",
+                  "value": 0.86
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "Negative NFCI and credit readings and a positive 10y–3m slope conditionally support broad risk appetite and financing conditions."
+            },
+            {
+              "claim_id": "NVDA-oppose",
+              "classification": "INFERENCE",
+              "evidence_family": "inflation_rates_energy",
+              "evidence_ids": [
+                "DCOILWTICO",
+                "CPIAUCSL",
+                "DGS10",
+                "DFII10"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidate if later observations materially reverse these oil and yield changes.",
+              "numeric_values": [
+                {
+                  "packet_path": "/market/DCOILWTICO/change_90_calendar_days",
+                  "value": 5.680000000000007
+                },
+                {
+                  "packet_path": "/market/CPIAUCSL/yoy_pct",
+                  "value": 3.353016322755642
+                },
+                {
+                  "packet_path": "/market/DGS10/change_90_calendar_days",
+                  "value": 0.47999999999999954
+                },
+                {
+                  "packet_path": "/market/DFII10/change_90_calendar_days",
+                  "value": 0.43000000000000016
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "Higher oil, CPI inflation and rising nominal and real yields form a countervailing macro discount-rate and cost-risk channel."
+            }
+          ],
+          "counterevidence": [
+            "Oil, nominal yields and real yields increased over 90 calendar days."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Hold a mixed macro assessment through the scheduled FOMC decision.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "next weekly observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "next weekly observation",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-09-22",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "NVDA-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-09-16"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "NVDA-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "NVDA-support"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Require conditions and rates to resolve before a directional cycle conclusion.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-10-14",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "NVDA-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-10-28"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "NVDA-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "NVDA-support"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Retain a balanced macro-cycle interpretation.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_BELOW",
+                "confirmation_interval": "weekly",
+                "evidence_ids": [
+                  "NFCI"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/NFCI/value",
+                "level": -0.564,
+                "units": "standard_deviations"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "AT_OR_ABOVE",
+                "confirmation_interval": "one completed daily observation",
+                "evidence_ids": [
+                  "DGS10"
+                ],
+                "expiry": "2026-12-15",
+                "field": "/market/DGS10/value",
+                "level": 5,
+                "units": "percent"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "NVDA-specific macro sensitivity"
+                }
+              ],
+              "review": {
+                "event": "Scheduled FOMC meeting ending date.",
+                "when": "2026-12-09"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "NVDA-oppose"
+              ],
+              "strongest_support_claim_ids": [
+                "NVDA-support"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A subsequent NFCI reading above -0.564 would negate the easy-conditions support."
+          ],
+          "missing": [
+            "NVDA-specific demand, earnings, valuation and macro sensitivity information were not supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "NVDA",
+          "thesis": "Macro conditions are supportive at the financial-conditions margin but opposed by rising inflation, energy and yields. The supplied macro evidence does not determine NVDA-specific performance.",
+          "view": "MIXED"
+        }
+      ],
+      "input_hash": "483a6f3a35faccb785b94d5743761d8cbc6e9812726cc4e310e3365c8363b272",
+      "role": "macro_cycle"
+    },
+    "news": {
+      "assessments": [
+        {
+          "claims": [
+            {
+              "claim_id": "anet_no_coverage",
+              "classification": "FACT",
+              "evidence_family": "news-coverage",
+              "evidence_ids": [
+                "news"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidated if a supplied dated ANET-specific news item is added.",
+              "numeric_values": [],
+              "stance": "CONTEXT",
+              "statement": "The supplied selected news evidence contains no ANET-specific item."
+            }
+          ],
+          "counterevidence": [],
+          "horizon_assessments": [
+            {
+              "action_implication": "No news-driven directional action is supported.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "n/a",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "n/a",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific dated catalyst"
+                }
+              ],
+              "review": {
+                "event": "Issuer or material market news",
+                "when": "On receipt of ANET-specific supplied evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "No news-driven directional action is supported.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "n/a",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "n/a",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific dated catalyst"
+                }
+              ],
+              "review": {
+                "event": "Issuer or material market news",
+                "when": "On receipt of ANET-specific supplied evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "No news-driven directional action is supported.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "n/a",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "UNKNOWN",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "n/a",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "ANET-specific dated catalyst"
+                }
+              ],
+              "review": {
+                "event": "Issuer or material market news",
+                "when": "On receipt of ANET-specific supplied evidence"
+              },
+              "status": "INSUFFICIENT_EVIDENCE",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A supplied, dated ANET-specific catalyst or primary issuer disclosure could establish a view."
+          ],
+          "missing": [
+            "ANET-specific news, issuer releases, and verified event/earnings information were not supplied to this role."
+          ],
+          "status": "INSUFFICIENT_EVIDENCE",
+          "symbol": "ANET",
+          "thesis": "The supplied news projection contains no ANET-specific article or documented indirect catalyst, so it cannot support a directional news view.",
+          "view": "UNKNOWN"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "qqq_macro_pressure",
+              "classification": "FACT",
+              "evidence_family": "market-news",
+              "evidence_ids": [
+                "news-61799304",
+                "news-61798307"
+              ],
+              "horizons": [
+                5,
+                21
+              ],
+              "invalidation": "Invalidated by corrected or superseding supplied market reporting.",
+              "numeric_values": [],
+              "stance": "OPPOSE",
+              "statement": "Supplied market reports say Treasury yields and oil rose and described pressure on stocks ahead of the Fed decision."
+            },
+            {
+              "claim_id": "qqq_ai_offset",
+              "classification": "FACT",
+              "evidence_family": "holding-exposure-news",
+              "evidence_ids": [
+                "news-61794801",
+                "news-61800060",
+                "holdings-QQQ"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidated by corrected or superseding supplied reports or holdings data.",
+              "numeric_values": [],
+              "stance": "SUPPORT",
+              "statement": "Supplied reports describe continued AI hardware demand and NVIDIA/Broadcom AI-trade support; NVIDIA, Micron, and Meta are documented QQQ holdings."
+            },
+            {
+              "claim_id": "qqq_event_uncertainty",
+              "classification": "INFERENCE",
+              "evidence_family": "policy-catalyst",
+              "evidence_ids": [
+                "news-61788155",
+                "news-61799304",
+                "news-61800060"
+              ],
+              "horizons": [
+                5,
+                21
+              ],
+              "invalidation": "Invalidated after the supplied policy outcome and market response establish a clearer catalyst direction.",
+              "numeric_values": [],
+              "stance": "OPPOSE",
+              "statement": "The approaching Fed decision and conflicting macro/AI reports imply elevated event uncertainty rather than a clean directional news signal."
+            }
+          ],
+          "counterevidence": [
+            "The news feed is truncated and article text is often headline-level.",
+            "Positive AI reports do not establish QQQ-level earnings or index impact."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Treat the news signal as conflicted until the policy event resolves.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "Fed decision",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "Fed decision",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Verified policy outcome and QQQ reaction"
+                }
+              ],
+              "review": {
+                "event": "Policy outcome and market response",
+                "when": "After the stated Wednesday Fed decision"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "qqq_macro_pressure",
+                "qqq_event_uncertainty"
+              ],
+              "strongest_support_claim_ids": [
+                "qqq_ai_offset"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Do not infer a persistent direction from conflicting catalyst headlines.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "21 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "21 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Constituent-level revisions after policy event"
+                }
+              ],
+              "review": {
+                "event": "Macro and AI-demand reassessment",
+                "when": "After Fed decision and subsequent constituent updates"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "qqq_macro_pressure",
+                "qqq_event_uncertainty"
+              ],
+              "strongest_support_claim_ids": [
+                "qqq_ai_offset"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "AI-demand news is supportive but inadequate for a standalone medium-horizon index direction.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "63 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "63 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Verified multi-quarter constituent fundamentals"
+                }
+              ],
+              "review": {
+                "event": "QQQ catalyst refresh",
+                "when": "On subsequent constituent earnings or policy releases"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [
+                "qqq_ai_offset"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "The stated macro and AI narratives are invalidated by subsequent supplied primary policy or issuer disclosures that contradict them."
+          ],
+          "missing": [
+            "Verified QQQ fund-flow, options-positioning, and constituent-level impact data were not supplied."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "QQQ",
+          "thesis": "Near-term news is mixed: reports describe rates/oil pressure and a Fed decision catalyst, while several large QQQ holdings have AI-demand-positive reports. This is a catalyst view, not a calibrated forecast.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "mu_memory_demand",
+              "classification": "FACT",
+              "evidence_family": "sector-news",
+              "evidence_ids": [
+                "news-61792028"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidated by corrected or superseding supplied reporting.",
+              "numeric_values": [],
+              "stance": "SUPPORT",
+              "statement": "A supplied report attributes a view that AI-driven memory shortages may persist into 2028 or 2029 and identifies Micron in that context."
+            },
+            {
+              "claim_id": "mu_competition",
+              "classification": "FACT",
+              "evidence_family": "sector-news",
+              "evidence_ids": [
+                "news-61800956"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidated by corrected supplier or Micron disclosures supplied in the packet.",
+              "numeric_values": [],
+              "stance": "OPPOSE",
+              "statement": "A supplied report says SK Hynix is at volume on 16-layer HBM4 for NVIDIA Rubin while Micron is at samples."
+            },
+            {
+              "claim_id": "mu_selloff",
+              "classification": "FACT",
+              "evidence_family": "market-news",
+              "evidence_ids": [
+                "news-61782945"
+              ],
+              "horizons": [
+                5
+              ],
+              "invalidation": "Invalidated by corrected or superseding supplied market reporting.",
+              "numeric_values": [],
+              "stance": "OPPOSE",
+              "statement": "A supplied article reports MU dipping in premarket amid a tech sell-off."
+            }
+          ],
+          "counterevidence": [
+            "The shortage forecast is attributed commentary, not a company disclosure.",
+            "The competitive report does not quantify financial impact."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Conflicting demand and risk headlines do not support a clean short-horizon direction.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "5 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "5 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Verified MU intraday response and company disclosure"
+                }
+              ],
+              "review": {
+                "event": "HBM4 and demand update",
+                "when": "On a Micron or supplier disclosure"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "mu_selloff",
+                "mu_competition"
+              ],
+              "strongest_support_claim_ids": [
+                "mu_memory_demand"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Require verification of demand translation and competitive execution.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "21 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "21 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Micron HBM4 production and pricing evidence"
+                }
+              ],
+              "review": {
+                "event": "Competitive status refresh",
+                "when": "On supplier or Micron update"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "mu_competition"
+              ],
+              "strongest_support_claim_ids": [
+                "mu_memory_demand"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Do not extrapolate third-party shortage commentary into a medium-horizon outcome.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "63 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "63 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Verified multi-quarter Micron demand and margin data"
+                }
+              ],
+              "review": {
+                "event": "Fundamental validation",
+                "when": "At next supplied Micron primary release"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "mu_competition"
+              ],
+              "strongest_support_claim_ids": [
+                "mu_memory_demand"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "Subsequent supplied company or supplier disclosures could supersede the reported demand and competition narratives."
+          ],
+          "missing": [
+            "Micron primary disclosures, earnings date/results, and verified pricing or shipment data were not supplied."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "MU",
+          "thesis": "Memory-shortage commentary supports the demand narrative, but supplied reports also cite MU premarket weakness and a potentially adverse competitive HBM4 position. The net news view is mixed.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "meta_favorable_commentary",
+              "classification": "FACT",
+              "evidence_family": "market-commentary",
+              "evidence_ids": [
+                "news-61799395"
+              ],
+              "horizons": [
+                5,
+                21
+              ],
+              "invalidation": "Invalidated by corrected or superseding supplied reporting.",
+              "numeric_values": [],
+              "stance": "SUPPORT",
+              "statement": "A supplied article attributes the view that the AI selloff is panic and that Meta may have a favorable setup."
+            },
+            {
+              "claim_id": "meta_custom_silicon",
+              "classification": "FACT",
+              "evidence_family": "company-news",
+              "evidence_ids": [
+                "news-61799604"
+              ],
+              "horizons": [
+                21,
+                63
+              ],
+              "invalidation": "Invalidated by a corrected or superseding supplied Meta disclosure.",
+              "numeric_values": [],
+              "stance": "SUPPORT",
+              "statement": "A supplied article reports that Meta's custom AI-chip plans are expanding, framed as a way to reduce its AI bill."
+            },
+            {
+              "claim_id": "meta_ai_risk",
+              "classification": "INFERENCE",
+              "evidence_family": "sector-news",
+              "evidence_ids": [
+                "news-61786542",
+                "news-61790219"
+              ],
+              "horizons": [
+                5,
+                21
+              ],
+              "invalidation": "Invalidated if subsequent supplied evidence resolves the policy and demand uncertainty.",
+              "numeric_values": [],
+              "stance": "OPPOSE",
+              "statement": "AI-slowdown and regulation debate in supplied coverage creates uncertainty for AI-linked sentiment, including Meta."
+            }
+          ],
+          "counterevidence": [
+            "The favorable setup is an analyst/commentator view.",
+            "No Meta primary disclosure or financial impact estimate was supplied."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Treat favorable commentary as offset by unresolved AI-sentiment risk.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "5 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "5 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Meta primary confirmation and market reaction"
+                }
+              ],
+              "review": {
+                "event": "AI spending update",
+                "when": "On supplied Meta primary disclosure"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "meta_ai_risk"
+              ],
+              "strongest_support_claim_ids": [
+                "meta_favorable_commentary"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Custom-silicon plans are strategically constructive but lack validated timing and economics.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "21 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "21 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Deployment timing and capex impact"
+                }
+              ],
+              "review": {
+                "event": "Capex and execution validation",
+                "when": "On Meta earnings or chip disclosure"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "meta_ai_risk"
+              ],
+              "strongest_support_claim_ids": [
+                "meta_custom_silicon",
+                "meta_favorable_commentary"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Strategic news alone is insufficient to determine the medium-horizon outcome.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "63 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "63 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Verified custom-silicon production and financial impact"
+                }
+              ],
+              "review": {
+                "event": "Execution validation",
+                "when": "At next supplied Meta primary results"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [
+                "meta_custom_silicon"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "Subsequent supplied Meta primary disclosure could supersede these commentary-based narratives."
+          ],
+          "missing": [
+            "Meta primary releases, earnings date/results, capex details, and custom-chip deployment milestones were not supplied."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "META",
+          "thesis": "Commentary frames Meta favorably in the AI selloff and reports custom-silicon plans, but those plans also create an adverse read-through for incumbent AI-chip spending. Evidence is headline-level and mixed.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "nvda_results_infra",
+              "classification": "FACT",
+              "evidence_family": "issuer-release",
+              "evidence_ids": [
+                "primary-nvidia-press-releases-77a71c9ef7da3f1e2093",
+                "primary-nvidia-press-releases-b20d78c5f74389c98858"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidated by corrected or superseding NVIDIA primary disclosures.",
+              "numeric_values": [],
+              "stance": "SUPPORT",
+              "statement": "NVIDIA reported fiscal-Q2 revenue growth and announced expanded AWS GPU infrastructure collaboration."
+            },
+            {
+              "claim_id": "nvda_capex_crowding_risk",
+              "classification": "FACT",
+              "evidence_family": "market-news",
+              "evidence_ids": [
+                "news-61783152",
+                "news-61788866",
+                "news-61796363"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidated by corrected or superseding supplied reports.",
+              "numeric_values": [],
+              "stance": "OPPOSE",
+              "statement": "Supplied reports flag a crowded AI trade, AI-capex boom/concentration concerns, and infrastructure-spending sentiment pressure."
+            },
+            {
+              "claim_id": "nvda_policy_supply_risk",
+              "classification": "FACT",
+              "evidence_family": "market-news",
+              "evidence_ids": [
+                "news-61783902",
+                "news-61797716"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Invalidated by corrected or superseding policy or supply-chain reporting.",
+              "numeric_values": [],
+              "stance": "OPPOSE",
+              "statement": "Supplied reports describe AI guardrail debate and potential Taiwan/capacity supply-chain risk for NVIDIA."
+            }
+          ],
+          "counterevidence": [
+            "Issuer releases are company statements and do not by themselves establish market outcomes.",
+            "Risk reports include commentator views and do not quantify NVDA earnings impact."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Strong issuer activity is offset by acute sentiment and policy/supply uncertainty.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "5 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "5 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Verified current customer demand and supply status"
+                }
+              ],
+              "review": {
+                "event": "Demand, supply, and regulation refresh",
+                "when": "On NVIDIA or policy update"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "nvda_capex_crowding_risk",
+                "nvda_policy_supply_risk"
+              ],
+              "strongest_support_claim_ids": [
+                "nvda_results_infra"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Do not treat infrastructure announcements as resolving capex-cycle risks.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "21 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "21 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Backlog and customer concentration verification"
+                }
+              ],
+              "review": {
+                "event": "Customer-demand validation",
+                "when": "On supplied NVIDIA primary update"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "nvda_capex_crowding_risk",
+                "nvda_policy_supply_risk"
+              ],
+              "strongest_support_claim_ids": [
+                "nvda_results_infra"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Longer-horizon demand evidence is positive, but policy, supply, and cycle risks remain material.",
+              "confirmation": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "63 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "UNAVAILABLE",
+                "comparison": "UNAVAILABLE",
+                "confirmation_interval": "n/a",
+                "evidence_ids": [],
+                "expiry": "63 trading days",
+                "field": "not supplied",
+                "level": null,
+                "units": "n/a"
+              },
+              "missing_evidence": [
+                {
+                  "criticality": "CRITICAL",
+                  "item": "Quantified medium-term demand and supply outlook"
+                }
+              ],
+              "review": {
+                "event": "Fundamental and risk reassessment",
+                "when": "At next supplied NVIDIA results or material policy release"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "nvda_capex_crowding_risk",
+                "nvda_policy_supply_risk"
+              ],
+              "strongest_support_claim_ids": [
+                "nvda_results_infra"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "New supplied NVIDIA primary results, demand disclosures, or policy developments could supersede the cited narratives."
+          ],
+          "missing": [
+            "Verified current order backlog, customer concentration detail, and quantified effect of AI-policy or supply risks were not supplied."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "NVDA",
+          "thesis": "Primary releases substantiate recent AI-infrastructure expansion and strong reported quarterly revenue, while supplied news flags AI-capex concentration, crowding, regulation, and supply-chain risks. Net news is mixed across horizons.",
+          "view": "MIXED"
+        }
+      ],
+      "input_hash": "d905d9103054dac0d7a0291ababd47ee74a7686cb562de700ee7852e52e7e849",
+      "role": "news"
+    },
+    "technical": {
+      "assessments": [
+        {
+          "claims": [
+            {
+              "claim_id": "ANET-trend",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-ANET"
+              ],
+              "horizons": [
+                21,
+                63
+              ],
+              "invalidation": "Completed daily close at or below the 50-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/ANET/price_to_sma50",
+                  "value": 1.0105287398871798
+                },
+                {
+                  "packet_path": "/instruments/ANET/price_to_sma200",
+                  "value": 1.221729494349314
+                },
+                {
+                  "packet_path": "/instruments/ANET/return63_pct",
+                  "value": 15.051457975986281
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "ANET is above its 50- and 200-session averages and has a positive 63-session return, supporting the longer-horizon trend."
+            },
+            {
+              "claim_id": "ANET-weakness",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-ANET"
+              ],
+              "horizons": [
+                5,
+                21
+              ],
+              "invalidation": "Completed daily close above the 20-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/ANET/price_to_sma20",
+                  "value": 0.9750817067693961
+                },
+                {
+                  "packet_path": "/instruments/ANET/return5_pct",
+                  "value": -3.080813293425533
+                },
+                {
+                  "packet_path": "/instruments/ANET/return21_pct",
+                  "value": -7.764463215794127
+                },
+                {
+                  "packet_path": "/instruments/ANET/rsi14_simple",
+                  "value": 49.7502937720329
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "ANET is below its 20-session average with negative 5- and 21-session returns; RSI is near neutral rather than showing a strong momentum recovery."
+            },
+            {
+              "claim_id": "ANET-risk",
+              "classification": "FACT",
+              "evidence_family": "risk-levels",
+              "evidence_ids": [
+                "price-ANET"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Not applicable; this is risk and level context.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/ANET/atr14_simple",
+                  "value": 7.695171428571426
+                },
+                {
+                  "packet_path": "/instruments/ANET/realized_vol5_pct",
+                  "value": 66.66888377964524
+                },
+                {
+                  "packet_path": "/instruments/ANET/realized_vol21_pct",
+                  "value": 48.34179319127294
+                },
+                {
+                  "packet_path": "/instruments/ANET/realized_vol63_pct",
+                  "value": 57.54512891040997
+                },
+                {
+                  "packet_path": "/instruments/ANET/support_resistance_candidates/20_session/support_close",
+                  "value": 183.75
+                },
+                {
+                  "packet_path": "/instruments/ANET/support_resistance_candidates/20_session/resistance_close",
+                  "value": 202.25
+                }
+              ],
+              "stance": "CONTEXT",
+              "statement": "ATR14 and realized volatility are elevated, while support is 183.75 and resistance is 202.25; these are descriptive levels, not forecasts."
+            }
+          ],
+          "counterevidence": [
+            "Five- and 21-session returns are negative and trail SPY.",
+            "Intraday bars have gaps and IEX-only coverage."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Avoid directional reliance until a daily-level break resolves recent weakness.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-ANET"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 202.25,
+                "units": "USD"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-ANET"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 183.75,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "reassess 20-session level break and volatility.",
+                "when": "next completed daily session"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "ANET-weakness"
+              ],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Intermediate trend evidence conflicts; require recovery of the 20-session average.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-ANET"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 192.6095,
+                "units": "USD"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-ANET"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 183.75,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review moving-average recovery.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "ANET-weakness"
+              ],
+              "strongest_support_claim_ids": [
+                "ANET-trend"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Longer trend remains constructive but volatility warrants level-based review.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-ANET"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 202.25,
+                "units": "USD"
+              },
+              "direction": "BULLISH",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-ANET"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 183.75,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review trend versus 50-session average.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [
+                "ANET-trend"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A completed daily close below 183.75 weakens the intermediate constructive structure.",
+            "A completed daily close above 202.25 negates the near-term bearish setup."
+          ],
+          "missing": [
+            "No options-implied volatility, consolidated intraday volume, or fundamental catalyst evidence was supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "ANET",
+          "thesis": "Near-term trend is mixed: price is below the 20-session average but above the 50- and 200-session averages; the 63-session return remains positive despite recent weakness.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "QQQ-shortweak",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-QQQ"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Completed daily close above the 20-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/QQQ/price_to_sma20",
+                  "value": 0.992452141032378
+                },
+                {
+                  "packet_path": "/instruments/QQQ/price_to_sma50",
+                  "value": 0.9983697901562356
+                },
+                {
+                  "packet_path": "/instruments/QQQ/return5_pct",
+                  "value": -1.360298208523436
+                },
+                {
+                  "packet_path": "/instruments/QQQ/return21_pct",
+                  "value": -3.126750174163684
+                },
+                {
+                  "packet_path": "/instruments/QQQ/return63_pct",
+                  "value": -1.6857515180081606
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "QQQ is below its 20- and 50-session averages and has negative 5-, 21-, and 63-session returns."
+            },
+            {
+              "claim_id": "QQQ-longtrend",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-QQQ"
+              ],
+              "horizons": [
+                21,
+                63
+              ],
+              "invalidation": "Completed daily close at or below the 200-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/QQQ/price_to_sma200",
+                  "value": 1.0734433346098362
+                },
+                {
+                  "packet_path": "/instruments/QQQ/rsi14_simple",
+                  "value": 52.29166666666658
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "QQQ remains above its 200-session average and RSI is near neutral, supporting a non-breakdown longer-term interpretation."
+            },
+            {
+              "claim_id": "QQQ-risk",
+              "classification": "FACT",
+              "evidence_family": "risk-levels",
+              "evidence_ids": [
+                "price-QQQ"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Not applicable; this is risk and level context.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/QQQ/atr14_simple",
+                  "value": 7.893914285714272
+                },
+                {
+                  "packet_path": "/instruments/QQQ/realized_vol5_pct",
+                  "value": 11.917515909365184
+                },
+                {
+                  "packet_path": "/instruments/QQQ/realized_vol21_pct",
+                  "value": 12.595734316422064
+                },
+                {
+                  "packet_path": "/instruments/QQQ/realized_vol63_pct",
+                  "value": 22.41736224799046
+                },
+                {
+                  "packet_path": "/instruments/QQQ/support_resistance_candidates/20_session/support_close",
+                  "value": 706.32
+                },
+                {
+                  "packet_path": "/instruments/QQQ/support_resistance_candidates/20_session/resistance_close",
+                  "value": 729.87
+                }
+              ],
+              "stance": "CONTEXT",
+              "statement": "ATR14 is a one-session range measure, and realized volatility is lower than the individual stocks; 20-session support and resistance are 706.32 and 729.87."
+            }
+          ],
+          "counterevidence": [
+            "The 200-session trend remains positive.",
+            "Intraday evidence is IEX-only and has gaps."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Near-flat positioning around short averages supports waiting for a daily break.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-QQQ"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 729.87,
+                "units": "USD"
+              },
+              "direction": "NEUTRAL",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-QQQ"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 706.32,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review support break or resistance recovery.",
+                "when": "next completed daily session"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "QQQ-shortweak"
+              ],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Short/intermediate weakness conflicts with the long moving-average trend.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-QQQ"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 714.5735,
+                "units": "USD"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-QQQ"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 706.32,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review 20-session average.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "QQQ-shortweak"
+              ],
+              "strongest_support_claim_ids": [
+                "QQQ-longtrend"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Maintain a mixed technical view until returns and short averages align with the 200-session trend.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-QQQ"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 729.87,
+                "units": "USD"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-QQQ"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 661.73,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review 63-session support.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "QQQ-shortweak"
+              ],
+              "strongest_support_claim_ids": [
+                "QQQ-longtrend"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A completed daily close above 729.87 negates the short-term bearish case.",
+            "A completed daily close below 706.32 weakens the 200-session trend recovery case."
+          ],
+          "missing": [
+            "No options-implied volatility, consolidated intraday volume, or macro catalyst evidence was supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "QQQ",
+          "thesis": "QQQ is near its short moving averages but below both, with negative recent returns; it remains above its 200-session average, producing a mixed multi-horizon technical picture.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "MU-weakness",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-MU"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Completed daily close above the 20-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/MU/price_to_sma20",
+                  "value": 0.9621050675208717
+                },
+                {
+                  "packet_path": "/instruments/MU/price_to_sma50",
+                  "value": 0.9961735886085428
+                },
+                {
+                  "packet_path": "/instruments/MU/return5_pct",
+                  "value": -9.104948897785736
+                },
+                {
+                  "packet_path": "/instruments/MU/return21_pct",
+                  "value": -2.716275544044733
+                },
+                {
+                  "packet_path": "/instruments/MU/return63_pct",
+                  "value": -5.865873412047562
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "MU is below its 20-session average with negative 5-, 21-, and 63-session returns; it is also slightly below its 50-session average."
+            },
+            {
+              "claim_id": "MU-longbase",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-MU"
+              ],
+              "horizons": [
+                21,
+                63
+              ],
+              "invalidation": "Completed daily close at or below the 200-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/MU/price_to_sma200",
+                  "value": 1.4771062557615167
+                },
+                {
+                  "packet_path": "/instruments/MU/rsi14_simple",
+                  "value": 52.1559923906151
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "MU remains materially above its 200-session average and RSI is near neutral, providing longer-horizon counterevidence to the recent decline."
+            },
+            {
+              "claim_id": "MU-risk",
+              "classification": "FACT",
+              "evidence_family": "risk-levels",
+              "evidence_ids": [
+                "price-MU"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Not applicable; this is risk and level context.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/MU/atr14_simple",
+                  "value": 43.68447857142859
+                },
+                {
+                  "packet_path": "/instruments/MU/realized_vol5_pct",
+                  "value": 53.928063538798966
+                },
+                {
+                  "packet_path": "/instruments/MU/realized_vol21_pct",
+                  "value": 56.39491284665741
+                },
+                {
+                  "packet_path": "/instruments/MU/realized_vol63_pct",
+                  "value": 93.52546590442891
+                },
+                {
+                  "packet_path": "/instruments/MU/support_resistance_candidates/20_session/support_close",
+                  "value": 910.43
+                },
+                {
+                  "packet_path": "/instruments/MU/support_resistance_candidates/20_session/resistance_close",
+                  "value": 1027.77
+                }
+              ],
+              "stance": "CONTEXT",
+              "statement": "MU has very high realized volatility and a large one-session ATR14; 20-session support is 910.43 and resistance is 1027.77."
+            }
+          ],
+          "counterevidence": [
+            "Price remains above the 200-session average.",
+            "Intraday bars have gaps and IEX-only coverage."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Recent downside trend dominates, subject to high-volatility risk.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-MU"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 910.43,
+                "units": "USD"
+              },
+              "direction": "BEARISH",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-MU"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 1027.77,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review support or 20-session recovery.",
+                "when": "next completed daily session"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "MU-weakness"
+              ],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Recent returns and position below the 20-session average favor downside continuation evidence.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-MU"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 910.43,
+                "units": "USD"
+              },
+              "direction": "BEARISH",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-MU"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 960.4252499999999,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review 20-session average.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "MU-weakness"
+              ],
+              "strongest_support_claim_ids": [],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Long-base support conflicts with negative medium-term momentum; do not treat the 200-session average as a forecast.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-MU"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 1027.77,
+                "units": "USD"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-MU"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 910.43,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review volatility and 50-session trend.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "MU-weakness"
+              ],
+              "strongest_support_claim_ids": [
+                "MU-longbase"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A completed daily close above 1027.77 negates near-term downside continuation.",
+            "A completed daily close below 910.43 confirms a loss of nearby support."
+          ],
+          "missing": [
+            "No options-implied volatility, consolidated intraday volume, or semiconductor fundamental evidence was supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "MU",
+          "thesis": "MU has recent downside momentum below the 20-session average, but remains well above the 200-session average; exceptionally high realized volatility makes the 63-session direction mixed rather than cleanly bearish.",
+          "view": "MIXED"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "META-trend",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-META"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Completed daily close below the 20-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/META/price_to_sma20",
+                  "value": 1.127649175059233
+                },
+                {
+                  "packet_path": "/instruments/META/price_to_sma50",
+                  "value": 1.1046272530263568
+                },
+                {
+                  "packet_path": "/instruments/META/price_to_sma200",
+                  "value": 1.0675329251548913
+                },
+                {
+                  "packet_path": "/instruments/META/return5_pct",
+                  "value": 7.917051737276459
+                },
+                {
+                  "packet_path": "/instruments/META/return21_pct",
+                  "value": 11.871186782526856
+                },
+                {
+                  "packet_path": "/instruments/META/return63_pct",
+                  "value": 17.39391160182018
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "META is above its 20-, 50-, and 200-session averages, with positive returns at all requested horizons."
+            },
+            {
+              "claim_id": "META-stretched",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-META"
+              ],
+              "horizons": [
+                5,
+                21
+              ],
+              "invalidation": "Completed daily close above the 63-session resistance.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/META/rsi14_simple",
+                  "value": 84.78005482313017
+                },
+                {
+                  "packet_path": "/instruments/META/support_resistance_candidates/63_session/resistance_close",
+                  "value": 681.31
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "META RSI14 is elevated and the price remains below its 63-session resistance, creating pullback risk despite the bullish trend."
+            },
+            {
+              "claim_id": "META-risk",
+              "classification": "FACT",
+              "evidence_family": "risk-levels",
+              "evidence_ids": [
+                "price-META"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Not applicable; this is risk and level context.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/META/atr14_simple",
+                  "value": 21.714028571428578
+                },
+                {
+                  "packet_path": "/instruments/META/realized_vol5_pct",
+                  "value": 49.25764597920966
+                },
+                {
+                  "packet_path": "/instruments/META/realized_vol21_pct",
+                  "value": 36.7253499057877
+                },
+                {
+                  "packet_path": "/instruments/META/realized_vol63_pct",
+                  "value": 46.876940655352875
+                },
+                {
+                  "packet_path": "/instruments/META/support_resistance_candidates/20_session/support_close",
+                  "value": 543.67
+                },
+                {
+                  "packet_path": "/instruments/META/support_resistance_candidates/20_session/resistance_close",
+                  "value": 665.6
+                }
+              ],
+              "stance": "CONTEXT",
+              "statement": "ATR14 is a one-session range measure; realized volatility is material, while 20-session support and resistance are 543.67 and 665.6."
+            }
+          ],
+          "counterevidence": [
+            "RSI14 is elevated, indicating stretched momentum.",
+            "Price is below the 63-session high and intraday data are IEX-only."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Trend is bullish, but elevated RSI calls for confirmation rather than extrapolation.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-META"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 681.31,
+                "units": "USD"
+              },
+              "direction": "BULLISH",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-META"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 590.2545,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review RSI and 63-session resistance.",
+                "when": "next completed daily session"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "META-stretched"
+              ],
+              "strongest_support_claim_ids": [
+                "META-trend"
+              ],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Intermediate trend is constructive, conditioned on holding the 20-session average.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-META"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 681.31,
+                "units": "USD"
+              },
+              "direction": "BULLISH",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-META"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 590.2545,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review moving-average trend.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "META-stretched"
+              ],
+              "strongest_support_claim_ids": [
+                "META-trend"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Longer-horizon trend is bullish; resistance is a measurable confirmation level.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-META"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 681.31,
+                "units": "USD"
+              },
+              "direction": "BULLISH",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-META"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 543.67,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review 200-session trend.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [
+                "META-trend"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A completed daily close below 590.2545 undermines the short/intermediate trend.",
+            "A completed daily close below 543.67 breaks the 20-session support level."
+          ],
+          "missing": [
+            "No options-implied volatility, consolidated intraday volume, or fundamental catalyst evidence was supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "META",
+          "thesis": "META is above all listed moving averages with positive returns across horizons and positive relative strength; elevated RSI is meaningful counterevidence to a continued near-term advance.",
+          "view": "BULLISH"
+        },
+        {
+          "claims": [
+            {
+              "claim_id": "NVDA-shortweak",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-NVDA"
+              ],
+              "horizons": [
+                5,
+                21
+              ],
+              "invalidation": "Completed daily close above the 20-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/NVDA/price_to_sma20",
+                  "value": 0.9613014205807635
+                },
+                {
+                  "packet_path": "/instruments/NVDA/price_to_sma50",
+                  "value": 0.9908570236902003
+                },
+                {
+                  "packet_path": "/instruments/NVDA/return5_pct",
+                  "value": -8.42160097239104
+                },
+                {
+                  "packet_path": "/instruments/NVDA/return21_pct",
+                  "value": -6.36484687083888
+                }
+              ],
+              "stance": "OPPOSE",
+              "statement": "NVDA is below its 20- and 50-session averages with negative 5- and 21-session returns."
+            },
+            {
+              "claim_id": "NVDA-longtrend",
+              "classification": "FACT",
+              "evidence_family": "daily-technical",
+              "evidence_ids": [
+                "price-NVDA"
+              ],
+              "horizons": [
+                21,
+                63
+              ],
+              "invalidation": "Completed daily close at or below the 200-session average.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/NVDA/price_to_sma200",
+                  "value": 1.0675316493328562
+                },
+                {
+                  "packet_path": "/instruments/NVDA/return63_pct",
+                  "value": 2.8120278766021745
+                },
+                {
+                  "packet_path": "/instruments/NVDA/rsi14_simple",
+                  "value": 51.64021164021166
+                }
+              ],
+              "stance": "SUPPORT",
+              "statement": "NVDA remains above its 200-session average, has a positive 63-session return, and RSI is near neutral."
+            },
+            {
+              "claim_id": "NVDA-risk",
+              "classification": "FACT",
+              "evidence_family": "risk-levels",
+              "evidence_ids": [
+                "price-NVDA"
+              ],
+              "horizons": [
+                5,
+                21,
+                63
+              ],
+              "invalidation": "Not applicable; this is risk and level context.",
+              "numeric_values": [
+                {
+                  "packet_path": "/instruments/NVDA/atr14_simple",
+                  "value": 7.765714285714286
+                },
+                {
+                  "packet_path": "/instruments/NVDA/realized_vol5_pct",
+                  "value": 20.885514056329516
+                },
+                {
+                  "packet_path": "/instruments/NVDA/realized_vol21_pct",
+                  "value": 44.114141442318555
+                },
+                {
+                  "packet_path": "/instruments/NVDA/realized_vol63_pct",
+                  "value": 40.616252796283014
+                },
+                {
+                  "packet_path": "/instruments/NVDA/support_resistance_candidates/20_session/support_close",
+                  "value": 208.48
+                },
+                {
+                  "packet_path": "/instruments/NVDA/support_resistance_candidates/20_session/resistance_close",
+                  "value": 230.36
+                }
+              ],
+              "stance": "CONTEXT",
+              "statement": "ATR14 is a one-session range measure; realized volatility varies across horizons, with 20-session support of 208.48 and resistance of 230.36."
+            }
+          ],
+          "counterevidence": [
+            "The 200-session trend and 63-session return remain positive.",
+            "Intraday evidence is IEX-only."
+          ],
+          "horizon_assessments": [
+            {
+              "action_implication": "Recent momentum is bearish until price recovers its 20-session average.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-NVDA"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 208.48,
+                "units": "USD"
+              },
+              "direction": "BEARISH",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-NVDA"
+                ],
+                "expiry": "within 5 trading days",
+                "field": "completed daily close",
+                "level": 219.45250000000001,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review support and 20-session average.",
+                "when": "next completed daily session"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "NVDA-shortweak"
+              ],
+              "strongest_support_claim_ids": [],
+              "trading_days": 5
+            },
+            {
+              "action_implication": "Near-term weakness conflicts with the 200-session trend.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-NVDA"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 230.36,
+                "units": "USD"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-NVDA"
+                ],
+                "expiry": "within 21 trading days",
+                "field": "completed daily close",
+                "level": 208.48,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review 20- and 50-session averages.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [
+                "NVDA-shortweak"
+              ],
+              "strongest_support_claim_ids": [
+                "NVDA-longtrend"
+              ],
+              "trading_days": 21
+            },
+            {
+              "action_implication": "Longer trend is constructive but lacks aligned short-average momentum.",
+              "confirmation": {
+                "availability": "AVAILABLE",
+                "comparison": "ABOVE",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-NVDA"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 230.36,
+                "units": "USD"
+              },
+              "direction": "MIXED",
+              "invalidation_trigger": {
+                "availability": "AVAILABLE",
+                "comparison": "BELOW",
+                "confirmation_interval": "one completed daily session",
+                "evidence_ids": [
+                  "price-NVDA"
+                ],
+                "expiry": "within 63 trading days",
+                "field": "completed daily close",
+                "level": 190.01,
+                "units": "USD"
+              },
+              "missing_evidence": [],
+              "review": {
+                "event": "review 63-session support and 200-session trend.",
+                "when": "weekly"
+              },
+              "status": "SUPPORTED",
+              "strongest_opposition_claim_ids": [],
+              "strongest_support_claim_ids": [
+                "NVDA-longtrend"
+              ],
+              "trading_days": 63
+            }
+          ],
+          "invalidation": [
+            "A completed daily close above 230.36 negates the short/intermediate bearish setup.",
+            "A completed daily close below 208.48 confirms loss of nearby support."
+          ],
+          "missing": [
+            "No options-implied volatility, consolidated intraday volume, or fundamental catalyst evidence was supplied to this role."
+          ],
+          "status": "SUPPORTED",
+          "symbol": "NVDA",
+          "thesis": "NVDA has negative 5- and 21-session momentum below short averages, while it remains above its 200-session average and has a positive 63-session return, yielding a mixed horizon profile.",
+          "view": "MIXED"
+        }
+      ],
+      "input_hash": "842132354557e72e621f77ee1bed5adb7811be5f8f49cd47ca29b9a1b50f916d",
+      "role": "technical"
+    }
+  },
+  "resumed_from": null,
+  "reused_roles": [],
+  "runtime_config_hash": "209bde1470b18899b36e5a2a2fa35eadcf28b55db40557baf4d042c371d9bb14",
+  "skipped_roles": [
+    "critic",
+    "synthesis"
+  ],
+  "status": "PARTIAL",
+  "validation": "META_AGENT_V3_HORIZON_DECISIONS_AND_CRITIC_CLAIM_GATES"
+}

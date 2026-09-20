@@ -1,0 +1,596 @@
+{
+  "assessments": [
+    {
+      "claims": [
+        {
+          "claim_id": "ANET-trend",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a revised supplied daily series containing different calculated values.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/price_to_sma20",
+              "value": 1.0332884655208117
+            },
+            {
+              "packet_path": "/instruments/ANET/price_to_sma50",
+              "value": 1.0771367881150673
+            },
+            {
+              "packet_path": "/instruments/ANET/price_to_sma200",
+              "value": 1.3011379007995618
+            },
+            {
+              "packet_path": "/instruments/ANET/rsi14_simple",
+              "value": 59.63028169014083
+            },
+            {
+              "packet_path": "/instruments/ANET/return21_pct",
+              "value": -5.182897862232783
+            },
+            {
+              "packet_path": "/instruments/ANET/return63_pct",
+              "value": 27.615089514066504
+            },
+            {
+              "packet_path": "/instruments/ANET/atr14_simple",
+              "value": 7.035885714285712
+            },
+            {
+              "packet_path": "/instruments/ANET/realized_vol21_pct",
+              "value": 45.07726952307267
+            },
+            {
+              "packet_path": "/instruments/ANET/realized_vol63_pct",
+              "value": 56.655212705591126
+            }
+          ],
+          "statement": "At the latest completed close, ANET was above its 20-, 50-, and 200-session moving averages; RSI was positive but not extreme, while the 21-session return was negative and 63-session return positive."
+        },
+        {
+          "claim_id": "ANET-levels-intraday",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "price-ANET",
+            "intraday-bars-ANET",
+            "intraday-latest-ANET"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Completed closes below the cited support levels, or a sustained change in the supplied intraday structure, would invalidate this conditional interpretation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/20_session/support_close",
+              "value": 183.75
+            },
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/20_session/resistance_close",
+              "value": 202.25
+            },
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/63_session/support_close",
+              "value": 157.6
+            },
+            {
+              "packet_path": "/instruments/ANET/support_resistance_candidates/63_session/resistance_close",
+              "value": 210.5
+            },
+            {
+              "packet_path": "/intraday/ANET/latest_trade/p",
+              "value": 189.23
+            },
+            {
+              "packet_path": "/instruments/ANET/latest_close",
+              "value": 199.59
+            }
+          ],
+          "statement": "The longer-term trend is constructive, but the intraday trade below the prior completed close makes the supplied supports conditional; a break of the cited support levels would weaken that reading."
+        }
+      ],
+      "counterevidence": [
+        "The 21-session completed return is negative.",
+        "IEX intraday bars have gaps and IEX-only coverage is limited-venue evidence.",
+        "Realized volatility is elevated, so support/resistance levels are conditional rather than durable."
+      ],
+      "invalidation": [
+        "A completed-close break below the supplied 20-session support would weaken the near-term trend structure.",
+        "A completed-close break below the 63-session support would invalidate the stated longer-horizon constructive structure."
+      ],
+      "missing": [
+        "No consolidated intraday feed, qualified halt feed, options-implied volatility, or supplied catalyst/fundamental evidence."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "ANET",
+      "thesis": "The completed-close trend is constructive across the 21/63-session framing (price above its 20-, 50-, and 200-session averages and positive 63-session return), but current IEX intraday trading is below the prior completed close and the 20-session resistance. This supports a longer-horizon bullish trend with short-horizon execution risk rather than a directional forecast.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "QQQ-trend",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a revised supplied daily series containing different calculated values.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma20",
+              "value": 0.9988989307891368
+            },
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma50",
+              "value": 1.0062972405654003
+            },
+            {
+              "packet_path": "/instruments/QQQ/price_to_sma200",
+              "value": 1.0829236089556302
+            },
+            {
+              "packet_path": "/instruments/QQQ/rsi14_simple",
+              "value": 51.128172986524554
+            },
+            {
+              "packet_path": "/instruments/QQQ/return21_pct",
+              "value": -1.2187370457371949
+            },
+            {
+              "packet_path": "/instruments/QQQ/return63_pct",
+              "value": -0.31236055332440893
+            },
+            {
+              "packet_path": "/instruments/QQQ/atr14_simple",
+              "value": 7.793914285714274
+            },
+            {
+              "packet_path": "/instruments/QQQ/realized_vol21_pct",
+              "value": 13.129796089652901
+            },
+            {
+              "packet_path": "/instruments/QQQ/realized_vol63_pct",
+              "value": 22.394481637899315
+            }
+          ],
+          "statement": "QQQ was slightly below its 20-session average, slightly above its 50- and 200-session averages, with near-neutral RSI and negative 21- and 63-session returns."
+        },
+        {
+          "claim_id": "QQQ-levels",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "price-QQQ",
+            "intraday-bars-QQQ",
+            "intraday-latest-QQQ"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close beyond either cited range boundary would invalidate the range interpretation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/QQQ/support_resistance_candidates/20_session/support_close",
+              "value": 706.32
+            },
+            {
+              "packet_path": "/instruments/QQQ/support_resistance_candidates/20_session/resistance_close",
+              "value": 731.07
+            },
+            {
+              "packet_path": "/instruments/QQQ/support_resistance_candidates/63_session/support_close",
+              "value": 661.73
+            },
+            {
+              "packet_path": "/instruments/QQQ/support_resistance_candidates/63_session/resistance_close",
+              "value": 744
+            },
+            {
+              "packet_path": "/intraday/QQQ/latest_trade/p",
+              "value": 711.745
+            },
+            {
+              "packet_path": "/instruments/QQQ/latest_close",
+              "value": 714.88
+            }
+          ],
+          "statement": "With intraday trade below the prior completed close and moving averages tightly clustered, the supplied support/resistance levels define a neutral, conditional range rather than a directional signal."
+        }
+      ],
+      "counterevidence": [
+        "Price remains above the 200-session average.",
+        "IEX intraday bars contain gaps and are limited-venue coverage."
+      ],
+      "invalidation": [
+        "A completed close through the supplied 20-session resistance would improve the near-term technical reading.",
+        "A completed close below the supplied 63-session support would weaken the longer-term structure."
+      ],
+      "missing": [
+        "No consolidated intraday feed, qualified halt feed, options-implied volatility, or supplied macro/catalyst evidence."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "QQQ",
+      "thesis": "QQQ is essentially at its 20- and 50-session averages while remaining above the 200-session average. Flat-to-negative 21/63-session returns and intraday trade below the completed close leave no clear trend edge; the long-term moving-average position is constructive but short/intermediate momentum is neutral.",
+      "view": "NEUTRAL"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "MU-trend-volatility",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a revised supplied daily series containing different calculated values.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/price_to_sma20",
+              "value": 1.0129343193740592
+            },
+            {
+              "packet_path": "/instruments/MU/price_to_sma50",
+              "value": 1.0502364878944324
+            },
+            {
+              "packet_path": "/instruments/MU/price_to_sma200",
+              "value": 1.5677726792309303
+            },
+            {
+              "packet_path": "/instruments/MU/rsi14_simple",
+              "value": 51.322850368151755
+            },
+            {
+              "packet_path": "/instruments/MU/return21_pct",
+              "value": 7.019719299015681
+            },
+            {
+              "packet_path": "/instruments/MU/return63_pct",
+              "value": -2.0695472300601536
+            },
+            {
+              "packet_path": "/instruments/MU/drawdown_from_window_high_pct",
+              "value": -19.636441543887408
+            },
+            {
+              "packet_path": "/instruments/MU/atr14_simple",
+              "value": 44.149835714285736
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol21_pct",
+              "value": 54.832849536219605
+            },
+            {
+              "packet_path": "/instruments/MU/realized_vol63_pct",
+              "value": 92.94729146500642
+            }
+          ],
+          "statement": "MU was above its 20-, 50-, and 200-session averages with near-neutral RSI and positive 21-session return, but negative 63-session return, material drawdown, and high realized volatility."
+        },
+        {
+          "claim_id": "MU-levels-intraday",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "price-MU",
+            "intraday-bars-MU",
+            "intraday-latest-MU"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Completed closes below the cited supports or failure of the intraday rebound would invalidate this conditional reading.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/MU/support_resistance_candidates/20_session/support_close",
+              "value": 910.43
+            },
+            {
+              "packet_path": "/instruments/MU/support_resistance_candidates/20_session/resistance_close",
+              "value": 1027.77
+            },
+            {
+              "packet_path": "/instruments/MU/support_resistance_candidates/63_session/support_close",
+              "value": 739
+            },
+            {
+              "packet_path": "/instruments/MU/support_resistance_candidates/63_session/resistance_close",
+              "value": 1213.56
+            },
+            {
+              "packet_path": "/intraday/MU/latest_trade/p",
+              "value": 926.21
+            },
+            {
+              "packet_path": "/intraday/MU/session_vwap",
+              "value": 914.1485673044806
+            }
+          ],
+          "statement": "The intraday advance is constructive for 5 sessions, but the large volatility measures make the supplied support/resistance levels conditional and prevent extending that observation into a stable 21/63-session trend conclusion."
+        }
+      ],
+      "counterevidence": [
+        "The latest intraday trade remains below the prior completed close.",
+        "The 63-session completed return is negative and drawdown from the window high is material."
+      ],
+      "invalidation": [
+        "A completed close below the supplied 20-session support would weaken the near-term structure.",
+        "A completed close below the 63-session support would invalidate the longer-horizon constructive moving-average reading."
+      ],
+      "missing": [
+        "No consolidated intraday feed, qualified halt feed, options-implied volatility, or supplied semiconductor-cycle/catalyst evidence."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "MU",
+      "thesis": "MU retains a constructive completed-close moving-average structure, but its 63-session return is negative, its drawdown is material, and realized volatility is the highest in this set. The intraday rebound is constructive only for the immediate session; high volatility makes the 5/21/63-session technical reading mixed.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "META-trend",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-META"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a revised supplied daily series containing different calculated values.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/price_to_sma20",
+              "value": 1.10497265830814
+            },
+            {
+              "packet_path": "/instruments/META/price_to_sma50",
+              "value": 1.078428403157785
+            },
+            {
+              "packet_path": "/instruments/META/price_to_sma200",
+              "value": 1.0397911913546005
+            },
+            {
+              "packet_path": "/instruments/META/rsi14_simple",
+              "value": 83.89169026732061
+            },
+            {
+              "packet_path": "/instruments/META/return21_pct",
+              "value": 11.95128271572945
+            },
+            {
+              "packet_path": "/instruments/META/return63_pct",
+              "value": 14.003483278503959
+            },
+            {
+              "packet_path": "/instruments/META/relative_strength_vs_spy/21_sessions_percentage_points",
+              "value": 13.012785130000193
+            },
+            {
+              "packet_path": "/instruments/META/relative_strength_vs_spy/63_sessions_percentage_points",
+              "value": 10.407462892470566
+            },
+            {
+              "packet_path": "/instruments/META/drawdown_from_window_high_pct",
+              "value": -16.94585068888177
+            },
+            {
+              "packet_path": "/instruments/META/atr14_simple",
+              "value": 21.324742857142862
+            },
+            {
+              "packet_path": "/instruments/META/realized_vol21_pct",
+              "value": 36.778720657291075
+            },
+            {
+              "packet_path": "/instruments/META/realized_vol63_pct",
+              "value": 46.62761438775864
+            }
+          ],
+          "statement": "META was above its 20-, 50-, and 200-session averages, with positive 21- and 63-session returns and positive relative strength versus SPY; its RSI was elevated and it remained below its 252-session window high."
+        },
+        {
+          "claim_id": "META-levels-intraday",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "price-META",
+            "intraday-bars-META",
+            "intraday-latest-META"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close below cited support, or reversal below intraday VWAP, would invalidate this immediate-momentum interpretation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/20_session/support_close",
+              "value": 543.67
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/20_session/resistance_close",
+              "value": 653.69
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/63_session/support_close",
+              "value": 539.03
+            },
+            {
+              "packet_path": "/instruments/META/support_resistance_candidates/63_session/resistance_close",
+              "value": 681.31
+            },
+            {
+              "packet_path": "/intraday/META/latest_trade/p",
+              "value": 664.13
+            },
+            {
+              "packet_path": "/intraday/META/session_vwap",
+              "value": 658.4702841033832
+            }
+          ],
+          "statement": "Intraday trading above session VWAP supports immediate momentum, but elevated RSI and proximity to supplied resistance make support/resistance conditional rather than confirmation of further gains."
+        }
+      ],
+      "counterevidence": [
+        "The supplied RSI is elevated and price is near 20-session resistance.",
+        "The drawdown from the 252-session window high remains material."
+      ],
+      "invalidation": [
+        "A completed close below the supplied 20-session support would weaken the near-term momentum thesis.",
+        "A completed close below the 63-session support would invalidate the stated constructive structure."
+      ],
+      "missing": [
+        "No consolidated intraday feed, qualified halt feed, options-implied volatility, or supplied earnings/catalyst evidence."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "META",
+      "thesis": "META has strong completed-close momentum: price is above all supplied moving averages and relative strength is positive at 21 and 63 sessions. However, RSI is very elevated, price is near the supplied 20-session resistance, and the drawdown from the window high remains material. The technical bias is constructive but extension risk makes the overall view mixed.",
+      "view": "MIXED"
+    },
+    {
+      "claims": [
+        {
+          "claim_id": "NVDA-trend",
+          "classification": "FACT",
+          "evidence_ids": [
+            "price-NVDA"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "Invalidated by a revised supplied daily series containing different calculated values.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma20",
+              "value": 0.9914949185260886
+            },
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma50",
+              "value": 1.0268411545553757
+            },
+            {
+              "packet_path": "/instruments/NVDA/price_to_sma200",
+              "value": 1.1054186224222387
+            },
+            {
+              "packet_path": "/instruments/NVDA/rsi14_simple",
+              "value": 52.39565159039054
+            },
+            {
+              "packet_path": "/instruments/NVDA/return21_pct",
+              "value": -2.5882457941005854
+            },
+            {
+              "packet_path": "/instruments/NVDA/return63_pct",
+              "value": 6.5504954361302214
+            },
+            {
+              "packet_path": "/instruments/NVDA/drawdown_from_window_high_pct",
+              "value": -7.402222787817092
+            },
+            {
+              "packet_path": "/instruments/NVDA/atr14_simple",
+              "value": 7.692857142857144
+            },
+            {
+              "packet_path": "/instruments/NVDA/realized_vol21_pct",
+              "value": 42.714636268483545
+            },
+            {
+              "packet_path": "/instruments/NVDA/realized_vol63_pct",
+              "value": 40.00325238191758
+            }
+          ],
+          "statement": "NVDA was below its 20-session average but above its 50- and 200-session averages, with near-neutral RSI, negative 21-session return, and positive 63-session return."
+        },
+        {
+          "claim_id": "NVDA-levels-intraday",
+          "classification": "INFERENCE",
+          "evidence_ids": [
+            "price-NVDA",
+            "intraday-bars-NVDA",
+            "intraday-latest-NVDA"
+          ],
+          "horizons": [
+            5,
+            21,
+            63
+          ],
+          "invalidation": "A completed close below cited support, or intraday reversal below VWAP, would invalidate this conditional support interpretation.",
+          "numeric_values": [
+            {
+              "packet_path": "/instruments/NVDA/support_resistance_candidates/20_session/support_close",
+              "value": 208.48
+            },
+            {
+              "packet_path": "/instruments/NVDA/support_resistance_candidates/20_session/resistance_close",
+              "value": 230.36
+            },
+            {
+              "packet_path": "/instruments/NVDA/support_resistance_candidates/63_session/support_close",
+              "value": 190.01
+            },
+            {
+              "packet_path": "/instruments/NVDA/support_resistance_candidates/63_session/resistance_close",
+              "value": 230.36
+            },
+            {
+              "packet_path": "/intraday/NVDA/latest_trade/p",
+              "value": 212.18
+            },
+            {
+              "packet_path": "/intraday/NVDA/session_vwap",
+              "value": 210.78964377523678
+            },
+            {
+              "packet_path": "/instruments/NVDA/latest_close",
+              "value": 218.29
+            }
+          ],
+          "statement": "Intraday trade above session VWAP offers only limited immediate support; because it is below the prior completed close, supplied support/resistance levels imply a mixed rather than confirmed 5-session setup."
+        }
+      ],
+      "counterevidence": [
+        "The 21-session return is negative and price is below the 20-session average.",
+        "The latest intraday trade is below the prior completed close."
+      ],
+      "invalidation": [
+        "A completed close below the supplied 20-session support would weaken the near-term structure.",
+        "A completed close below the 63-session support would invalidate the longer-horizon constructive moving-average structure."
+      ],
+      "missing": [
+        "No consolidated intraday feed, qualified halt feed, options-implied volatility, or supplied catalyst/fundamental evidence."
+      ],
+      "status": "SUPPORTED",
+      "symbol": "NVDA",
+      "thesis": "NVDA is below its 20-session average but above its 50- and 200-session averages, with neutral RSI. Positive 63-session return supports the longer trend, while negative 21-session return and intraday trading below the completed close constrain the 5/21-session reading. The result is mixed across the requested horizons.",
+      "view": "MIXED"
+    }
+  ],
+  "input_hash": "749d11be998c60b59559f5a5bbfe6d7b74627c43c1c9bc3d94d32da694dddf10",
+  "role": "technical"
+}
