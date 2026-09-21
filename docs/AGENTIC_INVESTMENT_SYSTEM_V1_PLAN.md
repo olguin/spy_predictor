@@ -1,6 +1,10 @@
 # Agentic Investment System V1 — implementation plan
 
-Date: 2026-09-20. Status: **M0 inputs/comparator registered; M1–M2 engineering acceptance passed; M3–M4 open; V1 release incomplete**.
+Date: 2026-09-20. Status: **M0 inputs/comparator registered; M1–M2 engineering acceptance passed; M3 implemented with synthetic engineering evidence; M4 open; V1 release incomplete**.
+
+The [M3 continuation record](AGENTIC_INVESTMENT_SYSTEM_V1_M3.md) records publication,
+monitoring, review/feedback and observation implementation and its qualifications.
+Original milestone acceptance requirements below remain unchanged.
 
 For a new session, start with the [M3/M4 handoff](AGENTIC_INVESTMENT_SYSTEM_V1_HANDOFF.md).
 

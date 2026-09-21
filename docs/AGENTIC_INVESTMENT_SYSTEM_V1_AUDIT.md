@@ -140,3 +140,18 @@ the explicitly requested monitor. Its task timeline, dependency links, time and
 budget displays and individual artifact inspector are planned, not yet built.
 M4 release comparisons and actual user usefulness feedback remain open. No
 release requirement or historical empirical gate was weakened to accept M2.
+
+## M3 continuation
+
+The [M3 record](AGENTIC_INVESTMENT_SYSTEM_V1_M3.md) now documents versioned telemetry,
+the read-only monitor, a pre-registered single publication refresh, scoped
+invalidation, immutable bundles, linked reviews/feedback and a separate
+corporate-action-safe observation lane. Synthetic fixtures are labeled as such;
+the accepted M2 run is also used for real-artifact browser replay. User confirmation
+that the page loads is not investment-research usefulness acceptance.
+
+Old accepted runs and failed candidates, comparator registrations, frozen cases,
+protected cohorts and legacy observations remain unchanged. The user's repository
+size audit is limited to removing regenerable caches after checks; research and
+backup artifacts are retained. The original M4 comparisons, critical-defect gate,
+versioned improvement proposal and actual user usefulness feedback remain required.

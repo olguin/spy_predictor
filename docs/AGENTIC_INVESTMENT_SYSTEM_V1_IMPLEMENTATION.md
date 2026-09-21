@@ -5,7 +5,9 @@ retained in `m1-live-v4`. M2 now implements the full roster, five-instrument gro
 research, scoped findings, ETF look-through, scenario valuation, fixed benchmark
 context and canonical review conditions. M2 engineering acceptance passed with
 `m2-live-v7`; the source/claim review and remaining limitations are recorded below;
-M3 publication/monitoring and M4 release comparison remain separate gates.
+M3 publication/monitoring is now implemented with synthetic engineering evidence;
+see the [M3 continuation record](AGENTIC_INVESTMENT_SYSTEM_V1_M3.md). M4 release
+comparison and actual user usefulness acceptance remain open.
 
 Read the [full conformance audit](AGENTIC_INVESTMENT_SYSTEM_V1_AUDIT.md). The original
 plan remains the acceptance authority. The existing META runner, forecasts,

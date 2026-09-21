@@ -1,0 +1,171 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "Primary BIS policy document was unavailable, so no current export-control change or company-specific China exposure can be verified. The available Micron 10-Q identifies political, legal/regulatory, tariff and trade-regulation developments as potential risks to global operations, but does not quantify China/cross-border exposure in the excerpt. NVIDIA\u2019s latest filing is identified but its operative disclosure was not retrieved. QQQ has dated, stale look-through positions in both companies, making any related ETF transmission diversified but not quantifiable beyond those dated weights.",
+      "assessment": "insufficient_evidence",
+      "claims": [
+        {
+          "claim_id": "task-6-c1",
+          "classification": "fact",
+          "text": "Micron\u2019s Q3 FY2026 10-Q (quarter ended May 28, 2026) states that political, legal and regulatory developments, including tariffs and trade regulations, may affect its global operations; the available excerpt does not provide a China revenue or supply-chain breakdown.",
+          "evidence_ids": [
+            "e22"
+          ],
+          "symbols": [
+            "MU"
+          ]
+        },
+        {
+          "claim_id": "task-6-c2",
+          "classification": "fact",
+          "text": "The supplied QQQ holdings table is dated September 12, 2026 and marked stale; it reports NVDA at 8.45% and MU at 4.85%. These are dated fund weights, not current holdings or an investor\u2019s exposure.",
+          "evidence_ids": [
+            "e13",
+            "e20"
+          ],
+          "symbols": [
+            "QQQ",
+            "NVDA",
+            "MU"
+          ]
+        },
+        {
+          "claim_id": "task-6-c3",
+          "classification": "inference",
+          "text": "If new export restrictions, enforcement, tariffs, or cross-border disruption constrain semiconductor shipments or inputs, NVDA and MU could be affected directly through demand, product eligibility, sourcing, logistics, or customer purchasing. The relative magnitude is unquantified from the retrieved disclosures; QQQ would have indirect exposure through its dated NVDA/MU holdings and other unexamined constituents.",
+          "evidence_ids": [
+            "e13",
+            "e20",
+            "e22"
+          ],
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        },
+        {
+          "claim_id": "task-6-c4",
+          "classification": "scenario",
+          "text": "Over 63 sessions, a confirmed policy action that changes product eligibility or a company disclosure quantifying lost orders, delayed supply, or changed geographic demand would raise the policy-risk relevance; an official clarification preserving eligibility or company disclosure of immaterial impact would reduce it. Neither outcome is established by current evidence.",
+          "evidence_ids": [
+            "e22"
+          ],
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "Registered BIS-policy source returned unavailable; therefore the latest primary policy status, scope, enactment/enforcement details, and any changes to semiconductor export controls cannot be verified.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        },
+        {
+          "description": "NVIDIA\u2019s latest 10-Q was identified but its substantive risk-factor/geographic and supply-chain disclosure was not retrieved; no NVDA China or manufacturing exposure is inferred.",
+          "critical": true,
+          "symbols": [
+            "NVDA"
+          ]
+        },
+        {
+          "description": "Available Micron disclosure excerpt does not quantify China revenue, affected products, customer concentration, or supply-chain dependence, preventing a financial-impact comparison with NVDA or QQQ.",
+          "critical": true,
+          "symbols": [
+            "MU"
+          ]
+        },
+        {
+          "description": "QQQ holdings are stale and only establish dated NVDA/MU weights; policy-sensitive exposure across remaining constituents and current fund composition are unknown.",
+          "critical": false,
+          "symbols": [
+            "QQQ"
+          ]
+        }
+      ],
+      "assumptions": [
+        "Policy-risk scenarios are framed over the registered 63-session horizon and are not forecasts.",
+        "Dated QQQ holdings are used only as a candidate transmission channel, not as current fund composition.",
+        "No geographic revenue, affected-product, supply-chain, or loss estimate is assumed where not disclosed."
+      ],
+      "counter_thesis": "Absent a newly verified policy change or company-reported operational impact, the supplied evidence does not establish that geopolitical risk will be a near-term driver; company demand and execution may dominate the period.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review upon publication of an accessible primary BIS policy document or official enforcement notice affecting semiconductor export eligibility, and reassess company-specific product and destination scope.",
+          "symbol": null,
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": []
+        },
+        {
+          "kind": "human_review",
+          "description": "Review NVDA\u2019s next substantive filing or earnings disclosure for quantified China/geographic demand, export-control eligibility, manufacturing, or supply-chain impact.",
+          "symbol": "NVDA",
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e3"
+          ]
+        },
+        {
+          "kind": "human_review",
+          "description": "Review Micron\u2019s next filing or earnings disclosure for quantified tariff/trade, geographic-demand, customer, or supply-chain effects.",
+          "symbol": "MU",
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e18",
+            "e22"
+          ]
+        }
+      ],
+      "dispositions": [],
+      "question_effects": [],
+      "shared_exposures": [
+        {
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ],
+          "mechanism": "Potential semiconductor trade-policy or cross-border-demand shock could transmit directly to the companies and indirectly to QQQ through its dated holdings.",
+          "evidence_ids": [
+            "e13",
+            "e20",
+            "e22"
+          ],
+          "qualification": "Direct company exposure is unquantified; QQQ composition is stale as of September 12, 2026, and remaining-constituent exposure was not evaluated."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 26950,
+    "output_tokens": 1199,
+    "catalog_cost_usd": 0.068288,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 44737,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

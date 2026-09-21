@@ -1,0 +1,492 @@
+# Investment research
+
+Published: 2026-09-20T23:06:41.838115+00:00
+
+SYNTHETIC ENGINEERING FIXTURE — not live research
+
+| Instrument | Published assessment | Refresh |
+|---|---|---|
+| ANET | watch | No material change detected within coverage |
+| QQQ | watch | No material change detected within coverage |
+| MU | insufficient_evidence | No material change detected within coverage |
+| META | watch | No material change detected within coverage |
+| NVDA | conditional_opportunity | No material change detected within coverage |
+
+## ANET — watch
+
+ANET differentiated synthetic thesis
+
+Counter-case: ANET concentration counter-case
+
+Valuation: Named scenario assumptions require comparison with qualified current prices
+
+Assumptions:
+- ANET growth scenario uncertain
+
+Review conditions:
+- Human review: Review issuer assumptions and exposure
+- Refresh condition state: HUMAN_REVIEW
+
+Immediate-entry quote: unavailable. Daily closes are dated trend evidence, never executable quotes.
+- fact: ANET synthetic primary evidence (38ad37e2491b7b39de1e5df5bf87af9d4f0e806eb184b8f87955cdcdf32b8a2f)
+
+## QQQ — watch
+
+QQQ differentiated synthetic thesis
+
+Counter-case: QQQ concentration counter-case
+
+Valuation: Named scenario assumptions require comparison with qualified current prices
+
+Assumptions:
+- QQQ growth scenario uncertain
+
+Review conditions:
+- Human review: Review issuer assumptions and exposure
+- Refresh condition state: HUMAN_REVIEW
+
+Immediate-entry quote: unavailable. Daily closes are dated trend evidence, never executable quotes.
+- fact: QQQ synthetic primary evidence (292a63e846b439f103b9bed88d62f945d8b3f5371016031ae258247baff94b31)
+
+## MU — insufficient_evidence
+
+MU differentiated synthetic thesis
+
+Counter-case: MU concentration counter-case
+
+Valuation: Named scenario assumptions require comparison with qualified current prices
+
+Assumptions:
+- MU growth scenario uncertain
+
+Review conditions:
+- Human review: Review issuer assumptions and exposure
+- Refresh condition state: HUMAN_REVIEW
+
+Immediate-entry quote: unavailable. Daily closes are dated trend evidence, never executable quotes.
+- fact: MU synthetic primary evidence (cde4f4c4d4b5a0c702e690e84bce026ac5f0e6daea87cd515a4d31ae403548f4)
+
+## META — watch
+
+META differentiated synthetic thesis
+
+Counter-case: META concentration counter-case
+
+Valuation: Named scenario assumptions require comparison with qualified current prices
+
+Assumptions:
+- META growth scenario uncertain
+
+Review conditions:
+- Human review: Review issuer assumptions and exposure
+- Refresh condition state: HUMAN_REVIEW
+
+Immediate-entry quote: unavailable. Daily closes are dated trend evidence, never executable quotes.
+- fact: META synthetic primary evidence (eb55ceecc97b7c667b21d7123760d59a5568824c5c5831756dd98fc9a9b510b3)
+
+## NVDA — conditional_opportunity
+
+NVDA differentiated synthetic thesis
+
+Counter-case: NVDA concentration counter-case
+
+Valuation: Named scenario assumptions require comparison with qualified current prices
+
+Assumptions:
+- NVDA growth scenario uncertain
+
+Review conditions:
+- Human review: Review issuer assumptions and exposure
+- Refresh condition state: HUMAN_REVIEW
+
+Immediate-entry quote: unavailable. Daily closes are dated trend evidence, never executable quotes.
+- fact: NVDA synthetic primary evidence (7245cfed6f7bbf76dcfae5dd23ccb667408c7f5ae1293242654fa18ed83754c5)
+
+## Coverage
+
+[
+  {
+    "source_id": "price-ANET",
+    "symbols": [
+      "ANET"
+    ],
+    "status": "OK",
+    "old_evidence_id": "71e1d827120bd281a9246c4c492a87734d5c98b8cbbb2c804cc3a20dd97931c1",
+    "new_evidence_id": "d34872f7e0d6dd6db9c9054ff33f6efabe1b17d2e88399a7ef76b5dcd05aa6bc",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  },
+  {
+    "source_id": "price-QQQ",
+    "symbols": [
+      "QQQ"
+    ],
+    "status": "OK",
+    "old_evidence_id": "bf9f3bac692485dcb81094ebd9fa9688f9a9c09c86bf658b08437db95d09bea5",
+    "new_evidence_id": "e18107bdcfe49154d6299098a5d3fc6ba10034bbe9e72ed780ee94f0aeafbd22",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  },
+  {
+    "source_id": "price-MU",
+    "symbols": [
+      "MU"
+    ],
+    "status": "OK",
+    "old_evidence_id": "cde4f4c4d4b5a0c702e690e84bce026ac5f0e6daea87cd515a4d31ae403548f4",
+    "new_evidence_id": "5449cbbe3f290612f3a428f8bbea04f4ca45cfeb96b2d876e0786b6b56244cdf",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  },
+  {
+    "source_id": "price-META",
+    "symbols": [
+      "META"
+    ],
+    "status": "OK",
+    "old_evidence_id": "02ebf7ab27098b120806f0c01e9f60a86d84de0a0671da709f2759e713fc3a10",
+    "new_evidence_id": "115c27ae748f35e16562ccf24c1544a2c9b6140225d52663fc079179892c4f7f",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  },
+  {
+    "source_id": "price-NVDA",
+    "symbols": [
+      "NVDA"
+    ],
+    "status": "OK",
+    "old_evidence_id": "11a1be10ac323a233f87bb141a1ac63aa05c72e368fe0cb3d037713542d6ccf3",
+    "new_evidence_id": "3b5755e33cf9ecc4d47e4a7f7e10e62613d1c5d055a10d621b9c42e23f74ddca",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  },
+  {
+    "source_id": "price-SPY",
+    "symbols": [
+      "SPY"
+    ],
+    "status": "OK",
+    "old_evidence_id": "000a844ff77cd21a764edc3bd752ef0b11ab90d61b4384129300dcc31d3ba227",
+    "new_evidence_id": "4725c1ed685766f05bb6ed45eff7a74e2c77214c7dcc9b0da58ed5f9ec0887d1",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  },
+  {
+    "source_id": "price-XLK",
+    "symbols": [
+      "XLK"
+    ],
+    "status": "OK",
+    "old_evidence_id": "22b846af2e74144e6201ed4ee56dcde63eeb8e448732142beb1956b42c3ae5c9",
+    "new_evidence_id": "42bad8941ce13161aa65e4c636c3bc77184a4508076ea35695f7ac11f39981e6",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  },
+  {
+    "source_id": "ANET",
+    "symbols": [
+      "ANET"
+    ],
+    "status": "OK",
+    "old_evidence_id": "38ad37e2491b7b39de1e5df5bf87af9d4f0e806eb184b8f87955cdcdf32b8a2f",
+    "new_evidence_id": "36a423f4767151ffe49448fce742a4ff5ace52c386ab2d224222cbfa479cb83e",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  },
+  {
+    "source_id": "m3-events",
+    "symbols": [
+      "ANET",
+      "QQQ",
+      "MU",
+      "META",
+      "NVDA"
+    ],
+    "status": "OK",
+    "old_evidence_id": "2307b5d0c8caaec715338d1b0f3a4a910c20722989a307282850766591dce343",
+    "new_evidence_id": "30eb29f43b4e93493f565445a435f5a84018c38ec1721602daebdc02e831a991",
+    "material_change": false,
+    "reason": "No policy-material change detected"
+  }
+]
+
+## Limitations
+
+- Market context uses only the frozen benchmark list; watchlist diagnostics are not market breadth.
+- Source dates and missingness remain explicit. Scenario valuations are assumptions, not price targets or calibrated forecasts.
+- Catalog cost is estimated; provider output-token and cost ceilings may be enforced after a response.
+- Final refresh is limited to registered sources; it does not certify all world news.
+- One refresh cycle only; materially affected guidance is withdrawn, never silently repaired.
+- Unconditional delayed research observations are separate from conditional opportunity performance.
+
+## Validated numerical evidence
+
+Values below come directly from stored evidence. Open each source for full lineage and fields.
+
+### [price-ANET](evidence/71e1d827120bd281a9246c4c492a87734d5c98b8cbbb2c804cc3a20dd97931c1.json)
+
+ANET · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-QQQ](evidence/bf9f3bac692485dcb81094ebd9fa9688f9a9c09c86bf658b08437db95d09bea5.json)
+
+QQQ · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-MU](evidence/cde4f4c4d4b5a0c702e690e84bce026ac5f0e6daea87cd515a4d31ae403548f4.json)
+
+MU · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-META](evidence/02ebf7ab27098b120806f0c01e9f60a86d84de0a0671da709f2759e713fc3a10.json)
+
+META · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-NVDA](evidence/11a1be10ac323a233f87bb141a1ac63aa05c72e368fe0cb3d037713542d6ccf3.json)
+
+NVDA · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-SPY](evidence/000a844ff77cd21a764edc3bd752ef0b11ab90d61b4384129300dcc31d3ba227.json)
+
+SPY · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-XLK](evidence/22b846af2e74144e6201ed4ee56dcde63eeb8e448732142beb1956b42c3ae5c9.json)
+
+XLK · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [635928fff0a9](evidence/635928fff0a9c0d558ed2a815a3f1931be84d852bca76059008bff8ef6c85da7.json)
+
+| Symbol | Benchmark | Date | Status | Excess 5 / 21 / 63 sessions (pp) |
+|---|---|---|---|---:|
+| ANET | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| ANET | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| QQQ | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| QQQ | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| MU | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| MU | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| META | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| META | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| NVDA | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| NVDA | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+
+Comparison gaps: `[]`
+
+### [68d1f89b7f6d](evidence/68d1f89b7f6dba75338bad1dab7fa80862898880b909c58a273f0c97c8c3a680.json)
+
+`left*right` = **75.00** USD/share
+
+Synthetic earnings/share and P/E scenario, not observed expectations
+
+User/model supplied scenario inputs; source lineage is not a verified numeric extraction
+
+
+### [price-ANET](evidence/d34872f7e0d6dd6db9c9054ff33f6efabe1b17d2e88399a7ef76b5dcd05aa6bc.json)
+
+ANET · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-QQQ](evidence/e18107bdcfe49154d6299098a5d3fc6ba10034bbe9e72ed780ee94f0aeafbd22.json)
+
+QQQ · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-MU](evidence/5449cbbe3f290612f3a428f8bbea04f4ca45cfeb96b2d876e0786b6b56244cdf.json)
+
+MU · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-META](evidence/115c27ae748f35e16562ccf24c1544a2c9b6140225d52663fc079179892c4f7f.json)
+
+META · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-NVDA](evidence/3b5755e33cf9ecc4d47e4a7f7e10e62613d1c5d055a10d621b9c42e23f74ddca.json)
+
+NVDA · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-SPY](evidence/4725c1ed685766f05bb6ed45eff7a74e2c77214c7dcc9b0da58ed5f9ec0887d1.json)
+
+SPY · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [price-XLK](evidence/42bad8941ce13161aa65e4c636c3bc77184a4508076ea35695f7ac11f39981e6.json)
+
+XLK · 2026-09-18 · FRESH · synthetic · split_adjusted · price return
+
+| Metric | Recorded value |
+|---|---:|
+| latest_close | 100.0 |
+| sma20 | 100.0 |
+| sma50 | 100.0 |
+| sma200 | 100.0 |
+| rsi14_simple | 50.0 |
+| return5_pct | 0.0 |
+| return21_pct | 0.0 |
+| return63_pct | 0.0 |
+| realized_vol63_pct | 0.0 |
+
+### [40812ca20598](evidence/40812ca20598014a07efade397aab154144562a12041af239aa2564d47fd35e1.json)
+
+| Symbol | Benchmark | Date | Status | Excess 5 / 21 / 63 sessions (pp) |
+|---|---|---|---|---:|
+| ANET | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| ANET | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| QQQ | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| QQQ | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| MU | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| MU | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| META | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| META | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| NVDA | SPY | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+| NVDA | XLK | 2026-09-18 | FRESH | 0.0 / 0.0 / 0.0 |
+
+Comparison gaps: `[]`
+
