@@ -1,0 +1,150 @@
+{
+  "kind": "source",
+  "source_id": "price-IWM",
+  "data": {
+    "status": "FRESH",
+    "price_date": "2026-09-22",
+    "latest_close": 287.21,
+    "source_ids": [
+      "price-IWM"
+    ],
+    "available_at": "2026-09-23T00:31:31.748393+00:00",
+    "currency": "USD",
+    "sessions": 252,
+    "adjustment": "split_adjusted",
+    "feed": "sip",
+    "rsi14_simple": 43.503480278422224,
+    "atr14_simple": 3.4389285714285784,
+    "drawdown_from_window_high_pct": -5.86056573470124,
+    "drawdown_window_sessions": 252,
+    "greed_proxy": {
+      "momentum_rsi14": 43.503480278422224,
+      "meaning": "Momentum only; not observed investor greed"
+    },
+    "sma20": 291.23100000000005,
+    "price_to_sma20": 0.9861930907080632,
+    "sma50": 294.80920000000003,
+    "price_to_sma50": 0.9742233281729333,
+    "sma200": 275.22114999999997,
+    "price_to_sma200": 1.0435607873886146,
+    "realized_vol5_pct": 8.595000656493617,
+    "return5_pct": 0.725959177947666,
+    "realized_vol21_pct": 11.57708258002477,
+    "return21_pct": -4.250566742232298,
+    "realized_vol63_pct": 12.8528664899633,
+    "return63_pct": -2.7461736421508953,
+    "support_resistance_candidates": {
+      "20_session": {
+        "support_close": 283.92,
+        "resistance_close": 299.81,
+        "method": "lowest/highest completed daily close; descriptive, not predictive"
+      },
+      "63_session": {
+        "support_close": 283.92,
+        "resistance_close": 305.09,
+        "method": "lowest/highest completed daily close; descriptive, not predictive"
+      }
+    },
+    "weekly_view": {
+      "observations": 53,
+      "latest_week_ending_session": "2026-09-22",
+      "sma4_weeks": 289.0525,
+      "sma13_weeks": 294.50384615384615,
+      "sma40_weeks": 276.691,
+      "return13_weeks_pct": -4.209051796017748,
+      "method": "last completed session close in each ISO week"
+    },
+    "reference_scenarios": [
+      {
+        "trading_days": 5,
+        "return_threshold_pct": 2.0,
+        "probabilities": {
+          "bear": 0.1322327093437755,
+          "neutral": 0.7307460306273025,
+          "bull": 0.137021260028922
+        },
+        "probability_price_up": 0.5,
+        "price_quantiles": {
+          "0.05": 278.7832301400766,
+          "0.1": 280.6229355165981,
+          "0.25": 283.72413391712917,
+          "0.5": 287.21,
+          "0.75": 290.73869381902404,
+          "0.9": 293.9516827024317,
+          "0.95": 295.8914855048939
+        },
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment"
+      },
+      {
+        "trading_days": 21,
+        "return_threshold_pct": 5.0,
+        "probabilities": {
+          "bear": 0.08341591360002754,
+          "neutral": 0.822327686745362,
+          "bull": 0.09425639965461041
+        },
+        "probability_price_up": 0.5,
+        "price_quantiles": {
+          "0.05": 270.20599232167456,
+          "0.1": 273.8729218096634,
+          "0.25": 280.111585189722,
+          "0.5": 287.21,
+          "0.75": 294.4882984548071,
+          "0.9": 301.19656793718633,
+          "0.95": 305.284066394049
+        },
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment"
+      },
+      {
+        "trading_days": 63,
+        "return_threshold_pct": 10.0,
+        "probabilities": {
+          "bear": 0.050555973505118534,
+          "neutral": 0.8804195843562242,
+          "bull": 0.06902444213865722
+        },
+        "probability_price_up": 0.5,
+        "price_quantiles": {
+          "0.05": 258.3998613134666,
+          "0.1": 264.50379516614936,
+          "0.25": 275.0266554748773,
+          "0.5": 287.21,
+          "0.75": 299.93305178935685,
+          "0.9": 311.8654083892586,
+          "0.95": 319.2323079459061
+        },
+        "status": "ASSUMPTION_BASED_UNCALIBRATED_REFERENCE",
+        "formula": "log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)",
+        "target": "terminal split-adjusted price; dividends excluded; not path highs/lows",
+        "assumptions": "constant volatility, zero median log return, no jumps; no cycle/LLM adjustment"
+      }
+    ],
+    "symbol": "IWM",
+    "return_basis": "price_return",
+    "interpretation": "Descriptive completed sessions, not a prediction or event causality"
+  },
+  "parent_evidence_id": null,
+  "adapter": "alpaca_daily",
+  "publisher": "Alpaca",
+  "url": "https://data.alpaca.markets/v2/stocks/IWM/bars?timeframe=1Day&start=2023-09-23T21%3A47%3A53.267553%2B00%3A00&end=2026-09-22T21%3A27%3A53.267553%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+  "published_at": null,
+  "available_at": null,
+  "captured_at": "2026-09-23T00:31:31.748393+00:00",
+  "symbols": [
+    "IWM"
+  ],
+  "retrieved_at": "2026-09-23T00:31:31.799928+00:00",
+  "content_sha256": "c6f66380809a156c360b018ec107a2cb20d467163012f190dd6211b8e51937e1",
+  "document_id": "5b7000538dd347db0dcf6eab77bf544dc2e929fd578b24eac0807b62a365abf0",
+  "locator": "normalized text characters 0:16000",
+  "excerpt": "{\"status\": \"FRESH\", \"price_date\": \"2026-09-22\", \"latest_close\": 287.21, \"source_ids\": [\"price-IWM\"], \"available_at\": \"2026-09-23T00:31:31.748393+00:00\", \"currency\": \"USD\", \"sessions\": 252, \"adjustment\": \"split_adjusted\", \"feed\": \"sip\", \"rsi14_simple\": 43.503480278422224, \"atr14_simple\": 3.4389285714285784, \"drawdown_from_window_high_pct\": -5.86056573470124, \"drawdown_window_sessions\": 252, \"greed_proxy\": {\"momentum_rsi14\": 43.503480278422224, \"meaning\": \"Momentum only; not observed investor greed\"}, \"sma20\": 291.23100000000005, \"price_to_sma20\": 0.9861930907080632, \"sma50\": 294.80920000000003, \"price_to_sma50\": 0.9742233281729333, \"sma200\": 275.22114999999997, \"price_to_sma200\": 1.0435607873886146, \"realized_vol5_pct\": 8.595000656493617, \"return5_pct\": 0.725959177947666, \"realized_vol21_pct\": 11.57708258002477, \"return21_pct\": -4.250566742232298, \"realized_vol63_pct\": 12.8528664899633, \"return63_pct\": -2.7461736421508953, \"support_resistance_candidates\": {\"20_session\": {\"support_close\": 283.92, \"resistance_close\": 299.81, \"method\": \"lowest/highest completed daily close; descriptive, not predictive\"}, \"63_session\": {\"support_close\": 283.92, \"resistance_close\": 305.09, \"method\": \"lowest/highest completed daily close; descriptive, not predictive\"}}, \"weekly_view\": {\"observations\": 53, \"latest_week_ending_session\": \"2026-09-22\", \"sma4_weeks\": 289.0525, \"sma13_weeks\": 294.50384615384615, \"sma40_weeks\": 276.691, \"return13_weeks_pct\": -4.209051796017748, \"method\": \"last completed session close in each ISO week\"}, \"reference_scenarios\": [{\"trading_days\": 5, \"return_threshold_pct\": 2.0, \"probabilities\": {\"bear\": 0.1322327093437755, \"neutral\": 0.7307460306273025, \"bull\": 0.137021260028922}, \"probability_price_up\": 0.5, \"price_quantiles\": {\"0.05\": 278.7832301400766, \"0.1\": 280.6229355165981, \"0.25\": 283.72413391712917, \"0.5\": 287.21, \"0.75\": 290.73869381902404, \"0.9\": 293.9516827024317, \"0.95\": 295.8914855048939}, \"status\": \"ASSUMPTION_BASED_UNCALIBRATED_REFERENCE\", \"formula\": \"log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)\", \"target\": \"terminal split-adjusted price; dividends excluded; not path highs/lows\", \"assumptions\": \"constant volatility, zero median log return, no jumps; no cycle/LLM adjustment\"}, {\"trading_days\": 21, \"return_threshold_pct\": 5.0, \"probabilities\": {\"bear\": 0.08341591360002754, \"neutral\": 0.822327686745362, \"bull\": 0.09425639965461041}, \"probability_price_up\": 0.5, \"price_quantiles\": {\"0.05\": 270.20599232167456, \"0.1\": 273.8729218096634, \"0.25\": 280.111585189722, \"0.5\": 287.21, \"0.75\": 294.4882984548071, \"0.9\": 301.19656793718633, \"0.95\": 305.284066394049}, \"status\": \"ASSUMPTION_BASED_UNCALIBRATED_REFERENCE\", \"formula\": \"log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)\", \"target\": \"terminal split-adjusted price; dividends excluded; not path highs/lows\", \"assumptions\": \"constant volatility, zero median log return, no jumps; no cycle/LLM adjustment\"}, {\"trading_days\": 63, \"return_threshold_pct\": 10.0, \"probabilities\": {\"bear\": 0.050555973505118534, \"neutral\": 0.8804195843562242, \"bull\": 0.06902444213865722}, \"probability_price_up\": 0.5, \"price_quantiles\": {\"0.05\": 258.3998613134666, \"0.1\": 264.50379516614936, \"0.25\": 275.0266554748773, \"0.5\": 287.21, \"0.75\": 299.93305178935685, \"0.9\": 311.8654083892586, \"0.95\": 319.2323079459061}, \"status\": \"ASSUMPTION_BASED_UNCALIBRATED_REFERENCE\", \"formula\": \"log(P_h/P_0) ~ Normal(0, (RV63/100)^2*h/252)\", \"target\": \"terminal split-adjusted price; dividends excluded; not path highs/lows\", \"assumptions\": \"constant volatility, zero median log return, no jumps; no cycle/LLM adjustment\"}], \"symbol\": \"IWM\", \"return_basis\": \"price_return\", \"interpretation\": \"Descriptive completed sessions, not a prediction or event causality\"}",
+  "truncated": false,
+  "trust": "UNTRUSTED_SOURCE_DATA",
+  "mode": "live"
+}

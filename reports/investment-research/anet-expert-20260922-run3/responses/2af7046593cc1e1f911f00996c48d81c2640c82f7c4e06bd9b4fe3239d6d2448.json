@@ -1,0 +1,51 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_valuation_methods",
+    "arguments": {
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e31",
+        "e33"
+      ],
+      "assumptions": "All three methods are conditional analyst sensitivities, not consensus, fair value, probabilities, or price targets. Forward P/E uses the FY2026 US-GAAP diluted EPS base stress already reconciled to reported H1. EV/revenue uses an assumed FY2026 revenue of $12.55bn: reported H1 $5.7447bn, management Q3 outlook about $3.3bn, and an analyst-assumed Q4 about $3.505bn; 14x is a deliberately demanding growth-company EV/sales stress. Net cash is approximated as June 30 cash plus marketable securities of $13.3433bn with no debt subtraction identified in the cited balance-sheet excerpt. Diluted shares use Q2 weighted-average diluted shares of 1.276bn as a constant-share approximation. Five-year DCF starts from $5.40bn annualized free cash flow, approximating H1 operating cash flow of $2.776bn less $0.084bn capex and doubling; assumes 18% annual FCF growth for five years, 10% discount rate, 4% terminal growth, constant net cash and 1.276bn diluted shares. Working-capital timing, stock compensation/dilution, acquisitions and future capital intensity can materially alter DCF results.",
+      "pe_method": {
+        "earnings_per_share": "3.55",
+        "pe_multiple": "55",
+        "rationale": "Matches the FY2026 GAAP base stress; tests whether sustained AI/cloud growth supports a stipulated premium multiple despite concentration and cycle risk."
+      },
+      "ev_sales_method": {
+        "revenue": "12550000000",
+        "ev_to_sales_multiple": "14",
+        "net_cash": "13343300000",
+        "diluted_shares": "1276000000",
+        "rationale": "Revenue bridge incorporates reported H1, management Q3 revenue guidance and an explicit Q4 assumption; 14x EV/sales deliberately tests a high-growth top-line valuation while ignoring margin differences and therefore must be cross-checked against earnings/cash flow."
+      },
+      "dcf_method": {
+        "starting_free_cash_flow": "5400000000",
+        "annual_growth_pct": "18",
+        "discount_rate_pct": "10",
+        "terminal_growth_pct": "4",
+        "net_cash": "13343300000",
+        "diluted_shares": "1276000000",
+        "rationale": "Annualized H1 cash generation anchors the starting FCF; 18% growth tests durable AI/networking expansion but moderates from current revenue growth, 10% discounts execution/multiple risk, and 4% terminal growth reflects a strong long-run franchise. This is sensitive to working-capital normalization and dilution."
+      }
+    }
+  },
+  "receipt": {
+    "input_tokens": 36749,
+    "output_tokens": 1091,
+    "catalog_cost_usd": 0.21647500000000003,
+    "model": "openai-codex/gpt-5.6-sol",
+    "response_model": "gpt-5.6-sol",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 37616,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

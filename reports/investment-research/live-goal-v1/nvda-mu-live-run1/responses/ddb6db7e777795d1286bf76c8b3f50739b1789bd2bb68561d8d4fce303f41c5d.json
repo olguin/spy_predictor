@@ -1,0 +1,113 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "Issuer evidence reviewed in this task does not support a definitive corporate-action answer. I found no substantive issuer disclosure establishing a split or comparable adjustment for either company through 2026-10-02; this is not evidence that none occurred. The supplied technical series remain explicitly labeled split-adjusted, but issuer-level audit confirmation is unresolved.",
+      "assessment": "insufficient_evidence",
+      "claims": [
+        {
+          "claim_id": "task-9-c1",
+          "classification": "fact",
+          "text": "The supplied NVDA and MU daily-price inputs identify their 2026-10-02 completed-session series as split-adjusted price returns. This supports the stated construction of the technical inputs, not independent issuer confirmation that all relevant corporate actions were captured.",
+          "evidence_ids": [
+            "e5",
+            "e6",
+            "e24"
+          ],
+          "symbols": [
+            "NVDA",
+            "MU"
+          ],
+          "dimensions": [
+            "market_behavior"
+          ]
+        },
+        {
+          "claim_id": "task-9-c2",
+          "classification": "fact",
+          "text": "The reviewed NVDA SEC submissions record identifies a latest 10-Q filed August 26, 2026 and five recent 8-K filings through September 3, 2026, but the submissions index itself is catalog metadata and does not establish whether a split or other price-adjusting corporate action occurred. No corresponding substantive corporate-action disclosure was reviewed for MU in this task.",
+          "evidence_ids": [
+            "e2"
+          ],
+          "symbols": [
+            "NVDA",
+            "MU"
+          ],
+          "dimensions": [
+            "market_behavior"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "No reviewed substantive issuer filing or issuer corporate-action notice establishes either the presence or absence, through 2026-10-02, of an NVDA or MU split, reverse split, merger/spinoff distribution, or similar adjustment that could affect the supplied historical series. Therefore this task cannot independently certify comparability from issuer evidence. This does not invalidate the internally matched, explicitly split-adjusted SIP inputs, but it leaves their issuer-action audit trail unconfirmed.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ],
+          "dimensions": [
+            "market_behavior"
+          ]
+        }
+      ],
+      "assumptions": [
+        "Technical return and moving-average interpretation continues to rely on the supplier's explicit split-adjusted designation and matched completed-session construction, rather than issuer-action verification."
+      ],
+      "counter_thesis": "A corporate action could have occurred or been disclosed outside the issuer passages reviewed here; the absence of a reviewed affirmative disclosure is not evidence of absence.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review each issuer's substantive 10-K/10-Q equity footnote and any corporate-action 8-K or investor-relations notice through 2026-10-02. An identified split or other price-adjusting action should be reconciled to the vendor adjustment methodology before treating the 5/21/63-session return and moving-average history as independently audited; confirmation of no relevant action would resolve this audit gap.",
+          "symbol": null,
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e2",
+            "e5",
+            "e6"
+          ]
+        }
+      ],
+      "dispositions": [],
+      "question_effects": [
+        {
+          "question_id": "question-1",
+          "effect": "unresolved",
+          "reason": "The reviewed issuer evidence does not substantively confirm or rule out a relevant corporate action through the cutoff. The supplied matched SIP series are explicitly split-adjusted, but issuer-level verification remains unavailable in this task."
+        }
+      ],
+      "shared_exposures": [],
+      "agent_report": {
+        "work_summary": "I limited work to the requested corporate-action audit question. I reviewed the available NVDA SEC-submissions record and the supplied price/path inputs; the issuer material available to this task did not provide a substantive split or comparable corporate-action disclosure for either issuer.",
+        "main_conclusions": [
+          "Both supplied price series are expressly labeled split-adjusted.",
+          "I cannot independently confirm from reviewed issuer evidence that no NVDA or MU corporate action affected the history through 2026-10-02.",
+          "The technical panel remains internally matched and split-adjusted as supplied, but its issuer-action audit trail is unresolved."
+        ],
+        "short_summary": "No issuer-supported confirmation was available for a definitive yes/no answer. Treat the vendor's split-adjusted series as the operative technical input, with an unresolved issuer-action audit check.",
+        "limitations": [
+          "NVDA submissions metadata is not substantive disclosure.",
+          "No substantive MU corporate-action notice was reviewed in this task.",
+          "A failed keyword retrieval or an unreviewed filing cannot establish that no corporate action occurred."
+        ]
+      }
+    }
+  },
+  "receipt": {
+    "input_tokens": 50832,
+    "output_tokens": 1409,
+    "catalog_cost_usd": 0.11857199999999998,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 26969,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

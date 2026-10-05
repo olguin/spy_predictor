@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e16",
+        "e50",
+        "e53"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 is NVIDIA's disclosed 53-week fiscal year. Reported GAAP diluted EPS is $4.85 for the first 26 weeks ended 2026-07-26, using the reported diluted-share basis; grid assumes a constant split-adjusted share basis solely for sensitivity. Annual EPS cases are analyst assumptions, not consensus: bear $8.50 (remaining 27-week EPS $3.65, reflecting demand/order normalization and/or margin pressure); base $9.50 (remaining $4.65, supported by Q3 revenue guidance of $108bn +/-2%, but no Q4 guidance); bull $10.50 (remaining $5.65, requiring continued data-center demand and execution beyond the disclosed Q3 outlook). Multiples 18x/24x/30x are hypothetical stress inputs, not observed, fair, normal, or probable multiples.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.50",
+          "pe_multiple": "18",
+          "rationale": "Hypothetical miss: $3.65 residual GAAP EPS is below the trajectory implied by the reported first-half $4.85, if AI infrastructure demand normalizes, supply/China constraints impede revenue, or margins compress."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "9.50",
+          "pe_multiple": "24",
+          "rationale": "Hypothetical continuation: $4.65 residual GAAP EPS assumes Q3 revenue near the disclosed $108bn +/-2% outlook and a reasonably profitable Q4 despite no Q4 guide."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "10.50",
+          "pe_multiple": "30",
+          "rationale": "Hypothetical beat: $5.65 residual GAAP EPS assumes data-center demand and execution remain strong through the un-guided Q4, with no material margin deterioration."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 36796,
+    "output_tokens": 724,
+    "catalog_cost_usd": 0.08227999999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 16154,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

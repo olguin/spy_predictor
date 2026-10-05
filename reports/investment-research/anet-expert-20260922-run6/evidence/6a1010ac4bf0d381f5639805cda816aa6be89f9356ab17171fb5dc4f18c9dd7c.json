@@ -1,0 +1,95 @@
+{
+  "kind": "three_method_valuation",
+  "adapter": "three_method_valuation_v1",
+  "symbol": "ANET",
+  "symbols": [
+    "ANET"
+  ],
+  "price_evidence_id": "6a1d1333a21a76c4e78d9ebf9f1850bc74bcae9c28c17bee9a1db0e40b887893",
+  "observed_close_decimal": "205.19",
+  "price_date": "2026-09-22",
+  "methods": [
+    {
+      "method": "forward_pe",
+      "value_per_share_decimal": "182.50",
+      "change_from_close_pct_decimal": "-11.05804376431599980505872605877479409328",
+      "rationale": "Matches the base FY2026 US-GAAP EPS sensitivity: H2 residual $1.90 after reported H1 EPS $1.75 under a constant-share approximation. A 50x P/E is a stress anchor, not an observed or fair multiple."
+    },
+    {
+      "method": "ev_to_sales",
+      "value_per_share_decimal": "147.6901717781786806808377127617852380579",
+      "change_from_close_pct_decimal": "-28.02272441240865506075456271661131728744",
+      "rationale": "Revenue bridge uses reported H1, management Q3 guidance and an assumed Q4. The 15x EV/revenue stress reflects premium growth/margins but deliberately sits below the third-party page's dated 17.368 current EV/sales snapshot; methodological definitions can differ. Net cash includes cash only, making this method conservative if marketable investments exceed debt."
+    },
+    {
+      "method": "discounted_cash_flow",
+      "value_per_share_decimal": "115.5872840171295924429049762490272165638",
+      "change_from_close_pct_decimal": "-43.66816900573634560996882097128163333311",
+      "rationale": "Five-year unlevered-equity-style cash-flow sensitivity uses annualized H1 OCF less capex as a rough starting point, then 15% growth to test sustained AI/enterprise demand, a 10% discount rate for execution and duration risk, and 4% terminal growth. Working-capital cyclicality, stock compensation treatment and omitted marketable investments materially limit precision."
+    }
+  ],
+  "range": {
+    "low_value_per_share_decimal": "115.5872840171295924429049762490272165638",
+    "median_value_per_share_decimal": "147.6901717781786806808377127617852380579",
+    "high_value_per_share_decimal": "182.50"
+  },
+  "inputs": {
+    "pe_method": {
+      "earnings_per_share": "3.65",
+      "pe_multiple": "50",
+      "rationale": "Matches the base FY2026 US-GAAP EPS sensitivity: H2 residual $1.90 after reported H1 EPS $1.75 under a constant-share approximation. A 50x P/E is a stress anchor, not an observed or fair multiple."
+    },
+    "ev_sales_method": {
+      "revenue": "12400000000",
+      "ev_to_sales_multiple": "15",
+      "net_cash": "2290200000",
+      "diluted_shares": "1274900000",
+      "rationale": "Revenue bridge uses reported H1, management Q3 guidance and an assumed Q4. The 15x EV/revenue stress reflects premium growth/margins but deliberately sits below the third-party page's dated 17.368 current EV/sales snapshot; methodological definitions can differ. Net cash includes cash only, making this method conservative if marketable investments exceed debt."
+    },
+    "dcf_method": {
+      "starting_free_cash_flow": "5300000000",
+      "annual_growth_pct": "15",
+      "discount_rate_pct": "10",
+      "terminal_growth_pct": "4",
+      "net_cash": "2290200000",
+      "diluted_shares": "1274900000",
+      "rationale": "Five-year unlevered-equity-style cash-flow sensitivity uses annualized H1 OCF less capex as a rough starting point, then 15% growth to test sustained AI/enterprise demand, a 10% discount rate for execution and duration risk, and 4% terminal growth. Working-capital cyclicality, stock compensation treatment and omitted marketable investments materially limit precision.",
+      "projected_cash_flows": [
+        {
+          "year": 1,
+          "free_cash_flow": "6095000000.00",
+          "present_value": "5540909090.909090909090909090909090909091"
+        },
+        {
+          "year": 2,
+          "free_cash_flow": "7009250000.0000",
+          "present_value": "5792768595.041322314049586776859504132231"
+        },
+        {
+          "year": 3,
+          "free_cash_flow": "8060637500.000000",
+          "present_value": "6056076258.452291510142749812171299774606"
+        },
+        {
+          "year": 4,
+          "free_cash_flow": "9269733125.00000000",
+          "present_value": "6331352452.018304760603783894542722491633"
+        },
+        {
+          "year": 5,
+          "free_cash_flow": "10660193093.7500000000",
+          "present_value": "6619141199.837318613358501344294664423071"
+        }
+      ],
+      "discounted_terminal_value": "114731780797.1801892982140233011075166666"
+    }
+  },
+  "input_evidence_ids": [
+    "21469a183cdc17d61f1f398b6f5991f56223d3b3048d7e0a8223c67e0d228e1d",
+    "6a1d1333a21a76c4e78d9ebf9f1850bc74bcae9c28c17bee9a1db0e40b887893",
+    "c5d6629bc56b472fefe261b2c973eaabd45177e721384fc288df1eb42e031ae6"
+  ],
+  "assumptions": "Three correlated conditional valuation sensitivities compared with the 2026-09-22 split-adjusted close, not independent estimates, consensus, fair-value claims or probability-weighted targets. FY2026 revenue of $12.4bn assumes H1 reported $5.7447bn, management Q3 revenue guidance of about $3.3bn, and $3.3553bn in Q4; this tests continued AI/cloud and enterprise/campus demand. Starting annual free cash flow of $5.3bn is an analyst run-rate assumption informed by H1 operating cash flow of $2.7765bn less $84.2m capex, but working-capital timing can make that extrapolation materially inaccurate. Net cash is conservatively represented by the $2.2902bn SEC cash-and-cash-equivalents figure only because total marketable securities and debt are not available in the normalized facts; therefore EV/revenue and DCF values omit potentially material net investments. Diluted shares of 1.2749bn use H1 2026 weighted-average diluted shares from company results; future dilution or repurchases can differ. The 15x EV/revenue, 15% five-year FCF growth, 10% discount rate and 4% terminal growth are explicit stress assumptions selected to test durable AI networking growth and high cash conversion against cycle normalization; they are not observed or historically normal multiples/rates.",
+  "qualification": "All forward financial inputs and valuation multiples are explicit analyst/model assumptions unless a cited source states otherwise. The three methods are correlated and do not form a statistical confidence interval. Values are conditional sensitivities, not targets or guarantees.",
+  "retrieved_at": "2026-09-22T22:42:08.941981+00:00"
+}

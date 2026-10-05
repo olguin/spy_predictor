@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e2",
+        "e6",
+        "e17",
+        "e51",
+        "e55"
+      ],
+      "earnings_period_start": "2025-08-29",
+      "earnings_period_end": "2026-09-03",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2026 is Micron's disclosed 53-week fiscal year. Reported GAAP diluted EPS is $41.40 for the first 39 weeks ended 2026-05-28, using its reported diluted-share basis; grid applies a constant split-adjusted share basis solely for sensitivity. Annual EPS cases are analyst assumptions, not consensus: bear $70.00 (remaining 14-week EPS $28.60, below the $30.73 +/- $1.00 GAAP Q4 outlook, testing weaker memory pricing/volume or margin); base $72.00 (remaining $30.60, near the stated Q4 GAAP outlook); bull $74.00 (remaining $32.60, above guidance, requiring stronger AI-memory demand/pricing and execution). P/E inputs 12x/15x/18x are hypothetical stress inputs, not observed, fair, normal or probable multiples.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "70.00",
+          "pe_multiple": "12",
+          "rationale": "Hypothetical miss: $28.60 residual GAAP EPS is below Q4 guidance, testing weaker memory demand/pricing or lower margin."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "72.00",
+          "pe_multiple": "15",
+          "rationale": "Hypothetical continuation: $30.60 residual GAAP EPS is near the stated Q4 GAAP EPS outlook."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "74.00",
+          "pe_multiple": "18",
+          "rationale": "Hypothetical beat: $32.60 residual GAAP EPS is above Q4 guidance and requires sustained AI-memory demand, pricing and margins."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 39410,
+    "output_tokens": 547,
+    "catalog_cost_usd": 0.085384,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 11352,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

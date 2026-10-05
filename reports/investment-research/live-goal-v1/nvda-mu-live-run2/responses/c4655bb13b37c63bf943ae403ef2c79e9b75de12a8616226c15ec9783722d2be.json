@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e4",
+        "e6",
+        "e41"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 is a 53-week fiscal year ending January 31, 2027 (e41). Reported US-GAAP diluted EPS for the first six months is $4.85 (e4). Bear/base/bull full-year EPS assumptions of $8.85/$9.85/$10.85 therefore embed residual second-half EPS of $4.00/$5.00/$6.00, respectively, using a constant-share approximation; they are not management guidance or consensus. Bear tests AI-compute demand/mix or supply constraints reducing second-half profitability; base holds broadly similar per-quarter earnings despite the 14-week Q4; bull assumes demand and mix sustain stronger earnings. P/E inputs 18x/24x/30x are explicit stress assumptions, not observed, normal, fair, or probability-weighted multiples.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.85",
+          "pe_multiple": "18",
+          "rationale": "Hypothetical demand/mix or supply constraint stress plus multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "9.85",
+          "pe_multiple": "24",
+          "rationale": "Hypothetical sustained earnings through the unreported second half, with a 14-week Q4, at an assumed multiple."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "10.85",
+          "pe_multiple": "30",
+          "rationale": "Hypothetical stronger second-half demand/mix and continued premium multiple."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 56389,
+    "output_tokens": 747,
+    "catalog_cost_usd": 0.12174199999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 16732,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

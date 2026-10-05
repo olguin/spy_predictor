@@ -1,0 +1,56 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e16",
+        "e50",
+        "e52",
+        "e53"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Scenario assumptions, not consensus or observed multiples. FY2027 is the disclosed 53-week period. GAAP diluted EPS cases are annual: bear $8.50, base $9.50, bull $10.50. They begin with reported GAAP H1 EPS of $4.85 and therefore imply remaining H2 EPS of $3.65/$4.65/$5.65, using a constant-share approximation only; actual diluted shares may differ. The Q3 revenue outlook is $108.0bn \u00b12% with no China Data Center compute revenue assumed, but it gives no EPS guidance; Q4 is a disclosed 14-week quarter. Bear tests weaker conversion of AI-system demand and/or margin or supply/policy friction; base assumes the Q3 revenue outlook and continuing demand support H2 earnings above the H1 run rate; bull assumes stronger execution and demand into the 14-week Q4. P/E assumptions are 18x/24x/30x, explicit hypothetical stresses rather than fair, normal, current, or probable multiples.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.50",
+          "pe_multiple": "18",
+          "rationale": "Annual EPS assumption; residual $3.65 for H2 is below the base case, testing demand/margin conversion or supply/policy friction after reported H1."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "9.50",
+          "pe_multiple": "24",
+          "rationale": "Annual EPS assumption; residual $4.65 for H2 assumes Q3 guided revenue and continued AI-system demand support earnings despite no EPS guidance."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "10.50",
+          "pe_multiple": "30",
+          "rationale": "Annual EPS assumption; residual $5.65 for H2 tests stronger demand and execution through the disclosed 14-week Q4."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 36803,
+    "output_tokens": 883,
+    "catalog_cost_usd": 0.08420199999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 18664,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

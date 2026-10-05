@@ -17,6 +17,13 @@ describe("research controller boundary", () => {
       expect(() => requireResearchRequest({ ...request(), runtime })).toThrow();
     }
   });
+  it("admits a reserved valuation turn without widening the tool boundary", () => {
+    const grid = { ...request(), tool_schemas: { calculate_scenarios: { type: "object" } } };
+    expect(Object.keys(requireResearchRequest(grid).tool_schemas)).toEqual(["calculate_scenarios"]);
+    for (const tool_schemas of [{}, { read_source: {} }, { calculate_scenarios: {}, shell: {} }]) {
+      expect(() => requireResearchRequest({ ...request(), tool_schemas })).toThrow();
+    }
+  });
   it("rejects a second model call or duplicate tool action", () => {
     const boundary = new ActionBoundary();
     boundary.admitModelCall();

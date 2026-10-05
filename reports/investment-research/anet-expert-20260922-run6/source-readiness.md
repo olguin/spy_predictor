@@ -1,0 +1,63 @@
+# Source readiness
+
+READY_WITH_GAPS
+
+Checks input usability, dates and coverage. Semantic source interpretation and investment usefulness remain separate.
+
+| Requirement | Symbols | Conclusions | Status | Observed dates |
+|---|---|---|---|---|
+| ANET-annual | ANET | valuation | READY | 2025-12-31 |
+| ANET-operations | ANET | business | READY | 2026-06-30 |
+| ANET-geographic | ANET | policy_exposure | PARTIAL | 2026-02-14, 2026-08-04 |
+| ANET-customer | ANET | policy_exposure | PARTIAL | 2026-02-14, 2026-08-04 |
+| ANET-supply | ANET | policy_exposure | PARTIAL | 2026-02-14, 2026-08-04 |
+| ANET-price | ANET | market_behavior | READY | 2026-09-22 |
+| SPY-price | SPY | market_behavior | READY | 2026-09-22 |
+| XLK-price | XLK | market_behavior | READY | 2026-09-22 |
+| IWM-price | IWM | market_behavior | READY | 2026-09-22 |
+| HYG-price | HYG | market_behavior | READY | 2026-09-22 |
+| dated-policy | ANET | policy_exposure | PARTIAL | 2026-01-15 |
+
+## ANET-annual
+Dated annual diluted EPS anchor; no forward consensus or automatic share-basis match.
+Evidence: 21469a183cdc17d61f1f398b6f5991f56223d3b3048d7e0a8223c67e0d228e1d
+
+## ANET-operations
+Period-qualified issuer revenue available; demand attribution requires cited disclosure.
+Evidence: 21469a183cdc17d61f1f398b6f5991f56223d3b3048d7e0a8223c67e0d228e1d
+
+## ANET-geographic
+Located filing excerpt for substantive review; keyword presence does not verify a quantified exposure.
+Evidence: 58f2bb4d57fab50f060d0a19ed55e8ca34b712b2e654fc48415c297b9376994c, a16ebfc9b46119b55d6ab482e6caf1c207370db67c695a6aed5f399d7b631a19, f44cef8155031f908506f1fe4fb40ece711c7df18848c5a03d7b14d56feac191, f31403e0969086162f38250685040ffc066a443b299d2a6d4c97a7dd9675b200
+
+## ANET-customer
+Located filing excerpt for substantive review; keyword presence does not verify a quantified exposure.
+Evidence: ee36220d4c15318d51fe175bd9a2c82239efe73dcda881595f9c21da25fec222, 9e9f49f1f67e98e2a735ca65438272016a2d6dc6724e80189fe47460eb6f62ba, 46e46ecdf9fd015a83cb37106a40d4edb31e4a171eb83d9eee44f95b57fcd895, e3743571ba8e34048ce4b7af2ce07ec5b2441e3a1629a9746e50351301ef6e48
+
+## ANET-supply
+Located filing excerpt for substantive review; keyword presence does not verify a quantified exposure.
+Evidence: 8d72dba1afece52d9b3991dfeae5bd7d4a499a51cc5ecc99f348135d6040bb28, ac893bba16fb35ef3094ba2a0517f465eb9e4b7742a22414c363febb7a423287, b58da8514af8414b5012a1e558998be771b527f734ea8c0acccb803cc7771e6a, e29a2d6cd4e863ff779974305db00277ad09f0d041b60d4d80477df18ba0a4bc
+
+## ANET-price
+Completed-session close and descriptive metrics; not an executable quote.
+Evidence: 6a1d1333a21a76c4e78d9ebf9f1850bc74bcae9c28c17bee9a1db0e40b887893
+
+## SPY-price
+Completed-session close and descriptive metrics; not an executable quote.
+Evidence: 15f9494429a40177f1d15b06de5232430a74694223d0780f39e80486281cd2f4
+
+## XLK-price
+Completed-session close and descriptive metrics; not an executable quote.
+Evidence: b7a33269b67b8129ebebe19b04d272e749ba6af0d30276907f0ab84902a6a88b
+
+## IWM-price
+Completed-session close and descriptive metrics; not an executable quote.
+Evidence: 5fd68b220f8bec7eec38cab4b9ebe713b511b1963e6100ec799ae1771980c7e8
+
+## HYG-price
+Completed-session close and descriptive metrics; not an executable quote.
+Evidence: a4453fca07c6d9987d8540fa2e6010ad8c5decbbfb4dd4be649af66cd1e55987
+
+## dated-policy
+Dated primary policy text retrieved; subsequent amendments and company applicability not certified.
+Evidence: db7f6a3c06db88d3bf7703e61053f0a19c1356b13bb59410fd4d96a40905bbc4

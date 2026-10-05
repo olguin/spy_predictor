@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e50",
+        "e52",
+        "e53"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 is 53 weeks ending 2027-01-31. GAAP diluted EPS assumptions: bear $8.50, base $10.00, bull $11.00. They begin with reported GAAP H1 EPS of $4.85 (six months ended 2026-07-26) and therefore imply residual H2 EPS of $3.65/$5.15/$6.15, respectively, using a constant-share approximation across reported interim and assumed annual EPS. Q3 revenue outlook is $108bn +/-2%, with no China Data Center compute revenue assumed; Q4 is a 14-week quarter. Bear tests weaker AI infrastructure conversion or margins below outlook; base assumes Q3 demand conversion and a profitable 14-week Q4; bull assumes stronger conversion/shipments and sustained margins. P/E values 20x/23x/26x are explicit sensitivity assumptions, not observed multiples, consensus, fair values, or probabilities.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.50",
+          "pe_multiple": "20.00",
+          "rationale": "Assumed AI-infrastructure demand conversion and/or gross-margin pressure leaves $3.65 residual H2 GAAP EPS; tests an earnings miss despite guided Q3 revenue."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "10.00",
+          "pe_multiple": "23.00",
+          "rationale": "Assumes Q3 guidance converts and the 14-week Q4 produces $5.15 residual H2 GAAP EPS at broadly sustained profitability."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "11.00",
+          "pe_multiple": "26.00",
+          "rationale": "Assumes stronger-than-base platform shipment conversion and sustained margins produce $6.15 residual H2 GAAP EPS."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 36803,
+    "output_tokens": 659,
+    "catalog_cost_usd": 0.08151399999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 13572,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

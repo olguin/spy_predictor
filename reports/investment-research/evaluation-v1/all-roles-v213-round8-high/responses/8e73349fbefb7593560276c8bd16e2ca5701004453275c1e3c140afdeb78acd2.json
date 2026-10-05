@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e2",
+        "e6",
+        "e17",
+        "e51",
+        "e55"
+      ],
+      "earnings_period_start": "2025-08-29",
+      "earnings_period_end": "2026-09-03",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2026 (53 weeks) GAAP diluted-EPS scenarios, using a split-adjusted price basis. FY2026 has ended but Q4 results were scheduled for September 30, so these are provisional historical-period estimates, not forward annual earnings. Anchor: reported first-nine-month FY2026 GAAP diluted EPS is $41.40. Q4 GAAP EPS guidance is $30.73 \u00b1 $1.00. Constant diluted-share approximation: bear $70.50 requires $29.10 residual EPS, below guidance's low end, representing weaker memory demand/pricing or lower earnings conversion; base $72.50 requires $31.10, within the stated guidance range, representing broadly delivered Q4 outlook; bull $74.00 requires $32.60, above guidance's high end, representing stronger AI-memory demand/pricing and conversion. P/E inputs of 10x/14x/18x are hypothetical stress assumptions, not observed multiples, consensus, normal/fair values or probabilities.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "70.50",
+          "pe_multiple": "10",
+          "rationale": "Hypothetical Q4 GAAP EPS miss below management's guided range from weaker memory demand/pricing or lower earnings conversion."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "72.50",
+          "pe_multiple": "14",
+          "rationale": "Hypothetical broadly delivered Q4 GAAP EPS within management's guided range, with AI-memory demand and margins holding."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "74.00",
+          "pe_multiple": "18",
+          "rationale": "Hypothetical Q4 GAAP EPS beat above management's guided range from stronger AI-memory demand/pricing and earnings conversion."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 39391,
+    "output_tokens": 646,
+    "catalog_cost_usd": 0.08653399999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 13131,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

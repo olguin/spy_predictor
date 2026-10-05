@@ -1,0 +1,52 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_valuation_methods",
+    "arguments": {
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e29",
+        "e31",
+        "e32"
+      ],
+      "assumptions": "Three correlated, non-consensus FY2026/forward sensitivities, not fair values or probability-weighted targets. Amounts are USD and company-level values are in dollars except per-share outputs. For EV/equity bridges, assume June 30 cash plus marketable securities of $13.3433bn and no debt-like offset because the inspected balance sheet shows no debt line; restricted/off-balance-sheet obligations are not netted. Use 1.275bn diluted shares as a rounded constant-share assumption anchored to H1 2026 weighted-average diluted shares; actual future dilution may differ. P/E uses hypothetical FY2026 GAAP diluted EPS of $3.65 and 50x. EV/revenue uses assumed FY2026 revenue of $12.5bn, reflecting reported H1 revenue of $5.7447bn plus a Q3 management revenue guide of about $3.3bn and an analyst-assumed Q4 bridge of about $3.4553bn, at a hypothetical 15x EV/revenue multiple. DCF starts from assumed FY2026 free cash flow of $5.4bn, approximately a rounded annualization of H1 operating cash flow less capital expenditure; grows FCF 25% annually for five years, discounts at 8.5%, applies 4.0% terminal growth, then adds assumed net cash and divides by assumed diluted shares. The DCF deliberately tests demanding durable AI-networking cash compounding; terminal growth and discount-rate proximity make it especially sensitive.",
+      "pe_method": {
+        "earnings_per_share": "3.65",
+        "pe_multiple": "50",
+        "rationale": "Matches the grid base case: reported H1 2026 GAAP diluted EPS is $1.75, leaving a $1.90 H2 GAAP residual under a constant-share approximation. The 50x multiple is a stress assumption, not an observed, historical-normal or consensus multiple."
+      },
+      "ev_sales_method": {
+        "revenue": "12500000000",
+        "ev_to_sales_multiple": "15",
+        "net_cash": "13343300000",
+        "diluted_shares": "1275000000",
+        "rationale": "Revenue bridge uses $5.7447bn reported H1, approximately $3.3bn management Q3 revenue guidance and an assumed $3.4553bn Q4. A 15x EV/revenue assumption tests a premium sales valuation while explicitly bridging enterprise value to equity with cash plus marketable securities and constant diluted shares."
+      },
+      "dcf_method": {
+        "starting_free_cash_flow": "5400000000",
+        "annual_growth_pct": "25",
+        "discount_rate_pct": "8.5",
+        "terminal_growth_pct": "4",
+        "net_cash": "13343300000",
+        "diluted_shares": "1275000000",
+        "rationale": "Starting FCF is a rounded annualization of H1 2026 operating cash flow less capex, not reported FY2026 FCF. Five years of 25% annual growth assumes durable AI Ethernet demand, strong margins and cash conversion. An 8.5% discount rate and 4% terminal growth are explicit scenario inputs, not market-implied or empirically calibrated; the method is highly sensitive to them."
+      }
+    }
+  },
+  "receipt": {
+    "input_tokens": 30587,
+    "output_tokens": 1427,
+    "catalog_cost_usd": 0.195745,
+    "model": "openai-codex/gpt-5.6-sol",
+    "response_model": "gpt-5.6-sol",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 48195,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

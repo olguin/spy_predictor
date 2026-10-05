@@ -8,7 +8,7 @@ import websocket
 from spy_predictor_quant.investment_research.workspace import Workspace, QUESTION, handler
 import uuid
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"python/tests"))
-from test_investment_research_m3 import draft
+from test_investment_research_live import live_fixture
 from spy_predictor_quant.investment_research.store import Store
 root=Path(__file__).resolve().parents[1]
 temporary=Path(tempfile.mkdtemp(prefix='research-ui-check-'))
@@ -16,8 +16,9 @@ calls=[]
 workspace=Workspace(temporary/'workspace',temporary/'ledger',launch=lambda *args:calls.append(args))
 identity=str(uuid.uuid4())
 workspace.start(identity,QUESTION)
-draft(workspace.directory(identity)/'run')
-job=workspace.job(identity);job['operation']=None;workspace.save_job(job);workspace.active=None
+fixture, _ = live_fixture(workspace.directory(identity))
+assert fixture.run()['status'] == 'DRAFT'
+job=workspace.job(identity);job['scope']=[r['symbol'] for r in fixture.store.load()['mandate']['watchlist']];job['horizon_sessions']=fixture.store.load()['mandate']['horizon_sessions'];job['operation']=None;workspace.save_job(job);workspace.active=None
 server=ThreadingHTTPServer(('127.0.0.1',0),handler(workspace))
 thread=Thread(target=server.serve_forever,daemon=True);thread.start()
 profile=Path(tempfile.mkdtemp(prefix='m3-chrome-'))
@@ -55,7 +56,8 @@ try:
   raise AssertionError(expression)
  until("!document.getElementById('entry').hidden")
  assert evaluate("document.getElementById('question').value") == QUESTION
- assert evaluate("document.getElementById('budget').textContent.includes('40 calls')")
+ assert evaluate("document.getElementById('budget').textContent.includes(String(workspace.budgets.model_calls)+' calls')")
+ assert evaluate("document.getElementById('symbols').value==='NVDA, MU' && document.querySelectorAll('[name=horizon]').length===3")
  shot=call('Page.captureScreenshot',{'format':'png','captureBeyondViewport':False})
  Path('/tmp/research-entry.png').write_bytes(base64.b64decode(shot['data']))
  call('Emulation.setDeviceMetricsOverride',{'width':390,'height':844,'deviceScaleFactor':1,'mobile':True})
@@ -65,8 +67,38 @@ try:
  until("document.querySelectorAll('.instrument').length===5")
  assert evaluate("document.getElementById('conclusion').textContent.includes('Draft conclusions')")
  assert evaluate("document.getElementById('instruments').textContent.includes('What would change this assessment')")
+ assert evaluate("document.querySelectorAll('.instrument table tbody tr').length")==12
+ assert evaluate("document.getElementById('instruments').textContent.includes('ETF exposure')")
+ assert evaluate("document.getElementById('instruments').textContent.includes('Synthetic margin/growth sensitivity')")
+ assert evaluate("document.querySelectorAll('.instrument .dimension').length")==25
+ assert evaluate("document.querySelector('.instrument').textContent.includes('Relative assessment')")
+ assert evaluate("document.querySelector('.dimension').textContent.includes('supported')")
+ assert evaluate("Array.from(document.querySelectorAll('.dimension')).some(n=>n.textContent.includes('policy exposure')&&n.textContent.includes('insufficient evidence'))")
+ assert evaluate("document.getElementById('supporting').textContent.includes('Source readiness')")
+ assert evaluate("document.getElementById('instruments').textContent.includes('Global forces that matter') && document.getElementById('instruments').textContent.includes('What I recommend considering')")
+ assert evaluate("document.querySelectorAll('#agentReports .agent-choice').length===7")
+ evaluate("document.querySelector('[data-view=agents]').click()")
+ assert evaluate("!document.getElementById('agentsView').hidden && document.getElementById('overviewView').hidden")
+ evaluate("document.querySelector('#agentReports [data-role=company]').click()")
+ assert evaluate("document.querySelector('#agentReports .agent-detail').textContent.includes('Final short summary') && document.querySelector('#agentReports .agent-detail').textContent.includes('What it did')")
+ assert evaluate("document.querySelector('#agentReports .chart-browser')!==null")
+ evaluate("document.querySelector('#agentReports .chart-browser').open=true")
+ until("document.querySelector('#agentReports .research-chart svg')!==null")
+ assert evaluate("document.querySelector('#agentReports .research-chart').textContent.includes('Completed close $100.00')")
+ evaluate("document.querySelector('#agentReports .research-chart').scrollIntoView({block:'center'})")
+ shot=call('Page.captureScreenshot',{'format':'png','captureBeyondViewport':False})
+ Path('/tmp/research-agent-valuation.png').write_bytes(base64.b64decode(shot['data']))
+ shot=call('Page.captureScreenshot',{'format':'png','captureBeyondViewport':False})
+ Path('/tmp/research-agents.png').write_bytes(base64.b64decode(shot['data']))
+ evaluate("document.querySelector('[data-view=overview]').click()")
  shot=call('Page.captureScreenshot',{'format':'png','captureBeyondViewport':False})
  Path('/tmp/research-conclusions.png').write_bytes(base64.b64decode(shot['data']))
+ evaluate("for(const d of document.querySelectorAll('.instrument details'))d.open=true;document.querySelector('.instrument table').scrollIntoView({block:'center'})")
+ shot=call('Page.captureScreenshot',{'format':'png','captureBeyondViewport':False})
+ Path('/tmp/research-scenarios.png').write_bytes(base64.b64decode(shot['data']))
+ call('Emulation.setDeviceMetricsOverride',{'width':390,'height':844,'deviceScaleFactor':1,'mobile':True})
+ assert evaluate("document.documentElement.scrollWidth<=innerWidth")
+ call('Emulation.setDeviceMetricsOverride',{'width':1500,'height':1000,'deviceScaleFactor':1,'mobile':False})
  call('Page.navigate',{'url':f'http://127.0.0.1:{server.server_port}/monitor?run={identity}'})
  until("document.getElementById('runStateTitle').textContent==='Finished — draft ready'")
  assert evaluate("document.getElementById('runStateDetail').textContent.includes('No research is running')")
@@ -81,6 +113,12 @@ try:
  evaluate("stateBanner(snapshot)")
  assert evaluate("document.getElementById('conclusionsLink').href.includes('/reports?run=')")
  assert evaluate("document.querySelectorAll('#table tr').length")>0
+ assert evaluate("document.querySelectorAll('#agentReports .agent-choice').length===7 && !document.getElementById('executionDetails').open")
+ evaluate("document.querySelector('#agentReports [data-role=technical]').click()")
+ assert evaluate("document.querySelector('#agentReports .agent-detail').textContent.includes('Final short summary')")
+ call('Emulation.setDeviceMetricsOverride',{'width':390,'height':844,'deviceScaleFactor':1,'mobile':True})
+ assert evaluate("document.documentElement.scrollWidth<=innerWidth")
+ call('Emulation.setDeviceMetricsOverride',{'width':1500,'height':1000,'deviceScaleFactor':1,'mobile':False})
  shot=call('Page.captureScreenshot',{'format':'png','captureBeyondViewport':False})
  Path('/tmp/research-monitor-status.png').write_bytes(base64.b64decode(shot['data']))
  # Real form submission against a fake launcher verifies the same-origin write path.
@@ -90,7 +128,7 @@ try:
  until("location.pathname==='/reports'")
  assert len(calls)==2,calls
  assert not exceptions,exceptions
- result={'status':'PASS','question_entry':True,'form_launch':True,'draft_conclusions':True,'exact_research_question_heading':True,'monitor_statuses':['running','draft','published','failed','interrupted','uncertain'],'responsive_entry':True,'browser_exceptions':exceptions,'paid_calls':0}
+ result={'status':'PASS','question_entry':True,'form_launch':True,'draft_conclusions':True,'scenario_rows':12,'distinct_conclusions':25,'source_readiness':True,'assumptions_and_etf_exposure':True,'exact_research_question_heading':True,'monitor_statuses':['running','draft','published','failed','interrupted','uncertain'],'responsive_entry':True,'browser_exceptions':exceptions,'paid_calls':0,'seven_agent_reports':True,'live_global_contract':True,'explicit_stocks_and_horizons':True,'progressive_disclosure':True,'agent_valuation_chart':True}
  Path('/tmp/research-workspace-browser-check.json').write_text(json.dumps(result,indent=2)+'\n')
  print(json.dumps(result,indent=2))
 finally:

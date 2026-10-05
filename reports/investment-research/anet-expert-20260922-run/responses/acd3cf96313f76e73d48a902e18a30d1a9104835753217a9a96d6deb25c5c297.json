@@ -1,0 +1,56 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e29",
+        "e30",
+        "e33",
+        "e34"
+      ],
+      "earnings_period_start": "2026-01-01",
+      "earnings_period_end": "2026-12-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Fiscal year is calendar 2026. Reported H1 2026 GAAP diluted EPS is $1.75. Annual GAAP EPS assumptions are bear $3.45, base $3.75, bull $4.05, implying residual H2 EPS of $1.70/$2.00/$2.30 under a constant-share approximation. Management's Q3 guidance is non-GAAP diluted EPS $1.06-$1.08, so it is not directly additive to GAAP H1 EPS; the bear residual tests slower AI/cloud deployment, large-customer timing and lower margins, base assumes Q3 execution near management's non-GAAP outlook plus ordinary GAAP exclusions and steady Q4, and bull assumes stronger AI Ethernet acceptance/deferred-revenue conversion and operating leverage. P/E assumptions of 40x/50x/60x are explicit stress inputs, not observed, consensus, normal or fair multiples; they test de-rating versus sustained growth-premium outcomes at the September 22, 2026 split-adjusted close.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "3.45",
+          "pe_multiple": "40",
+          "rationale": "Miss stress: H2 GAAP residual $1.70, below a run-rate suggested by Q3 non-GAAP EPS guidance because of customer timing, acceptance delays, pricing/mix pressure or supply friction, plus multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "3.75",
+          "pe_multiple": "50",
+          "rationale": "Execution stress anchor: H2 GAAP residual $2.00, consistent with Q3 non-GAAP guidance after allowing for non-GAAP exclusions and a steady Q4; 50x is an assumption to test what sustained AI networking growth must support."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "4.05",
+          "pe_multiple": "60",
+          "rationale": "Beat stress: H2 GAAP residual $2.30 through faster AI Ethernet deployments, deferred-revenue conversion and margin leverage; 60x assumes investors continue to capitalize durable high growth."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 34945,
+    "output_tokens": 930,
+    "catalog_cost_usd": 0.20262500000000003,
+    "model": "openai-codex/gpt-5.6-sol",
+    "response_model": "gpt-5.6-sol",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 33043,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

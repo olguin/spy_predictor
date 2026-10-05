@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e4",
+        "e6",
+        "e41",
+        "e66"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 is a 53-week fiscal year ending the last Sunday in January (Jan. 31, 2027); its Q4 is 14 weeks per the July 2026 10-Q. Six-month FY2027 GAAP diluted EPS reported through Jul. 26 was $4.85. Scenario annual GAAP EPS assumptions explicitly add hypothetical H2 residual EPS of $3.15/$4.85/$6.65 to that reported amount, using a constant-share approximation: bear $8.00, base $9.70, bull $11.50. Bear tests lower accelerator demand or mix/margin and a valuation de-rating; base holds H1 earnings run-rate in H2; bull tests continued demand/mix and higher valuation. These are not guidance, consensus, forecasts, or empirically fair multiples. GAAP EPS includes material other income, including six-month equity-security gains, so the operating bridge is not fully recurring. Hypothetical P/E inputs: 18, 24.1185567010 (equals the dated close at $9.70 EPS), and 28.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.00",
+          "pe_multiple": "18",
+          "rationale": "Residual H2 EPS $3.15 is below the H1 run rate, testing demand/mix and multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "9.70",
+          "pe_multiple": "24.1185567010",
+          "rationale": "Residual H2 EPS $4.85 equals reported H1 EPS on a constant-share arithmetic basis; multiple is reverse-engineered to the dated close."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "11.50",
+          "pe_multiple": "28",
+          "rationale": "Residual H2 EPS $6.65 tests sustained accelerator demand/mix plus multiple expansion."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 58722,
+    "output_tokens": 1042,
+    "catalog_cost_usd": 0.12994799999999998,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 20412,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

@@ -222,3 +222,28 @@ def test_worker_pipe_deadline_is_enforced():
     import sys
     with pytest.raises(TimeoutError):
         subprocess_worker({}, {"argv": [sys.executable, "-c", "import time; time.sleep(10)"]}, 0.05)
+
+
+def test_worker_wall_clock_deadline_survives_suspended_monotonic_clock(monkeypatch):
+    import sys
+    from spy_predictor_quant.investment_research import controller
+    wall = iter([0.0, 2.0])
+    with monkeypatch.context() as patch:
+        patch.setattr(controller.time, 'time', lambda: next(wall, 2.0))
+        with pytest.raises(TimeoutError, match='deadline'):
+            subprocess_worker({}, {'argv': [sys.executable, '-c', 'import time; time.sleep(5)']}, 1)
+
+
+def test_late_worker_response_accounts_known_usage_before_rejecting_action(tmp_path):
+    c = Controller(tmp_path)
+    state = c.create(mandate())
+    def late(request, runtime, timeout):
+        state['attempts'][-1]['worker_deadline_at'] = '2000-01-01T00:00:00+00:00'
+        return response('submit_findings', findings(request['task_id']))
+    c.worker = late
+    with pytest.raises(LimitReached, match='wall-clock deadline'):
+        c.execute_task(state, state['tasks'][0])
+    assert state['usage']['input_tokens'] == 100
+    assert state['usage']['catalog_cost_usd'] == 0.01
+    assert not state['usage_unknown']
+    assert state['tasks'][0]['result'] is None

@@ -1,0 +1,857 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "investment-research-action-v4.schema.json",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "discover_sources"
+        },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "query"
+          ],
+          "properties": {
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          }
+        }
+      },
+      "required": [
+        "tool",
+        "arguments"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "read_source"
+        },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_id"
+          ],
+          "properties": {
+            "source_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "description": "Registered source ID. SEC companyfacts expose normalized numeric financial fields; read matching submissions first if not seeded. Seeded market/ETF/macro sources are already visible and cached."
+            }
+          }
+        }
+      },
+      "required": [
+        "tool",
+        "arguments"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "inspect_evidence"
+        },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence_id"
+          ],
+          "properties": {
+            "evidence_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          }
+        }
+      },
+      "required": [
+        "tool",
+        "arguments"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "calculate"
+        },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "operation",
+            "left",
+            "right",
+            "units",
+            "assumptions",
+            "evidence_ids"
+          ],
+          "properties": {
+            "operation": {
+              "type": "string",
+              "enum": [
+                "percentage_change",
+                "valuation_multiple",
+                "scenario_price"
+              ],
+              "description": "scenario_price multiplies left earnings/share assumption by right P/E assumption. Repeat for bear/base/bull and compare each target with an observed price using percentage_change. All scenario assumptions must be explicit."
+            },
+            "left": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 300,
+              "description": "Exact decimal scenario value OR evidence_id#/JSON/pointer/to/numeric/value. Evidence field references are resolved by Python."
+            },
+            "right": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 300,
+              "description": "Exact decimal scenario value OR evidence_id#/JSON/pointer/to/numeric/value. Evidence field references are resolved by Python."
+            },
+            "units": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "assumptions": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "uniqueItems": true,
+              "maxItems": 40
+            }
+          }
+        }
+      },
+      "required": [
+        "tool",
+        "arguments"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "ask_specialist"
+        },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "recipient",
+            "question",
+            "decision_impact",
+            "evidence_ids",
+            "symbols"
+          ],
+          "properties": {
+            "recipient": {
+              "type": "string",
+              "enum": [
+                "company",
+                "macro",
+                "technical",
+                "geopolitics",
+                "commodities"
+              ]
+            },
+            "question": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "decision_impact": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "uniqueItems": true,
+              "maxItems": 40
+            },
+            "symbols": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "uniqueItems": true,
+              "maxItems": 5,
+              "minItems": 1
+            }
+          }
+        }
+      },
+      "required": [
+        "tool",
+        "arguments"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "submit_findings"
+        },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "assessment",
+            "claims",
+            "gaps",
+            "assumptions",
+            "counter_thesis",
+            "review_conditions",
+            "objections",
+            "dispositions",
+            "question_effects",
+            "instruments",
+            "role_coverage",
+            "shared_exposures"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "assessment": {
+              "type": "string",
+              "enum": [
+                "attractive_candidate",
+                "conditional_opportunity",
+                "watch",
+                "avoid",
+                "insufficient_evidence"
+              ]
+            },
+            "claims": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "claim_id",
+                  "classification",
+                  "text",
+                  "evidence_ids",
+                  "symbols"
+                ],
+                "properties": {
+                  "claim_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "classification": {
+                    "type": "string",
+                    "enum": [
+                      "fact",
+                      "inference",
+                      "scenario"
+                    ]
+                  },
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "evidence_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 40
+                  },
+                  "symbols": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 5,
+                    "minItems": 1
+                  }
+                }
+              },
+              "maxItems": 40
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "description",
+                  "critical",
+                  "symbols"
+                ],
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "critical": {
+                    "type": "boolean"
+                  },
+                  "symbols": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 5,
+                    "minItems": 1
+                  }
+                }
+              },
+              "maxItems": 12
+            },
+            "assumptions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              },
+              "maxItems": 12
+            },
+            "counter_thesis": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "review_conditions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "description",
+                  "symbol",
+                  "operator",
+                  "threshold_decimal",
+                  "price_basis",
+                  "expires_at",
+                  "evidence_ids"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "human_review",
+                      "completed_close"
+                    ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "symbol": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "operator": {
+                    "enum": [
+                      "above",
+                      "below",
+                      null
+                    ]
+                  },
+                  "threshold_decimal": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "pattern": "^[0-9]+(\\.[0-9]+)?$"
+                  },
+                  "price_basis": {
+                    "enum": [
+                      "split_adjusted",
+                      "raw",
+                      null
+                    ]
+                  },
+                  "expires_at": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "evidence_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 40
+                  }
+                }
+              },
+              "maxItems": 10
+            },
+            "objections": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "objection_id",
+                  "claim_ids",
+                  "severity",
+                  "description",
+                  "symbols"
+                ],
+                "properties": {
+                  "objection_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "claim_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 40
+                  },
+                  "severity": {
+                    "type": "string",
+                    "enum": [
+                      "critical",
+                      "material",
+                      "minor"
+                    ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "symbols": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 5,
+                    "minItems": 1
+                  }
+                }
+              },
+              "maxItems": 12
+            },
+            "dispositions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "objection_id",
+                  "decision",
+                  "reason"
+                ],
+                "properties": {
+                  "objection_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "decision": {
+                    "type": "string",
+                    "enum": [
+                      "changed",
+                      "unchanged",
+                      "unresolved"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  }
+                }
+              },
+              "maxItems": 200
+            },
+            "question_effects": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "question_id",
+                  "effect",
+                  "reason"
+                ],
+                "properties": {
+                  "question_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "effect": {
+                    "type": "string",
+                    "enum": [
+                      "changed",
+                      "unchanged",
+                      "unresolved"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  }
+                }
+              },
+              "maxItems": 200
+            },
+            "instruments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "symbol",
+                  "assessment",
+                  "thesis",
+                  "counter_thesis",
+                  "assumptions",
+                  "claim_ids",
+                  "review_conditions",
+                  "valuation",
+                  "etf_lookthrough"
+                ],
+                "properties": {
+                  "symbol": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "assessment": {
+                    "type": "string",
+                    "enum": [
+                      "attractive_candidate",
+                      "conditional_opportunity",
+                      "watch",
+                      "avoid",
+                      "insufficient_evidence"
+                    ]
+                  },
+                  "thesis": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "counter_thesis": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "assumptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 12000
+                    },
+                    "minItems": 1,
+                    "maxItems": 12
+                  },
+                  "claim_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 40
+                  },
+                  "review_conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "kind",
+                        "description",
+                        "symbol",
+                        "operator",
+                        "threshold_decimal",
+                        "price_basis",
+                        "expires_at",
+                        "evidence_ids"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "enum": [
+                            "human_review",
+                            "completed_close"
+                          ]
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 12000
+                        },
+                        "symbol": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "operator": {
+                          "enum": [
+                            "above",
+                            "below",
+                            null
+                          ]
+                        },
+                        "threshold_decimal": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "pattern": "^[0-9]+(\\.[0-9]+)?$"
+                        },
+                        "price_basis": {
+                          "enum": [
+                            "split_adjusted",
+                            "raw",
+                            null
+                          ]
+                        },
+                        "expires_at": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "format": "date-time"
+                        },
+                        "evidence_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200
+                          },
+                          "uniqueItems": true,
+                          "maxItems": 40
+                        }
+                      }
+                    },
+                    "minItems": 1,
+                    "maxItems": 10
+                  },
+                  "valuation": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "etf_lookthrough": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "maxItems": 5
+            },
+            "role_coverage": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "role",
+                  "status",
+                  "reason"
+                ],
+                "properties": {
+                  "role": {
+                    "enum": [
+                      "company",
+                      "macro",
+                      "technical",
+                      "geopolitics",
+                      "commodities"
+                    ]
+                  },
+                  "status": {
+                    "enum": [
+                      "completed",
+                      "omitted"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  }
+                }
+              },
+              "maxItems": 5
+            },
+            "shared_exposures": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "symbols",
+                  "mechanism",
+                  "evidence_ids",
+                  "qualification"
+                ],
+                "properties": {
+                  "symbols": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 5,
+                    "minItems": 2
+                  },
+                  "mechanism": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "evidence_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "uniqueItems": true,
+                    "maxItems": 40
+                  },
+                  "qualification": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  }
+                }
+              },
+              "maxItems": 12
+            }
+          }
+        }
+      },
+      "required": [
+        "tool",
+        "arguments"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "route_question"
+        },
+        "arguments": {
+          "type": "object",
+          "properties": {
+            "question_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "decision": {
+              "type": "string",
+              "enum": [
+                "approve",
+                "decline"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "answer_task_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "An already COMPLETE task by the requested specialist that answers this question, or null to schedule new research/decline."
+            }
+          },
+          "required": [
+            "question_id",
+            "decision",
+            "reason",
+            "answer_task_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "tool",
+        "arguments"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

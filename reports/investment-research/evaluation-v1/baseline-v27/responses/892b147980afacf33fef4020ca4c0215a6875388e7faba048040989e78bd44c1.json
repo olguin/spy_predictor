@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e2",
+        "e6",
+        "e17"
+      ],
+      "earnings_period_start": "2025-08-29",
+      "earnings_period_end": "2026-08-27",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Scenario sensitivity, not consensus or an observed company multiple. FY2026 GAAP annual EPS assumptions are anchored to FY2025 reported diluted EPS of $7.59 and the reported 273-day FY2026 interim diluted EPS of $41.40; these inputs are not an annualization. Bear/base/bull multiples of 18x/22x/26x are explicit assumptions, held beyond the 63-session horizon solely to frame sensitivity. Dated price is split-adjusted; scenario EPS assumptions are declared split-adjusted for comparability.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "35.00",
+          "pe_multiple": "18",
+          "rationale": "Assumes a sharp deceleration from the interim earnings run-rate and multiple compression consistent with memory-cycle and execution risk."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "45.00",
+          "pe_multiple": "22",
+          "rationale": "Assumes fiscal-year earnings retain much of the reported interim strength while allowing for moderation after record fiscal Q3 results."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "55.00",
+          "pe_multiple": "26",
+          "rationale": "Assumes strategic customer agreements and AI-memory demand sustain strong earnings and a higher valuation assumption."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 39857,
+    "output_tokens": 403,
+    "catalog_cost_usd": 0.08454999999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 19083,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

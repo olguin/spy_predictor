@@ -65,6 +65,18 @@ def test_telemetry_and_replay_reconcile_without_lock(tmp_path):
     assert project(c.store)['elapsed_seconds'] == snap['elapsed_seconds']
 
 
+@pytest.mark.parametrize('status', ['EVALUATION_COMPLETE', 'EVALUATION_INCOMPLETE', 'EVALUATION_INTERRUPTED'])
+def test_monitor_recognizes_finished_evaluations_instead_of_stale_running_work(tmp_path, status):
+    c = Controller(tmp_path)
+    state = c.create(m3_mandate())
+    end = datetime.fromisoformat(state['started_at']) + timedelta(seconds=1)
+    state.update(status=status, completed_at=end.isoformat())
+    c.store.save(state)
+    snap = project(c.store, now=end + timedelta(days=1))
+    assert snap['status'] == status and not snap['stale']
+    assert snap['elapsed_seconds'] == 1
+
+
 @pytest.mark.parametrize('error', [TimeoutError, KeyboardInterrupt])
 def test_terminal_failure_frozen_once_and_not_retried(tmp_path, error):
     calls = []
@@ -237,12 +249,37 @@ def test_monitor_http_readonly_paths_credentials_and_injection(tmp_path):
             assert json.load(r)['tasks'][0]['question'].startswith('<script>')
         with urlopen(base+'/monitor.js') as r:
             script = r.read().decode(); assert '.innerHTML' not in script and '.textContent' in script
+            assert "$('evaluationReportLink').hidden=!s.report_available" in script
+        with urlopen(base+'/') as r:
+            assert b'id="evaluationReportLink"' in r.read()
+        with pytest.raises(HTTPError):
+            urlopen(base+'/report')
         request_id = state['attempts'][0]['request_id']
         assert 'runtime' not in artifact(c.store,'requests',request_id)
         for path in ['/api/artifact/code/'+'a'*64,'/../.env','/api/artifact/evidence/../state.json']:
             with pytest.raises(HTTPError): urlopen(base+path)
         with pytest.raises(HTTPError): urlopen(Request(base+'/api/snapshot',data=b'{}',method='POST'))
         with pytest.raises(HTTPError): urlopen(Request(base+'/api/snapshot',headers={'Origin':'https://evil.example'}))
+        (tmp_path/'final-research-draft.md').write_text(
+            '# Saved analysis\n\n| Case | Change |\n|---|---:|\n| Base | 3% |\n\n'
+            '[Quality review](independent-review.md)\n\n<script>alert(1)</script>\n')
+        (tmp_path/'independent-review.md').write_text('# Independent quality review\n')
+        state.update(status='EVALUATION_COMPLETE', completed_at=state['updated_at'])
+        c.store.save(state)
+        with urlopen(base+'/api/snapshot') as r:
+            assert json.load(r)['report_available']
+        with urlopen(base+'/report') as r:
+            html = r.read().decode()
+            assert r.headers['Content-Type'].startswith('text/html')
+            assert 'Saved analysis' in html and 'Base' in html
+            assert 'href="/report/review"' in html
+            assert '<script>alert(1)</script>' not in html
+            assert '&lt;script&gt;alert(1)&lt;/script&gt;' in html
+        with urlopen(base+'/report/review') as r:
+            assert 'Independent quality review' in r.read().decode()
+        for path in ['/report/details', '/report/../../.env']:
+            with pytest.raises(HTTPError):
+                urlopen(base+path)
     finally:
         server.shutdown();server.server_close();thread.join()
 

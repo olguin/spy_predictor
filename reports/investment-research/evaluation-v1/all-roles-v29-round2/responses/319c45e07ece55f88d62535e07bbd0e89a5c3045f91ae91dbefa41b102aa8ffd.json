@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e50"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Explicit FY2027 GAAP diluted EPS scenario assumptions, split-adjusted for comparison with the 2026-09-18 split-adjusted close. Reported first-half FY2027 GAAP diluted EPS is $4.85 (Q1 $2.39 plus Q2 $2.46) on separately reported diluted-share bases. Thus residual EPS assumptions for Q3+Q4 are $3.15/$5.15/$7.15 in bear/base/bull respectively; this is a constant-share approximation, not addition of actual future diluted EPS. Q3 revenue guidance is $108bn +/-2%, 74% GAAP gross margin +/-50bp and $9.2bn GAAP opex, with no China Data Center compute revenue assumed. Bear tests a material Q3/Q4 demand or mix/margin shortfall and/or multiple compression; base assumes Q3 guidance and continued demand roughly support the residual; bull assumes Q3 at/above guidance plus sustained ramp and a higher multiple. P/E bands 20x/25x/30x are scenario inputs, not observed multiples, fair values, consensus or probabilities.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.00",
+          "pe_multiple": "20.00",
+          "rationale": "EPS is $3.15 above reported H1; tests a sharp deceleration versus the Q3 outlook through lower demand/mix or margin, alongside 20x multiple stress."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "10.00",
+          "pe_multiple": "25.00",
+          "rationale": "EPS is $5.15 above reported H1; assumes Q3 guidance and continued demand durability support FY completion, with 25x assumed multiple."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "12.00",
+          "pe_multiple": "30.00",
+          "rationale": "EPS is $7.15 above reported H1; assumes Q3 upside and sustained platform ramp/demand into Q4, with 30x assumed multiple."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 33399,
+    "output_tokens": 906,
+    "catalog_cost_usd": 0.07766999999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 17880,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

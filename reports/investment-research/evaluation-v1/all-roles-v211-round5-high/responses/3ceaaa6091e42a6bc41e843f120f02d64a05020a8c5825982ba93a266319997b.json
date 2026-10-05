@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e2",
+        "e6",
+        "e51",
+        "e55"
+      ],
+      "earnings_period_start": "2025-08-29",
+      "earnings_period_end": "2026-09-03",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Explicit hypothetical FY2026 US-GAAP diluted EPS and P/E sensitivity, not consensus, a target, or an observed multiple. FY2026 is a 53-week year with a 14-week Q4; $41.40 nine-month GAAP diluted EPS is the reported anchor. Bear/base/bull annual EPS of $70.00/$72.13/$74.00 imply Q4 residual EPS of $28.60/$30.73/$32.60 under a constant diluted-share approximation. The base residual equals Micron's GAAP Q4 EPS midpoint guidance of $30.73 (+/- $1.00); bear is below guidance and tests a demand/margin or execution miss, while bull is above guidance and tests sustained AI-memory demand and margin strength. P/E stress assumptions of 11x/14x/17x test cycle-sensitive compression/expansion without empirical probability, fair-value claim, or historical-multiple claim. No forward diluted-share count is supplied.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "70.00",
+          "pe_multiple": "11.00",
+          "rationale": "Hypothesis: Q4 residual EPS of $28.60 falls below the $29.73-$31.73 GAAP guidance interval as demand, pricing/mix, or margin execution weakens; pair with multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "72.13",
+          "pe_multiple": "14.00",
+          "rationale": "Hypothesis: Q4 residual EPS equals the $30.73 GAAP guidance midpoint, supported by AI-memory product demand and guided operating structure; multiple is an explicit held-fixed stress assumption."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "74.00",
+          "pe_multiple": "17.00",
+          "rationale": "Hypothesis: Q4 residual EPS of $32.60 exceeds guidance as AI-memory demand and margins remain stronger than guided; pair with multiple expansion."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 39373,
+    "output_tokens": 798,
+    "catalog_cost_usd": 0.088322,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 15798,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

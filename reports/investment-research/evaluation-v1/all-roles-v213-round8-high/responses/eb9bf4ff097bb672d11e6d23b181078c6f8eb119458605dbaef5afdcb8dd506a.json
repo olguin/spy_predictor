@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e16",
+        "e50",
+        "e53"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 (53 weeks) GAAP diluted-EPS scenarios, split-adjusted price basis. Starting anchor: reported FY27 first-half GAAP diluted EPS of $4.85. Q3 revenue outlook is $108bn \u00b12%, 74% GAAP gross-margin midpoint and about $9.2bn GAAP opex; it gives no EPS outlook. Assumptions therefore use a constant diluted-share approximation: bear $9.50 assumes Q3 revenue/margin conversion and the 14-week Q4 soften materially versus the implied run-rate (including demand or supply/policy disruption); base $10.50 assumes Q3 guidance is broadly delivered and Q4 sustains demand with the 14-week quarter; bull $11.50 assumes higher Q3/Q4 conversion from AI-platform demand. P/E inputs (17x/22x/27x) are hypothetical stress assumptions, not observed multiples, consensus, normal/fair values or probabilities.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "9.50",
+          "pe_multiple": "17",
+          "rationale": "Hypothetical EPS miss: demand conversion slows or supply/policy frictions constrain results; explicit departure below a base that assumes Q3 guidance delivery."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "10.50",
+          "pe_multiple": "22",
+          "rationale": "Hypothetical delivery: Q3 revenue outlook is broadly achieved and demand continues through the 14-week Q4, on a constant-share approximation."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "11.50",
+          "pe_multiple": "27",
+          "rationale": "Hypothetical beat: stronger AI-platform demand and earnings conversion in Q3/Q4 than the base assumption."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 36797,
+    "output_tokens": 955,
+    "catalog_cost_usd": 0.08505399999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 19455,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

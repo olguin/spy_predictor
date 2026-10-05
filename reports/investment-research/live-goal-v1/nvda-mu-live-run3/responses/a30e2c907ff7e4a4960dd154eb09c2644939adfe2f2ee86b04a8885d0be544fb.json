@@ -1,0 +1,56 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e5",
+      "evidence_ids": [
+        "e3",
+        "e5",
+        "e58",
+        "e59",
+        "e60",
+        "e65"
+      ],
+      "earnings_period_start": "2026-09-04",
+      "earnings_period_end": "2027-09-02",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 period dates are a 52-week analyst timing assumption anchored only to FY2026 ending September 3, 2026; exact FY2027 fiscal calendar was not verified. Micron reported FY2026 GAAP diluted EPS of $74.33 and guided FQ1 FY2027 GAAP diluted EPS of $37.84 \u00b1 $1.00. Annual FY2027 GAAP EPS sensitivity assumptions are $120/$150/$180, of which the arithmetic remainder after the $37.84 guide is $82.16/$112.16/$142.16 for the final three quarters; no interim FY2027 earnings have been reported, so these are not residuals from reported earnings nor consensus. Bear tests a sharp post-Q1 memory price/mix or margin normalization and multiple compression; base assumes sizable but moderating remaining AI-memory demand and retains a reverse-engineered multiple; bull tests continued tight supply, mix and margins. FY2026 GAAP net income was below operating income after taxes and non-operating items; this is total-GAAP sensitivity, not a recurring-operating-EPS model. Hypothetical P/E inputs are 5, 7.1659333333 (equals dated close at $150 EPS), and 9; none is observed, fair, or forecast.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "120",
+          "pe_multiple": "5",
+          "rationale": "Assumes the $37.84 FQ1 GAAP midpoint is followed by $82.16 across the remaining three quarters, testing a sharp memory-cycle/margin normalization and de-rating."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "150",
+          "pe_multiple": "7.1659333333",
+          "rationale": "Assumes the guided FQ1 midpoint plus $112.16 for the remaining three quarters; multiple is reverse-engineered to the dated close."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "180",
+          "pe_multiple": "9",
+          "rationale": "Assumes the guided FQ1 midpoint plus $142.16 for the remaining three quarters, testing continued AI-memory supply tightness, mix and margins with re-rating."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 61402,
+    "output_tokens": 1373,
+    "catalog_cost_usd": 0.13928,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 27024,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

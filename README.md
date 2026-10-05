@@ -5,7 +5,29 @@ Research infrastructure for point-in-time, reproducible market forecasting.
 The proposed next product iteration is **Agentic Investment System V1**: a
 cooperating research team for investment decisions over several weeks to three
 months. Start with the [V1 implementation plan](docs/AGENTIC_INVESTMENT_SYSTEM_V1_PLAN.md).
-Implementation under that plan has not started.
+M1–M3 engineering is implemented; the first real report failed the user's
+usefulness review. Start with the [current handoff](docs/AGENTIC_INVESTMENT_SYSTEM_V1_HANDOFF.md)
+and [delivery repair](docs/AGENTIC_INVESTMENT_SYSTEM_V1_DELIVERY_REPAIR.md).
+The [latest continuation](docs/AGENTIC_INVESTMENT_SYSTEM_V1_READINESS.md) verifies
+source readiness without model calls and separates supported conclusions from
+the specific uncertainties that affect them.
+M4 remains open and V1 is not released.
+The [reviewed agent configuration](docs/AGENTIC_INVESTMENT_SYSTEM_V1_PROMOTION.md)
+is now the default for new v6 runs: prompts v2.17, high reasoning, improved role
+context and Sol for Technical. Individual development scores do not close M4.
+The [evaluation runner](docs/AGENTIC_INVESTMENT_SYSTEM_V1_EVALUATION.md) now has a
+measured Company/Director baseline; its failed delivery and usefulness review
+identify the next prompt/context interventions.
+
+The revised [live global assessment goal](docs/AGENTIC_INVESTMENT_SYSTEM_V1_LIVE_GOAL.md)
+is implemented in the local workspace: one to five selected US-listed stocks,
+5/21/63-session horizons, timestamped assessment and source clocks, conditional
+outcomes and view-change conditions. All seven agents have readable activity,
+conclusion and short-summary reports; relevant charts and evidence expand on demand.
+See the [workspace guide](docs/AGENTIC_INVESTMENT_RESEARCH_WORKSPACE.md) for input and
+navigation. New v7 runs use the v2.21 derived live/report profile; existing v6 runs
+retain the frozen v2.17 promotion. Development quality evidence and release gates
+remain separate.
 
 The existing engineering baseline is **Improvement Plan 3**; see its
 [implementation handoff](docs/IMPROVEMENT_PLAN_3_HANDOFF.md) and

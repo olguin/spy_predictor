@@ -1,8 +1,11 @@
-# Local research workspace and first real M3 pilot
+# Local research workspace
 
-September 21, 2026 UTC (September 20 local). Question entry and conclusions are
-available before launching the user's real NVDA/MU/QQQ development pilot. This
-does not evaluate frozen release cases or change M4 acceptance requirements.
+October 4: explicit stock/horizon input, timestamped global assessments and clear
+reports for every agent are implemented. Optional charts show deterministic values
+with source links; original specialist reports and follow-ups remain available
+alongside final Director review decisions. See the [live goal and evidence](AGENTIC_INVESTMENT_SYSTEM_V1_LIVE_GOAL.md)
+and [current handoff](AGENTIC_INVESTMENT_SYSTEM_V1_HANDOFF.md). Archived pilot records
+below remain historical; release and human-usefulness gates are separate.
 
 ## Use the workspace
 
@@ -10,18 +13,26 @@ does not evaluate frozen release cases or change M4 acceptance requirements.
 node --env-file=.env scripts/investment-research.mjs workspace --port 8766
 ```
 
-Open <http://127.0.0.1:8766/>. This version supports **NVDA and MU against QQQ**, a
-**63-trading-session** horizon, USD and long-only research. The visible universe
-and horizon remain fixed; free text refines the research question within that
-scope. Broader ticker selection requires a separately registered source universe.
+Open <http://127.0.0.1:8766/>. Enter **one to five US-listed tickers**, a research
+question and any of the **5 / 21 / 63 trading-session** horizons. Known issuers use
+the configured SEC identities; new issuers are resolved through the SEC ticker
+catalog and verified against filings before model research. Unclassified sectors
+use an explicitly broad SPY comparator. USD stock research remains the scope.
+Unresolved issuers, missing required financial anchors or unavailable required
+price history stop admission rather than produce fabricated analysis.
 
-1. Enter the question and read the displayed budget. **Start research** makes
+1. Enter stocks, select horizons, refine the question and read the displayed budget. **Start research** makes
    real provider calls and creates a separate saved run.
 2. Open its **Monitor** for current activity, specialist findings, tools, evidence,
    receipts and remaining budgets. Browser refresh does not start or stop research.
-3. Read **Reports & conclusions** for each instrument's thesis/demand drivers,
-   valuation assumptions, downside/counter-case and evidence that would change
-   the assessment. Claims link to the exact saved evidence.
+3. Read **Overall assessment** for the stock assessment, global forces, conditional
+   outcomes/consequences, what to consider and what changes the view. The header
+   separates assessment time, source dates, closed markets and venue coverage.
+   Choose **Agent reports** for each role’s actual actions, main conclusions, final
+   short summary and Director review corrections. Choose **Evidence & limits**
+   for source readiness and saved records. Optional chart controls show one
+   relevant valuation, relative-return or price-path chart at a time; exact values
+   and source links expand underneath.
 4. A completed run is initially a **draft**. Review its claims and limitations,
    then choose **Reviewed — refresh & publish** within the original run deadline.
    The bounded final refresh can withdraw affected guidance. Publication means a
@@ -49,14 +60,20 @@ a single-run saved replay. Its banner states clearly when no research is running
 There is no automatic paid retry after failure, interruption or server restart.
 An unchanged repeated form submission retains its request UUID, avoiding duplicate
 runs after a lost response. Only one research/publication operation runs in a
-workspace at a time. Keep the server process open while research is running.
+workspace at a time. Keep the server process open while research is running. Live runs on macOS hold
+a temporary `caffeinate` idle-sleep assertion and release it on completion/failure.
+This does not override manual sleep or lid closure; interrupted calls keep their
+unknown-usage status and are never silently retried.
 
 ## Bounds and artifacts
 
-The existing provider/model and budget remain: `openai-codex/gpt-5.6-terra`, medium
-reasoning, 40 model calls, 1,000,000 input tokens, 100,000 output tokens, 1,200
-seconds and $25 catalog estimate ceiling. Provider-reported consumption is still
-validated after a response, so this is not a prepaid billing cap. Eight calls
+The default model is `openai-codex/gpt-5.6-terra`, with Sol for Technical, high
+reasoning and a 10,000-token response ceiling. New explicit v7 runs use v2.21 prompts derived from the promoted analytical
+cohort. Budgets are 40–72 model calls (40 for one stock,48 for two,72 for five), 1.6 million input tokens and 50 MB total
+download per selected stock (up to 8 million / 250 MB), 120,000 output tokens,
+3,600 seconds and a $25 catalog estimate ceiling. Director synthesis has a
+stock-count-based response ceiling of 10,000–20,000 tokens. Provider-reported consumption is still
+validated after a response, so this is not a prepaid billing cap. Seven calls
 remain reserved for final work; publication reserves its source/tool capacity.
 
 Workspace questions, mandates, job records and runs are under
@@ -66,7 +83,7 @@ freezes its source window and policy before the run. Earlier accepted runs,
 failed candidates, synthetic artifacts and frozen M4 records remain untouched.
 
 Browser mutation routes require the exact local Host, a matching Origin and a
-server-session token. They accept only question/request IDs or the explicit
+server-session token. They accept question/request IDs, ticker and horizon selections, or the explicit
 publication action. The browser cannot supply runtime commands, model changes,
 filesystem paths, budgets or arbitrary source URLs. Credentials stay server-side.
 The standalone monitor remains read-only.

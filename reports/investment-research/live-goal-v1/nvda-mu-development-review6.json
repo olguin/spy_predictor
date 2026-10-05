@@ -1,0 +1,20 @@
+{
+  "case": "NVDA/MU run6",
+  "execution": "FAIL",
+  "usage": {
+    "task_attempts": 3,
+    "model_calls": 12,
+    "source_requests": 33,
+    "tool_calls": 72,
+    "input_tokens": 525078,
+    "output_tokens": 4863,
+    "catalog_cost_usd": 1.0522944,
+    "download_bytes": 17990589
+  },
+  "usage_unknown": true,
+  "stop_reason": "RuntimeError",
+  "diagnosis": "The Python scheduler correctly reserved a calculation-only turn, but the TypeScript worker required submit_findings to remain available in every request. Worker initialization rejected this before producing a receipt. Original unknown-usage accounting is preserved.",
+  "repair": "Worker contract now permits exactly calculate_scenarios as the one narrow alternative to the usual submit-capable allowlist. Empty, arbitrary and shell tool sets remain rejected. Four contract tests and four mocked worker tests pass under required Node22.22.",
+  "other_engineering": "M1 transport no longer adds M2-only fields to legacy findings.106 Python checks pass; two local HTTP checks were sandbox-blocked and are being rerun with appropriate permissions.",
+  "qualification": "No product or live quality acceptance. Original failed archive unchanged."
+}

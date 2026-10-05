@@ -1,0 +1,50 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_valuation_methods",
+    "arguments": {
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e29"
+      ],
+      "assumptions": "Three correlated conditional valuation sensitivities compared with the 2026-09-22 split-adjusted close, not independent estimates, consensus, fair-value claims or probability-weighted targets. FY2026 revenue of $12.4bn assumes H1 reported $5.7447bn, management Q3 revenue guidance of about $3.3bn, and $3.3553bn in Q4; this tests continued AI/cloud and enterprise/campus demand. Starting annual free cash flow of $5.3bn is an analyst run-rate assumption informed by H1 operating cash flow of $2.7765bn less $84.2m capex, but working-capital timing can make that extrapolation materially inaccurate. Net cash is conservatively represented by the $2.2902bn SEC cash-and-cash-equivalents figure only because total marketable securities and debt are not available in the normalized facts; therefore EV/revenue and DCF values omit potentially material net investments. Diluted shares of 1.2749bn use H1 2026 weighted-average diluted shares from company results; future dilution or repurchases can differ. The 15x EV/revenue, 15% five-year FCF growth, 10% discount rate and 4% terminal growth are explicit stress assumptions selected to test durable AI networking growth and high cash conversion against cycle normalization; they are not observed or historically normal multiples/rates.",
+      "pe_method": {
+        "earnings_per_share": "3.65",
+        "pe_multiple": "50",
+        "rationale": "Matches the base FY2026 US-GAAP EPS sensitivity: H2 residual $1.90 after reported H1 EPS $1.75 under a constant-share approximation. A 50x P/E is a stress anchor, not an observed or fair multiple."
+      },
+      "ev_sales_method": {
+        "revenue": "12400000000",
+        "ev_to_sales_multiple": "15",
+        "net_cash": "2290200000",
+        "diluted_shares": "1274900000",
+        "rationale": "Revenue bridge uses reported H1, management Q3 guidance and an assumed Q4. The 15x EV/revenue stress reflects premium growth/margins but deliberately sits below the third-party page's dated 17.368 current EV/sales snapshot; methodological definitions can differ. Net cash includes cash only, making this method conservative if marketable investments exceed debt."
+      },
+      "dcf_method": {
+        "starting_free_cash_flow": "5300000000",
+        "annual_growth_pct": "15",
+        "discount_rate_pct": "10",
+        "terminal_growth_pct": "4",
+        "net_cash": "2290200000",
+        "diluted_shares": "1274900000",
+        "rationale": "Five-year unlevered-equity-style cash-flow sensitivity uses annualized H1 OCF less capex as a rough starting point, then 15% growth to test sustained AI/enterprise demand, a 10% discount rate for execution and duration risk, and 4% terminal growth. Working-capital cyclicality, stock compensation treatment and omitted marketable investments materially limit precision."
+      }
+    }
+  },
+  "receipt": {
+    "input_tokens": 29617,
+    "output_tokens": 896,
+    "catalog_cost_usd": 0.17496500000000004,
+    "model": "openai-codex/gpt-5.6-sol",
+    "response_model": "gpt-5.6-sol",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 32191,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

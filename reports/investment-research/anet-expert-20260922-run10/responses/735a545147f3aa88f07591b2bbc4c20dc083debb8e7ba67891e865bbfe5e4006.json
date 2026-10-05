@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e29",
+        "e31"
+      ],
+      "earnings_period_start": "2026-01-01",
+      "earnings_period_end": "2026-12-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Hypothetical FY2026 US-GAAP diluted EPS stress grid, not consensus. H1 reported GAAP diluted EPS is $1.75. Bear/base/bull FY EPS of $3.35/$3.65/$3.95 imply H2 residual GAAP EPS of $1.60/$1.90/$2.20 under a constant-share approximation; actual diluted shares and GAAP/non-GAAP exclusions can change. Management's Q3 guide is non-GAAP diluted EPS $1.06-$1.08 and cannot be added directly to GAAP H1 EPS. Bear tests weaker AI/customer deployment timing, acceptance delays and/or margin pressure; base assumes Q3 demand and margins broadly track management's non-GAAP outlook while GAAP exclusions remain manageable; bull tests stronger AI Ethernet shipments and operating leverage. P/E assumptions of 40x/50x/60x deliberately stress valuation compression versus durable premium growth; they are not observed, fair, normal, or probability-weighted multiples.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "3.35",
+          "pe_multiple": "40",
+          "rationale": "H2 GAAP residual $1.60; tests customer timing, acceptance/supply friction and margin pressure, plus multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "3.65",
+          "pe_multiple": "50",
+          "rationale": "H2 GAAP residual $1.90; assumes execution directionally consistent with Q3 non-GAAP guide while preserving the accounting-basis distinction."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "3.95",
+          "pe_multiple": "60",
+          "rationale": "H2 GAAP residual $2.20; tests AI Ethernet shipment upside, better operating leverage and sustained premium multiple."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 28011,
+    "output_tokens": 960,
+    "catalog_cost_usd": 0.168855,
+    "model": "openai-codex/gpt-5.6-sol",
+    "response_model": "gpt-5.6-sol",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 33205,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

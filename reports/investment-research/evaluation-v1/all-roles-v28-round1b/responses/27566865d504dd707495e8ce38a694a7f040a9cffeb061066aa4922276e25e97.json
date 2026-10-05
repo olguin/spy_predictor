@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e16",
+        "e50"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Scenario sensitivity for NVIDIA fiscal 2027 (a future year ending approximately January 2027), not consensus or a forecast. Uses split-adjusted price convention; reported diluted EPS share basis is treated as a constant-share approximation after verifying no corporate-action reconciliation is supplied. Bear $8.00 EPS assumes second-half profitability remains positive but revenue/margin conversion softens versus reported H1 GAAP EPS $4.85; base $10.00 assumes Q3 revenue outlook of $108bn and 74% GAAP gross-margin outlook support continued profitability; bull $12.00 assumes stronger conversion/persistence. P/E bands 20x/25x/30x are explicit stress assumptions, not observed, historical-normal, or fair multiples; horizon is 63 sessions although fiscal-year assumptions extend beyond it.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.00",
+          "pe_multiple": "20.00",
+          "rationale": "Demand or margin normalization and/or policy/supply disruption; annual EPS remains above reported H1 EPS, leaving a positive second half."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "10.00",
+          "pe_multiple": "25.00",
+          "rationale": "Continued data-center demand reflected in Q3 revenue and margin outlook, with no assumption of China data-center compute revenue."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "12.00",
+          "pe_multiple": "30.00",
+          "rationale": "Stronger demand persistence and conversion than base, while retaining elevated-multiple risk."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 33277,
+    "output_tokens": 496,
+    "catalog_cost_usd": 0.072506,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 11181,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

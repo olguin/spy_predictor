@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e2",
+        "e6",
+        "e17",
+        "e51"
+      ],
+      "earnings_period_start": "2025-08-29",
+      "earnings_period_end": "2026-08-27",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Explicit hypothetical FY2026 GAAP diluted-EPS/P-E sensitivity, not consensus, forecast, observed multiple, or fair-value estimate. FY26 first nine months reported GAAP diluted EPS is $41.40. Q4 GAAP EPS guidance is $30.73 +/- $1.00, making the residual annual bridge directly tied to guidance, subject to different quarterly diluted-share counts. Bear $69.00 assumes a low-end Q4 guide outcome and modest execution/mix pressure; base $72.13 mechanically combines nine-month EPS with the guided midpoint under a constant diluted-share approximation; bull $74.00 assumes high-end Q4 guidance and continued AI-memory demand/margin execution. Multiples 12x/14x/16x are deliberately unweighted stress assumptions.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "69.00",
+          "pe_multiple": "12",
+          "rationale": "Low-end Q4 guided EPS with execution/mix pressure and multiple compression stress."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "72.13",
+          "pe_multiple": "14",
+          "rationale": "Nine-month reported EPS plus Q4 guided midpoint under a constant-share approximation; hypothetical multiple."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "74.00",
+          "pe_multiple": "16",
+          "rationale": "High-end Q4 guided EPS with continued AI-memory demand/margin execution and multiple expansion stress."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 36364,
+    "output_tokens": 467,
+    "catalog_cost_usd": 0.078332,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 10147,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

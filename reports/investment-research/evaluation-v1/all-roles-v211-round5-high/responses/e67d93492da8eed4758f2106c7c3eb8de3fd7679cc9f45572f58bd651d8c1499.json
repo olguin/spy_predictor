@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e50",
+        "e53"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Explicit hypothetical FY2027 US-GAAP diluted EPS and P/E sensitivity, not consensus, a target, or an observed multiple. FY2027 is a 53-week year; $4.85 six-month GAAP diluted EPS is the reported anchor. Bear/base/bull annual EPS of $8.00/$10.00/$12.00 imply residual second-half EPS of $3.15/$5.15/$7.15 under a constant-share approximation. Q3 revenue guidance is $108bn +/-2%, 74% GAAP gross-margin guidance, approximately $9.2bn GAAP opex and 16%-18% FY tax-rate outlook; no Q4 guidance or forward diluted-share count is supplied. P/E stress assumptions 20x/24x/28x test earnings execution and multiple compression/expansion without empirical probability, fair-value claim, or historical-multiple claim.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.00",
+          "pe_multiple": "20.00",
+          "rationale": "Hypothesis: Q3 lands toward/below guided revenue range and the 14-week Q4 does not sustain the Q2-to-Q3 demand ramp; use a lower residual EPS than the base, paired with a compression stress."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "10.00",
+          "pe_multiple": "24.00",
+          "rationale": "Hypothesis: reported first-half EPS plus a positive second half consistent with Q3 revenue/margin/opex/tax outlook and continued data-center demand, without assuming China compute revenue; multiple held as an explicit stress assumption."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "12.00",
+          "pe_multiple": "28.00",
+          "rationale": "Hypothesis: Q3 execution and a longer fourth quarter preserve demand and margin momentum, producing residual EPS above base; paired with an expansion stress."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 36794,
+    "output_tokens": 939,
+    "catalog_cost_usd": 0.084856,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 18956,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

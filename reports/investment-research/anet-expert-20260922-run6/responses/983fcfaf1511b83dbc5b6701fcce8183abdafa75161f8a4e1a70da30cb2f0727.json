@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e29"
+      ],
+      "earnings_period_start": "2026-01-01",
+      "earnings_period_end": "2026-12-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Hypothetical FY2026 US-GAAP diluted EPS stress grid, not consensus or management guidance. Reported H1 2026 GAAP diluted EPS is $1.75. Bear/base/bull EPS of $3.40/$3.65/$3.90 therefore require H2 residual EPS of $1.65/$1.90/$2.15 on a constant-share approximation. Management's dated Q3 guidance is non-GAAP diluted EPS of $1.06-$1.08 and cannot be added directly to GAAP H1 because exclusions are not forecast-reconciled. Bear tests slower AI/cloud deployments, customer timing, gross-margin pressure and a Q3 miss versus non-GAAP guidance; base assumes Q3 roughly consistent with management's non-GAAP range, continued AI networking and enterprise/campus growth, with a normal GAAP/non-GAAP gap; bull assumes AI fabric deployment pull-through, enterprise strength and operating leverage yielding a beat. P/E assumptions of 40x/50x/60x are explicit stress inputs chosen to test joint earnings and multiple compression/expansion around a high-growth networking cycle; they are not observed, historical-normal, fair or probability-weighted multiples. FY2026 ends after the 63-session mandate, so the grid is a forward run-rate sensitivity rather than a prediction that all earnings will be reported within the horizon.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "3.40",
+          "pe_multiple": "40",
+          "rationale": "Miss stress: H2 GAAP residual $1.65; slower hyperscale/AI timing, customer concentration and margin normalization combine with multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "3.65",
+          "pe_multiple": "50",
+          "rationale": "Operating continuation stress: H2 GAAP residual $1.90, with Q3 non-GAAP outcome broadly around company guidance and continued enterprise/campus plus AI demand; 50x is only a sensitivity anchor."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "3.90",
+          "pe_multiple": "60",
+          "rationale": "Beat stress: H2 GAAP residual $2.15 supported by stronger AI fabric deployments, enterprise/campus traction and operating leverage, combined with multiple expansion."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 26764,
+    "output_tokens": 1179,
+    "catalog_cost_usd": 0.16919,
+    "model": "openai-codex/gpt-5.6-sol",
+    "response_model": "gpt-5.6-sol",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 40485,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

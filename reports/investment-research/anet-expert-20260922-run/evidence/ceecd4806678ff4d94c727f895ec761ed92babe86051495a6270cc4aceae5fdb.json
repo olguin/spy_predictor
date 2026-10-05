@@ -1,0 +1,99 @@
+{
+  "kind": "three_method_valuation",
+  "adapter": "three_method_valuation_v1",
+  "symbol": "ANET",
+  "symbols": [
+    "ANET"
+  ],
+  "price_evidence_id": "34b5a6eedb1956445723d3dbf11bffab62ee131cb94f9a3f25687734726ccc00",
+  "observed_close_decimal": "205.19",
+  "price_date": "2026-09-22",
+  "methods": [
+    {
+      "method": "forward_pe",
+      "value_per_share_decimal": "187.50",
+      "change_from_close_pct_decimal": "-8.621277840050684731224718553535747356110",
+      "rationale": "Forward fiscal-2026 P/E stress uses the scenario-grid base GAAP EPS and an explicit 50x assumed multiple. The multiple is not observed, historical-normal, consensus, or fair; it tests the premium required for durable AI-networking growth."
+    },
+    {
+      "method": "ev_to_sales",
+      "value_per_share_decimal": "151.9584522676815731049793847129717729147",
+      "change_from_close_pct_decimal": "-25.94256432200322963839398376481710954983",
+      "rationale": "Fiscal-2026 revenue assumes reported H1 $5.7447B plus management Q3 revenue guidance of about $3.3B and roughly $3.0B Q4. A 15x EV/revenue stress is deliberately below the timestamped third-party page's 17.368x snapshot but is not an empirical fair multiple. Net cash and shares are held constant."
+    },
+    {
+      "method": "discounted_cash_flow",
+      "value_per_share_decimal": "116.0979053229716438381078189610866800706",
+      "change_from_close_pct_decimal": "-43.41931608608039191085929189478693890024",
+      "rationale": "Starting annual FCF of $5.0B is a conservative normalization versus H1 2026 operating cash flow of $2.7765B less $0.0842B capex, recognizing deferred-revenue working-capital timing. Five-year 18% annual growth tests sustained AI Ethernet adoption but decelerates relative to recent operating expansion; 10% discount and 3% terminal growth explicitly stress duration and multiple risk."
+    }
+  ],
+  "range": {
+    "low_value_per_share_decimal": "116.0979053229716438381078189610866800706",
+    "median_value_per_share_decimal": "151.9584522676815731049793847129717729147",
+    "high_value_per_share_decimal": "187.50"
+  },
+  "inputs": {
+    "pe_method": {
+      "earnings_per_share": "3.75",
+      "pe_multiple": "50",
+      "rationale": "Forward fiscal-2026 P/E stress uses the scenario-grid base GAAP EPS and an explicit 50x assumed multiple. The multiple is not observed, historical-normal, consensus, or fair; it tests the premium required for durable AI-networking growth."
+    },
+    "ev_sales_method": {
+      "revenue": "12.05",
+      "ev_to_sales_multiple": "15",
+      "net_cash": "10.90",
+      "diluted_shares": "1.2612",
+      "rationale": "Fiscal-2026 revenue assumes reported H1 $5.7447B plus management Q3 revenue guidance of about $3.3B and roughly $3.0B Q4. A 15x EV/revenue stress is deliberately below the timestamped third-party page's 17.368x snapshot but is not an empirical fair multiple. Net cash and shares are held constant."
+    },
+    "dcf_method": {
+      "starting_free_cash_flow": "5.00",
+      "annual_growth_pct": "18",
+      "discount_rate_pct": "10",
+      "terminal_growth_pct": "3",
+      "net_cash": "10.90",
+      "diluted_shares": "1.2612",
+      "rationale": "Starting annual FCF of $5.0B is a conservative normalization versus H1 2026 operating cash flow of $2.7765B less $0.0842B capex, recognizing deferred-revenue working-capital timing. Five-year 18% annual growth tests sustained AI Ethernet adoption but decelerates relative to recent operating expansion; 10% discount and 3% terminal growth explicitly stress duration and multiple risk.",
+      "projected_cash_flows": [
+        {
+          "year": 1,
+          "free_cash_flow": "5.9000",
+          "present_value": "5.363636363636363636363636363636363636364"
+        },
+        {
+          "year": 2,
+          "free_cash_flow": "6.962000",
+          "present_value": "5.753719008264462809917355371900826446281"
+        },
+        {
+          "year": 3,
+          "free_cash_flow": "8.21516000",
+          "present_value": "6.172171299774605559729526671675432006011"
+        },
+        {
+          "year": 4,
+          "free_cash_flow": "9.6938888000",
+          "present_value": "6.621056485212758691346219520524554333720"
+        },
+        {
+          "year": 5,
+          "free_cash_flow": "11.438788784000",
+          "present_value": "7.102587865955504777989580940199067376173"
+        }
+      ],
+      "discounted_terminal_value": "104.5095071704881417332752624057862771066"
+    }
+  },
+  "input_evidence_ids": [
+    "38122a133319ebf656bb6a1e9d9936e5a81d738a1eada8691906a47c8513c7fb",
+    "34b5a6eedb1956445723d3dbf11bffab62ee131cb94f9a3f25687734726ccc00",
+    "55601ab83ba89e57366e63a609c2ce22da31f95e5173710610a521ffeafb5e5f",
+    "e5052513a412c3e8f17ac47ff42aff9f7a3a51fb6b36f1898181bdf6bc9c247f",
+    "e99bd2e0e6e2e3ab0514b8df24767558c5c99021b564bb6b3e5a603b7c5c2718",
+    "421322c10fd71ed62e2a7ffdce4e8651bf6919698b1b44757a1a61b1e6529b0f",
+    "11abf207dc81c27d94954e241bca958434dda881682575fc9a80422aba2677d4"
+  ],
+  "assumptions": "All outputs are conditional sensitivity estimates at the September 22, 2026 split-adjusted close, not consensus, probabilities, targets, or claims of fair value. Fiscal 2026 GAAP diluted EPS and revenue are analyst assumptions. Net cash is approximated at $10.9 billion from June 30, 2026 cash, cash equivalents and marketable securities, assuming no material debt; diluted shares are held constant at 1.2612 billion. Revenue and cash-flow inputs are in USD billions; shares are in billions. The methods are correlated because each depends on continued AI/cloud networking execution and do not form an independent confidence interval.",
+  "qualification": "All forward financial inputs and valuation multiples are explicit analyst/model assumptions unless a cited source states otherwise. The three methods are correlated and do not form a statistical confidence interval. Values are conditional sensitivities, not targets or guarantees.",
+  "retrieved_at": "2026-09-22T21:57:14.534132+00:00"
+}

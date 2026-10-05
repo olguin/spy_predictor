@@ -1,5 +1,209 @@
 # V1 handoff — M3 continuation and preserved M4 gates
 
+## Saved terminal status — October 4, 2026
+
+Run7 finished normally at 2026-10-04T22:44:27.934441+00:00: all seven roles completed, no crash/hang,34 calls/$4.0665086 known catalog cost/14.74 minutes, all receipts present. Controller handle11231 is terminal; no research worker remains active.14 numerical/archive groups and the actual desktop/mobile report and chart checks passed.
+
+**The revised goal is still unmet.** The final report introduces an unsupported NVDA raw-material-inventory proposition citing an AI-cloud lease-guarantee passage after Challenger draft review. Original report quality is FAIL; Director15/20, other six roles16–19/20 in provisional assistant review. Preserve the original. A clean execution does not repair that defect or prove general reliability.
+
+Read the [saved terminal status](../reports/investment-research/live-goal-v1/session-status-2026-10-04.md), `nvda-mu-development-review7.json` and the [failure audit](AGENTIC_INVESTMENT_SYSTEM_V1_FAILURE_AUDIT.md). All terminal live attempts have $20.4454290 known catalog cost plus unknown run1/run6 receipts. No additional paid run was started. The user choice to pause all work or continue offline fixes remains pending; no pause or completion was inferred. Diagnose and reproduce the final-content coverage gap offline before any further model attempt. The older active-run checkpoints below are historical.
+
+## Live global assessment implementation — October 4, 2026
+
+**The revised product goal is not achieved.** v7/v2.21 implements the intended
+input, timestamp and report contracts, but complete live quality and reliability
+remain unproven. ANET completed with provisional 16–18/20 development reviews;
+the completed NVDA/MU run2 failed Company and Challenger quality review. Five
+other terminal NVDA/MU attempts stopped incomplete. Preserve their failed grades
+and original receipts; engineering passes do not repair those results.
+
+At the October 4, 22:37 UTC checkpoint, run7 was still active (CLI handle 11231),
+with Company and Macro completed, Technical running and further work pending.
+The user asked why failures were repeated and whether to stop. The assistant
+recommended stopping the current run and pausing paid evaluations, and requested
+a choice between immediate stop and allowing only this run to finish. **No answer
+has been received: do not describe the run or goal as paused, and do not launch
+another paid run while that choice is pending.** Offline diagnosis may continue.
+
+Root causes include host idle sleep, earnings/citation interpretation defects,
+duplicate question routing, inadequate multi-company tool allocation, a Python
+reserved-tool lookup and a Python/TypeScript contract mismatch. Whole live runs
+were launched too early after changes; that execution process contributed to
+wasted runs. See the [failure audit and next admission gate](AGENTIC_INVESTMENT_SYSTEM_V1_FAILURE_AUDIT.md).
+
+Verification: 108 Python regressions and eight TypeScript worker/contract tests
+passed. Latest compact-layout Chrome checks passed with zero provider calls and
+no browser exceptions. A new offline boundary test also passes actual Python
+tool envelopes through the TypeScript validator for one through five companies,
+ETF-only and mixed scopes, all roles/stages and calculation-only reserved turns.
+These checks establish engineering behavior, not end-to-end investment quality.
+
+See [live goal and evidence](AGENTIC_INVESTMENT_SYSTEM_V1_LIVE_GOAL.md) and
+`reports/investment-research/live-goal-v1/`. The prior promoted v2.17 cohort remains
+immutable and applies to v6 mandates; v2.21 derives those analytical prompts for
+the revised live/report workflow. M4 release, human usefulness and investment
+performance gates remain separate.
+
+## Active goal and authorization — October 3, 2026
+
+The user requests an on-demand global assessment of one or a few stocks at a
+specific live moment: overall assessment, relevant global forces, plausible
+conditional outcomes and consequences, practical advice and what changes the
+view. Monitor and summary pages must also explain each agent's actual work,
+main conclusions and final short summary in clear prose. The user explicitly
+authorized starting immediately and continuing through implementation and quality
+evaluation. This supersedes the earlier stop instructions for the current task.
+Read the [revised goal, immediate remediation plan and acceptance criteria](AGENTIC_INVESTMENT_SYSTEM_V1_LIVE_GOAL.md).
+Current status: product contracts implemented; complete revised-system acceptance
+still open. The latest stop question and pending paid-run choice above take
+precedence over the earlier instruction to continue paid iteration.
+
+The third task additionally requires substantially improved agent reports and
+overall usability: clear input, easy navigation between overview and each agent,
+and attractive, explanatory graphs/tables/charts used sparingly. Fold this into
+the same remediation and verification work; do not treat it as replacing the live
+global-assessment goal.
+
+## Current defaults — October 3, 2026
+
+The user explicitly requested promoting the improved candidates. New v6 runs now
+use reviewed prompts **v2.17**, high reasoning, a 10,000-token response ceiling,
+role-specific evidence context and Sol for Technical. The six other role prompts
+match the reviewed full-team development run; Technical matches its EXCELLENT
+focused replay. Read the [promotion record](AGENTIC_INVESTMENT_SYSTEM_V1_PROMOTION.md).
+This supersedes the older statements below about v2.7 production defaults and
+withholding candidate promotion. Archived full-team failure, pending campaign and
+M4 gates retain their original status. This authorization concerns configuration
+promotion; no new paid research run or publication was launched.
+
+The user's clarified product goal is an on-demand global assessment of one or a
+few stocks at a specified live moment: company and worldwide context, scenarios
+and plausible consequences, recommendations, and evidence that changes the advice.
+General ticker entry and qualified live market freshness remain implementation
+gaps; this configuration promotion is the first requested step toward that goal.
+
+## Stop checkpoint — September 22, 2026
+
+### Focused Technical expert continuation
+
+After reviewing the stopped work, the user authorized fixing the signed-return
+contradiction, strengthening Technical analysis, adding charts and running one
+better-model replay. The new [Technical expert standard](AGENTIC_INVESTMENT_SYSTEM_V1_TECHNICAL_EXPERT.md)
+records the implementation and limits. `technical-v216-sol-expert2` used GPT-5.6
+Sol/high against the same archived evidence, completed three calls for $0.655155,
+and produced an accepted Technical memo with deterministic signed-pair validation,
+OHLCV-derived path/volume evidence and five SVG charts. Its evidence-linked
+assistant review scored 20/20 EXCELLENT on the frozen role rubric. This is one
+focused development case, not a repaired full-team run, production promotion,
+human usefulness acceptance or proof of general expert reliability. Production
+defaults remain v2.7; the full-team cohort remains failed.
+
+The user stopped this work for today and said the progress was poor relative to
+time and tokens. **Do not launch another run or continue implementation on reading
+this handoff.** First read the [session status and exact resume point](../reports/investment-research/evaluation-v1/session-status-2026-09-22.md).
+The original real report remains rejected; today's saved evaluation draft is
+unpublished, and its full-team quality run failed Technical. A separate Technical
+replay passed, but it does not repair the full-run result. Candidate prompts are
+v2.14, production defaults are v2.7, and the multi-case campaign is incomplete.
+The read-only monitor link to the draft was implemented and checked, then the
+idle monitor was stopped at the user's request. All artifacts are local and
+uncommitted; no evaluation worker is active. The prior continuation sections
+below are historical and must not override this stop checkpoint.
+
+## Latest outcome — per-role prompt quality, with a focused repair
+
+The user authorized iterative improvement until each role reaches VERY GOOD or
+EXCELLENT and a concurrent Jev investigation. See the
+[prompt-loop protocol](AGENTIC_INVESTMENT_SYSTEM_V1_PROMPT_LOOP.md) and
+[Jev implementation plan](AGENTIC_INVESTMENT_SYSTEM_V1_JEV_PLAN.md).
+All seven roles now have a VERY GOOD reviewed response, but **Technical passed in
+a separate focused replay; the last full-team run remains failed**. See the
+[outcome and score table](../reports/investment-research/evaluation-v1/role-target-outcome.md)
+and [completed report](../reports/investment-research/evaluation-v1/all-roles-v213-round8-high/final-research-draft.md).
+Candidate prompts are v2.14; production v6 defaults remain v2.7. Do not silently
+promote them or claim a clean end-to-end pass. After the user challenged the elapsed
+time, extra whole-team/stress runs were deferred; no evaluation worker remains active.
+The last full run completed17 calls/$1.941186; Technical repair completed one
+call/$0.082434. All attempts total114 calls and at least $10.9186336 in research-model
+catalog cost, with two unknown interrupted receipts. Coding/reviewer assistant
+usage is not included. The per-task rubric and original multi-case campaign gates
+were not relaxed; the latter campaign remains incomplete.
+
+The read-only monitor at port8765 shows the completed full run. Refresh old tabs to
+load the prominent **Open completed analysis and report** link; its `/report` route
+renders the saved evaluation draft with access to the independent review and full
+evaluation record. The route is read-only and available only for a completed run.
+Evaluation terminal states are recognized in both backend and browser. Tests:595
+Python before final additions,21 focused after them,
+19 agent-runtime tests and TypeScript build; three terminal banners checked.
+Jev remains an investigation document only: no SDK install, API call or integration.
+Preserve failed iterations and cumulative usage. This supersedes the older
+"no prompt tuning or second paid candidate" checkpoint below.
+
+## Latest continuation — evaluation runner and measured baseline
+
+The user authorized building the evaluation runner/scorecard and establishing the
+current Company→Director baseline. See the
+[evaluation workflow](AGENTIC_INVESTMENT_SYSTEM_V1_EVALUATION.md) and
+[actual baseline review](../reports/investment-research/evaluation-v1/baseline-review.md).
+The fixed-evidence v2.7 baseline is **REJECTED**: Company produced both grids in
+three calls, Director's first submission failed claim-scope validation, and the
+correction was blocked by the conservative input-admission check. Total: four
+calls, 162,827 input / 6,417 output tokens, **$0.402658 catalog cost**, no source
+requests, all usage known. No accepted Director report or publication was produced.
+
+Assistant usefulness review scored 5/12 and recorded three critical defects,
+including inadequate valuation rationale and a reversed comparative-upside claim
+in the rejected candidate. The source-omission negative control stopped before
+any model call. The full Python suite passed 583 tests; after final scorer
+hardening, all nine focused evaluator tests passed, including frozen-rubric
+threshold preservation. The original pilot, capture and frozen
+cases remain unchanged; the full team and release cases were not evaluated.
+
+Next: version and test targeted evidence/context, Company valuation-reasoning and
+Director claim-link/comparison interventions against this baseline. Preserve
+v2.7 and its failed artifacts. Do not resume or silently repair the rejected
+experiment. No prompt tuning or second paid candidate has been performed yet.
+
+## Latest continuation — source readiness and separate conclusions
+
+After the user authorized the next two repair steps, the source-only check and
+conclusion-specific dependency contract are implemented. Read the
+[readiness and next-acceptance record](AGENTIC_INVESTMENT_SYSTEM_V1_READINESS.md).
+New workspace runs now use mandate v6 / prompts v2.7 / action v6, superseding the
+v5 first-repair checkpoint below. Business, valuation, market behavior, policy
+exposure and relative preference have independent statuses and explicit dependencies.
+Publication withdraws only affected conclusions and dependent guidance.
+
+The real source check used **zero model calls**: 13 input requirements READY,
+7 PARTIAL, no blocked mandatory requirements. Annual earnings, operating data,
+completed prices, dated sponsor holdings and the dated QQQ valuation metric are
+usable. Filing-exposure interpretation and complete current policy remain partial;
+FRED timed out. Source failures, dates, usage and evidence are retained under
+`reports/investment-research/readiness-v1/`. No new paid pilot, publication,
+release-case evaluation or service restart occurred. The next step is a separately
+registered bounded Company/Director usefulness probe, not another full team run.
+The original pilot remains rejected; M4 remains open.
+
+## September 21 continuation — user rejected pilot usefulness
+
+The user has now reviewed the real report and rejected it as a failure and wasted
+effort. Actual usefulness feedback is **REJECTED**, superseding the pending-feedback
+language in the historical checkpoint below. Read the
+[delivery diagnosis and first repair](AGENTIC_INVESTMENT_SYSTEM_V1_DELIVERY_REPAIR.md)
+before doing further research or product work. The original report and acceptance
+artifacts remain immutable; feedback and diagnosis are additive records under
+`reports/investment-research/delivery-repair-v1/`.
+
+The first repair exposes annual EPS previously discarded from downloaded SEC
+facts, adds batch company scenarios and full-document section inspection, and
+introduces pre-model, post-Company, pre-synthesis and publication delivery checks.
+This first checkpoint used mandate v5 / prompts v2.6 / action v5. Missing required work
+stops as incomplete, while conditional analysis does not force a recommendation.
+Numerical grids, assumptions and ETF exposure are visible in conclusions.
+No new paid run was launched. Source coverage and granular uncertainty were
+continued in the latest checkpoint above; real-model usefulness remains unverified.
+
 ## Session stop checkpoint — September 21, 2026
 
 **The user requested saving the handoff and ending this session. The next session

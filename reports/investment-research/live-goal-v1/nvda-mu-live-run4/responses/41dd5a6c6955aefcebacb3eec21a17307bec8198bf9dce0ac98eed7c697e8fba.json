@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e5",
+      "evidence_ids": [
+        "e3",
+        "e5",
+        "e59",
+        "e60"
+      ],
+      "earnings_period_start": "2026-09-04",
+      "earnings_period_end": "2027-09-03",
+      "accounting_basis": "adjusted_assumption",
+      "assumptions": "FY27 dates are explicit analytical assumptions rather than a verified Micron fiscal calendar. GAAP annual EPS scenarios use FY26 reported GAAP diluted EPS of 74.33 as an anchor and FQ1-27 GAAP guidance of $37.84\u00b1$1.00. They hold a split-adjusted per-share basis constant and do not add quarterly EPS with potentially differing weighted diluted shares. Bear $130 assumes the guided FQ1 is achieved but the remaining three quarters contribute $92.16 as memory pricing/mix and utilization normalize; base $155 assumes the guided FQ1 and $117.16 residual on sustained AI-memory demand and high margins; bull $180 assumes the guided FQ1 and $142.16 residual from continued demand/mix strength. The P/E assumptions (7x/7x/8x) are sensitivity inputs, not observed multiples, consensus, fair values, or probabilities. Total GAAP EPS may include non-operating/tax effects not reconciled in the inspected MU release.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "130",
+          "pe_multiple": "7",
+          "rationale": "Hypothetical FY27 total-GAAP EPS: FQ1 guidance achieved, but a $92.16 residual for the next three quarters reflects memory-cycle normalization in pricing, mix, or utilization; 7x is a multiple stress assumption."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "155",
+          "pe_multiple": "7",
+          "rationale": "Hypothetical FY27 total-GAAP EPS: FQ1 guidance achieved and $117.16 remains over the last three quarters, requiring AI-memory demand and margins to remain elevated; 7x is held as a sensitivity assumption."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "180",
+          "pe_multiple": "8",
+          "rationale": "Hypothetical FY27 total-GAAP EPS: FQ1 guidance achieved and $142.16 remains over the last three quarters, requiring continued demand/mix strength; 8x is a sensitivity assumption."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 55184,
+    "output_tokens": 1985,
+    "catalog_cost_usd": 0.134188,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 37404,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

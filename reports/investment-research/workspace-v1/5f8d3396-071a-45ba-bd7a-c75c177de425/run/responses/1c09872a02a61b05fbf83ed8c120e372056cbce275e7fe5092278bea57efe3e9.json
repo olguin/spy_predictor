@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e4",
+        "e6",
+        "e64"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Hypothetical full-fiscal-2027 total-GAAP diluted EPS sensitivity. The six months ended 2026-07-26 reported diluted EPS of 4.85; bear/base/bull EPS assumptions of 8.00/10.00/12.00 imply 3.15/5.15/7.15 of total-GAAP EPS in the remaining period under a constant-share approximation. The period end is an unverified assumed fiscal endpoint, not a disclosed fiscal calendar. The anchor includes material other income, including equity-security gains; therefore these are not recurring operating-EPS forecasts and hold unforecasted non-operating items only implicitly within total-GAAP EPS assumptions. P/E multiples of 18/24/30 are hypothetical stress inputs, not observed multiples, consensus, fair values, or probability-weighted estimates.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.00",
+          "pe_multiple": "18.00",
+          "rationale": "Hypothetical total-GAAP miss: lower remaining-period EPS plus multiple compression, testing weaker AI demand or margin realization while not attributing unforecasted non-operating income to operations."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "10.00",
+          "pe_multiple": "24.00",
+          "rationale": "Hypothetical total-GAAP continuation case: remaining-period EPS supports a full-year total-GAAP figure of 10.00 under constant shares; multiple held at a selected stress input."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "12.00",
+          "pe_multiple": "30.00",
+          "rationale": "Hypothetical total-GAAP beat: stronger remaining-period EPS and multiple expansion, testing demand/mix durability; it does not forecast gains from equity securities."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 51690,
+    "output_tokens": 849,
+    "catalog_cost_usd": 0.113568,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 21325,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

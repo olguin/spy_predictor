@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e37",
+        "e38",
+        "e42"
+      ],
+      "earnings_period_start": "2026-01-01",
+      "earnings_period_end": "2026-12-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2026 GAAP diluted EPS scenarios are explicit unweighted stress assumptions, not consensus or management guidance. They begin with reported H1 FY2026 GAAP diluted EPS of $1.75 (same reported diluted-share basis in each reported period); remaining H2 GAAP EPS is therefore $1.40/$1.80/$2.10 in bear/base/bull. Q3 guidance is non-GAAP $1.06-$1.08 and cannot be directly combined with GAAP EPS; it informs demand/margin context only. Scenario P/E multiples (50x/58x/66x) are unweighted assumptions, not observed or fair multiples. Price is the split-adjusted completed close on 2026-10-02; scenarios use split-adjusted per-share inputs.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "3.15",
+          "pe_multiple": "50",
+          "rationale": "Miss stress: $1.40 H2 GAAP residual after $1.75 reported H1, testing AI/data-center demand or execution normalization and multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "3.55",
+          "pe_multiple": "58",
+          "rationale": "Continuation stress: $1.80 H2 GAAP residual, with Q3 revenue outlook of about $3.3bn and non-GAAP operating-margin outlook of 48%-49% supporting strong demand but without equating non-GAAP guidance to GAAP EPS."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "3.85",
+          "pe_multiple": "66",
+          "rationale": "Beat stress: $2.10 H2 GAAP residual, requiring continued AI/networking demand and execution above the base bridge, with multiple expansion."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 35817,
+    "output_tokens": 825,
+    "catalog_cost_usd": 0.08153400000000001,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 16249,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

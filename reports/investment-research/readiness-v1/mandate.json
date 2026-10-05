@@ -1,0 +1,1018 @@
+{
+  "schema_version": "investment-research-mandate-v6",
+  "watchlist": [
+    {
+      "symbol": "NVDA",
+      "kind": "company",
+      "benchmark": "QQQ",
+      "sector_benchmark": "XLK"
+    },
+    {
+      "symbol": "MU",
+      "kind": "company",
+      "benchmark": "QQQ",
+      "sector_benchmark": "XLK"
+    },
+    {
+      "symbol": "QQQ",
+      "kind": "etf",
+      "benchmark": "SPY",
+      "sector_benchmark": "XLK"
+    }
+  ],
+  "objective": "Research NVDA and MU over the next three months. Compare their valuation assumptions, demand drivers, and downside risks against QQQ. Explain what evidence would change each assessment.\nRegistered scope: NVDA and MU compared against QQQ, over 63 trading sessions (approximately three months). Research only. Explain demand drivers, explicit valuation assumptions, downside cases, and symbol-specific evidence that would change the assessment. Deliver an explicitly assumed bear/base/bull annual EPS and multiple grid per company using calculate_scenarios, with rationale tied to reported earnings anchors and percentage sensitivities to the dated close; distinguish assumptions from facts, fiscal periods from annual earnings, and dated ETF holdings from current holdings. Missing consensus is unknown. The registered universe, budgets and tools cannot be changed by the question.",
+  "horizon_sessions": [
+    63
+  ],
+  "currency": "USD",
+  "perspective": "long_only_research",
+  "mode": "live",
+  "sources": [
+    {
+      "source_id": "sec-submissions-MU",
+      "symbols": [
+        "MU"
+      ],
+      "title": "sec-submissions-MU",
+      "publisher": "SEC",
+      "url": "https://data.sec.gov/submissions/CIK0000723125.json",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "sec-facts-MU",
+      "symbols": [
+        "MU"
+      ],
+      "title": "sec-facts-MU",
+      "publisher": "SEC",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000723125.json",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "sec-submissions-NVDA",
+      "symbols": [
+        "NVDA"
+      ],
+      "title": "sec-submissions-NVDA",
+      "publisher": "SEC",
+      "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "sec-facts-NVDA",
+      "symbols": [
+        "NVDA"
+      ],
+      "title": "sec-facts-NVDA",
+      "publisher": "SEC",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "price-QQQ",
+      "symbols": [
+        "QQQ"
+      ],
+      "title": "price-QQQ",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/QQQ/bars?timeframe=1Day&start=2025-08-07T18%3A53%3A10.996815%2B00%3A00&end=2026-09-21T18%3A33%3A10.996815%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-MU",
+      "symbols": [
+        "MU"
+      ],
+      "title": "price-MU",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/MU/bars?timeframe=1Day&start=2025-08-07T18%3A53%3A10.996815%2B00%3A00&end=2026-09-21T18%3A33%3A10.996815%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-NVDA",
+      "symbols": [
+        "NVDA"
+      ],
+      "title": "price-NVDA",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/NVDA/bars?timeframe=1Day&start=2025-08-07T18%3A53%3A10.996815%2B00%3A00&end=2026-09-21T18%3A33%3A10.996815%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-SPY",
+      "symbols": [
+        "SPY"
+      ],
+      "title": "price-SPY",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/SPY/bars?timeframe=1Day&start=2025-08-07T18%3A53%3A10.996815%2B00%3A00&end=2026-09-21T18%3A33%3A10.996815%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-XLK",
+      "symbols": [
+        "XLK"
+      ],
+      "title": "price-XLK",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/XLK/bars?timeframe=1Day&start=2025-08-07T18%3A53%3A10.996815%2B00%3A00&end=2026-09-21T18%3A33%3A10.996815%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-IWM",
+      "symbols": [
+        "IWM"
+      ],
+      "title": "price-IWM",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/IWM/bars?timeframe=1Day&start=2025-08-07T18%3A53%3A10.996815%2B00%3A00&end=2026-09-21T18%3A33%3A10.996815%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-HYG",
+      "symbols": [
+        "HYG"
+      ],
+      "title": "price-HYG",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/HYG/bars?timeframe=1Day&start=2025-08-07T18%3A53%3A10.996815%2B00%3A00&end=2026-09-21T18%3A33%3A10.996815%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "qqq-profile",
+      "symbols": [
+        "QQQ"
+      ],
+      "title": "qqq-profile",
+      "publisher": "qqq-profile",
+      "url": "https://www.invesco.com/qqq-etf/en/about.html",
+      "fixture_text": null,
+      "kind": "etf",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "etf_profile",
+      "local_path": "datasets/workbench/manual-sources/qqq-profile-20260911.json",
+      "sha256": "f3b7c3b88dd297828268e2285d92ba3fe9dbbdd0890c442b47bc117980254c67",
+      "captured_at": "2026-09-15T19:12:06+00:00",
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "qqq-holdings",
+      "symbols": [
+        "QQQ"
+      ],
+      "title": "QQQ sponsor holdings with effective business date",
+      "publisher": "qqq-holdings",
+      "url": "https://dng-api.invesco.com/cache/v1/accounts/en_US/shareclasses/QQQ/holdings/fund?idType=ticker&productType=ETF",
+      "fixture_text": null,
+      "kind": "etf",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "etf_holdings",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business"
+      ]
+    },
+    {
+      "source_id": "fred-DGS10",
+      "symbols": [],
+      "title": "fred-DGS10",
+      "publisher": "fred-DGS10",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-05-24",
+      "fixture_text": null,
+      "kind": "macro",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "fred_csv",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": "DGS10",
+      "units": "percent",
+      "data_end": null,
+      "supports_dimensions": [
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "fred-DFF",
+      "symbols": [],
+      "title": "fred-DFF",
+      "publisher": "fred-DFF",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFF&cosd=2026-05-24",
+      "fixture_text": null,
+      "kind": "macro",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "fred_csv",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": "DFF",
+      "units": "percent",
+      "data_end": null,
+      "supports_dimensions": [
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "fed-monetary-feed",
+      "symbols": [],
+      "title": "fed-monetary-feed",
+      "publisher": "fed-monetary-feed",
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "fixture_text": null,
+      "kind": "macro",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "nvda-press-feed",
+      "symbols": [
+        "NVDA"
+      ],
+      "title": "nvda-press-feed",
+      "publisher": "nvda-press-feed",
+      "url": "https://nvidianews.nvidia.com/cats/press_release.xml",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "nvda-quarterly-results",
+      "symbols": [
+        "NVDA"
+      ],
+      "title": "NVIDIA Q2 FY2027 results, August 26 2026",
+      "publisher": "NVIDIA",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "mu-quarterly-results",
+      "symbols": [
+        "MU"
+      ],
+      "title": "Micron Q3 FY2026 results, June 24 2026",
+      "publisher": "Micron",
+      "url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Results-for-the-Third-Quarter-of-Fiscal-2026/default.aspx",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "mu-earnings-event",
+      "symbols": [
+        "MU"
+      ],
+      "title": "Micron scheduled earnings announcement",
+      "publisher": "Micron",
+      "url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-to-Report-Fiscal-Fourth-Quarter-Results-on-September-30-2026/default.aspx",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "qqq-sponsor-current",
+      "symbols": [
+        "QQQ"
+      ],
+      "title": "Invesco QQQ sponsor overview at retrieval",
+      "publisher": "Invesco",
+      "url": "https://www.invesco.com/qqq-etf/en/about.html",
+      "fixture_text": null,
+      "kind": "etf",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation"
+      ]
+    },
+    {
+      "source_id": "advanced-computing-rule-20260115",
+      "symbols": [
+        "NVDA",
+        "MU",
+        "QQQ"
+      ],
+      "title": "Dated advanced computing license review rule, January 15 2026",
+      "publisher": "U.S. Government Publishing Office / Bureau of Industry and Security",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-01-15/html/2026-00789.htm",
+      "fixture_text": null,
+      "kind": "policy",
+      "published_at": "2026-01-15T23:59:59+00:00",
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "policy_exposure"
+      ]
+    }
+  ],
+  "runtime": {
+    "argv": [
+      "packages/agent-runtime/bin/pi-research-worker"
+    ],
+    "model": "openai-codex/gpt-5.6-terra",
+    "reasoning_effort": "medium",
+    "max_output_tokens": 6000,
+    "timeout_seconds": 180
+  },
+  "budgets": {
+    "task_attempts": 16,
+    "model_calls": 40,
+    "source_requests": 250,
+    "tool_calls": 100,
+    "input_tokens": 1000000,
+    "output_tokens": 100000,
+    "catalog_cost_usd": 25,
+    "wall_seconds": 1200,
+    "followup_rounds": 2,
+    "reserved_final_calls": 8,
+    "document_bytes": 10000000
+  },
+  "network": {
+    "enabled": true,
+    "user_agent": "spy-predictor-investment-research/1.0",
+    "minimum_spacing_seconds": 0.25
+  },
+  "market_context_symbols": [
+    "SPY",
+    "IWM",
+    "HYG"
+  ],
+  "seed_source_ids": [
+    "sec-submissions-MU",
+    "sec-facts-MU",
+    "sec-submissions-NVDA",
+    "sec-facts-NVDA",
+    "price-QQQ",
+    "price-MU",
+    "price-NVDA",
+    "price-SPY",
+    "price-XLK",
+    "price-IWM",
+    "price-HYG",
+    "qqq-profile",
+    "qqq-holdings",
+    "fred-DGS10",
+    "fred-DFF",
+    "fed-monetary-feed",
+    "nvda-press-feed",
+    "nvda-quarterly-results",
+    "mu-quarterly-results",
+    "mu-earnings-event",
+    "qqq-sponsor-current",
+    "advanced-computing-rule-20260115"
+  ],
+  "publication_policy": {
+    "version": "investment-research-publication-policy-v1",
+    "refresh_source_ids": [
+      "price-QQQ",
+      "price-MU",
+      "price-NVDA",
+      "price-SPY",
+      "price-XLK",
+      "price-IWM",
+      "price-HYG",
+      "nvda-press-feed",
+      "sec-submissions-NVDA",
+      "sec-submissions-MU",
+      "mu-earnings-event",
+      "fed-monetary-feed",
+      "qqq-holdings",
+      "advanced-computing-rule-20260115"
+    ],
+    "material_price_move_pct": 2,
+    "maximum_refresh_age_seconds": 600,
+    "maximum_quote_age_seconds": 60
+  },
+  "source_requirements": [
+    {
+      "requirement_id": "NVDA-annual",
+      "symbols": [
+        "NVDA"
+      ],
+      "dimensions": [
+        "valuation"
+      ],
+      "source_ids": [
+        "sec-facts-NVDA"
+      ],
+      "check": "annual_eps",
+      "maximum_age_days": 450,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "NVDA-operations",
+      "symbols": [
+        "NVDA"
+      ],
+      "dimensions": [
+        "business"
+      ],
+      "source_ids": [
+        "sec-facts-NVDA"
+      ],
+      "check": "operating_data",
+      "maximum_age_days": 150,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "NVDA-geographic",
+      "symbols": [
+        "NVDA"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-NVDA"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "geographic"
+    },
+    {
+      "requirement_id": "NVDA-customer",
+      "symbols": [
+        "NVDA"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-NVDA"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "customer"
+    },
+    {
+      "requirement_id": "NVDA-supply",
+      "symbols": [
+        "NVDA"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-NVDA"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "supply"
+    },
+    {
+      "requirement_id": "MU-annual",
+      "symbols": [
+        "MU"
+      ],
+      "dimensions": [
+        "valuation"
+      ],
+      "source_ids": [
+        "sec-facts-MU"
+      ],
+      "check": "annual_eps",
+      "maximum_age_days": 450,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "MU-operations",
+      "symbols": [
+        "MU"
+      ],
+      "dimensions": [
+        "business"
+      ],
+      "source_ids": [
+        "sec-facts-MU"
+      ],
+      "check": "operating_data",
+      "maximum_age_days": 150,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "MU-geographic",
+      "symbols": [
+        "MU"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-MU"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "geographic"
+    },
+    {
+      "requirement_id": "MU-customer",
+      "symbols": [
+        "MU"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-MU"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "customer"
+    },
+    {
+      "requirement_id": "MU-supply",
+      "symbols": [
+        "MU"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-MU"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "supply"
+    },
+    {
+      "requirement_id": "NVDA-price",
+      "symbols": [
+        "NVDA"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-NVDA"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "MU-price",
+      "symbols": [
+        "MU"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-MU"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "QQQ-price",
+      "symbols": [
+        "QQQ"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-QQQ"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "SPY-price",
+      "symbols": [
+        "SPY"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-SPY"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "XLK-price",
+      "symbols": [
+        "XLK"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-XLK"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "IWM-price",
+      "symbols": [
+        "IWM"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-IWM"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "HYG-price",
+      "symbols": [
+        "HYG"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-HYG"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "QQQ-composition",
+      "symbols": [
+        "QQQ"
+      ],
+      "dimensions": [
+        "business"
+      ],
+      "source_ids": [
+        "qqq-holdings"
+      ],
+      "check": "holdings",
+      "maximum_age_days": 4,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "QQQ-valuation",
+      "symbols": [
+        "QQQ"
+      ],
+      "dimensions": [
+        "valuation"
+      ],
+      "source_ids": [
+        "qqq-profile"
+      ],
+      "check": "etf_valuation",
+      "maximum_age_days": 31,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "dated-policy",
+      "symbols": [
+        "NVDA",
+        "MU",
+        "QQQ"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "advanced-computing-rule-20260115"
+      ],
+      "check": "policy_document",
+      "maximum_age_days": 365,
+      "required_for_run": false,
+      "query": null
+    }
+  ]
+}

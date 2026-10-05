@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e16",
+        "e50"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-25",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Explicit hypothetical FY2027 GAAP diluted-EPS/P-E sensitivity, not consensus, forecast, observed multiple, or fair-value estimate. FY27 H1 reported GAAP diluted EPS is $4.85. Q3 revenue guidance is $108bn +/-2%, 74% GAAP GM +/-50bp, $9.2bn GAAP opex and 16-18% FY tax. Bear $9.50 assumes Q3 is near the low guidance/margin band and Q4 demand or mix normalizes; base $10.10 assumes Q3 guidance is achieved and Q4 sustains broadly Q3-level earnings; bull $10.70 assumes high-end Q3 and continued demand/margin resilience in Q4. Multiples 19x/22x/25x are deliberately unweighted stress assumptions.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "9.50",
+          "pe_multiple": "19",
+          "rationale": "Q3 near low-end guidance/margin and Q4 demand/mix normalization; multiple compression stress."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "10.10",
+          "pe_multiple": "22",
+          "rationale": "Q3 guidance achievement and Q4 broadly sustains the earnings run-rate; held as a hypothetical multiple."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "10.70",
+          "pe_multiple": "25",
+          "rationale": "High-end Q3 execution plus continued AI infrastructure demand and margin resilience; multiple expansion stress."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 33955,
+    "output_tokens": 902,
+    "catalog_cost_usd": 0.078734,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 17678,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

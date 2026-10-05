@@ -14,6 +14,7 @@ import subprocess
 import tempfile
 import time
 import uuid
+from copy import deepcopy
 from datetime import datetime, timedelta
 
 from jsonschema import ValidationError
@@ -24,6 +25,10 @@ from .capabilities import inventory
 from .contracts import ROOT, ROLES, M2_ROLES, TOOLS, PROMPT_VERSION, WORKER_PROTOCOL, validate, validate_findings, is_m2
 from .store import Store
 from .result_transport import tool_schemas, restore_action
+from .delivery import enabled as delivery_enabled, require_coverage
+from .dimensions import enabled as dimensional
+from .profiles import DEFAULT_PROMPT_VERSION, LIVE_PROMPT_VERSION, promoted_profile
+from .live import enabled as live_enabled, validate_report, refresh_snapshots, as_of_record
 
 
 def subprocess_worker(request: dict, runtime: dict, timeout: float) -> dict:
@@ -36,11 +41,12 @@ def subprocess_worker(request: dict, runtime: dict, timeout: float) -> dict:
     output, errors = bytearray(), bytearray()
     try:
         deadline = time.monotonic() + timeout
+        wall_deadline = time.time() + timeout  # Monotonic clocks may exclude host sleep.
         with selectors.DefaultSelector() as selector:
             selector.register(process.stdout, selectors.EVENT_READ, output)
             selector.register(process.stderr, selectors.EVENT_READ, errors)
             while selector.get_map():
-                if time.monotonic() >= deadline:
+                if time.monotonic() >= deadline or time.time() >= wall_deadline:
                     raise TimeoutError("Worker deadline exceeded")
                 for key, _ in selector.select(min(0.2, max(0, deadline - time.monotonic()))):
                     chunk = key.fileobj.read1(8192)
@@ -81,7 +87,15 @@ class Controller:
         self.store = Store(root)
         self.worker = worker
 
-    def create(self, mandate: dict) -> dict:
+    def create(self, mandate: dict, *, prompt_version=None) -> dict:
+        # Explicit prompt selection is used for frozen evaluation comparisons.
+        # New v6 production runs inherit the reviewed default configuration.
+        profile = None
+        if mandate['schema_version'] in {'investment-research-mandate-v6', 'investment-research-mandate-v7'} and prompt_version is None:
+            profile = promoted_profile(LIVE_PROMPT_VERSION if live_enabled({'mandate': mandate}) else DEFAULT_PROMPT_VERSION)
+            prompt_version = profile['prompt_version']
+            mandate = deepcopy(mandate)
+            mandate['runtime'].update(profile['runtime_defaults'])
         validate("mandate", mandate)
         source_ids = [s["source_id"] for s in mandate["sources"]]
         if len(set(source_ids)) != len(source_ids):
@@ -93,7 +107,7 @@ class Controller:
         if is_m2(mandate):
             from .multi_instrument import validate_mandate
             validate_mandate(mandate)
-        prompt_version = "v2.5" if is_m2(mandate) else PROMPT_VERSION
+        prompt_version = prompt_version or (DEFAULT_PROMPT_VERSION if mandate['schema_version'] == 'investment-research-mandate-v6' else "v2.6" if mandate['schema_version'] == 'investment-research-mandate-v5' else "v2.5" if is_m2(mandate) else PROMPT_VERSION)
         roles = M2_ROLES if is_m2(mandate) else ROLES
         with self.store.lock():
             if (self.store.root / "state.json").exists():
@@ -105,10 +119,10 @@ class Controller:
                 "prompts": prompts, "started_at": utc_now(), "status": "READY", "phase": "research",
                 "capabilities": inventory(mandate),
                 "runtime_policy_version": "investment-research-m1-v4", "followup_round": 0,
-                "validation_feedback_policy": "Receipted rejected submissions may use remaining task turns; no added calls or retries",
+                "validation_feedback_policy": "One receipted schema-repair turn per task may follow a rejected submission; global call, token, cost and wall ceilings remain unchanged",
                 "stage_turn_limits": {"independent": 4, "planning": 4, "research": 6,
                                       "followup": 4, "triage": 5, "draft": 2, "review": 3, "final": 3},
-                "limits": {**mandate["budgets"], "download_bytes": 50_000_000},
+                "limits": {**mandate["budgets"], "download_bytes": mandate['budgets'].get('download_bytes', 50_000_000)},
                 "reservations": {"input_tokens": min(50000, mandate["budgets"]["input_tokens"] // 4),
                     "output_tokens": min(3 * mandate["runtime"]["max_output_tokens"], mandate["budgets"]["output_tokens"] // 4),
                     "tool_calls": min(6, mandate["budgets"]["tool_calls"] // 4),
@@ -131,6 +145,18 @@ class Controller:
                 state['seed_complete'] = False
                 state['market_context'] = {'symbols': mandate['market_context_symbols'], 'inputs': {},
                     'qualification': 'Fixed declared benchmark observations, not selected-watchlist breadth'}
+            if delivery_enabled(state):
+                state['runtime_policy_version'] = 'investment-research-delivery-v1'
+            if dimensional(state):
+                state['runtime_policy_version'] = 'investment-research-readiness-v1'
+                state['stage_turn_limits'].update(research=7)
+                if len(mandate['watchlist']) == 1:
+                    state['context_profile'] = 'role-research-v1'
+                    state['stage_turn_limits']['independent'] = 4
+            if profile:
+                state['promotion'] = profile
+                state['context_profile'] = profile['context_profile']
+                state['stage_turn_limits']['draft'] = 3
             for name in state["source_identity"]:
                 path = self.store.root / "code" / name
                 path.parent.mkdir(parents=True, exist_ok=True)
@@ -138,6 +164,19 @@ class Controller:
             state["manifest_id"] = self.store.put("manifests", {"parent": None, "evidence_ids": [], "created_at": utc_now()})
             self.add_task(state, "challenger", "independent", "Form an independent initial risk view from the mandate and evidence.")
             self.add_task(state, "director", "planning", "Define the decision. Assign neutral grouped research to company, macro, technical and geopolitics; optionally commodities. Use ask_specialist, then submit findings. Share the single global budget across all symbols." if is_m2(mandate) else "Define the decision. Assign neutral, material research questions to Company and Macro using ask_specialist, then submit an initial research plan.", round_number=-1)
+            if live_enabled(state):
+                planning = state['tasks'][-1]
+                planning['question'] = 'Define the decision and research plan. The controller has already assigned all five specialists; use their work for the global assessment. Submit your plan without duplicate assignments.'
+                planning['model_turn_limit'] = 1
+                planning['permitted_tools'] = ['submit_findings']
+                briefs = {
+                    'company': 'Assess business drivers, latest reported results and guidance, valuation and conditional bear/base/bull scenarios for each selected stock. Use admitted fiscal periods and deterministic calculation tools; identify unavailable forward consensus.',
+                    'macro': 'Identify the global economic, rates, currency, credit and demand forces material to each selected stock. Explain evidence, transmission mechanisms and conditional consequences.',
+                    'technical': 'Assess completed-session price/volume behavior, exact signed performance versus benchmarks, path risk and empirical forward-return frequencies with their limitations. Separate quote observations from completed closes.',
+                    'geopolitics': 'Assess material global policy, geographic, trade and geopolitical exposures for each stock using dated primary disclosures. Explain mechanisms, conditional consequences and concrete view-change evidence.',
+                    'commodities': 'Assess material input, energy, supply and commodity exposures for each stock. Link costs and supply conditions to margins and demand; state when available sources do not establish material sensitivity.'}
+                for role, brief in briefs.items():
+                    self.add_task(state, role, 'research', brief, parent=planning['task_id'])
             self.store.event(state, "RUN_CREATED")
             self.store.event(state, "BUDGET_RESERVED", reservations=state['reservations'],
                              model_calls=mandate['budgets']['reserved_final_calls'],
@@ -145,16 +184,33 @@ class Controller:
             return state
 
     def add_task(self, state, role, stage, question, *, round_number=0, parent=None, question_id=None):
+        runtime = deepcopy(state['mandate']['runtime'])
+        runtime['model'] = state.get('promotion', {}).get('role_models', {}).get(role, runtime['model'])
+        if live_enabled(state) and role == 'director' and stage in {'draft', 'final'}:
+            count = len(state['mandate']['watchlist'])
+            runtime['max_output_tokens'] = {1: 10000, 2: 12000, 3: 15000, 4: 20000, 5: 20000}[count]
         task = {"task_id": f"task-{len(state['tasks']) + 1}", "role": role, "stage": stage,
                 "question": question, "round": round_number, "parent_task_id": parent,
                 "question_id": question_id, "status": "PENDING", "history": [], "result": None,
                 "prompt_version": "investment-research/" + state.get("prompt_version", PROMPT_VERSION),
                 "created_at": utc_now(), "symbols": [i["symbol"] for i in state["mandate"]["watchlist"]],
                 "permitted_tools": [name for name in TOOLS if name != "route_question" or stage == "triage"],
-                "model": state["mandate"]["runtime"]["model"]}
+                "model": runtime['model'], "runtime": runtime}
+        task['validation_repair_limit'] = 1
+        if not delivery_enabled(state):
+            task['permitted_tools'].remove('calculate_scenarios')
+            task['permitted_tools'].remove('calculate_valuation_methods')
+        elif role != 'company':
+            task['permitted_tools'].remove('calculate_valuation_methods')
         if is_m2(state["mandate"]) and stage in {"independent", "final", "triage"}:
             task["permitted_tools"].remove("ask_specialist")
         task["model_turn_limit"] = state["stage_turn_limits"]["followup" if stage == "research" and round_number > 0 else stage]
+        if state.get('context_profile') == 'role-research-v1' and stage == 'research' and round_number == 0:
+            task['model_turn_limit'] = {'company': 7, 'macro': 5, 'technical': 3,
+                                        'geopolitics': 4, 'commodities': 4}.get(role, task['model_turn_limit'])
+            if live_enabled(state) and role == 'company':
+                count = sum(w['kind'] == 'company' for w in state['mandate']['watchlist'])
+                task['model_turn_limit'] = 7 + 3 * max(0, count - 1)
         state["tasks"].append(task)
         # Commit with the enclosing transition, after the question and child
         # scope are linked. A checkpoint here would expose half a task graph.
@@ -165,8 +221,15 @@ class Controller:
         return task
 
     def run(self) -> dict:
+        from .awake import keep_awake
+        with keep_awake(live_enabled(self.store.load())):
+            return self._run()
+
+    def _run(self) -> dict:
         with self.store.lock():
             state = self.store.load()
+            if state.get('evaluation'):
+                raise ValueError('Use the registered evaluation runner, not the full-team scheduler')
             if content_hash(state["mandate"]) != state["mandate_hash"]:
                 raise ValueError("Frozen mandate integrity mismatch")
             if source_identity() != state["source_identity"]:
@@ -208,13 +271,30 @@ class Controller:
                         self.store.event(state, 'SEED_SOURCE_READ', source_id=source_id, status=result['status'])
                     from .panels import seed_panels
                     seed_panels(broker)
+                    from .technical_path import seed as seed_technical_paths
+                    seed_technical_paths(broker)
+                    from .technical_probabilities import seed as seed_technical_probabilities
+                    seed_technical_probabilities(broker)
+                    from .fiscal_calendar import seed as seed_fiscal_calendar
+                    seed_fiscal_calendar(broker)
+                    from .analyst_consensus import seed as seed_analyst_consensus
+                    seed_analyst_consensus(broker)
+                    from .readiness import acquire_sections, acquire_current_releases
+                    acquire_sections(broker)
+                    acquire_current_releases(broker)
                     state['seed_complete'] = True
                     self.store.save(state)
+                from .readiness import checkpoint
+                checkpoint(self.store, state)
+                require_coverage(self.store, state, 'seed')
                 while True:
                     remaining_seconds(state)
                     pending = next((t for t in state["tasks"] if t["status"] in {"PENDING", "RUNNING"}), None)
                     if pending:
                         self.execute_task(state, pending)
+                        if (pending['role'] == 'company' and pending['stage'] == 'research'
+                                and pending['status'] == 'COMPLETE'):
+                            require_coverage(self.store, state, 'company_complete')
                         continue
                     proposed = [q for q in state["questions"] if q["status"] == "PROPOSED"]
                     if proposed:
@@ -229,6 +309,7 @@ class Controller:
                             self.store.save(state)
                             continue
                     if state["phase"] == "research":
+                        require_coverage(self.store, state, 'before_synthesis')
                         completed_roles = {t["role"] for t in state["tasks"] if t["status"] == "COMPLETE"}
                         if not is_m2(state["mandate"]) and not {"company", "macro"} <= completed_roles:
                             raise ValueError("Director did not obtain Company and Macro findings")
@@ -238,9 +319,11 @@ class Controller:
                         state["phase"] = "review"
                         self.add_task(state, "challenger", "review", "Review the Director draft against your independent risk view. Return claim-specific objections.")
                     elif state["phase"] == "review":
+                        refresh_snapshots(self.store, state, 'before_final')
                         state["phase"] = "final"
                         self.add_task(state, "director", "final", "Produce the final research draft. Explain every question's effect and give a disposition for every objection. Publication is unavailable.")
                     else:
+                        refresh_snapshots(self.store, state, 'report_delivery')
                         self.finish(state)
                         return state
                     self.store.save(state)
@@ -269,7 +352,9 @@ class Controller:
             task["visible_results"] = self.prior_results(state, task)
             self.store.event(state, "TASK_STARTED", task_id=task["task_id"])
         while task["status"] == "RUNNING":
-            remaining_turns = task["model_turn_limit"] - len(task["history"])
+            rejected = sum(row.get('result', {}).get('status') == 'REJECTED_VALIDATION' for row in task['history'])
+            repair_turns = min(rejected, task.get('validation_repair_limit', 0))
+            remaining_turns = task["model_turn_limit"] + repair_turns - len(task["history"])
             if remaining_turns <= 0:
                 raise LimitReached("Task model-turn budget exhausted")
             if state["usage_unknown"]:
@@ -287,7 +372,7 @@ class Controller:
                     question.update(status='UNANSWERED', disposition='Final model-call capacity reserved')
                 self.store.event(state, "RESEARCH_RESERVE_REACHED", task_id=task["task_id"])
                 return
-            runtime = state["mandate"]["runtime"]
+            runtime = task.get('runtime', state["mandate"]["runtime"])
             if task["stage"] == "research" and task["round"] > 0:
                 if any(state["usage"][key] >= state["limits"][key] - amount - state.get('publication_reservations', {}).get(key, 0)
                        for key, amount in state["reservations"].items()):
@@ -318,9 +403,24 @@ class Controller:
                 request['context']['market_context'] = {**state['market_context'], 'inputs': {symbol: {'evidence_id': value['evidence_id']} for symbol, value in state['market_context']['inputs'].items()}}
                 request['context']['registered_sources'] = [{k: source[k] for k in ('source_id', 'title', 'symbols', 'adapter', 'critical')} for source in state['mandate']['sources']]
                 request['context']['role_task_status'] = [{'role': t['role'], 'stage': t['stage'], 'status': t['status']} for t in state['tasks']]
+                if dimensional(state):
+                    request['context']['source_readiness'] = state.get('source_readiness')
+                if live_enabled(state):
+                    request['context']['live_time_context'] = as_of_record(self.store, state)
             request["context"]["task_model_turns_remaining"] = remaining_turns
             request["context"]["response_transport"] = "final_identity_maps_v1" if task["stage"] == "final" else "findings_lists_v1"
+            if task['stage'] == 'draft' and state.get('context_profile') == 'role-research-v1':
+                request['context']['response_transport'] = 'draft_instrument_identity_maps_v1'
             if task["stage"] == "final":
+                if live_enabled(state):
+                    request['context']['final_review_policy'] = {
+                        'version': 'reviewed-citations-v1',
+                        'instruction': 'Preserve the reviewed draft global analysis. Final global forces and '
+                        'outcomes may cite draft-supported sources, sources in a same-stock Challenger '
+                        'correction that you actually accept, or refreshed versions of those same news '
+                        'sources. Do not add a new unreviewed source or mechanism after review. Include '
+                        'all material specialist mechanisms in the draft so Challenger can examine them. '
+                        'This is review coverage; correct interpretation and scoped uncertainty are still required.'}
                 if is_m2(state["mandate"]):
                     request["context"]["response_transport"] = "final_scoped_identity_maps_v2"
                 request["context"]["required_objection_dispositions"] = [o for t in state["tasks"] if t["result"] for o in t["result"]["objections"]]
@@ -347,6 +447,8 @@ class Controller:
                 attempt["status"] = "RECEIVED"
                 self.account(state, response.get("receipt"))
                 self.store.save(state)
+                if datetime.fromisoformat(attempt['worker_completed_at']) > datetime.fromisoformat(attempt['worker_deadline_at']):
+                    raise LimitReached('Worker wall-clock deadline exceeded; measured receipt retained')
                 if response.get("schema_version") != WORKER_PROTOCOL:
                     raise ValueError("Wrong worker protocol version")
                 try:
@@ -354,7 +456,7 @@ class Controller:
                     if is_m2(state['mandate']):
                         from .evidence_transport import restore
                         action = restore(action, request)
-                    validate("action", action, m2=is_m2(state["mandate"]))
+                    validate("action", action, m2=is_m2(state["mandate"]), delivery=delivery_enabled(state), dimensional=dimensional(state), live=live_enabled(state))
                     result = self.action(state, task, action)
                 except (ValidationError, ValueError) as error:
                     # No tool side effects have occurred for a rejected submission.
@@ -365,7 +467,7 @@ class Controller:
                         raise
                     reason = ("Schema violation at " + "/".join(map(str, error.absolute_path)) + ": " + str(error.validator)) if isinstance(error, ValidationError) else str(error)
                     task["history"].append({"action": response["action"], "result": {"status": "REJECTED_VALIDATION", "reason": reason,
-                        "instruction": "Correct the rejected submission within the remaining task budget. Critical gaps require insufficient_evidence. Preserve every required identity."},
+                        "instruction": "Correct the rejected submission within the remaining task budget. Critical gaps require insufficient_evidence for their declared scope. Preserve every required identity."},
                         "manifest_id": task["manifest_id"]})
                     attempt["status"] = "REJECTED_VALIDATION"
                     attempt["completed_at"] = utc_now()
@@ -385,6 +487,13 @@ class Controller:
                 raise
 
     def context_evidence(self, state, task, value):
+        if state.get('context_profile') == 'role-research-v1':
+            from .role_context import project, select_sections
+            marker = tuple(state['evidence_ids'])
+            if getattr(self, '_section_marker', None) != marker:
+                self._section_marker = marker
+                self._selected_sections = select_sections(self.store, state)
+            return project(value, task['role'], self._selected_sections)
         if is_m2(state['mandate']):
             from .context import compact
             return compact(value, catalog_only=task['stage'] == 'planning')
@@ -403,6 +512,13 @@ class Controller:
         if task["stage"] in {"independent", "planning"} or (task["stage"] == "research" and task["round"] == 0):
             return []
         rows = [t for t in state["tasks"] if t["status"] == "COMPLETE"]
+        # The accepted draft already contains the specialist claims and their
+        # evidence links. Sending every full payload again made review/final calls
+        # needlessly large and caused avoidable timeouts.
+        if task["stage"] == "review":
+            rows = [t for t in rows if t["stage"] in {"independent", "draft"}]
+        elif task["stage"] == "final":
+            rows = [t for t in rows if t["stage"] in {"draft", "review"}]
         if task["stage"] == "research":
             rows = [t for t in rows if t["task_id"] == task["parent_task_id"]]
         return [{"task_id": t["task_id"], "role": t["role"], "result": t["result"]} for t in rows]
@@ -445,10 +561,16 @@ class Controller:
             consume(state, "tool_calls")
             prior = [t["result"] for t in state["tasks"] if t["result"]]
             claims = {c["claim_id"] for r in prior for c in r["claims"]}
-            validate_findings(args, set(task["visible_evidence_ids"]), claims, {q["question_id"] for q in state["questions"]}, m2=is_m2(state["mandate"]))
+            validate_findings(args, set(task["visible_evidence_ids"]), claims, {q["question_id"] for q in state["questions"]}, m2=is_m2(state["mandate"]), dimensional=dimensional(state), live=live_enabled(state))
+            validate_report(state, task, args)
+            if task['role'] == 'technical':
+                from .technical_signs import validate_technical_signs
+                validate_technical_signs(self.store, task, args)
             if is_m2(state["mandate"]):
                 from .multi_instrument import validate_scoped
                 validate_scoped(state, task, args)
+                if task['stage'] == 'final':
+                    require_coverage(self.store, state, 'final', args)
             if task["stage"] == "triage" and any(q["status"] == "PROPOSED" for q in state["questions"]):
                 raise ValueError("Director triage must dispose of every proposed question")
             task["result"] = args
@@ -514,6 +636,13 @@ class Controller:
         if task["role"] != "director" or task["stage"] != "triage":
             raise ValueError("Only Director triage can prioritize questions")
         question = next((q for q in state["questions"] if q["question_id"] == args["question_id"]), None)
+        previous = (question or {}).get('director_disposition')
+        if question and question['status'] != 'PROPOSED' and previous:
+            if (previous['decision'] == args['decision'] and
+                    previous.get('answer_task_id') == args.get('answer_task_id')):
+                return {**deepcopy(question), 'already_prioritized': True,
+                        'instruction': 'This question was already handled. Dispose of remaining PROPOSED questions, then submit findings.'}
+            raise ValueError('Prioritized question cannot be changed by a repeated routing action')
         if question is None or question["status"] != "PROPOSED":
             raise ValueError("Question is not awaiting prioritization")
         question["director_disposition"] = args

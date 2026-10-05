@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_valuation_methods",
+    "arguments": {
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e29",
+        "e30",
+        "e33",
+        "e34",
+        "e35"
+      ],
+      "assumptions": "All outputs are conditional sensitivity estimates at the September 22, 2026 split-adjusted close, not consensus, probabilities, targets, or claims of fair value. Fiscal 2026 GAAP diluted EPS and revenue are analyst assumptions. Net cash is approximated at $10.9 billion from June 30, 2026 cash, cash equivalents and marketable securities, assuming no material debt; diluted shares are held constant at 1.2612 billion. Revenue and cash-flow inputs are in USD billions; shares are in billions. The methods are correlated because each depends on continued AI/cloud networking execution and do not form an independent confidence interval.",
+      "pe_method": {
+        "earnings_per_share": "3.75",
+        "pe_multiple": "50",
+        "rationale": "Forward fiscal-2026 P/E stress uses the scenario-grid base GAAP EPS and an explicit 50x assumed multiple. The multiple is not observed, historical-normal, consensus, or fair; it tests the premium required for durable AI-networking growth."
+      },
+      "ev_sales_method": {
+        "revenue": "12.05",
+        "ev_to_sales_multiple": "15",
+        "net_cash": "10.90",
+        "diluted_shares": "1.2612",
+        "rationale": "Fiscal-2026 revenue assumes reported H1 $5.7447B plus management Q3 revenue guidance of about $3.3B and roughly $3.0B Q4. A 15x EV/revenue stress is deliberately below the timestamped third-party page's 17.368x snapshot but is not an empirical fair multiple. Net cash and shares are held constant."
+      },
+      "dcf_method": {
+        "starting_free_cash_flow": "5.00",
+        "annual_growth_pct": "18",
+        "discount_rate_pct": "10",
+        "terminal_growth_pct": "3",
+        "net_cash": "10.90",
+        "diluted_shares": "1.2612",
+        "rationale": "Starting annual FCF of $5.0B is a conservative normalization versus H1 2026 operating cash flow of $2.7765B less $0.0842B capex, recognizing deferred-revenue working-capital timing. Five-year 18% annual growth tests sustained AI Ethernet adoption but decelerates relative to recent operating expansion; 10% discount and 3% terminal growth explicitly stress duration and multiple risk."
+      }
+    }
+  },
+  "receipt": {
+    "input_tokens": 37749,
+    "output_tokens": 833,
+    "catalog_cost_usd": 0.21373500000000004,
+    "model": "openai-codex/gpt-5.6-sol",
+    "response_model": "gpt-5.6-sol",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 29731,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

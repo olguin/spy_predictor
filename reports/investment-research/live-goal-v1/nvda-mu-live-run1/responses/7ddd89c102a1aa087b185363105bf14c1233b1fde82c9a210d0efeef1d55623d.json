@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e5",
+      "evidence_ids": [
+        "e3",
+        "e5",
+        "e58"
+      ],
+      "earnings_period_start": "2026-09-04",
+      "earnings_period_end": "2027-09-02",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 period dates are a 52-week working assumption following FY2026's September 3, 2026 end; exact FY2027 calendar was not independently verified. No FY2027 interim EPS is reported. Micron guided FQ1 FY2027 GAAP diluted EPS of $37.84 plus/minus $1.00. Annual GAAP EPS assumptions use constant split-adjusted diluted shares: bear $100 (EPS remaining after the guidance midpoint $62.16), base $110 ($72.16), bull $120 ($82.16). Bear tests a sharp post-Q1 memory price/margin normalization; base retains strong AI-memory demand but moderates the Q1 pace; bull tests sustained supply discipline and customer demand. P/E inputs 8x/10x/12x are explicit sensitivity assumptions, not observed multiples, fair values, consensus or probabilities.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "100.00",
+          "pe_multiple": "8.00",
+          "rationale": "FQ1 guidance midpoint is retained, but a $62.16 constant-share residual tests demand or pricing normalization and concurrent multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "110.00",
+          "pe_multiple": "10.00",
+          "rationale": "A $72.16 constant-share residual assumes demand remains strong after guided FQ1 while earnings normalize from the initial quarter; 10x is a sensitivity only."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "120.00",
+          "pe_multiple": "12.00",
+          "rationale": "An $82.16 constant-share residual tests continued AI-memory demand, supply discipline and margins; 12x is an expansion sensitivity only."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 55039,
+    "output_tokens": 938,
+    "catalog_cost_usd": 0.121334,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 19043,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

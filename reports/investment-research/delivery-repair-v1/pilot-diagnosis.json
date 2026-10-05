@@ -1,0 +1,550 @@
+{
+  "kind": "RETROSPECTIVE_DELIVERY_DIAGNOSIS",
+  "run_id": "04bc90a5-dc91-4fe7-8df8-f0a88d7f3c31",
+  "original_state_sha256": "786f0ea6d2d306dbb7f7af3617236bf577342aa8eddc5da026f51c7e52945116",
+  "user_usefulness_verdict": "REJECTED: requested relative valuation analysis not delivered",
+  "usage": {
+    "task_attempts": 10,
+    "model_calls": 28,
+    "source_requests": 36,
+    "tool_calls": 62,
+    "input_tokens": 565541,
+    "output_tokens": 18568,
+    "catalog_cost_usd": 1.3393827999999997,
+    "download_bytes": 14235320
+  },
+  "unused_model_calls": 12,
+  "scenario_calculations": 0,
+  "assessments": {
+    "NVDA": "insufficient_evidence",
+    "MU": "insufficient_evidence",
+    "QQQ": "insufficient_evidence"
+  },
+  "source_failures": {
+    "fred-DGS10": {
+      "status": "GAP",
+      "reason": "SOURCE_UNAVAILABLE",
+      "error_type": "TimeoutError"
+    },
+    "fred-DFF": {
+      "status": "GAP",
+      "reason": "SOURCE_UNAVAILABLE",
+      "error_type": "TimeoutError"
+    },
+    "bis-policy": {
+      "status": "GAP",
+      "reason": "SOURCE_UNAVAILABLE",
+      "error_type": "HTTPError"
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "task-1",
+      "role": "challenger",
+      "stage": "independent",
+      "turns_used": 2,
+      "turn_limit": 3,
+      "tools": {
+        "inspect_evidence": 1,
+        "submit_findings": 1
+      },
+      "input_tokens": 38669,
+      "output_tokens": 2096,
+      "gaps": [
+        {
+          "description": "No validated current or forward P/E/earnings estimate exists for NVDA or MU. Their reported EPS cover different partial fiscal periods and cannot support a like-for-like valuation comparison with QQQ's sponsor-reported aggregate P/E.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ]
+        },
+        {
+          "description": "QQQ holdings weights are stale as of September 12 and therefore cannot establish current fund exposure or precise look-through risk.",
+          "critical": false,
+          "symbols": [
+            "QQQ"
+          ]
+        },
+        {
+          "description": "No independently sourced customer concentration, memory supply/pricing, AI-capex, export-control, or macro-rate evidence is available in the supplied evidence to quantify downside transmission.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-2",
+      "role": "director",
+      "stage": "planning",
+      "turns_used": 5,
+      "turn_limit": 6,
+      "tools": {
+        "ask_specialist": 4,
+        "submit_findings": 1
+      },
+      "input_tokens": 38208,
+      "output_tokens": 1468,
+      "gaps": [
+        {
+          "description": "Primary company, macro, technical, and geopolitical research is pending; this currently prevents symbol-level assessment.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        },
+        {
+          "description": "No registered commodity-specific source is available to quantify commodity-price or input-cost transmission; commodities research is omitted to preserve the shared final-synthesis budget.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-3",
+      "role": "company",
+      "stage": "research",
+      "turns_used": 3,
+      "turn_limit": 5,
+      "tools": {
+        "inspect_evidence": 2,
+        "submit_findings": 1
+      },
+      "input_tokens": 66770,
+      "output_tokens": 2331,
+      "gaps": [
+        {
+          "description": "No reviewed evidence supplies annual EPS estimates, a market-derived company P/E, or a validated annualization method for NVDA or MU. Quarterly and partial-year EPS therefore cannot establish company valuation multiples or a valuation comparison with QQQ.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ]
+        },
+        {
+          "description": "NVDA\u2019s next earnings date was not provided in the reviewed company-results/SEC evidence; event timing beyond Q3 guidance is unknown.",
+          "critical": false,
+          "symbols": [
+            "NVDA"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-4",
+      "role": "macro",
+      "stage": "research",
+      "turns_used": 5,
+      "turn_limit": 5,
+      "tools": {
+        "read_source": 3,
+        "discover_sources": 1,
+        "submit_findings": 1
+      },
+      "input_tokens": 94037,
+      "output_tokens": 1494,
+      "gaps": [
+        {
+          "description": "The registered 10-year Treasury series was unavailable, and no dated policy-rate (DFF) observation, yield-curve change, or measured credit-spread series is present; the level/change in market discount rates and credit conditions cannot be quantified.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        },
+        {
+          "description": "No issuer-specific evidence here quantifies NVDA\u2019s or MU\u2019s sensitivity to interest rates, customer financing, or macro-driven changes in semiconductor demand; relative transmission remains unknown.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-5",
+      "role": "technical",
+      "stage": "research",
+      "turns_used": 2,
+      "turn_limit": 5,
+      "tools": {
+        "ask_specialist": 1,
+        "submit_findings": 1
+      },
+      "input_tokens": 35848,
+      "output_tokens": 2261,
+      "gaps": [
+        {
+          "description": "The normalized series provide completed-session returns, moving averages, drawdowns and realized volatility but not daily bar history, volume, or a formal support/resistance calculation. Liquidity, pivot levels, and volume confirmation are therefore not assessed.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-6",
+      "role": "geopolitics",
+      "stage": "research",
+      "turns_used": 5,
+      "turn_limit": 5,
+      "tools": {
+        "read_source": 3,
+        "discover_sources": 1,
+        "submit_findings": 1
+      },
+      "input_tokens": 104248,
+      "output_tokens": 1453,
+      "gaps": [
+        {
+          "description": "Registered BIS-policy source returned unavailable; therefore the latest primary policy status, scope, enactment/enforcement details, and any changes to semiconductor export controls cannot be verified.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        },
+        {
+          "description": "NVIDIA\u2019s latest 10-Q was identified but its substantive risk-factor/geographic and supply-chain disclosure was not retrieved; no NVDA China or manufacturing exposure is inferred.",
+          "critical": true,
+          "symbols": [
+            "NVDA"
+          ]
+        },
+        {
+          "description": "Available Micron disclosure excerpt does not quantify China revenue, affected products, customer concentration, or supply-chain dependence, preventing a financial-impact comparison with NVDA or QQQ.",
+          "critical": true,
+          "symbols": [
+            "MU"
+          ]
+        },
+        {
+          "description": "QQQ holdings are stale and only establish dated NVDA/MU weights; policy-sensitive exposure across remaining constituents and current fund composition are unknown.",
+          "critical": false,
+          "symbols": [
+            "QQQ"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-7",
+      "role": "director",
+      "stage": "triage",
+      "turns_used": 2,
+      "turn_limit": 5,
+      "tools": {
+        "route_question": 1,
+        "submit_findings": 1
+      },
+      "input_tokens": 56986,
+      "output_tokens": 879,
+      "gaps": [
+        {
+          "description": "Validated annual/forward EPS or market-derived P/E inputs for NVDA and MU remain absent, preventing a like-for-like valuation comparison against QQQ's dated sponsor aggregate P/E.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ]
+        },
+        {
+          "description": "Current primary export-control status and quantified issuer-specific geographic/supply-chain exposure remain unverified, preventing a quantified geopolitical downside comparison.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-8",
+      "role": "director",
+      "stage": "draft",
+      "turns_used": 1,
+      "turn_limit": 2,
+      "tools": {
+        "submit_findings": 1
+      },
+      "input_tokens": 29342,
+      "output_tokens": 2596,
+      "gaps": [
+        {
+          "description": "No validated annual/forward EPS or market-derived P/E exists for NVDA or MU. Reported quarterly, six-month, and nine-month EPS cannot be annualized or compared like-for-like with QQQ's dated aggregate P/E.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ]
+        },
+        {
+          "description": "Current primary export-control status and quantified NVDA geographic/supply-chain exposure were not retrieved.",
+          "critical": true,
+          "symbols": [
+            "NVDA"
+          ]
+        },
+        {
+          "description": "Micron's available disclosure does not quantify geographic demand, affected products, customer exposure, or supply-chain impact from trade-policy risks.",
+          "critical": true,
+          "symbols": [
+            "MU"
+          ]
+        },
+        {
+          "description": "The geopolitical review lacks accessible primary policy status and quantified remaining-constituent policy exposure for QQQ.",
+          "critical": true,
+          "symbols": [
+            "QQQ"
+          ]
+        },
+        {
+          "description": "QQQ holdings are stale, so precise current look-through weights are unknown.",
+          "critical": false,
+          "symbols": [
+            "QQQ"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-9",
+      "role": "challenger",
+      "stage": "review",
+      "turns_used": 2,
+      "turn_limit": 3,
+      "tools": {
+        "inspect_evidence": 1,
+        "submit_findings": 1
+      },
+      "input_tokens": 67334,
+      "output_tokens": 1426,
+      "gaps": [
+        {
+          "description": "No validated annual/forward EPS or market-derived P/E for NVDA or MU is available; partial fiscal-period EPS cannot support a company-versus-QQQ multiple comparison.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ]
+        },
+        {
+          "description": "Current QQQ constituent weights are not established because the available holdings table is marked stale.",
+          "critical": false,
+          "symbols": [
+            "QQQ"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "task-10",
+      "role": "director",
+      "stage": "final",
+      "turns_used": 1,
+      "turn_limit": 3,
+      "tools": {
+        "submit_findings": 1
+      },
+      "input_tokens": 34099,
+      "output_tokens": 2564,
+      "gaps": [
+        {
+          "description": "No validated annual/forward EPS or market-derived P/E is available for NVDA or MU. Quarterly and partial fiscal-period EPS cannot support a like-for-like valuation comparison with QQQ\u2019s dated aggregate P/E.",
+          "critical": true,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ]
+        },
+        {
+          "description": "Current primary export-control status and quantified NVDA geographic, customer, and supply-chain exposure were not retrieved.",
+          "critical": true,
+          "symbols": [
+            "NVDA"
+          ]
+        },
+        {
+          "description": "Micron disclosure reviewed does not quantify geographic demand, affected products, customer exposure, or trade-policy/supply-chain financial impact.",
+          "critical": true,
+          "symbols": [
+            "MU"
+          ]
+        },
+        {
+          "description": "Primary policy status and quantified policy-sensitive exposure across QQQ constituents were not available.",
+          "critical": true,
+          "symbols": [
+            "QQQ"
+          ]
+        },
+        {
+          "description": "QQQ holdings are stale; current look-through weights are unknown.",
+          "critical": false,
+          "symbols": [
+            "QQQ"
+          ]
+        }
+      ]
+    }
+  ],
+  "recovered_earnings": [
+    {
+      "source_id": "sec-facts-MU",
+      "evidence_id": "b80debb10ff2563164584c822259cbb20da62baa7908cb56d61c0b0f324e5c6b",
+      "raw_document_id": "d2412f0569c4dd8829af3d1c21315029088efcab010534d817ef76bff84ada9b",
+      "content_sha256": "a8b088c2111daef36536e53c81fef4c0f01220c64933e126a665b00a9257f882",
+      "original_selected_eps": {
+        "concept": "EarningsPerShareDiluted",
+        "label": "Earnings Per Share, Diluted",
+        "unit": "USD/shares",
+        "value": 41.4,
+        "start": "2025-08-29",
+        "end": "2026-05-28",
+        "filed": "2026-06-25",
+        "form": "10-Q",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q3",
+        "accession": "0000723125-26-000015",
+        "frame": null
+      },
+      "annual_observations_in_original_download": [
+        {
+          "value": 7.59,
+          "unit": "USD/shares",
+          "concept": "EarningsPerShareDiluted",
+          "start": "2024-08-30",
+          "end": "2025-08-28",
+          "duration_days": 364,
+          "period_kind": "annual",
+          "accounting_basis": "US_GAAP",
+          "share_basis": "diluted_as_reported_in_accession",
+          "filed": "2025-10-03",
+          "accession": "0000723125-25-000028",
+          "form": "10-K"
+        },
+        {
+          "value": 0.7,
+          "unit": "USD/shares",
+          "concept": "EarningsPerShareDiluted",
+          "start": "2023-09-01",
+          "end": "2024-08-29",
+          "duration_days": 364,
+          "period_kind": "annual",
+          "accounting_basis": "US_GAAP",
+          "share_basis": "diluted_as_reported_in_accession",
+          "filed": "2025-10-03",
+          "accession": "0000723125-25-000028",
+          "form": "10-K"
+        },
+        {
+          "value": -5.34,
+          "unit": "USD/shares",
+          "concept": "EarningsPerShareDiluted",
+          "start": "2022-09-02",
+          "end": "2023-08-31",
+          "duration_days": 364,
+          "period_kind": "annual",
+          "accounting_basis": "US_GAAP",
+          "share_basis": "diluted_as_reported_in_accession",
+          "filed": "2025-10-03",
+          "accession": "0000723125-25-000028",
+          "form": "10-K"
+        }
+      ],
+      "qualification": "Historical reported EPS; no consensus, annualization or TTM construction. Verify corporate actions/share basis before combining with a market price."
+    },
+    {
+      "source_id": "sec-facts-NVDA",
+      "evidence_id": "bbe759d6a6861ea05266a11b26a4a2a95f442040487d9c20d3571eb3de2f65fd",
+      "raw_document_id": "2074c43b655dc1aa9d2c95f3aaaebbc541c9ac48ac667f354ed159b5cde57d73",
+      "content_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "original_selected_eps": {
+        "concept": "EarningsPerShareDiluted",
+        "label": "Earnings Per Share, Diluted",
+        "unit": "USD/shares",
+        "value": 4.85,
+        "start": "2026-01-26",
+        "end": "2026-07-26",
+        "filed": "2026-08-26",
+        "form": "10-Q",
+        "fiscal_year": 2027,
+        "fiscal_period": "Q2",
+        "accession": "0001045810-26-000075",
+        "frame": null
+      },
+      "annual_observations_in_original_download": [
+        {
+          "value": 4.9,
+          "unit": "USD/shares",
+          "concept": "EarningsPerShareDiluted",
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "duration_days": 364,
+          "period_kind": "annual",
+          "accounting_basis": "US_GAAP",
+          "share_basis": "diluted_as_reported_in_accession",
+          "filed": "2026-02-25",
+          "accession": "0001045810-26-000021",
+          "form": "10-K"
+        },
+        {
+          "value": 2.94,
+          "unit": "USD/shares",
+          "concept": "EarningsPerShareDiluted",
+          "start": "2024-01-29",
+          "end": "2025-01-26",
+          "duration_days": 364,
+          "period_kind": "annual",
+          "accounting_basis": "US_GAAP",
+          "share_basis": "diluted_as_reported_in_accession",
+          "filed": "2026-02-25",
+          "accession": "0001045810-26-000021",
+          "form": "10-K"
+        },
+        {
+          "value": 1.19,
+          "unit": "USD/shares",
+          "concept": "EarningsPerShareDiluted",
+          "start": "2023-01-30",
+          "end": "2024-01-28",
+          "duration_days": 364,
+          "period_kind": "annual",
+          "accounting_basis": "US_GAAP",
+          "share_basis": "diluted_as_reported_in_accession",
+          "filed": "2026-02-25",
+          "accession": "0001045810-26-000021",
+          "form": "10-K"
+        }
+      ],
+      "qualification": "Historical reported EPS; no consensus, annualization or TTM construction. Verify corporate actions/share basis before combining with a market price."
+    }
+  ],
+  "followups": [
+    {
+      "recipient": "macro",
+      "question": "Is there a material macro/rate or risk-sentiment mechanism in the current evidence that could invalidate a purely technical relative-strength reading for NVDA, MU, or QQQ over 63 sessions?",
+      "status": "ANSWERED",
+      "answer_reused": true
+    }
+  ],
+  "interpretation": "Annual EPS existed in downloaded source bytes but was omitted from normalized evidence. This is a retrospective parser diagnosis, not a new company valuation, current data capture or release evaluation."
+}

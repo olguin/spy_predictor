@@ -94,8 +94,9 @@ class FiveSymbolWorker:
             r['gaps'] = [{'symbols': ['MU'], 'critical': True, 'description': 'MU source missing'},
                          {'symbols': SYMBOLS, 'critical': False, 'description': 'Optional policy source unavailable'}]
             r['shared_exposures'] = [{'symbols': ['ANET', 'NVDA'], 'mechanism': 'Synthetic shared demand scenario', 'evidence_ids': [], 'qualification': 'Assumed, no measured portfolio weights'}]
-        if stage == 'final':
+        if stage == 'final' or c.get('response_transport') == 'draft_instrument_identity_maps_v1':
             r['instruments'] = {row['symbol']: {k: v for k, v in row.items() if k != 'symbol'} for row in r['instruments']}
+        if stage == 'final':
             r['role_coverage'] = [{'role': role, 'status': 'omitted' if role == 'commodities' else 'completed',
                 'reason': 'No material commodity channel in this fixture' if role == 'commodities' else 'Grouped task completed'} for role in ROLES]
             r['question_effects'] = {q['question_id']: {'effect': 'unchanged', 'reason': 'Scoped answer retained'} for q in c['questions']}

@@ -1,0 +1,287 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "submit_findings",
+    "arguments": {
+      "summary": "Company contribution: conditional operating-to-earnings sensitivities for NVDA and MU, plus dated QQQ look-through. The grids are assumptions rather than forecasts or fair values; neither establishes a directional recommendation.",
+      "assessment": "conditional_opportunity",
+      "claims": [
+        {
+          "claim_id": "task-3-nvda-operating-anchor",
+          "classification": "fact",
+          "text": "NVDA reported GAAP diluted EPS of $4.85 for the first six months ended July 26, 2026. Its Q3 FY2027 outlook called for $108.0bn revenue plus or minus 2%, 74.0% GAAP gross margin plus or minus 50bp, and explicitly assumed no China Data Center compute revenue. FY2027 is a 53-week year ending January 31, 2027, with a 14-week Q4.",
+          "evidence_ids": [
+            "e4",
+            "e50",
+            "e52",
+            "e53"
+          ],
+          "symbols": [
+            "NVDA"
+          ],
+          "dimensions": [
+            "business"
+          ]
+        },
+        {
+          "claim_id": "task-3-nvda-valuation-bridge",
+          "classification": "scenario",
+          "text": "NVDA's FY2027 GAAP grid uses assumed EPS/P-E pairs of $8.50/20x, $10.00/23x, and $11.00/26x. Relative to the September 18 split-adjusted close, the cases are -23.52%, +3.48%, and +28.67%; bull upside exceeds bear downside magnitude by 5.16pp, without probabilities. The respective residual H2 EPS assumptions are $3.65/$5.15/$6.15 under a constant-diluted-share approximation, not an exact reconciliation. The bear represents a miss mechanism\u2014slower AI-infrastructure demand conversion and/or margin pressure\u2014whereas base requires Q3 guidance conversion and a profitable 14-week Q4; bull requires stronger shipment conversion with sustained margins.",
+          "evidence_ids": [
+            "e50",
+            "e52",
+            "e53",
+            "e56"
+          ],
+          "symbols": [
+            "NVDA"
+          ],
+          "dimensions": [
+            "business",
+            "valuation"
+          ]
+        },
+        {
+          "claim_id": "task-3-nvda-reverse-expectations",
+          "classification": "scenario",
+          "text": "At NVDA's base EPS assumption of $10.00, the dated close equates to a 22.227x break-even P/E; holding EPS fixed, a multiple above that threshold is required for upside. Holding the 23x base multiple fixed, EPS must exceed $9.6639 for upside. These are reverse-expectation sensitivities, not observed valuation multiples or fair-value judgments.",
+          "evidence_ids": [
+            "e7",
+            "e56"
+          ],
+          "symbols": [
+            "NVDA"
+          ],
+          "dimensions": [
+            "valuation"
+          ]
+        },
+        {
+          "claim_id": "task-3-mu-operating-anchor",
+          "classification": "fact",
+          "text": "MU reported GAAP diluted EPS of $41.40 for the 273 days ended May 28, 2026. Its Q4 FY2026 GAAP outlook was $30.73 plus or minus $1.00 EPS, $50bn plus or minus $1bn revenue, and approximately 86% gross margin. FY2026 is a 53-week period ending September 3, 2026, including a 14-week Q4; it had ended but results were still scheduled for September 30.",
+          "evidence_ids": [
+            "e2",
+            "e18",
+            "e51",
+            "e54",
+            "e55"
+          ],
+          "symbols": [
+            "MU"
+          ],
+          "dimensions": [
+            "business"
+          ]
+        },
+        {
+          "claim_id": "task-3-mu-valuation-bridge",
+          "classification": "scenario",
+          "text": "MU's FY2026 GAAP grid uses assumed EPS/P-E pairs of $70.00/11x, $72.13/14x, and $73.13/16x. Relative to the September 18 split-adjusted close, the cases are -24.20%, -0.59%, and +15.19%; bear downside magnitude exceeds bull upside by 9.01pp, without probabilities. Residual Q4 EPS is $28.60/$30.73/$31.73 under a constant-diluted-share approximation. Bear is below management's $29.73-$31.73 guidance range and tests weaker memory/AI demand conversion or margin erosion; base equals the guidance midpoint; bull equals the high end and requires delivery plus sustained memory margins.",
+          "evidence_ids": [
+            "e51",
+            "e54",
+            "e55",
+            "e57"
+          ],
+          "symbols": [
+            "MU"
+          ],
+          "dimensions": [
+            "business",
+            "valuation"
+          ]
+        },
+        {
+          "claim_id": "task-3-mu-reverse-expectations",
+          "classification": "scenario",
+          "text": "At MU's base EPS assumption of $72.13, the dated close equates to a 14.0829x break-even P/E; holding EPS fixed, a higher multiple is required for upside. Holding the 14x base multiple fixed, EPS must exceed $72.5571 for upside. Because FY2026 had already ended awaiting reporting, this is a provisional historical estimate, not next-year growth or a forecast.",
+          "evidence_ids": [
+            "e6",
+            "e18",
+            "e57"
+          ],
+          "symbols": [
+            "MU"
+          ],
+          "dimensions": [
+            "valuation"
+          ]
+        },
+        {
+          "claim_id": "task-3-qqq-overlap-comparison",
+          "classification": "fact",
+          "text": "QQQ's September 18 dated equity holdings included NVDA at 8.535228% and MU at 5.012336%, within 99.859505% reported equity-weight coverage; thus QQQ has dated indirect exposure to both rather than being an alternative with zero issuer overlap. Its sponsor-reported aggregate P/E was 30.08 as of August 31 across 103 holdings. This fund-level metric is not methodologically interchangeable with the companies' assumed GAAP EPS/P-E sensitivities, and the dated holdings are not evidence of future weights.",
+          "evidence_ids": [
+            "e12",
+            "e13",
+            "e49"
+          ],
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ],
+          "dimensions": [
+            "business",
+            "valuation",
+            "relative_preference"
+          ]
+        },
+        {
+          "claim_id": "task-3-company-versus-qqq-risk-shape",
+          "classification": "inference",
+          "text": "The conditional grids isolate issuer earnings and multiple risk that QQQ's aggregate P/E cannot replicate: NVDA's selected grid has a modestly positive within-grid asymmetry, while MU's has negative asymmetry. QQQ diversification mitigates but does not eliminate these channels because it held both issuers on the stated date. No cross-instrument ranking follows: company P/Es are assumptions, QQQ's P/E is sponsor-reported aggregate, and neither has empirical weighting or a demonstrated fair-value band.",
+          "evidence_ids": [
+            "e12",
+            "e13",
+            "e56",
+            "e57"
+          ],
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ],
+          "dimensions": [
+            "valuation",
+            "relative_preference"
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "description": "No consensus estimates, observed company valuation multiples, or empirical multiple-history evidence is supplied. The grids remain valid explicitly hypothetical sensitivities, but cannot support a claim that any selected P/E is fair, normal, likely, or preferred versus QQQ.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ],
+          "dimensions": [
+            "valuation",
+            "relative_preference"
+          ]
+        },
+        {
+          "description": "Annual EPS assumptions combine reported interim EPS with assumed annual EPS using a constant-diluted-share approximation. Actual future diluted shares and final annual reported EPS are unknown; this limits exact reconciliation but not the stated conditional grid.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU"
+          ],
+          "dimensions": [
+            "valuation"
+          ]
+        },
+        {
+          "description": "MU FY2026 had ended and Q4 results were not yet reported as of the fixed evidence cutoff. The base case is therefore conditional on management's guidance converting, not a reported annual result.",
+          "critical": false,
+          "symbols": [
+            "MU"
+          ],
+          "dimensions": [
+            "business",
+            "valuation"
+          ]
+        },
+        {
+          "description": "QQQ holding weights and aggregate valuation are dated sponsor figures, with excluded cash/derivatives and limited reported-weight coverage; they do not establish future holdings, personalized exposure, or a like-for-like corporate valuation comparison.",
+          "critical": false,
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ],
+          "dimensions": [
+            "business",
+            "valuation",
+            "relative_preference"
+          ]
+        }
+      ],
+      "assumptions": [
+        "All grid EPS and P/E inputs are explicit GAAP sensitivity assumptions, not consensus, observed multiples, fair values, probabilities, or price targets.",
+        "NVDA FY2027 uses the disclosed January 26, 2026\u2013January 31, 2027 53-week fiscal period; MU FY2026 uses the disclosed August 29, 2025\u2013September 3, 2026 53-week fiscal period.",
+        "Residual EPS calculations hold diluted share count constant across interim reported and assumed annual EPS; this is an approximation only.",
+        "The September 18, 2026 closes are split-adjusted completed-session reference prices, not executable quotes."
+      ],
+      "counter_thesis": "Demand durability may exceed the stress assumptions: NVDA's guided Q3 excludes China Data Center compute revenue while platform shipments convert, and MU could deliver at or above its Q4 guidance high end on strong memory demand and margins. Conversely, a lower multiple alone can defeat otherwise achieved EPS assumptions; no probability is assigned to either mechanism.",
+      "review_conditions": [
+        {
+          "kind": "human_review",
+          "description": "Review NVDA at its next reported results/outlook: evidence that Q3 revenue or gross margin misses the disclosed outlook, or that demand conversion/supply availability weakens, would make the bear residual-EPS mechanism more relevant; conversion with sustained margin would support the base/bull bridge.",
+          "symbol": "NVDA",
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e50",
+            "e52",
+            "e56"
+          ]
+        },
+        {
+          "kind": "human_review",
+          "description": "Review MU's September 30 FY2026 results against its Q4 GAAP EPS guidance range and stated revenue/gross-margin outlook: a result below range would validate the bear miss mechanism, while delivery at the upper end with sustained margins would support the bull residual assumption.",
+          "symbol": "MU",
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e18",
+            "e51",
+            "e57"
+          ]
+        },
+        {
+          "kind": "human_review",
+          "description": "Refresh QQQ sponsor holdings and aggregate characteristics before using the dated NVDA/MU overlap in a relative comparison; a material weight change changes the degree of indirect issuer exposure but not the direct-company grids.",
+          "symbol": "QQQ",
+          "operator": null,
+          "threshold_decimal": null,
+          "price_basis": null,
+          "expires_at": null,
+          "evidence_ids": [
+            "e12",
+            "e13",
+            "e49"
+          ]
+        }
+      ],
+      "dispositions": [],
+      "question_effects": [],
+      "shared_exposures": [
+        {
+          "symbols": [
+            "NVDA",
+            "MU",
+            "QQQ"
+          ],
+          "mechanism": "AI-infrastructure demand is a shared candidate channel: NVDA's data-center platform outlook and MU's memory/AI guidance provide the company anchors, while QQQ's dated holdings contain both issuers.",
+          "evidence_ids": [
+            "e13",
+            "e50",
+            "e51"
+          ],
+          "qualification": "This is a dated overlap and operating-channel observation, not quantified QQQ factor exposure, causal attribution, or portfolio advice."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 42129,
+    "output_tokens": 2772,
+    "catalog_cost_usd": 0.117522,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 51496,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

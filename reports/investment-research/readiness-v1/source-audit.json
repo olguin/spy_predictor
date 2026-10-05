@@ -1,0 +1,195 @@
+{
+  "kind": "SOURCE_ONLY_READINESS_AUDIT",
+  "captured_at": "2026-09-21T18:55:10.036012+00:00",
+  "run_id": "a39b5af7-de74-469b-bd04-c14e0c0a139f",
+  "source_state_sha256": "ec2c5d60b996409a8b48d6b62a668127a678979a25164a27a166300d8e89f236",
+  "status": "READY_WITH_GAPS",
+  "counts": {
+    "READY": 13,
+    "PARTIAL": 7
+  },
+  "blocked_requirements": [],
+  "usage": {
+    "task_attempts": 0,
+    "model_calls": 0,
+    "source_requests": 26,
+    "tool_calls": 50,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "catalog_cost_usd": 0,
+    "download_bytes": 18567808
+  },
+  "delivery_check": {
+    "version": "research-delivery-v1",
+    "companies": [
+      {
+        "symbol": "NVDA",
+        "annual_anchor_ids": [
+          "eb8f3138f6fcea5152c727af6a0867751c0d3d1c3282e661c5c31a3add67267a"
+        ],
+        "price_ids": [
+          "8f28054cfc8983334d84a757fb4286b82436afcdab199ba7590f1a83528810bb"
+        ],
+        "scenario_grid_ids": [],
+        "scenario_linked_in_report": null
+      },
+      {
+        "symbol": "MU",
+        "annual_anchor_ids": [
+          "3530dd5525c7703b5dfac039b4a24a9729af8d2c6f90552ca3aa26e0fd03e74b"
+        ],
+        "price_ids": [
+          "dcffee9042af48d03c4547fb1cb5a2157bbfb8006c3cd2effcf59395fe8fcae9"
+        ],
+        "scenario_grid_ids": [],
+        "scenario_linked_in_report": null
+      }
+    ],
+    "qualification": "Mechanical coverage only. Assumption suitability, sources, comparison and usefulness require review.",
+    "stage": "seed",
+    "status": "PASS",
+    "missing": []
+  },
+  "source_failures": {
+    "fred-DGS10": {
+      "status": "GAP",
+      "reason": "SOURCE_UNAVAILABLE",
+      "error_type": "TimeoutError"
+    },
+    "fred-DFF": {
+      "status": "GAP",
+      "reason": "SOURCE_UNAVAILABLE",
+      "error_type": "TimeoutError"
+    }
+  },
+  "current_code_read_only_recheck": "MATCHES_ARCHIVED_REQUIREMENT_STATUSES_AND_LINEAGE",
+  "acquisition_cli_exit_code": 1,
+  "exit_code_explanation": "At capture, the CLI required every source request to succeed. FRED timeouts returned exit 1 although required inputs passed. Current v6 CLI uses registered mandatory requirements; the archived check is not rewritten or resumed.",
+  "inputs": {
+    "sec-facts-NVDA": {
+      "evidence_id": "eb8f3138f6fcea5152c727af6a0867751c0d3d1c3282e661c5c31a3add67267a",
+      "content_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "data": [
+        {
+          "value": 4.9,
+          "unit": "USD/shares",
+          "concept": "EarningsPerShareDiluted",
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "duration_days": 364,
+          "period_kind": "annual",
+          "accounting_basis": "US_GAAP",
+          "share_basis": "diluted_as_reported_in_accession",
+          "filed": "2026-02-25",
+          "accession": "0001045810-26-000021",
+          "form": "10-K"
+        }
+      ]
+    },
+    "sec-facts-MU": {
+      "evidence_id": "3530dd5525c7703b5dfac039b4a24a9729af8d2c6f90552ca3aa26e0fd03e74b",
+      "content_sha256": "a8b088c2111daef36536e53c81fef4c0f01220c64933e126a665b00a9257f882",
+      "data": [
+        {
+          "value": 7.59,
+          "unit": "USD/shares",
+          "concept": "EarningsPerShareDiluted",
+          "start": "2024-08-30",
+          "end": "2025-08-28",
+          "duration_days": 364,
+          "period_kind": "annual",
+          "accounting_basis": "US_GAAP",
+          "share_basis": "diluted_as_reported_in_accession",
+          "filed": "2025-10-03",
+          "accession": "0000723125-25-000028",
+          "form": "10-K"
+        }
+      ]
+    },
+    "qqq-holdings": {
+      "evidence_id": "3aea8cccef0a5ac3ebc0acf3c9ab1dc17df3d14db035feaf9118993817962a19",
+      "content_sha256": "6c678afd67ec94353d338621b35364841042a7890a5d8a3c5910e22e4630a4e4",
+      "data": {
+        "symbol": "QQQ",
+        "as_of": "2026-09-18",
+        "status": "CURRENT",
+        "age_days": 3,
+        "maximum_age_days": 7,
+        "source_url": "https://dng-api.invesco.com/cache/v1/accounts/en_US/shareclasses/QQQ/holdings/fund?idType=ticker&productType=ETF",
+        "holdings_count": 101,
+        "reported_weight_pct": 99.859505,
+        "top10_weight_pct": 47.718919,
+        "sector_weights_pct": {},
+        "limitations": "Dated sponsor equity view; cash/derivatives excluded and retained separately. Weights are not renormalized. Unknown weights remain unknown. No historical membership inference.",
+        "sponsor_effective_date": "2026-09-19",
+        "sponsor_row_count": 106,
+        "sponsor_reported_weight_pct": 100.00000099999997,
+        "excluded_positions": [
+          {
+            "ticker": "NQZ6",
+            "issuerName": "CME E-Mini NASDAQ 100 Index Future",
+            "securityTypeCode": "IFUT",
+            "percentageOfTotalNetAssets": 0.154437
+          },
+          {
+            "ticker": "USD",
+            "issuerName": "CASH &amp; EQUIVALENTS",
+            "securityTypeCode": "CURR",
+            "percentageOfTotalNetAssets": 0.127617
+          },
+          {
+            "ticker": null,
+            "issuerName": "CASH COLLATERAL",
+            "securityTypeCode": "CURRCOL",
+            "percentageOfTotalNetAssets": 0.012879
+          },
+          {
+            "ticker": null,
+            "issuerName": "CONTRA FUTURE NASDAQ 100 E-MINI DEC26NQZ6",
+            "securityTypeCode": "SYN",
+            "percentageOfTotalNetAssets": -0.154437
+          },
+          {
+            "ticker": "USDPDV",
+            "issuerName": "USD Pending Dividends",
+            "securityTypeCode": "CURR",
+            "percentageOfTotalNetAssets": null
+          }
+        ],
+        "unknown_weight_positions": 1
+      }
+    },
+    "qqq-profile": {
+      "evidence_id": "ae762c4dd397313553c7f4b184ea0b0e3671b339b92871abadd3720bab3748cf",
+      "content_sha256": "f3b7c3b88dd297828268e2285d92ba3fe9dbbdd0890c442b47bc117980254c67",
+      "data": {
+        "symbol": "QQQ",
+        "as_of": "2026-08-31",
+        "status": "CURRENT",
+        "age_days": 21,
+        "maximum_age_days": 31,
+        "source_url": "https://www.invesco.com/us/en/financial-products/etfs/invesco-qqq-trust-series-1.html",
+        "metrics": {
+          "expense_ratio_pct": 0.18,
+          "holdings_count": 103,
+          "pe_ratio": 30.08,
+          "price_to_book_ratio": 9.6,
+          "roe_pct": 35.15
+        },
+        "methodology_note": "Official Invesco QQQ About page and its linked Full Product Details page accessed 2026-09-14. Metric-specific source dates are recorded in metric_as_of. The profile-level as_of conservatively uses the oldest included metric date. Total expense ratio was 0.18% on the About page whose Overview facts were dated 2026-09-11; the detailed page displayed 103 holdings as of 2026-09-10 and fund characteristics as of 2026-08-31. Unsupported source facts were preserved here but omitted from model metrics rather than mapped to non-equivalent v1 fields: forward P/E 25.74 as of 2026-08-31, SEC 30-day yield 0.41%, 12-month distribution rate 0.42%, and distribution rate 0.46%, each as of 2026-09-11. Earnings growth and tracking difference were not displayed and were omitted.",
+        "limitations": [
+          "current sponsor-reported aggregate; no historical point-in-time series",
+          "metric methodology may differ across sponsors; no silent cross-fund comparison"
+        ],
+        "metric_as_of": {
+          "expense_ratio_pct": "2026-09-11",
+          "holdings_count": "2026-09-10",
+          "pe_ratio": "2026-08-31",
+          "price_to_book_ratio": "2026-08-31",
+          "roe_pct": "2026-08-31"
+        }
+      }
+    }
+  },
+  "qualification": "Input usability only. Annual EPS is historical, filing sections require substantive interpretation, and a dated rule does not certify current policy. No paid model or investment recommendation."
+}

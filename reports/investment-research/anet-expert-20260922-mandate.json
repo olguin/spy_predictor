@@ -1,0 +1,605 @@
+{
+  "schema_version": "investment-research-mandate-v6",
+  "watchlist": [
+    {
+      "symbol": "ANET",
+      "kind": "company",
+      "benchmark": "SPY",
+      "sector_benchmark": "XLK"
+    }
+  ],
+  "objective": "Complete analysis on potential upside/downside of ANET. What is the stock value by three different valuation methods? What is the probable performance over the upcoming weeks and months, with probabilities, drivers, and analyst estimates?\nRegistered scope: ANET, benchmarked to SPY and XLK, over 5, 21 and 63 completed trading sessions. Run the complete Director, Company, Macro, Technical, Geopolitics, Commodities and Challenger workflow. Deliver upside/downside cases; values from forward P/E, EV/revenue and five-year DCF; explicit assumptions and reverse expectations; dated company guidance and separately identified analyst consensus; business, AI networking, customer concentration, competition, supply, policy and macro drivers; historical conditional forward-return frequencies with sample sizes and unconditional base rates; and concrete thesis-change conditions. Probability language must come from the deterministic probability panel or be labeled subjective and uncalibrated. Consensus or target data without a timestamped source must be reported unavailable. Research only.",
+  "horizon_sessions": [
+    5,
+    21,
+    63
+  ],
+  "currency": "USD",
+  "perspective": "long_only_research",
+  "mode": "live",
+  "sources": [
+    {
+      "source_id": "sec-submissions-ANET",
+      "symbols": [
+        "ANET"
+      ],
+      "title": "sec-submissions-ANET",
+      "publisher": "SEC",
+      "url": "https://data.sec.gov/submissions/CIK0001596532.json",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation",
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "sec-facts-ANET",
+      "symbols": [
+        "ANET"
+      ],
+      "title": "sec-facts-ANET",
+      "publisher": "SEC",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001596532.json",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation",
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "price-ANET",
+      "symbols": [
+        "ANET"
+      ],
+      "title": "price-ANET",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/ANET/bars?timeframe=1Day&start=2023-09-23T21%3A47%3A53.267553%2B00%3A00&end=2026-09-22T21%3A27%3A53.267553%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-SPY",
+      "symbols": [
+        "SPY"
+      ],
+      "title": "price-SPY",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/SPY/bars?timeframe=1Day&start=2023-09-23T21%3A47%3A53.267553%2B00%3A00&end=2026-09-22T21%3A27%3A53.267553%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-XLK",
+      "symbols": [
+        "XLK"
+      ],
+      "title": "price-XLK",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/XLK/bars?timeframe=1Day&start=2023-09-23T21%3A47%3A53.267553%2B00%3A00&end=2026-09-22T21%3A27%3A53.267553%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": true,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-IWM",
+      "symbols": [
+        "IWM"
+      ],
+      "title": "price-IWM",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/IWM/bars?timeframe=1Day&start=2023-09-23T21%3A47%3A53.267553%2B00%3A00&end=2026-09-22T21%3A27%3A53.267553%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "price-HYG",
+      "symbols": [
+        "HYG"
+      ],
+      "title": "price-HYG",
+      "publisher": "Alpaca",
+      "url": "https://data.alpaca.markets/v2/stocks/HYG/bars?timeframe=1Day&start=2023-09-23T21%3A47%3A53.267553%2B00%3A00&end=2026-09-22T21%3A27%3A53.267553%2B00%3A00&limit=1000&adjustment=split&feed=sip&sort=asc",
+      "fixture_text": null,
+      "kind": "market",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "alpaca_daily",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "split_adjusted",
+      "feed": "sip",
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "valuation",
+        "market_behavior"
+      ]
+    },
+    {
+      "source_id": "fred-DGS10",
+      "symbols": [],
+      "title": "fred-DGS10",
+      "publisher": "fred-DGS10",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-09-22",
+      "fixture_text": null,
+      "kind": "macro",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "fred_csv",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": "DGS10",
+      "units": "percent",
+      "data_end": null,
+      "supports_dimensions": [
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "fred-DFF",
+      "symbols": [],
+      "title": "fred-DFF",
+      "publisher": "fred-DFF",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFF&cosd=2025-09-22",
+      "fixture_text": null,
+      "kind": "macro",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "fred_csv",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": "DFF",
+      "units": "percent",
+      "data_end": null,
+      "supports_dimensions": [
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "fed-monetary-feed",
+      "symbols": [],
+      "title": "fed-monetary-feed",
+      "publisher": "fed-monetary-feed",
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "fixture_text": null,
+      "kind": "macro",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "anet-quarterly-results",
+      "symbols": [
+        "ANET"
+      ],
+      "title": "Arista Networks Q2 2026 results and Q3 guidance",
+      "publisher": "Arista Networks",
+      "url": "https://investors.arista.com/Communications/Press-Releases-and-Events/Press-Release-Detail/2026/Arista-Networks-Inc--Reports-Second-Quarter-2026-Financial-Results/default.aspx",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": "2026-08-04T23:59:59+00:00",
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation",
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "anet-analyst-consensus",
+      "symbols": [
+        "ANET"
+      ],
+      "title": "ANET analyst estimates, recommendations and target snapshot",
+      "publisher": "Fox Business",
+      "url": "https://www.foxbusiness.com/quote?stockTicker=anet",
+      "fixture_text": null,
+      "kind": "company",
+      "published_at": null,
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "business",
+        "valuation",
+        "policy_exposure"
+      ]
+    },
+    {
+      "source_id": "advanced-computing-rule-20260115",
+      "symbols": [
+        "ANET"
+      ],
+      "title": "Dated advanced computing license review rule, January 15 2026",
+      "publisher": "U.S. Government Publishing Office / Bureau of Industry and Security",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-01-15/html/2026-00789.htm",
+      "fixture_text": null,
+      "kind": "policy",
+      "published_at": "2026-01-15T23:59:59+00:00",
+      "available_at": null,
+      "critical": false,
+      "adapter": "document",
+      "local_path": null,
+      "sha256": null,
+      "captured_at": null,
+      "share_basis": "not_applicable",
+      "feed": null,
+      "series_id": null,
+      "units": null,
+      "data_end": null,
+      "supports_dimensions": [
+        "policy_exposure"
+      ]
+    }
+  ],
+  "runtime": {
+    "argv": [
+      "packages/agent-runtime/bin/pi-research-worker"
+    ],
+    "model": "openai-codex/gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "max_output_tokens": 10000,
+    "timeout_seconds": 300
+  },
+  "budgets": {
+    "task_attempts": 16,
+    "model_calls": 40,
+    "source_requests": 250,
+    "tool_calls": 100,
+    "input_tokens": 1000000,
+    "output_tokens": 100000,
+    "catalog_cost_usd": 25,
+    "wall_seconds": 1200,
+    "followup_rounds": 2,
+    "reserved_final_calls": 9,
+    "document_bytes": 10000000
+  },
+  "network": {
+    "enabled": true,
+    "user_agent": "spy-predictor-investment-research/1.0",
+    "minimum_spacing_seconds": 0.25
+  },
+  "market_context_symbols": [
+    "SPY",
+    "IWM",
+    "HYG"
+  ],
+  "seed_source_ids": [
+    "sec-submissions-ANET",
+    "sec-facts-ANET",
+    "price-ANET",
+    "price-SPY",
+    "price-XLK",
+    "price-IWM",
+    "price-HYG",
+    "fred-DGS10",
+    "fred-DFF",
+    "fed-monetary-feed",
+    "anet-quarterly-results",
+    "anet-analyst-consensus",
+    "advanced-computing-rule-20260115"
+  ],
+  "publication_policy": {
+    "version": "investment-research-publication-policy-v1",
+    "refresh_source_ids": [
+      "price-ANET",
+      "price-SPY",
+      "price-XLK",
+      "anet-quarterly-results",
+      "advanced-computing-rule-20260115"
+    ],
+    "material_price_move_pct": 2,
+    "maximum_refresh_age_seconds": 600,
+    "maximum_quote_age_seconds": 60
+  },
+  "source_requirements": [
+    {
+      "requirement_id": "ANET-annual",
+      "symbols": [
+        "ANET"
+      ],
+      "dimensions": [
+        "valuation"
+      ],
+      "source_ids": [
+        "sec-facts-ANET"
+      ],
+      "check": "annual_eps",
+      "maximum_age_days": 450,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "ANET-operations",
+      "symbols": [
+        "ANET"
+      ],
+      "dimensions": [
+        "business"
+      ],
+      "source_ids": [
+        "sec-facts-ANET"
+      ],
+      "check": "operating_data",
+      "maximum_age_days": 150,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "ANET-geographic",
+      "symbols": [
+        "ANET"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-ANET"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "geographic"
+    },
+    {
+      "requirement_id": "ANET-customer",
+      "symbols": [
+        "ANET"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-ANET"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "customer"
+    },
+    {
+      "requirement_id": "ANET-supply",
+      "symbols": [
+        "ANET"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "sec-submissions-ANET"
+      ],
+      "check": "issuer_sections",
+      "maximum_age_days": 450,
+      "required_for_run": false,
+      "query": "supply"
+    },
+    {
+      "requirement_id": "ANET-price",
+      "symbols": [
+        "ANET"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-ANET"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "SPY-price",
+      "symbols": [
+        "SPY"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-SPY"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "XLK-price",
+      "symbols": [
+        "XLK"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-XLK"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": true,
+      "query": null
+    },
+    {
+      "requirement_id": "IWM-price",
+      "symbols": [
+        "IWM"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-IWM"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "HYG-price",
+      "symbols": [
+        "HYG"
+      ],
+      "dimensions": [
+        "market_behavior"
+      ],
+      "source_ids": [
+        "price-HYG"
+      ],
+      "check": "completed_price",
+      "maximum_age_days": 4,
+      "required_for_run": false,
+      "query": null
+    },
+    {
+      "requirement_id": "dated-policy",
+      "symbols": [
+        "ANET"
+      ],
+      "dimensions": [
+        "policy_exposure"
+      ],
+      "source_ids": [
+        "advanced-computing-rule-20260115"
+      ],
+      "check": "policy_document",
+      "maximum_age_days": 365,
+      "required_for_run": false,
+      "query": null
+    }
+  ]
+}

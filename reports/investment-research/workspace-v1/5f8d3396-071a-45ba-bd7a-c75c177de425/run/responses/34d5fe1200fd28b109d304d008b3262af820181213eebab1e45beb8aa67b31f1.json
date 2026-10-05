@@ -1,0 +1,54 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "symbol": "MU",
+      "share_basis": "split_adjusted",
+      "price_evidence_id": "e5",
+      "evidence_ids": [
+        "e3",
+        "e5",
+        "e59",
+        "e60"
+      ],
+      "earnings_period_start": "2026-09-04",
+      "earnings_period_end": "2027-09-02",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Hypothetical fiscal-2027 total-GAAP diluted-EPS sensitivity. Fiscal 2026 ended 2026-09-03 and reported GAAP diluted EPS of 74.33. Management guided fiscal Q1 2027 GAAP diluted EPS to 37.84 +/- 1.00; bear/base/bull annual EPS assumptions of 120.00/150.00/180.00 therefore require 82.16/112.16/142.16 across the remaining three quarters after holding the guided midpoint fixed, a simple quarterly EPS bridge that is not exact because future diluted shares are unknown. The fiscal end is an unverified one-year assumption, not a disclosed calendar. P/E inputs of 7/8/9 are hypothetical stresses, not observed multiples, consensus, fair values or probabilities. Assumptions test memory pricing and AI-memory demand/margin durability versus cycle normalization; no forward consensus is supplied.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "120.00",
+          "pe_multiple": "7.00",
+          "rationale": "Hypothetical total-GAAP miss: after Q1 guidance midpoint, remaining-period EPS of 82.16 tests weaker memory pricing, supply response or margin normalization, coupled with multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "150.00",
+          "pe_multiple": "8.00",
+          "rationale": "Hypothetical total-GAAP continuation: after Q1 guidance midpoint, remaining-period EPS of 112.16 tests sustained AI-memory demand and high margins, with a selected stress multiple held fixed."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "180.00",
+          "pe_multiple": "9.00",
+          "rationale": "Hypothetical total-GAAP beat: after Q1 guidance midpoint, remaining-period EPS of 142.16 tests stronger demand/mix and pricing persistence plus multiple expansion."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 54210,
+    "output_tokens": 981,
+    "catalog_cost_usd": 0.120192,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 19349,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

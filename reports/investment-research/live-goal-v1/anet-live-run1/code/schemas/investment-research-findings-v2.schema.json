@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "investment-research-findings-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "summary",
+    "assessment",
+    "claims",
+    "gaps",
+    "assumptions",
+    "counter_thesis",
+    "review_conditions",
+    "objections",
+    "dispositions",
+    "question_effects"
+  ],
+  "properties": {
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 12000
+    },
+    "assessment": {
+      "type": "string",
+      "enum": [
+        "attractive_candidate",
+        "conditional_opportunity",
+        "watch",
+        "avoid",
+        "insufficient_evidence"
+      ]
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "classification",
+          "text",
+          "evidence_ids"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "classification": {
+            "type": "string",
+            "enum": [
+              "fact",
+              "inference",
+              "scenario"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "uniqueItems": true,
+            "maxItems": 40
+          }
+        }
+      },
+      "maxItems": 12
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "description",
+          "critical"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "critical": {
+            "type": "boolean"
+          }
+        }
+      },
+      "maxItems": 12
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 12000
+      },
+      "maxItems": 12
+    },
+    "counter_thesis": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 12000
+    },
+    "review_conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "description"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "human_review",
+              "completed_close"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          }
+        }
+      },
+      "maxItems": 10
+    },
+    "objections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "objection_id",
+          "claim_ids",
+          "severity",
+          "description"
+        ],
+        "properties": {
+          "objection_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "claim_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "uniqueItems": true,
+            "maxItems": 40
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "material",
+              "minor"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          }
+        }
+      },
+      "maxItems": 12
+    },
+    "dispositions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "objection_id",
+          "decision",
+          "reason"
+        ],
+        "properties": {
+          "objection_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "changed",
+              "unchanged",
+              "unresolved"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          }
+        }
+      },
+      "maxItems": 200
+    },
+    "question_effects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question_id",
+          "effect",
+          "reason"
+        ],
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "effect": {
+            "type": "string",
+            "enum": [
+              "changed",
+              "unchanged",
+              "unresolved"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          }
+        }
+      },
+      "maxItems": 200
+    }
+  }
+}

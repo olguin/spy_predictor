@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e2",
+        "e6",
+        "e51"
+      ],
+      "earnings_period_start": "2025-08-29",
+      "earnings_period_end": "2026-08-28",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Explicit FY2026 GAAP diluted EPS scenario assumptions, split-adjusted for comparison with the 2026-09-18 split-adjusted close. Reported first nine months FY2026 GAAP diluted EPS is $41.40; Q4 GAAP EPS guidance is $30.73 +/-$1.00. Annual assumptions of $65/$72/$78 imply Q4 residual EPS of $23.60/$30.60/$36.60 under a constant diluted-share approximation only, not an exact annual EPS reconciliation. Bear tests a Q4 shortfall versus guidance from weaker memory demand/pricing or margin/cost pressure and 10x multiple; base is approximately the guided Q4 EPS completion with 14x; bull tests Q4 above guidance from durable AI-memory demand/margins with 18x. P/E bands are scenario inputs, not observed multiples, fair values, consensus or probabilities.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "65.00",
+          "pe_multiple": "10.00",
+          "rationale": "Residual EPS is $23.60 versus $30.73 guided Q4 GAAP EPS; tests demand/pricing or margin shortfall plus multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "72.00",
+          "pe_multiple": "14.00",
+          "rationale": "Residual EPS is $30.60, approximately Q4 GAAP guidance; tests guided completion and retained elevated profitability."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "78.00",
+          "pe_multiple": "18.00",
+          "rationale": "Residual EPS is $36.60, above Q4 guidance; tests an AI-memory demand/margin beat plus higher scenario multiple."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 35812,
+    "output_tokens": 543,
+    "catalog_cost_usd": 0.07813999999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 11357,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "ANET",
+      "price_evidence_id": "e3",
+      "evidence_ids": [
+        "e2",
+        "e3",
+        "e30",
+        "e31",
+        "e32"
+      ],
+      "earnings_period_start": "2026-01-01",
+      "earnings_period_end": "2026-12-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2026 GAAP diluted EPS stress grid anchored to reported H1 2026 GAAP diluted EPS of $1.75. Constant-share approximation: assumes the H1 diluted share basis remains representative through year-end. Management's Q3 guidance is non-GAAP EPS $1.06-$1.08 and cannot be directly added to GAAP H1 because management does not provide a forward GAAP reconciliation. Bear residual H2 EPS of $1.50 assumes a Q3/Q4 GAAP conversion and a Q4 demand/margin miss from hyperscaler timing, product mix or supply costs. Base residual H2 EPS of $1.80 assumes Q3 near management's non-GAAP outlook after normal exclusions and moderate Q4 execution. Bull residual H2 EPS of $2.10 assumes sustained AI/Ethernet demand, favorable mix and operating leverage yielding a Q4 beat. P/E multiples are explicit stress assumptions\u2014not observed, consensus, fair, normal, or probability-weighted\u2014and test simultaneous earnings and multiple compression/expansion around a dated close.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "3.25",
+          "pe_multiple": "42",
+          "rationale": "H1 GAAP EPS $1.75 plus $1.50 H2 residual; tests a marked Q4 slowdown/miss and multiple compression if concentrated cloud demand or supply/mix disappoints."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "3.55",
+          "pe_multiple": "55",
+          "rationale": "H1 GAAP EPS $1.75 plus $1.80 H2 residual; assumes Q3 broadly consistent with management's separately stated non-GAAP outlook and a solid but not accelerating Q4, with a still-premium stipulated multiple."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "3.85",
+          "pe_multiple": "68",
+          "rationale": "H1 GAAP EPS $1.75 plus $2.10 H2 residual; assumes AI-fabric and cloud demand plus operating leverage produce an H2 beat while the market sustains a high growth multiple."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 33979,
+    "output_tokens": 872,
+    "catalog_cost_usd": 0.196055,
+    "model": "openai-codex/gpt-5.6-sol",
+    "response_model": "gpt-5.6-sol",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 30983,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

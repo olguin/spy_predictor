@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e2",
+        "e6",
+        "e51",
+        "e54",
+        "e55"
+      ],
+      "earnings_period_start": "2025-08-29",
+      "earnings_period_end": "2026-09-03",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2026 is a 53-week year ending 2026-09-03. GAAP diluted EPS assumptions: bear $70.00, base $72.13, bull $73.13. They begin with reported GAAP EPS of $41.40 for the 273 days ended 2026-05-28 and thus imply residual Q4 EPS of $28.60/$30.73/$31.73, respectively, using a constant diluted-share approximation. Q4 GAAP EPS guidance was $30.73 +/- $1.00; bear is below its range (a miss), base equals its midpoint, bull equals its upper end. Q4 revenue guidance was $50bn +/- $1bn with approximately 86% GAAP gross margin. Bear tests weaker memory/AI demand conversion or margin erosion; base assumes management's Q4 outlook converts; bull assumes delivery at the high end. P/E values 11x/14x/16x are explicit sensitivity assumptions, not observed multiples, consensus, fair values, or probabilities. The annual period had just ended and is awaiting reporting.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "70.00",
+          "pe_multiple": "11.00",
+          "rationale": "Assumes Q4 GAAP EPS of $28.60, below management's $29.73-$31.73 guidance range, from weaker memory/AI demand conversion and/or margin erosion."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "72.13",
+          "pe_multiple": "14.00",
+          "rationale": "Assumes the $30.73 Q4 GAAP EPS guidance midpoint converts, with the guided revenue and gross-margin outlook."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "73.13",
+          "pe_multiple": "16.00",
+          "rationale": "Assumes Q4 GAAP EPS of $31.73 at management's guidance upper end, supported by stronger delivery and sustained memory margins."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 39391,
+    "output_tokens": 694,
+    "catalog_cost_usd": 0.08710999999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 15432,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e6",
+      "evidence_ids": [
+        "e4",
+        "e6",
+        "e41"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-31",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 is NVIDIA's 53-week year ending the last Sunday in January (Jan. 31, 2027); reported first-half FY2027 GAAP diluted EPS was $4.85 for the 26-week period ended July 26, 2026. Assumptions use a constant split-adjusted diluted-share approximation: bear $8.00 (remaining-half $3.15) models customer digestion, supply/China constraints, or lower margins; base $9.00 (remaining-half $4.15) models continued data-center demand without a claim of management guidance; bull $10.00 (remaining-half $5.15) models sustained demand and execution. P/E values 24x/26x/28x are explicit sensitivity assumptions, not observed multiples, fair values, consensus or probabilities.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "8.00",
+          "pe_multiple": "24.00",
+          "rationale": "Below the first-half run rate: demand or supply/policy disruption reduces second-half earnings; 24x tests simultaneous multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "9.00",
+          "pe_multiple": "26.00",
+          "rationale": "Second-half GAAP EPS of $4.15 under constant-share approximation, reflecting continued demand but no extrapolation of a management outlook; 26x is a sensitivity midpoint only."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "10.00",
+          "pe_multiple": "28.00",
+          "rationale": "Second-half GAAP EPS of $5.15 under constant-share approximation, contingent on sustained accelerator demand and supply execution; 28x tests an expansion assumption."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 52507,
+    "output_tokens": 740,
+    "catalog_cost_usd": 0.09983959999999999,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 15180,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

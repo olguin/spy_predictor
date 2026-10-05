@@ -1,0 +1,55 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "MU",
+      "price_evidence_id": "e5",
+      "evidence_ids": [
+        "e3",
+        "e5",
+        "e59",
+        "e60",
+        "e66"
+      ],
+      "earnings_period_start": "2026-09-04",
+      "earnings_period_end": "2027-09-02",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "FY2027 period dates are a calendar application of Micron's disclosed fiscal-year convention (Thursday closest to August 31); exact FY2027 calendar remains to be verified. FY2026 GAAP diluted EPS was $74.33 and FQ1 FY2027 GAAP diluted-EPS outlook is $37.84 \u00b1 $1.00 (e60, e59). Bear/base/bull FY2027 EPS assumptions of $125/$150/$175 are analyst stresses, not guidance or consensus. They embed $87.16/$112.16/$137.16 respectively after the FQ1 guidance midpoint under a constant diluted-share approximation: bear assumes memory pricing/mix or supply additions normalize margins after FQ1; base assumes AI-led data-center and cloud-memory demand broadly sustain elevated profitability; bull assumes stronger pricing/mix and execution. P/E inputs of 6x/7.2x/8.5x are explicit stress assumptions, not observed, normal, fair, or probability-weighted multiples.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "125",
+          "pe_multiple": "6",
+          "rationale": "Hypothetical margin/cycle normalization after guided FQ1 plus multiple compression."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "150",
+          "pe_multiple": "7.2",
+          "rationale": "Hypothetical continuation of AI memory demand and elevated margins beyond guided FQ1 at an assumed multiple."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "175",
+          "pe_multiple": "8.5",
+          "rationale": "Hypothetical stronger pricing/mix and sustained high utilization beyond guided FQ1 at an assumed multiple."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 58830,
+    "output_tokens": 859,
+    "catalog_cost_usd": 0.127968,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 17199,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}

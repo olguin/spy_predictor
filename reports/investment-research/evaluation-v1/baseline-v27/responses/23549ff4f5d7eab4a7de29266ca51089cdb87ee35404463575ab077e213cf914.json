@@ -1,0 +1,53 @@
+{
+  "schema_version": "pi-research-worker-v2",
+  "action": {
+    "tool": "calculate_scenarios",
+    "arguments": {
+      "share_basis": "split_adjusted",
+      "symbol": "NVDA",
+      "price_evidence_id": "e7",
+      "evidence_ids": [
+        "e4",
+        "e7",
+        "e16"
+      ],
+      "earnings_period_start": "2026-01-26",
+      "earnings_period_end": "2027-01-25",
+      "accounting_basis": "US_GAAP",
+      "assumptions": "Scenario sensitivity, not consensus or a company-observed multiple. FY2027 GAAP annual EPS assumptions use the reported FY2026 $4.90 diluted-EPS anchor and the 182-day FY2027 interim $4.85 as evidence of acceleration; figures are not an annualization. Multiples are explicit 25x/30x/35x assumptions and are held beyond the 63-session horizon solely to frame sensitivity. Dated price is split-adjusted; all scenario EPS inputs are declared split-adjusted assumptions.",
+      "cases": [
+        {
+          "case": "bear",
+          "earnings_per_share": "7.50",
+          "pe_multiple": "25",
+          "rationale": "Assumes demand moderates and a lower valuation multiple despite reported Q2 FY2027 acceleration."
+        },
+        {
+          "case": "base",
+          "earnings_per_share": "9.00",
+          "pe_multiple": "30",
+          "rationale": "Assumes continued data-center demand converts into a full-year GAAP EPS step-up from FY2026."
+        },
+        {
+          "case": "bull",
+          "earnings_per_share": "10.50",
+          "pe_multiple": "35",
+          "rationale": "Assumes sustained demand and margin resilience support both higher EPS and a premium multiple."
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "input_tokens": 38439,
+    "output_tokens": 490,
+    "catalog_cost_usd": 0.082758,
+    "model": "openai-codex/gpt-5.6-terra",
+    "response_model": "gpt-5.6-terra",
+    "pi_version": "0.85.1",
+    "stop_reason": "toolUse",
+    "latency_ms": 13860,
+    "provider_output_token_limit_enforced": false,
+    "model_calls": 1,
+    "blocked_model_calls": 0
+  }
+}
